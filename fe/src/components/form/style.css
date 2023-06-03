@@ -1,0 +1,70 @@
+.form-group {
+    position: relative;
+    margin-bottom: 1rem;
+    justify-content: center;
+    display: flex;
+}
+
+.form-control {
+    height: 50px;
+    color: white !important;
+    border: 1px solid transparent !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 40px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s !important;
+}
+
+.form-control::placeholder {
+    color: white;
+}
+
+.form-control:hover, .form-control:focus {
+    background: transparent !important;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.field-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.button-sign {
+    color: #1f1111 !important;
+    background-color: rgb(251, 206, 181) !important;
+    width: 70% !important;
+}
+
+.button-sign:hover, .button-sign:focus {
+    color: black !important;
+    background-color: rgb(251, 206, 181) !important;
+}
+
+.text-center a {
+    color: #fbceb5;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.text-center a:hover, .text-center a:focus {
+    color: #fbceb5;
+    text-decoration: none !important;
+    outline: none !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+::-ms-reveal {
+    display: none;
+}
