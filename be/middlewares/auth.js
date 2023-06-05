@@ -4,8 +4,8 @@ const {checkSession, getUserInfo} = require("../database");
 const AUTH = {
     ROLE: {
         ADMIN: 2,
-        MANAGER: 1,
-        USER: 0
+        TEACHER: 1,
+        STUDENT: 0
     },
     auth: async (req, res, next) => {
         try {

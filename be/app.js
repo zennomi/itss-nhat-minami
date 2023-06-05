@@ -6,6 +6,7 @@ const logger = require('morgan');
 const app = express();
 
 const usersRouter = require('./routes/users');
+const teachersRouter = require('./routes/teachers');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 });
 //api
 app.use('/user', usersRouter);
+app.use("/api", teachersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
