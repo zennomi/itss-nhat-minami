@@ -1,6 +1,6 @@
 import React from "react";
 import {Routes, Route, BrowserRouter} from "react-router-dom";
-import {AdminRoutes, GuestRoutes, UserRoutes, NormalRoutes} from "./routes/routes";
+import {AdminRoutes, GuestRoutes, UserRoutes, NormalRoutes } from "./routes/routes";
 import Auth, {ROLE} from "./hooks/auth";
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
                     <Route key={index} path={route.path}
                            element={<Auth role={ROLE.ADMIN} path={"/"}>{route.element}</Auth>}/>
                 ))}
+
             </Routes>
         </BrowserRouter>
     );

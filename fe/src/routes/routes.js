@@ -8,9 +8,13 @@ export const AdminRoutes = [
 
 export const GuestRoutes = [
     {path: '/login', element: <Pages.Login/>},
-    {path: '/register', element: <Pages.Register/>}
+    {path: '/register', element: <Pages.Register/>},
+
 ];
 
+
+
 export const NormalRoutes = [
-    {path: '/', element: <Pages.Home/>}
+    {path: '/', element: <Pages.Home/>},
+    {path: '/search', element: <Pages.Search/>},
 ];
