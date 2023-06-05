@@ -112,7 +112,7 @@ const DB = {
             });
             subQuery += `)`;
         }
-        if(subQuery.length > 0)
+        if (subQuery.length > 0)
             subQuery = subQuery.slice(4);
         else subQuery = '1 = 1';
         let limit = params.limit || 10;
@@ -125,18 +125,28 @@ const DB = {
                              join schedules s on t.id = s.teacher_id
                              join reviews r on t.id = r.teacher_id
                     WHERE ${subQuery}
-                    GROUP BY t.id
-                    LIMIT ${limit} OFFSET ${(page - 1) * limit}`, (err, rows) => {
+                    GROUP BY t.id`, (err, rows) => {
                 if (err) console.log(err);
 
                 for (let i = 0; i < rows?.length; i++) {
                     rows[i].age = new Date().getFullYear() - new Date(rows[i].date_of_birth).getFullYear();
-                    if(rows[i].age < params.age){
+                    if (rows[i].age < params.age) {
                         rows.splice(i, 1);
                         i--;
                     }
                 }
-                resolve(rows);
+
+                let result = rows.slice((page - 1) * limit, page * limit);
+                let data = {
+                    teacher: result,
+                    pagination: {
+                        total: rows.length,
+                        currentPage: parseInt(page),
+                        totalPage: Math.ceil(rows.length / limit),
+                        limit: parseInt(limit)
+                    }
+                }
+                resolve(data);
             });
         });
     }
