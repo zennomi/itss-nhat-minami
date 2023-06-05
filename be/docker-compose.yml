@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+    be-minami:
+        container_name: be-minami
+        volumes:
+            -   ./:/app
+        ports:
+            - "9999:9999"
+        image: node:15.14.0-slim
+        command: bash -c "cd /app && npm install && npm run start"
+
+networks:
+    be-network:
+        driver: host
+
+volumes:
+    be-database:
+        driver: local
