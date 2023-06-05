@@ -9,7 +9,6 @@ export const AdminRoutes = [
 export const GuestRoutes = [
     {path: '/login', element: <Pages.Login/>},
     {path: '/register', element: <Pages.Register/>},
-
 ];
 
 

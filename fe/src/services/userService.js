@@ -1,34 +1,73 @@
-import api from "../utils/api";
+import privateHttp from './http/privateHttp.config';
 
 const USER = {
-    getUser: async ({user_id = "", username = ""}) => {
-        return await api(`/user/get?user_id=${user_id}&username=${username}`, 'GET');
-    },
-    me: async () => {
-        return await api('/user/me', 'GET');
-    },
-    register: async (username, password) => {
-        let result = await api('/user/register', 'POST', {username, password});
+    getUser: ({ user_id = "", username = "" }) => privateHttp({
+        method: 'GET',
+        url: '/user/get',
+        param: {
+            user_id,
+            username
+        }
+    }),
+    me: () => privateHttp({
+        method: 'GET',
+        url: '/user/me'
+    }),
+    register: async ({ username, password }) => {
+        let result = await privateHttp({
+            method: 'POST',
+            url: '/user/register',
+            data: {
+                username,
+                password
+            }
+        })
         if (result.message === 'USER_CREATED')
             localStorage.setItem('token', result.token);
         return result;
     },
     login: async (username, password) => {
-        let result = await api('/user/login', 'POST', {username, password});
+        let result = await privateHttp({
+            method: 'POST',
+            url: '/user/login',
+            data: {
+                username,
+                password
+            }
+        });
         if (result.message === 'LOGIN_SUCCESS') {
             localStorage.setItem('token', result.token);
         }
         return result;
     },
-    logout: async () => {
+    logout: () => {
         localStorage.removeItem('token');
-        return await api('/user/logout', 'POST');
+        return privateHttp(
+            {
+                method: 'POST',
+                url: '/user/logout'
+            }
+        );
     },
-    changePassword: async (old_password, new_password) => {
-        return await api('/user/change-password', 'POST', {old_password, new_password});
+    changePassword: (old_password, new_password) => {
+        return privateHttp({
+            method: 'POST',
+            url: '/user/change-password',
+            data: {
+                old_password,
+                new_password
+            }
+        });
     },
-    setRole: async (user_id, role) => {
-        return await api('/user/set-role', 'POST', {user_id, role});
+    setRole: (user_id, role) => {
+        return privateHttp({
+            method: 'POST',
+            url: '/user/set-role',
+            data: {
+                user_id,
+                role
+            }
+        });
     }
 }
 

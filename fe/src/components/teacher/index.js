@@ -2,7 +2,22 @@ import React from "react";
 import './style.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-function Teacher() {
+const calculatorDate = (time) => {
+    const currentDate = new Date();
+
+    const dateOfBirth = new Date("1990-01-01");
+
+    let age = currentDate.getFullYear() - dateOfBirth.getFullYear();
+
+    if ( currentDate.getMonth() < dateOfBirth.getMonth() ||
+        (currentDate.getMonth() === dateOfBirth.getMonth() && currentDate.getDate() < dateOfBirth.getDate())) {
+    age--;
+    }
+    return age;
+}
+
+function Teacher({ data }) {
+    console.log(data)
     return (
         <div className="frame-1">
             {/*avt */}
@@ -15,13 +30,13 @@ function Teacher() {
             <div className="frame-2">
                 <div className="frame-3">
                     <div className="aizawa-minamipublicsans-semi-bold-black-16px">
-                        <span className="publicsans-semi-bold-black-16px" >Aizawa Minami</span>
+                        <span className="publicsans-semi-bold-black-16px" >{data.name}</span>
                     </div>
                     <div className="iconsflagsic_kr"></div>
                     <div className="button-x">
 
                         <div className="labelpublicsans-bold-white-13px">
-                            <span className="model" >オンラインレッスン</span>
+                            <span className="model" >{data.remote}</span>
                         </div>
                     </div>
                 </div>
@@ -30,13 +45,13 @@ function Teacher() {
                         <div className="button-x1">
                             <i className="fa-solid fa-user-group" style={{color:'rgb(255, 86, 48)'}}></i>
                             <div className="label-1publicsans-bold-white-13px">
-                                <span className="publicsans-bold-black-13px sex">女性</span>
+                                <span className="publicsans-bold-black-13px sex">{data.gender}</span>
                             </div>
                         </div>
                         <div className="button-2">
                             <i className="fa-solid fa-circle-exclamation" style={{color: '#000000'}}></i>
                             <div className="label-2publicsans-bold-charade-13px">
-                                <span className="publicsans-bold-charade-13px">20 歳</span>
+                                <span className="publicsans-bold-charade-13px">{calculatorDate(data.date_of_birth)} 歳</span>
                             </div>
                         </div>
                         <div className="button-3">
@@ -55,35 +70,23 @@ function Teacher() {
                 </div>
             </div>
             {/*cục giá + đánh giá */}
-            <Frame5 />
-        </div>
-    );
-}
-
-export default Teacher;
-
-function Frame5() {
-    return (
-        <div className="frame-5">
+            <div className="frame-5">
             <div className="frame-10">
                 <div className="overlap-group">
                     <div className="frame-6">
                         <i className="fa-solid fa-star fa-lg" style={{color: '#f5d60f'}} ></i>
                         <div className="numberpublicsans-bold-black-14px">
-                            <span className="publicsans-bold-black-14px">5</span>
+                            <span className="publicsans-bold-black-14px">{data.star.toFixed(1)}</span>
                         </div>
-                    </div>
-                    <div className="addresspublicsans-semi-bold-black-14px">
-                        <span className="publicsans-semi-bold-black-14px">34 レビー</span>
                     </div>
                 </div>
                 <div className="frame-9">
                     <span className="pricepublicsans-bold-black-24px">
-                        <span className="publicsans-bold-black-24px">5000¥</span>
+                        <span className="publicsans-bold-black-24px">{data.price}¥</span>
                     </span>
 
                     <div className="address-1publicsans-semi-bold-white-14px">
-                        <span  className="publicsans-semi-bold-black-14px tx1">50 min / lesson</span>
+                        <span  className="publicsans-semi-bold-black-14px tx1">{data.longitude} min / lesson</span>
                     </div>
                 </div>
             </div>
@@ -104,5 +107,8 @@ function Frame5() {
                 </div>
             </div>
         </div>
+        </div>
     );
 }
+
+export default Teacher;
