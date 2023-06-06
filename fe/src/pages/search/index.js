@@ -1,22 +1,53 @@
-import React from 'react';
-import './style.css';
-import {Rating,Switch,Button,Slider} from "@mui/material";
-import {useState} from "react";
+import React, { useState, useEffect } from 'react';
+import { Rating, Switch, Button, Slider,Pagination } from "@mui/material";
 import Pickdaterow from "../../components/pickdaterow";
 import Teacher from "../../components/teacher";
-import TeacherCard from "../../components/card-teacher";
+import {
+    LinearProgress
+} from '@mui/material';
+import useListTeacher from './useListTeacher';
+import {
+    languages,
+    purposes,
+    prices,
+    sex, 
+    stars,
+    date,
+    timesession
+} from "../../utils/constant";
+import './style.css';
+
 const Search = () => {
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
-    const languages = ['VietNamese','French','Japanese','Chinese','Korean'];
-    const purposes = ['試験','会話','ビジネス'];
-    const [value, setValue] = useState([20, 80]);
-    const prices = ['0¥','2000','4000','6000','8000','10万'];
-    const sex =['男性','女性','何でも'];
-    const stars = ['4','3','2','1'];
-    const date = ['日','月','火','水','木','金','土'];
-    const timesession = [{time : '6時 - 9時' , ss : '午前'},{time : '9時 -12時' , ss : '午前'},{time : '12時 - 15時' , ss : '午前'},
-        {time : '15時 - 18時' , ss : '午前'},{time : '18時 - 21時' , ss : '午前'}, {time : '21時 - 0時' , ss : '午前'}, {time : '0時 - 3時' , ss : '午前'}];
 
+    const {
+        listTeachers,
+        isSuccess,
+        isLoading,
+        page,
+        totalPage,
+        handlePageChange,
+        queryString,
+        setQueryString,
+    } = useListTeacher();
+
+    const [filters, setFilters] = useState(null);
+
+    const handleFilter = (key, value) => {
+        setFilters({ ...filters, [key]: value });
+    };
+
+    const handleSubmit = () => {
+        const params = {
+            ...queryString,
+            ...filters
+        };
+        setQueryString(params);
+    };
+
+    useEffect(() => {
+        setFilters({ ...queryString });
+    }, []);
 
     return (
         <div>
@@ -30,12 +61,12 @@ const Search = () => {
                             <div className="dropdown item_dropdown">
                                <div  style={{color:'#212B36'}} className="d-flex justify-content-between"
                                      data-bs-toggle="dropdown" aria-expanded="false">
-                                   <span>Vietnamese</span>
+                                   <span>{filters?.lang_study}</span>
                                    <span className="dropdown-toggle"  ></span>
                                 </div>
                                 <div className="dropdown-menu">
                                     {languages.map((language, index) => (
-                                        <li><span key={index} className="dropdown-item" >{language}</span></li>
+                                        <li onClick={() => handleFilter('lang_study', language)}><span key={index} className="dropdown-item" >{language}</span></li>
                                     ))}
                                 </div>
                             </div>
@@ -45,18 +76,17 @@ const Search = () => {
                     <div className="col col-sm-2_4 col-md-2_4 item " style={{padding:'0 10px'}}>
                         <div className="item_header">
                             <div className="i-want-to-learnpublicsans-semi-bold-black-16px">
-                                <span className="publicsans-semi-bold-black-16px">何語を習いたいか？</span>
+                                <span className="publicsans-semi-bold-black-16px">何語で習いたいか？</span>
                             </div>
                             <div className="dropdown item_dropdown">
                                 <div  style={{color:'#212B36'}} className="d-flex justify-content-between"
                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>Japanese</span>
+                                    <span>{filters?.lang_teach}</span>
                                     <span className="dropdown-toggle"  ></span>
                                 </div>
                                 <div className="dropdown-menu">
                                     {languages.map((language,index) => (
-                                        <label key={index} className="choose dropdown-item">
-                                            <input style={{height:'20px','width':'20px','margin':'0 8px 0 0'}} type="checkbox"/>
+                                        <label onClick={() => handleFilter("lang_teach", language)} key={index} className="choose dropdown-item">
                                             <span>{language}</span>
                                         </label>
                                     ))}
@@ -73,13 +103,13 @@ const Search = () => {
                             <div className="dropdown item_dropdown">
                                 <div  style={{color:'#212B36'}} className="d-flex justify-content-between"
                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>試験</span>
+                                    <span>{filters?.purpose}</span>
                                     <span className="dropdown-toggle"  ></span>
                                 </div>
                                 <div className="dropdown-menu">
                                     {purposes.map((purpose,index) => (
-                                        <label key={index} className="choose dropdown-item">
-                                            <input style={{height:'20px','width':'20px','margin':'0 8px 0 0'}} type="checkbox"/>
+                                        <label onClick={() => handleFilter("purpose", purpose)} key={index} className="choose dropdown-item">
+                                            {/* <input style={{height:'20px','width':'20px','margin':'0 8px 0 0'}} type="checkbox"/> */}
                                             <span>{purpose}</span>
                                         </label>
                                     ))}
@@ -92,12 +122,12 @@ const Search = () => {
                     <div className="col col-sm-2_4 col-md-2_4 item " style={{padding:'0 10px'}}>
                         <div className="item_header">
                             <div className="i-want-to-learnpublicsans-semi-bold-black-16px">
-                                <span className="publicsans-semi-bold-black-16px">何語を習いたいか？</span>
+                                <span className="publicsans-semi-bold-black-16px">価値？</span>
                             </div>
                             <div className="dropdown item_dropdown">
                                 <div  style={{color:'#212B36'}} className="d-flex justify-content-between"
                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>試験</span>
+                                    <span>{filters?.price}</span>
                                     <span className="dropdown-toggle"  ></span>
                                 </div>
                                 <div className="price dropdown-menu" >
@@ -127,10 +157,12 @@ const Search = () => {
                                         <div className="overlap-group2">
                                             <Slider
                                                 getAriaLabel={() => 'Temperature range'}
-                                                value={value}
                                                 valueLabelDisplay="auto"
                                                 step={10}
+                                                onChange={(e, value) => handleFilter('price', value)}
                                                 marks
+                                                min={0}
+                                                max={10000}
                                             />
                                         </div>
                                         <div className="navbarpublicsans-normal-manatee-12px d-flex justify-content-between pt-2">
@@ -149,41 +181,22 @@ const Search = () => {
                     <div className="col col-sm-2_4 col-md-2_4 item " style={{padding:'0 10px'}}>
                         <div className="item_header">
                             <div className="i-want-to-learnpublicsans-semi-bold-black-16px">
-                                <span className="publicsans-semi-bold-black-16px">何語を習いたいか？</span>
+                                <span className="publicsans-semi-bold-black-16px">性別と年齢？</span>
                             </div>
                             <div className="dropdown item_dropdown">
                                 <div  style={{color:'#212B36'}} className="d-flex justify-content-between"
                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>何でも</span>
+                                    <span>{filters?.age}</span>
                                     <span className="dropdown-toggle"  ></span>
                                 </div>
                                 <div>
                                     <div className="dropdown-menu">
                                         <div >
                                                 {sex.map((item,index) => (
-                                                    <li><span className="dropdown-item" >{item}</span></li>
+                                                    <li onClick={() => handleFilter('age', item)}><span className="dropdown-item" >{item}</span></li>
                                                 ))}
                                         </div>
-                                        {/*cục này là chọn tuổi nma kb cho hiển thị */}
-                                        {/*<div　className="age">*/}
-                                        {/*    <div>*/}
-                                        {/*        <span>年齢</span>*/}
-                                        {/*    </div>*/}
-                                        {/*    <div className="overlap-group2">*/}
-                                        {/*        <Slider*/}
-                                        {/*            getAriaLabel={() => 'Temperature range'}*/}
-                                        {/*            value={value}*/}
-                                        {/*            valueLabelDisplay="auto"*/}
-                                        {/*            step={10}*/}
-                                        {/*            marks*/}
-                                        {/*            valueLabelDisplay="on"*/}
-                                        {/*        />*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
                                         </div>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -198,12 +211,12 @@ const Search = () => {
                         <div className="dropdown item_dropdown">
                             <div  style={{color:'#212B36'}} className="d-flex justify-content-between"
                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                <span>4 stars & up</span>
+                                <span>{filters?.star} Star</span>
                                 <span className="dropdown-toggle"  ></span>
                             </div>
                             <div className="dropdown-menu ">
                                 {stars.map((star,index) => (
-                                    <div className="small-ratings d-flex " style={{cursor:'pointer'}} >
+                                    <div onClick={() => handleFilter('star', star)} className="small-ratings d-flex " style={{cursor:'pointer'}} >
                                         <div className="dropdown-item_1  ">
                                             <Rating
                                                 name="text-feedback"
@@ -212,7 +225,6 @@ const Search = () => {
                                                 precision={0.5}
                                             />
                                         </div>
-                                        <span> & Up</span>
                                     </div>
                                 ))}
                             </div>
@@ -243,127 +255,6 @@ const Search = () => {
                                     {timesession.map((item,index) => (
                                         <Pickdaterow time={item.time} session={item.ss}/>
                                     ))}
-                                    {/*<div className="datepicker-timerow">*/}
-                                    {/*    <div className="datepicker-col-hour">*/}
-                                    {/*        <span className="pickhour">6時 - 9時</span>*/}
-                                    {/*        <div className="picksession"><span>午前</span>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="d-flex">*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="no-choose date-hour"></div>*/}
-                                    {/*        <div className="no-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
-                                    {/*<div className="datepicker-timerow">*/}
-                                    {/*    <div className="datepicker-col-hour">*/}
-                                    {/*        <span className="pickhour">6時 - 9時</span>*/}
-                                    {/*        <div className="picksession"><span>午前</span>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="d-flex">*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
-                                    {/*<div className="datepicker-timerow">*/}
-                                    {/*    <div className="datepicker-col-hour">*/}
-                                    {/*        <span className="pickhour">6時 - 9時</span>*/}
-                                    {/*        <div className="picksession"><span>午前</span>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="d-flex">*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
-                                    {/*<div className="datepicker-timerow">*/}
-                                    {/*    <div className="datepicker-col-hour">*/}
-                                    {/*        <span className="pickhour">6時 - 9時</span>*/}
-                                    {/*        <div className="picksession"><span>午前</span>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="d-flex">*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
-                                    {/*<div className="datepicker-timerow">*/}
-                                    {/*    <div className="datepicker-col-hour">*/}
-                                    {/*        <span className="pickhour">6時 - 9時</span>*/}
-                                    {/*        <div className="picksession"><span>午前</span>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="d-flex">*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
-                                    {/*<div className="datepicker-timerow">*/}
-                                    {/*    <div className="datepicker-col-hour">*/}
-                                    {/*        <span className="pickhour">6時 - 9時</span>*/}
-                                    {/*        <div className="picksession"><span>午前</span>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="d-flex">*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
-                                    {/*<div className="datepicker-timerow">*/}
-                                    {/*    <div className="datepicker-col-hour">*/}
-                                    {/*        <span className="pickhour">6時 - 9時</span>*/}
-                                    {/*        <div className="picksession"><span>午前</span>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="d-flex">*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-                                    {/*        <div className="hour-choose date-hour"></div>*/}
-
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
-
-
                                 </div>
                             </div>
                         </div>
@@ -378,14 +269,14 @@ const Search = () => {
                             <div style={{color:'#212B36'}} className="d-flex justify-content-between"
                                       data-bs-toggle="dropdown" aria-expanded="false">
                             <span>
-                              <span className="publicsans-semi-bold-charade-14px">Ha Dong, Ha Noi +5km</span>
+                              <span className="publicsans-semi-bold-charade-14px">Ha Noi, Ha Noi +5km</span>
                             </span>
                                 <span className="dropdown-toggle"  ></span>
                             </div>
                             <div className="map-search dropdown-menu">
                                 <div className="">
                                     <div className="switch">
-                                        <Switch {...label} defaultChecked />
+                                        <Switch {... label } defaultChecked />
                                         <div>
                                             <span className="map-choose">online</span>
                                         </div>
@@ -420,7 +311,7 @@ const Search = () => {
                         </Button>
                     </div>
                     <div className="">
-                        <Button style={{'min-width':'814px','background-color':'rgba(0, 171, 85, 1)'}} size={"large"} fullWidth={830} variant="contained" >
+                        <Button onClick={handleSubmit} style={{'min-width':'814px','background-color':'rgba(0, 171, 85, 1)'}} size={"large"} fullWidth={830} variant="contained" >
                             <div className="labelpublicsans-normal-white-16px d-flex align-items-center " style={{'gap':'8px'}}>
                                 <i className="fa-solid fa-magnifying-glass"></i>
                                 <span className="publicsans-normal-white-16px">料金：最低から</span>
@@ -429,9 +320,20 @@ const Search = () => {
                     </div>
                 </div>
 
-                <div className="teacher d-flex mt-5 ">
-                    <Teacher></Teacher>
+                { isLoading && <>
+                    <LinearProgress className='mt-4'/>
+                </> }
 
+                {isSuccess && listTeachers?.map((item) => <>
+                    <div className="teacher d-flex mt-5 ">
+                        <Teacher data={item} />
+                    </div>
+                </>) }
+                <div className="mt-5">
+                    <Pagination count={totalPage} page={page} color="primary" onChange={handlePageChange} style={{
+                        justifyContent: 'center',
+                        display: 'flex',
+                    }}/>
                 </div>
             </div>
         </div>

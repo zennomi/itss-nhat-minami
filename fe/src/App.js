@@ -2,29 +2,33 @@ import React from "react";
 import {Routes, Route, BrowserRouter} from "react-router-dom";
 import {AdminRoutes, GuestRoutes, UserRoutes, NormalRoutes } from "./routes/routes";
 import Auth, {ROLE} from "./hooks/auth";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 function App() {
+    const queryClient = new QueryClient()
     return (
-        <BrowserRouter>
-            <Routes>
-                {NormalRoutes.map((route, index) => (
-                    <Route key={index} path={route.path} element={route.element}/>
-                ))}
-                {GuestRoutes.map((route, index) => (
-                    <Route key={index} path={route.path}
-                           element={<Auth role={ROLE.GUEST} path={'/'}>{route.element}</Auth>}/>
-                ))}
-                {UserRoutes.map((route, index) => (
-                    <Route key={index} path={route.path}
-                           element={<Auth role={ROLE.USER} path={"/login"}>{route.element}</Auth>}/>
-                ))}
-                {AdminRoutes.map((route, index) => (
-                    <Route key={index} path={route.path}
-                           element={<Auth role={ROLE.ADMIN} path={"/"}>{route.element}</Auth>}/>
-                ))}
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <Routes>
+                    {NormalRoutes.map((route, index) => (
+                        <Route key={index} path={route.path} element={route.element}/>
+                    ))}
+                    {GuestRoutes.map((route, index) => (
+                        <Route key={index} path={route.path}
+                            element={<Auth role={ROLE.GUEST} path={'/'}>{route.element}</Auth>}/>
+                    ))}
+                    {UserRoutes.map((route, index) => (
+                        <Route key={index} path={route.path}
+                            element={<Auth role={ROLE.USER} path={"/login"}>{route.element}</Auth>}/>
+                    ))}
+                    {AdminRoutes.map((route, index) => (
+                        <Route key={index} path={route.path}
+                            element={<Auth role={ROLE.ADMIN} path={"/"}>{route.element}</Auth>}/>
+                    ))}
 
-            </Routes>
-        </BrowserRouter>
+                </Routes>
+            </BrowserRouter>
+        </QueryClientProvider>
     );
 }
 

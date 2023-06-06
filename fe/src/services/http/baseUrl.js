@@ -1,0 +1,1 @@
+export const baseUrl = process.env.LINK || 'http://tungsnk.tech:9999/';
