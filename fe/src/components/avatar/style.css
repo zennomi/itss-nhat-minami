@@ -1,0 +1,65 @@
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+
+    position: absolute;
+    width: 458px;
+    height: 364px;
+    left: 66px;
+    top: 215px;
+    background: #FFFFFF;
+    /* Shadows/Light/Shadows/Light/Card */
+
+    box-shadow: 0px 0px 2px rgba(145, 158, 171, 0.2), 0px 12px 24px -4px rgba(145, 158, 171, 0.12);
+    border-radius: 16px;
+}
+
+.user-avatar{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.placeholder-avatar {
+    align-items: center;
+    background-image: url('./placeholder.jpg');
+    background-size: cover;
+    border: transparent;
+    padding: 0;
+    width: 174px;
+    height: 174px;
+    border-radius: 50%;
+}
+
+.transparent-layout {
+    position: absolute;
+    background-color: rgba(129, 129, 129, 0.5);
+    border: transparent;
+    border-radius: 16px;
+    width: 100%;
+    height: 100%;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    color: #ffffff;
+}
+
+.transparent-layout-center-content{
+    padding-top: 120px;
+    padding-bottom: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    font-size: 24px;
+}
+.transparent-layout-note {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+}
