@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import Form from "../../components/form";
 import USER from "../../services/userService";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     let navigate = useNavigate();
@@ -24,9 +24,9 @@ const Login = () => {
                 <div className="login-login1">
                     <div className="login-auth-banner">
                         <div className="login-content">
-              <span className="login-text H3">
-               こんにちは
-              </span>
+                            <span className="login-text H3">
+                                こんにちは
+                            </span>
                             <div className="login-illustrationsillustrationdashboard">
                                 <img
                                     src="/images/login.png"
@@ -39,19 +39,19 @@ const Login = () => {
                     <div className="login-stack">
                         <div className="login-auth-form-login">
                             <div className="login-head">
-                <span className="login-text02 H4">
-                 ログイン
-                </span>
+                                <span className="login-text02 H4">
+                                    ログイン
+                                </span>
                                 <span className="login-text04">
-                    新しいメンバー?
-                  <span>アカウント作る</span>
-                </span>
+                                    新しいメンバー?
+                                    <span>アカウント作る</span>
+                                </span>
                             </div>
                             <div className="login-content1">
                                 <div className="login-text-field">
                                     <div className="login-input">
-                    <span className="login-text07 Body1">
-                    </span>
+                                        <span className="login-text07 Body1">
+                                        </span>
                                         <div className="login-labelfocus">
                                             <img
                                                 src="/images/masklabeli1740-6dx7-200h.png"
@@ -59,16 +59,16 @@ const Login = () => {
                                                 className="login-masklabel"
                                             />
                                             <span className="login-text09 ComponentsTextFieldLabel">
-                        <span>メールアドレス</span>
-                      </span>
+                                                <span>メールアドレス</span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="login-text-field1">
                                     <div className="login-input1">
-                    <span className="login-text11 Body1">
-                      <span>パスワード</span>
-                    </span>
+                                        <span className="login-text11 Body1">
+                                            <span>パスワード</span>
+                                        </span>
                                         <div className="login-endadornment">
                                             <button className="login-icon-button">
                                                 <img
@@ -81,12 +81,12 @@ const Login = () => {
                                     </div>
                                 </div>
                                 <span className="login-text13 UnderlineBody2">
-                  <span>パスワードを忘れた?</span>
-                </span>
+                                    <span>パスワードを忘れた?</span>
+                                </span>
                                 <button className="login-button">
-                  <span className="login-text15 ComponentsButtonLarge">
-                    <span>ログイン</span>
-                  </span>
+                                    <span className="login-text15 ComponentsButtonLarge">
+                                        <span>ログイン</span>
+                                    </span>
                                 </button>
                                 <div className="login-divider">
                                     <img
@@ -95,8 +95,8 @@ const Login = () => {
                                         className="login-divider1"
                                     />
                                     <span className="login-text17 Overline">
-                    <span>OR</span>
-                  </span>
+                                        <span>OR</span>
+                                    </span>
                                     <img
                                         src="/images/divideri1740.svg"
                                         alt="DividerI1740"

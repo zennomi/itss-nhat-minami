@@ -1,12 +1,45 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
+import LanguageCard from '../languageInfo';
 import './style.css'
 export default function Form() {
-    const [inputValue, setInputValue] = useState('');
-    const handleChange = (event) => {
-        const { value } = event.target;
-        setInputValue(formatDate(value));
+    const [name, setName] = useState('');
+    const [gender, setGender] = useState('');
+    const [dob, setDob] = useState('');
+    const [address, setAddress] = useState('');
+    const [speakingLanguage, setSpeakingLanguage] = useState('');
+    const [country, setCountry] = useState('');
+    const [description, setDescription] = useState('');
+
+    const handleNameChange = (event) => {
+        setName(event.target.value);
     };
+
+    const handleGenderChange = (event) => {
+        setGender(event.target.value);
+    };
+
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value);
+    };
+
+    const handleSpeakingLanguageChange = (event) => {
+        setSpeakingLanguage(event.target.value);
+    };
+
+    const handleCountryChange = (event) => {
+        setCountry(event.target.value);
+    };
+
+    const handleDescriptionChange = (event) => {
+        setDescription(event.target.value);
+    };
+
+    const handleDobChange = (event) => {
+        const { value } = event.target;
+        setDob(formatDate(value));
+    };
+
     const formatDate = (value) => {
         let formattedValue = value.replace(/\D/g, ''); // Remove non-numeric characters
         if (formattedValue.length <= 2) {
@@ -18,57 +51,49 @@ export default function Form() {
         }
         return formattedValue;
     };
-    const languageDiv = <div className='frame-2-item'>
-        <div className='form-row'>
-            <select id='language' className="form-field" >
-                <option disabled selected>言語</option>
-                <option value="Endlish">英語</option>
-                <option value="Vietnamese">ベトナム語</option>
-                <option value="Japanese">日本語</option>
-            </select>
-            <select id='level' className="form-field" >
-                <option disabled selected>レベル</option>
-                <option value="primary">初級</option>
-                <option value="senior">中級</option>
-                <option value="junior">上級</option>
-            </select>
-        </div>
-        <div className='form-row'>
-            <input
-                id='salary'
-                type='text'
-                className='form-field'
-                placeholder='料金'
-            />
-            <input
-                id='min per lesson'
-                type='text'
-                className='form-field'
-                placeholder='レッソンの時間'
-            />
-        </div>
-    </div>
+
+    const nullData = {
+        language: '',
+        level: '',
+        salary: '',
+        minPerLesson: '',
+    }
+
     const [languages, setLanguages] = useState([]);
-    const handleButtonClick = () => {
-        const newLanguage = languageDiv
+    const handleAddButtonClick = () => {
+        const newLanguage = <LanguageCard initialData={nullData} />
         setLanguages([...languages, newLanguage]);
     };
 
     /**Thử hiển thị thôi ạ */
+    const initialData = {
+        language: 'English',
+        level: 'A1',
+        salary: '5000',
+        minPerLesson: '50',
+    }
+    const languageDiv = <LanguageCard initialData={initialData} />
     useEffect(() => {
         setLanguages([...languages, languageDiv]);
     }, []);
     /** */
+
+    const handleSubmit = () =>{
+
+    };
     return (
-        <div className="form-container">
+        <form className="form-container" onClick={handleSubmit}>
             <div className="form-row">
                 <input
                     id='name'
                     type="text"
                     className="form-field"
+                    value={name}
+                    onChange={handleNameChange}
                     placeholder='氏名' />
-                <select id='gender' className="form-field" placeholder='Gender'>
-                    <option disabled selected>性別</option>
+                <select id='gender' className="form-field"
+                    value={gender} onChange={handleGenderChange}>
+                    <option value='' disabled selected>性別</option>
                     <option value="Male">男</option>
                     <option value="Female">女</option>
                     <option value="Other">他</option>
@@ -79,9 +104,12 @@ export default function Form() {
                     id='address'
                     type='text'
                     className='form-field'
+                    value={address}
+                    onChange={handleAddressChange}
                     placeholder='場所' />
-                <select id='teaching language' className="form-field" >
-                    <option disabled selected>何語で教えますか。</option>
+                <select id='speaking language' className="form-field"
+                    value={speakingLanguage} onChange={handleSpeakingLanguageChange}>
+                    <option value='' disabled selected>何語で教えますか。</option>
                     <option value="Endlish">英語</option>
                     <option value="Vietnamese">ベトナム語</option>
                     <option value="Japanese">日本語</option>
@@ -94,14 +122,16 @@ export default function Form() {
                     className='form-field'
                     pattern="\d{2}/\d{2}/\d{4}"
                     maxLength="10"
-                    value={inputValue}
-                    onChange={handleChange}
+                    value={dob}
+                    onChange={handleDobChange}
                     placeholder="生年月日"
                 />
                 <input
                     id='country'
                     type="text"
                     className="form-field"
+                    value={country}
+                    onChange={handleCountryChange}
                     placeholder='国籍'
                 />
             </div>
@@ -109,18 +139,24 @@ export default function Form() {
                 <input
                     id='description'
                     type='text'
+                    value={description}
+                    onChange={handleDescriptionChange}
                     placeholder='自己紹介'
                 />
             </div>
             <div className='frame-2'>
                 <label>言語</label>
                 <div>{languages.map((div) => div)}</div>
-
-                <button className='button' onClick={handleButtonClick}>
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    <label>言語</label>
-                </button>
+                <div className='button-row'>
+                    <button className='button' onClick={handleAddButtonClick}>
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <label>言語</label>
+                    </button>
+                    <button type="submit" className='button'>
+                        <label>保存</label>
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     )
 }

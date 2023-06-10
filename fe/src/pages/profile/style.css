@@ -1,10 +1,7 @@
-.container {
+.profile-container {
     position: relative;
     width: 1920px;
     height: 1024px;
-
-    /* Grey/100 */
-
     background: #F9FAFB;
 }
 

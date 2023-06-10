@@ -49,7 +49,6 @@
     height: 104px;
     flex: none;
     align-self: stretch;
-    flex-grow: 0;
 }
 
 .textarea>input {
@@ -68,36 +67,13 @@
     font-size: 18px;
 }
 
-.frame-2 {
+.button-row {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    gap: 10px;
+    justify-content: space-between;
     width: 100%;
-    height: auto;
-}
-
-.frame-2>label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 64px;
-    height: 32px;
-    border: 1px solid rgba(145, 158, 171, 0.32);
-    border-radius: 6px;
-    font-family: 'Public Sans';
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;}
-
-.frame-2-item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-bottom: 16px;
-    gap: 16px;
-    width: 1220px;
-    height: auto;
+    height: fit-content;
 }
 
 .button {
@@ -105,14 +81,13 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    width: 72px;
-    height: 30px;
-    background: rgba(145, 158, 171, 0.08);
+    background: rgba(0, 255, 145, 0.559);
     border: transparent;
     border-radius: 8px;
     font-family: 'Public Sans';
     font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+    color: #ffffff;
 }
