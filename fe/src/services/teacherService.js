@@ -7,3 +7,10 @@ export const getTeachers = async (params) => {
         params
     })
 }
+
+export const getTeacher = async (id) => {
+    return publicHttp({
+        method: 'GET',
+        url: `/api/teacher/${id}`,
+    })
+}

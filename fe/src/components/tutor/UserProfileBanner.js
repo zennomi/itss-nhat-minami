@@ -2,7 +2,7 @@ import React from "react";
 import '../../pages/tutor/style.css';
 
 const UserProfileBanner = (props) => {
-    const { bg, img_Avatar25, spanText1, spanText2, handleBannerClick } = props;
+    const { bg = '', img_Avatar25 = '', spanText1 = '', spanText2 = '', handleBannerClick = '' } = props;
   
     return (
       <div className="tutor-user-profile-banner">

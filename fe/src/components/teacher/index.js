@@ -1,6 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import './style.css';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const calculatorDate = (time) => {
     const currentDate = new Date();
@@ -17,9 +18,14 @@ const calculatorDate = (time) => {
 }
 
 function Teacher({ data }) {
-    console.log(data)
+    const navigate = useNavigate();
+
+    const { id } = data;
+
     return (
-        <div className="frame-1">
+        <div className="frame-1" onClick={() => navigate(`/tutor/${id}`)} style={{
+            'cursor': 'pointer'
+        }}>
             {/*avt */}
             <img
                 className="x335913644_9819789628"
