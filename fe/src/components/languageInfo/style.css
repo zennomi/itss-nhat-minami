@@ -1,0 +1,32 @@
+.frame-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    height: auto;
+}
+
+.frame-2>label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 32px;
+    border: 1px solid rgba(145, 158, 171, 0.32);
+    border-radius: 6px;
+    font-family: 'Public Sans';
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 28px;
+}
+
+.frame-2-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 16px;
+    gap: 16px;
+    width: auto;
+    height: auto;
+}
