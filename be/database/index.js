@@ -26,21 +26,22 @@ const DB = {
             });
         });
     },
-    updateUserInfos: async (user_id, {full_name, email, phone, address}) => {
+    updateUserInfos: async (user_id, params) => {
         let subQuery = '';
-        if (full_name) subQuery += `full_name = '${full_name}',`;
-        if (email) subQuery += `email = '${email}',`;
-        if (phone) subQuery += `phone = '${phone}',`;
-        if (address) subQuery += `address = '${address}',`;
-        subQuery = subQuery.slice(0, -1);
+        subQuery += params.name ? `name = '${params.name}', ` : '';
+        subQuery += params.gender ? `gender = '${params.gender}', ` : '';
+        subQuery += params.date_of_birth ? `date_of_birth = '${params.date_of_birth}', ` : '';
 
         return new Promise((resolve) => {
+            if (subQuery === '') resolve();
+            subQuery = subQuery.slice(0, -2);
             db.run(`UPDATE users
                     SET ${subQuery}
                     WHERE id = ${user_id}`, (err) => {
                 if (err) console.log(err);
                 resolve();
             });
+
         });
     },
     changePassword: async (user_id, hash_password) => {
@@ -158,9 +159,15 @@ const DB = {
     },
     getTeacherInfos: async (teacher_id) => {
         return new Promise((resolve) => {
-            db.get(`select t.*, avg(r.rating) as star, count(r.id) as reviewCount
+            db.get(`select t.*,
+                           avg(r.rating) as star,
+                           count(r.id)   as reviewCount,
+                           u.name,
+                           u.gender,
+                           u.date_of_birth
                     from teachers t
                              join reviews r on t.id = r.teacher_id
+                             join users u on u.id = t.user_id
                     where t.id = ${teacher_id}`, (err, row) => {
                 if (err) console.log(err);
                 resolve(row);
