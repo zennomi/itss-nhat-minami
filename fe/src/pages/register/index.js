@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import Form from "../../components/form";
 import USER from "../../services/userService";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     let navigate = useNavigate();
@@ -30,9 +30,9 @@ const Register = () => {
                             />
                         </div>
                         <div className="register-content">
-              <span className="register-text H3">
-                <span>こんにちは</span>
-              </span>
+                            <span className="register-text H3">
+                                <span>こんにちは</span>
+                            </span>
                             <div className="register-illustrationsillustrationdashboard">
                                 <img
                                     src="/images/imgi1740-boyd-600h.png"
@@ -45,20 +45,20 @@ const Register = () => {
                     <div className="register-stack">
                         <div className="register-auth-form-register">
                             <div className="register-head">
-                <span className="register-text02 H4">
-                  <span>無料でスタート</span>
-                </span>
+                                <span className="register-text02 H4">
+                                    <span>無料でスタート</span>
+                                </span>
                                 <span className="register-text04">
-                  <span className="register-text05">
-                    アカウントつくった?
-                    <span
-                        dangerouslySetInnerHTML={{
-                            __html: ' ',
-                        }}
-                    />
-                  </span>
-                  <span>ログイン</span>
-                </span>
+                                    <span className="register-text05">
+                                        アカウントつくった?
+                                        <span
+                                            dangerouslySetInnerHTML={{
+                                                __html: ' ',
+                                            }}
+                                        />
+                                    </span>
+                                    <span>ログイン</span>
+                                </span>
                             </div>
                             <div className="register-content1">
                                 <div className="register-stack1">
@@ -79,9 +79,9 @@ const Register = () => {
                                 </div>
                                 <div className="register-text-field2">
                                     <div className="register-input2">
-                    <span className="register-text07 Body1">
-                      <span>パスワード</span>
-                    </span>
+                                        <span className="register-text07 Body1">
+                                            <span>パスワード</span>
+                                        </span>
                                         <div className="register-endadornment">
                                             <button className="register-icon-button">
                                                 <img
@@ -94,41 +94,41 @@ const Register = () => {
                                     </div>
                                 </div>
                                 <button className="register-button">
-                  <span className="register-text09 ComponentsButtonLarge">
-                    <span>アカウン作る</span>
-                  </span>
+                                    <span className="register-text09 ComponentsButtonLarge">
+                                        <span>アカウン作る</span>
+                                    </span>
                                 </button>
                                 <span className="register-text11">
-                  <span className="register-text12">
-                    ここをクリックして進むか、サインアップをすることで
-                    <span
-                        dangerouslySetInnerHTML={{
-                            __html: ' ',
-                        }}
-                    />
-                  </span>
-                  <span className="register-text13">
-                    定期レッスン購入に関する条項を含んだ利用規約
-                  </span>
-                  <span className="register-text14">
-                    {' '}
-                      と
-                    <span
-                        dangerouslySetInnerHTML={{
-                            __html: ' ',
-                        }}
-                    />
-                  </span>
-                  <span className="register-text15">
-                    プライバシーポリシー
-                    <span
-                        dangerouslySetInnerHTML={{
-                            __html: ' ',
-                        }}
-                    />
-                  </span>
-                  <span>に同意します。</span>
-                </span>
+                                    <span className="register-text12">
+                                        ここをクリックして進むか、サインアップをすることで
+                                        <span
+                                            dangerouslySetInnerHTML={{
+                                                __html: ' ',
+                                            }}
+                                        />
+                                    </span>
+                                    <span className="register-text13">
+                                        定期レッスン購入に関する条項を含んだ利用規約
+                                    </span>
+                                    <span className="register-text14">
+                                        {' '}
+                                        と
+                                        <span
+                                            dangerouslySetInnerHTML={{
+                                                __html: ' ',
+                                            }}
+                                        />
+                                    </span>
+                                    <span className="register-text15">
+                                        プライバシーポリシー
+                                        <span
+                                            dangerouslySetInnerHTML={{
+                                                __html: ' ',
+                                            }}
+                                        />
+                                    </span>
+                                    <span>に同意します。</span>
+                                </span>
                                 <div className="register-divider">
                                     <img
                                         src="/images/divideri1740.svg"
@@ -136,8 +136,8 @@ const Register = () => {
                                         className="register-divider1"
                                     />
                                     <span className="register-text17 Overline">
-                    <span>OR</span>
-                  </span>
+                                        <span>OR</span>
+                                    </span>
                                     <img
                                         src="/images/divideri1740.svg"
                                         alt="DividerI1740"
