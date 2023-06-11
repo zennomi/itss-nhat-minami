@@ -160,15 +160,18 @@ const DB = {
     getTeacherInfos: async (teacher_id) => {
         return new Promise((resolve) => {
             db.get(`select t.*,
-                           avg(r.rating) as star,
-                           count(r.id)   as reviewCount,
+                           avg(r.rating)             as star,
+                           count(r.id)               as reviewCount,
                            u.name,
                            u.gender,
-                           u.date_of_birth
+                           u.date_of_birth,
+                           s.end_hour - s.start_hour as hours
                     from teachers t
                              join reviews r on t.id = r.teacher_id
                              join users u on u.id = t.user_id
-                    where t.id = ${teacher_id}`, (err, row) => {
+                             join schedules s on t.id = s.teacher_id
+                    where t.id = ${teacher_id}
+                    GROUP BY t.id`, (err, row) => {
                 if (err) console.log(err);
                 resolve(row);
             });
