@@ -104,11 +104,11 @@ const DB = {
         subQuery += params.price ? `AND t.price <= '${params.price}' ` : '';
         subQuery += params.gioitinh ? `AND u.gender = '${params.gioitinh}' ` : '';
         subQuery += params.star ? `AND (select avg(rating) from reviews where teacher_id = t.id) >= ${params.star} ` : '';
-        subQuery += params.date ? `AND s.day = '${params.date}' ` : '';
         if (params.timesession.length > 0) {
             subQuery += `AND (`;
             params.timesession.forEach((item, index) => {
-                subQuery += `(s.start_hour = ${item.split("-")[0]} and s.end_hour = ${item.split("-")[1]})`;
+                let [day, start_hour, end_hour] = item.split("-");
+                subQuery += `(s.day = '${day}' and s.start_hour >= '${start_hour}' and s.end_hour <= '${end_hour}')`;
                 if (index < params.timesession.length - 1) subQuery += ` or `;
             });
             subQuery += `)`;
@@ -143,7 +143,7 @@ const DB = {
                     }
                 }
 
-                let result = rows.slice((page - 1) * limit, page * limit);
+                let result = rows?.slice((page - 1) * limit, page * limit);
                 let data = {
                     teacher: result,
                     pagination: {
