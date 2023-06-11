@@ -61,11 +61,15 @@ const TEACHER = {
             instagram_url: req.body.instagram_url || null,
             linkedin_url: req.body.linkedin_url || null,
             twitter_url: req.body.twitter_url || null,
+            name: req.body.name || null,
+            gender: req.body.gender || null,
+            date_of_birth: req.body.date_of_birth || null,
         };
         try {
             await DB.updateTeacherInfos(teacherId, params);
             let kq = await DB.getTeacherInfos(teacherId);
-            return res.status(200).json(kq);
+            await DB.updateUserInfos(kq.user_id, params);
+            return res.status(200).json(await DB.getTeacherInfos(teacherId));
         } catch (e) {
             console.log(e);
             return res.status(500).json({message: 'DATABASE_ERROR'});
