@@ -17,5 +17,5 @@ export const flagLanguageImg = {
         'Chinese' : 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1200px-Flag_of_the_People%27s_Republic_of_China.svg.png',
         'Korean' : 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/1200px-Flag_of_South_Korea.svg.png'
 }
-export const timesession = [{time : '6 - 9' , ss : '午前'},{time : '9 -　12' , ss : '午前'},{time : '12 - 15' , ss : '午前'},
-        {time : '15 - 18' , ss : '午前'},{time : '18 - 21' , ss : '午前'}, {time : '21 - 0' , ss : '午前'}, {time : '0 - 3' , ss : '午前'},{time : '3 - 6' , ss : '午前'}];
+export const timesession = [{time : '6-9' , ss : '午前'},{time : '9-12' , ss : '午前'},{time : '12-15' , ss : '午前'},
+        {time : '15-18' , ss : '午前'},{time : '18-21' , ss : '午前'}, {time : '21-0' , ss : '午前'}, {time : '0-3' , ss : '午前'},{time : '3-6' , ss : '午前'}];

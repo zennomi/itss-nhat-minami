@@ -61,7 +61,7 @@ export default function useListTeacher() {
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['teachers', queryString],
     queryFn: () => getTeachers(queryString),
-    staleTime: 3 * 1000,
+    staleTime: 20 * 1000,
     select: (data) => parseData(data.data),
     enabled: !!page && !!limit,
   });
