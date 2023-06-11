@@ -185,6 +185,7 @@ color: rgb(25, 57, 183)!important;
     min-width: 1229px;
     padding: 0 10px;
     position: relative;
+    cursor: pointer;
 }
 
 .x335913644_9819789628 {
@@ -228,7 +229,7 @@ color: rgb(25, 57, 183)!important;
     width: 28px;
 }
 
-.overlap-group {
+.result-right {
     height: 56px;
     position: relative;
 
@@ -378,7 +379,7 @@ color: rgb(25, 57, 183)!important;
     min-width: 169px;
 }
 
-.overlap-group-1 {
+.teacher-result-right {
     height: 55px;
     margin-bottom: 1px;
     position: relative;
