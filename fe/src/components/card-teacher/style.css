@@ -1,0 +1,119 @@
+.teacherCard {
+    align-items: center;
+    justify-items: center;
+    background-color: var(--white);
+    border-radius: 16px;
+    box-shadow: 0px 12px 24px -4px #919eab1f, 0px 0px 2px #919eab33;
+    display: flex;
+    flex-direction: column;
+    height: 412px;
+    overflow: hidden;
+    width: 472px;
+}
+
+.group2 {
+    height: 349px;
+    position: relative;
+    width: 344px;
+}
+
+.group1 {
+    height: 226px;
+    width: 344px;
+}
+
+.group1>img {
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 194px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 344px;
+}
+
+.overlay-solid {
+    background-color:
+            #161c24a3;
+    height: 194px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 344px;
+}
+
+.group0 {
+    height: 68px;
+    left: 100px;
+    position: absolute;
+    top: 158px;
+    width: 144px;
+}
+
+.layer {
+    height: 62px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 144px;
+}
+
+.avatar {
+    background-size: 100% 100%;
+    border-radius: 100px;
+    height: 64px;
+    left: 40px;
+    position: absolute;
+    top: 4px;
+    width: 64px;
+    box-shadow: 0px 12px 24px -4px #919eab1f, 0px 0px 2px #919eab33;
+}
+
+.info {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    height: 63px;
+    top: 226px;
+    width: 344px;
+}
+
+.contactWrapper {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 6px;
+    height: 60px;
+    width: 344px;
+}
+
+.icon {
+    align-items: center;
+    background-color: #F7F8F9;
+    border-radius: 50px;
+    display: flex;
+    height: 30px;
+    min-width: 30px;
+    padding-left: 7px;
+}
+
+.footer {
+    align-items: center;
+    display: flex;
+    border-top-color: aqua;
+    height: 63px;
+    width: 344px;
+
+}
+.footerItem{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 63px;
+    width: 114px;
+}
+.footerItem-result{
+    color: #212B36;
+    font-weight: 500;
+}
