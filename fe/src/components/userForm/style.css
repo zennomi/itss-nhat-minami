@@ -13,7 +13,15 @@
     box-shadow: 0px 0px 2px rgba(145, 158, 171, 0.2), 0px 12px 24px -4px rgba(145, 158, 171, 0.12);
     border-radius: 16px;
 }
-
+.error-message{
+    margin: 0;
+    padding-left: 10px;
+    color: #ff4343;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+}
 .form-row {
     display: flex;
     flex-direction: row;
@@ -28,14 +36,17 @@
 }
 
 .form-field {
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+}
+
+.input-field{
     padding-left: 10px;
     padding-right: 10px;
     isolation: isolate;
     width: 578px;
     height: 56px;
-    flex: none;
-    flex-grow: 1;
     border: 1px solid rgba(145, 158, 171, 0.32);
     border-radius: 8px;
     font-family: 'Public Sans';
@@ -45,13 +56,6 @@
 }
 
 .textarea {
-    width: 100%;
-    height: 104px;
-    flex: none;
-    align-self: stretch;
-}
-
-.textarea>input {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -81,7 +85,7 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    background: rgba(0, 255, 145, 0.559);
+    background: rgba(145, 158, 171, 0.08);
     border: transparent;
     border-radius: 8px;
     font-family: 'Public Sans';
@@ -89,5 +93,5 @@
     font-weight: 600;
     font-size: 22px;
     line-height: 28px;
-    color: #ffffff;
+    color: #000000;
 }

@@ -1,10 +1,13 @@
 import React from 'react'
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './style.css'
 export default function Avatar() {
     const fileInputRef = useRef(null);
+    const divRef = useRef(null);
+    const buttonRef = useRef(null);
     const [avatar, setAvatar] = useState(null);
     const [isButtonVisible, setButtonVisible] = useState(false);
+    const [showDiv, setShowDiv] = useState(false);
 
     const handleMouseMove = () => {
         setButtonVisible(true);
@@ -12,9 +15,26 @@ export default function Avatar() {
     const handleMouseLeave = () => {
         setButtonVisible(false);
     };
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (divRef.current && !divRef.current.contains(event.target) &&
+                buttonRef.current &&
+                !buttonRef.current.contains(event.target)) {
+                setShowDiv(false);
+            }
+        };
+        document.addEventListener('mousedown', handleOutsideClick);
+
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick);
+        };
+    }, []);
     const handleAvatarChangeButton = () => {
-        fileInputRef.current.click();
+        setShowDiv(true);
     };
+    const handleAddFileClick = () => {
+        fileInputRef.current.click();
+    }
     const handleAvatarChange = (event) => {
         const uploadedAvatar = event.target.files[0];
         if (uploadedAvatar.size > 3.1 * 1024 * 1024) {
@@ -32,29 +52,44 @@ export default function Avatar() {
         }
     };
     return (
-        <div className='avatar-container'>
-            {avatar ? (
-                <img src={avatar} alt='User Avatar' className='user-avatar' />
-            ) : (
-                <div className='placeholder-avatar'></div>
-            )}
-            <div
-                className='add-file-button'
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-            >
-                {isButtonVisible && <button className='transparent-layout' onClick={handleAvatarChangeButton}>
-                    <input type='file' accept="image/*" style={{ display: 'none' }} ref={fileInputRef} onChange={handleAvatarChange} />
-                    <div className='transparent-layout-center-content'>
-                        <i class="fa fa-camera fa-lg" aria-hidden="true"></i>
-                        <lable>Update photo</lable>
+        <div className='left-side'>
+            <div className='avatar-container'>
+                {avatar ? (
+                    <img src={avatar} alt='User Avatar' className='user-avatar' />
+                ) : (
+                    <div className='placeholder-avatar'></div>
+                )}
+                <div
+                    className='round-button'
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    {isButtonVisible && <button className='transparent-layout' onClick={handleAvatarChangeButton}>
+                        <div className='transparent-layout-center-content'>
+                            <i class="fa fa-camera fa-lg" aria-hidden="true"></i>
+                            <label>Update photo</label>
+                        </div>
+                    </button>}
+                </ div>
+            </div>
+            {showDiv && (
+                <div className='add-file-field' ref={divRef}>
+                    <button className='add-file-button' onClick={handleAddFileClick}>
+                        <input type='file' accept="image/*" style={{ display: 'none' }} ref={fileInputRef} onChange={handleAvatarChange} />
+                        <i class="fa fa-cloud-upload" aria-hidden="true" style={{
+                            width: '40px',
+                            height: '40px',
+                            color: '#919EAB'
+                        }}></i>
+                        <label>Upload file</label>
+                    </button>
+                    <div className='note'>
+                        <span>Allowed *.jpeg, *.jpg, *.png, *.gif</span>
+                        <span>Max size of 3.1 MB</span>
                     </div>
-                    {/* <div className='transparent-layout-note'>
-                    <span>Allowed *.jpeg, *.jpg, *.png, *.gif</span>
-                    <span>Max size of 3.1 MB</span>
-                </div> */}
-                </button>}
-            </ div>
-        </div>
+                </div>
+            )
+            }
+        </div >
     );
 }
