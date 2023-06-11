@@ -119,7 +119,13 @@ const DB = {
         let page = params.page || 1;
 
         return new Promise((resolve) => {
-            db.all(`select t.*, avg(r.rating) as star, u.name, u.gender, u.date_of_birth
+            db.all(`select t.*,
+                           avg(r.rating)             as star,
+                           u.name,
+                           u.gender,
+                           u.date_of_birth,
+                           count(r.id)               as reviewCount,
+                           s.end_hour - s.start_hour as hours
                     from teachers t
                              join users u on u.id = t.user_id
                              join schedules s on t.id = s.teacher_id
@@ -147,6 +153,44 @@ const DB = {
                     }
                 }
                 resolve(data);
+            });
+        });
+    },
+    getTeacherInfos: async (teacher_id) => {
+        return new Promise((resolve) => {
+            db.get(`select t.*, avg(r.rating) as star, count(r.id) as reviewCount
+                    from teachers t
+                             join reviews r on t.id = r.teacher_id
+                    where t.id = ${teacher_id}`, (err, row) => {
+                if (err) console.log(err);
+                resolve(row);
+            });
+        });
+    },
+    updateTeacherInfos: async (teacher_id, params) => {
+        let subQuery = '';
+        subQuery += params.lang_teach ? `lang_teach = '${params.lang_teach}', ` : '';
+        subQuery += params.lang_study ? `lang_study = '${params.lang_study}', ` : '';
+        subQuery += params.purpose ? `purpose = '${params.purpose}', ` : '';
+        subQuery += params.price ? `price = '${params.price}', ` : '';
+        subQuery += params.phone_number ? `phone_number = '${params.phone_number}', ` : '';
+        subQuery += params.resume_url ? `resume_url = '${params.resume_url}', ` : '';
+        subQuery += params.website_url ? `website_url = '${params.website_url}', ` : '';
+        subQuery += params.facebook_url ? `facebook_url = '${params.facebook_url}', ` : '';
+        subQuery += params.instagram_url ? `instagram_url = '${params.instagram_url}', ` : '';
+        subQuery += params.linkedin_url ? `linkedin_url = '${params.linkedin_url}', ` : '';
+        subQuery += params.twitter_url ? `twitter_url = '${params.twitter_url}', ` : '';
+
+        if (subQuery.length > 0)
+            subQuery = subQuery.slice(0, -2);
+        else subQuery = '1 = 1';
+
+        return new Promise((resolve) => {
+            db.run(`UPDATE teachers
+                    SET ${subQuery}
+                    WHERE id = '${teacher_id}'`, (err) => {
+                if (err) console.log(err);
+                resolve();
             });
         });
     }
