@@ -1,0 +1,22 @@
+.profile-container {
+    position: relative;
+    width: 1920px;
+    height: 1024px;
+    background: #F9FAFB;
+}
+
+.page-label {
+    position: absolute;
+    width: 192px;
+    height: 48px;
+    left: 66px;
+    top: 128px;
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 48px;
+}
+
+
+

@@ -35,11 +35,9 @@ const Search = () => {
     const [sort , setSort] = useState(true)
     const handleFilter = (key, value) => {
         setFilters({ ...filters, [key]: value });
-        console.log(filters)
     };
     const handleChange = (event, newValue) => {
         handleFilter('age',newValue)
-        console.log(filters.age)
         setValue(newValue);
     };
 
@@ -48,20 +46,23 @@ const Search = () => {
 
     }
     const handleSchedule = (event, hour, day) => {
-        console.log(`Giờ: ${hour}, Thứ: ${day}`);
-        // Thêm hoặc xóa class cho thẻ
+        const timesession = filters?.timesession || [];
+        const value = `${day}-${hour}`;
+        if (timesession.includes(value)) {
+            const index = timesession.indexOf(value);
+            timesession.splice(index, 1);
+        } else {
+            timesession.push(value);
+        }
+        handleFilter('timesession', timesession);
         event.target.classList.toggle('hour-choose');
     };
     const handleMouseOver = (id , data) => {
-        // Thực hiện các tác vụ khi di chuột qua phần tử
-        console.log("Di chuột qua phần tử",id);
         setHoverData(data)
-        console.log(document.querySelector('.teachercard'))
         document.querySelector('.teachercard').classList.add('display');
     };
 
     const handleMouseLeave = (id) => {
-        console.log("Di chuột ra khỏi phần tử",id);
         document.querySelector('.teachercard').classList.remove('display');
     }
 
@@ -70,12 +71,23 @@ const Search = () => {
             ...queryString,
             ...filters
         };
+        console.log(filters)
         setQueryString(params);
     };
 
     useEffect(() => {
         setFilters({ ...queryString });
     }, []);
+
+    useEffect(() => {
+        if (filters?.timesession.length > 0) {
+            const timesession = filters?.timesession;
+            timesession.forEach((time) => {
+                const element = document.querySelector(`.${time}`);
+                element.classList.add('hour-choose');
+            });
+        }
+    }, [filters?.timesession]);
 
     return (
         <div>
@@ -326,11 +338,10 @@ const Search = () => {
                                             </div>
                                             {date.map((day,index) => (
                                                 <div className="d-flex">
-                                                    <div key={index} onClick={(e) => handleSchedule(e,item.time,day)} className="date-hour"></div>
+                                                    <div key={index} onClick={(e) => handleSchedule(e,item.time,day)} className={`date-hour ${day}-${item.time}`}></div>
                                                 </div>
                                             ))}
                                         </div>
-                                        // <Pickdaterow  time={item.time} session={item.ss}/>
                                     ))}
                                 </div>
                             </div>

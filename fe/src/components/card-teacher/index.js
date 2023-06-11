@@ -3,7 +3,6 @@ import './style.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Icon } from '@iconify/react';
 function TeacherCard ({ data }) {
-    console.log('aaaaa',data)
     return (
         <div>
 
@@ -53,7 +52,7 @@ function TeacherCard ({ data }) {
                             <span>評点</span>
                         </div>
                         <div>
-                            <span className="footerItem-result" style={{color:'#212B36'}}>{data.star}</span>
+                            <span className="footerItem-result" style={{color:'#212B36'}}>{data?.star?.toFixed(1)}</span>
                         </div>
                     </div>
                     <div className="footerItem">
