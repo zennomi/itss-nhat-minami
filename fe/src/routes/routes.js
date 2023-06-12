@@ -15,6 +15,7 @@ export const GuestRoutes = [
 export const NormalRoutes = [
     {path: '/', element: <Pages.Home/>},
     {path: '/search', element: <Pages.Search/>},
-    {path: '/tutor', element: <Pages.Tutor/>},
-    {path: '/profile', element: <Pages.Profile/>},
+
+    {path: '/tutor/:id', element: <Pages.Tutor/>},
+
 ];

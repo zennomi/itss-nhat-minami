@@ -1,26 +1,30 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import './teacher.css';
-
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const calculatorDate = (time) => {
     const currentDate = new Date();
+    var dateofBirth = new Date(time)
 
-    const dateOfBirth = new Date("1990-01-01");
+    let age = currentDate.getFullYear() - dateofBirth.getFullYear();
 
-    let age = currentDate.getFullYear() - dateOfBirth.getFullYear();
-
-    if ( currentDate.getMonth() < dateOfBirth.getMonth() ||
-        (currentDate.getMonth() === dateOfBirth.getMonth() && currentDate.getDate() < dateOfBirth.getDate())) {
+    if ( currentDate.getMonth() < dateofBirth.getMonth() ||
+        (currentDate.getMonth() === dateofBirth.getMonth() && currentDate.getDate() < dateofBirth.getDate())) {
     age--;
     }
     return age;
 }
 
 function Teacher({ data }) {
-    console.log(data)
+    const navigate = useNavigate();
+
+    const { id } = data;
+
     return (
-        <div className="frame-1">
+        <div className="frame-1" onClick={() => navigate(`/tutor/${id}`)} style={{
+            'cursor': 'pointer'
+        }}>
             {/*avt */}
             <img
                 className="x335913644_9819789628"
@@ -78,7 +82,7 @@ function Teacher({ data }) {
                     <div className="frame-6">
                         <i className="fa-solid fa-star fa-lg" style={{color: '#f5d60f'}} ></i>
                         <div className="numberpublicsans-bold-black-14px">
-                            <span className="publicsans-bold-black-14px">{data.star.toFixed(1)}</span>
+                            <span className="publicsans-bold-black-14px">{data?.star?.toFixed(1)}</span>
                         </div>
                     </div>
                     <div className="numberpublicsans-bold-black-14px">
@@ -91,7 +95,7 @@ function Teacher({ data }) {
                     </span>
 
                     <div className="address-1publicsans-semi-bold-white-14px">
-                        <span  className="publicsans-semi-bold-black-14px tx1">{data.longitude} min / lesson</span>
+                        <span  className="publicsans-semi-bold-black-14px tx1">{data.hours*60} min / lesson</span>
                     </div>
                 </div>
             </div>
