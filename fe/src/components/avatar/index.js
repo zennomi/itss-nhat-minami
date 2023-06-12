@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState, useRef, useEffect } from 'react';
 import './style.css'
-export default function Avatar() {
+export default function Avatar({ initialData }) {
     const fileInputRef = useRef(null);
     const divRef = useRef(null);
     const buttonRef = useRef(null);
-    const [avatar, setAvatar] = useState(null);
+    const [avatar, setAvatar] = useState(initialData.avatar);
     const [isButtonVisible, setButtonVisible] = useState(false);
     const [showDiv, setShowDiv] = useState(false);
 
@@ -47,8 +47,7 @@ export default function Avatar() {
                 setAvatar(reader.result);
             };
             reader.readAsDataURL(uploadedAvatar);
-        } else {
-            setAvatar(null);
+            initialData.avatar = uploadedAvatar;
         }
     };
     return (
@@ -67,7 +66,7 @@ export default function Avatar() {
                     {isButtonVisible && <button className='transparent-layout' onClick={handleAvatarChangeButton}>
                         <div className='transparent-layout-center-content'>
                             <i class="fa fa-camera fa-lg" aria-hidden="true"></i>
-                            <label>Update photo</label>
+                            Update photo
                         </div>
                     </button>}
                 </ div>

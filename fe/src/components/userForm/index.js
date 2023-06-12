@@ -1,11 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import LanguageCard from '../languageInfo';
 import './style.css'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
@@ -39,40 +38,16 @@ const schema = yup.object().shape({
     ),
 });
 
-const initialData = {
-    name: 'Do Minh Hieu',
-    gender: 'male',
-    address: 'Thanh Xuan',
-    speakingLanguage: 'Vietnamese',
-    dob: '03/08/2001',
-    country: 'Viet Nam',
-    description: '',
-    languages: [
-        {
-            language: 'English',
-            level: 'B1',
-            salary: '5000',
-            minPerLesson: '45'
-        },
-        {
-            language: 'Japanese',
-            level: 'N3',
-            salary: '5000',
-            minPerLesson: '45'
-        },
-    ]
-}
-export default function Form() {
+export default function Form({initialData}) {
     const [languages, setLanguages] = useState(initialData.languages);
-    const { handleSubmit, register, setValue, formState: { errors } } = useForm({
+    const { handleSubmit, register, setValue, watch, formState: { errors } } = useForm({
         defaultValues: initialData,
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data) => {
-        setLanguages(languages);
-        setValue('languages', languages);
-        console.log(data);
+    const onSubmit = () => {
+        const updatedData = watch();
+        console.log(updatedData);
     };
 
     const handleAddButtonClick = () => {
@@ -86,20 +61,20 @@ export default function Form() {
     };
 
     const handleChange = (index, field, value) => {
-        setLanguages((prevLanguages) => {
-            const updatedLanguages = [...prevLanguages];
-            updatedLanguages[index] = {
-                ...updatedLanguages[index],
-                [field]: value
-            };
-            return updatedLanguages;
-        });
+        const updatedLanguages = [...languages];
+        updatedLanguages[index] = {
+            ...updatedLanguages[index],
+            [field]: value
+        };
+        setLanguages(updatedLanguages)
+        setValue('languages', updatedLanguages);
     }
 
     const removeLanguage = (index) => {
         const updatedLanguages = [...languages];
         updatedLanguages.splice(index, 1);
-        setLanguages(updatedLanguages)
+        setLanguages(updatedLanguages);
+        setValue('languages', updatedLanguages);
     };
 
     return (
@@ -208,8 +183,6 @@ export default function Form() {
                         </div>
                     </div>
                 ))}
-
-
                 <div className='button-row'>
                     <button type="button" className='button' onClick={handleAddButtonClick}>
                         <FontAwesomeIcon icon="fa-solid fa-plus" />
