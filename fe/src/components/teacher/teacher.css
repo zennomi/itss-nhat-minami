@@ -182,7 +182,7 @@ color: rgb(25, 57, 183)!important;
     display: flex;
     gap: 10px;
     height: 162px;
-    min-width: 1229px;
+    min-width: 1236px;
     padding: 0 10px;
     position: relative;
     cursor: pointer;
@@ -232,7 +232,7 @@ color: rgb(25, 57, 183)!important;
 .result-right {
     height: 56px;
     position: relative;
-
+    width: 78px;
 }
 
 .frame-8 {
@@ -367,7 +367,7 @@ color: rgb(25, 57, 183)!important;
     flex-direction: column;
     gap: 6px;
     min-height: 142px;
-    width: 179px;
+    width: 200px;
 }
 
 .frame-10 {
@@ -424,7 +424,7 @@ color: rgb(25, 57, 183)!important;
     display: flex;
     flex-direction: column;
     min-height: 58px;
-    width: 100px;
+    width: 110px;
     padding-top: 4px;
 }
 
