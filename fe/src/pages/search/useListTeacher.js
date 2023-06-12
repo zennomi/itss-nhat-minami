@@ -47,6 +47,8 @@ export default function useListTeacher() {
         gender: item.gender,
         date_of_birth: item.date_of_birth,
         age: item.age,
+        reviewCount:item.reviewCount,
+        hours : item.hours
       };
     });
     const pagination = {
