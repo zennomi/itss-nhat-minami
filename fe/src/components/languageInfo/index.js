@@ -1,41 +1,36 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react'
 import './style.css'
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-const schema = yup.object().shape({
-    language: yup.string().required('言語を選択してください。'),
-    level: yup.string().required('レベルを入力してください。'),
-    salary: yup.number().required('給料を入力してください。'),
-    minPerLesson: yup.number().required('レッソンの時間を入力してください。'),
-});
-const LanguageCard = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-    });
+
+const LanguageCard = ({
+    index,
+    data,
+    onChange,
+    errors,
+}) => {
     return (
         <div className='frame-2-item'>
             <div className='form-row'>
                 <div className='form-field'>
                     <select
-                        id='language'
+                        id={`language[${index}]`}
                         className="input-field"
-                        {...register('language')} // Đăng ký trường language
+                        value={data.language}
+                        onChange={(e) => onChange(index, 'language', e.target.value)}
                     >
-                        <option value='' disabled>言語</option>
-                        <option value="Endlish">英語</option>
+                        <option value="" disabled selected>言語</option>
+                        <option value="English">英語</option>
                         <option value="Vietnamese">ベトナム語</option>
                         <option value="Japanese">日本語</option>
                     </select>
-                    {errors.language && <p className='error-message'>{errors.language.message}</p>}
+                    {errors.laguage && <p className='error-message'>{errors.laguage.message}</p>}
                 </div>
                 <div className='form-field'>
                     <input
-                        id='level'
+                        id={`language[${index}]`}
                         type='text'
                         className='input-field'
-                        {...register('level')} // Đăng ký trường level
+                        value={data.level}
+                        onChange={(e) => onChange(index, 'level', e.target.value)}
                         placeholder='レベル'
                     />
                     {errors.level && <p className='error-message'>{errors.level.message}</p>}
@@ -44,25 +39,28 @@ const LanguageCard = () => {
             <div className='form-row'>
                 <div className='form-field'>
                     <input
-                        id='salary'
+                        id={`language[${index}]`}
                         type='text'
                         className='input-field'
-                        {...register('salary')} // Đăng ký trường salary
+                        value={data.salary}
+                        onChange={(e) => onChange(index, 'salary', e.target.value)}
                         placeholder='料金 ¥'
                     />
                     {errors.salary && <p className='error-message'>{errors.salary.message}</p>}
                 </div>
                 <div className='form-field'>
                     <input
-                        id='min per lesson'
+                        id={`language[${index}]`}
                         type='text'
                         className='input-field'
-                        {...register('minPerLesson')} // Đăng ký trường minPerLesson
+                        value={data.minPerLesson}
+                        onChange={(e) => onChange(index, 'minPerLesson', e.target.value)}
                         placeholder='レッソンの時間 （分）'
                     />
                     {errors.minPerLesson && <p className='error-message'>{errors.minPerLesson.message}</p>}
                 </div>
             </div>
+
         </div>
     )
 }

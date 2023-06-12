@@ -30,3 +30,17 @@
     width: auto;
     height: auto;
 }
+
+.card-button-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    width: 100%;
+    height: auto;
+}
+
+.card-button-row>button{
+    background: rgba(145, 158, 171, 0.08);
+    border-radius: 8px;
+    border: transparent;
+}

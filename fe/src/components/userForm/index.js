@@ -4,6 +4,8 @@ import LanguageCard from '../languageInfo';
 import './style.css'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
@@ -27,41 +29,78 @@ const schema = yup.object().shape({
         }).required('生年月日を入力してください'),
     country: yup.string(),
     description: yup.string(),
+    languages: yup.array().of(
+        yup.object().shape({
+            language: yup.string().required('言語を選択してください。'),
+            level: yup.string().required('レベルを入力してください。'),
+            salary: yup.number().required('給料を入力してください。'),
+            minPerLesson: yup.number().required('レッソンの時間を入力してください。'),
+        }),
+    ),
 });
+
+const initialData = {
+    name: 'Do Minh Hieu',
+    gender: 'male',
+    address: 'Thanh Xuan',
+    speakingLanguage: 'Vietnamese',
+    dob: '03/08/2001',
+    country: 'Viet Nam',
+    description: '',
+    languages: [
+        {
+            language: 'English',
+            level: 'B1',
+            salary: '5000',
+            minPerLesson: '45'
+        },
+        {
+            language: 'Japanese',
+            level: 'N3',
+            salary: '5000',
+            minPerLesson: '45'
+        },
+    ]
+}
 export default function Form() {
-    const { handleSubmit, register, formState: { errors } } = useForm({
+    const [languages, setLanguages] = useState(initialData.languages);
+    const { handleSubmit, register, setValue, formState: { errors } } = useForm({
+        defaultValues: initialData,
         resolver: yupResolver(schema),
     });
 
     const onSubmit = (data) => {
-        console.log(data)
+        setLanguages(languages);
+        setValue('languages', languages);
+        console.log(data);
     };
 
-    const nullData = {
-        language: '',
-        level: '',
-        salary: '',
-        minPerLesson: '',
-    }
-
-    const [languages, setLanguages] = useState([]);
     const handleAddButtonClick = () => {
-        const newLanguage = <LanguageCard initialData={nullData} />
-        setLanguages([...languages, newLanguage]);
+        const newLanguage = {
+            language: '',
+            level: '',
+            salary: '',
+            minPerLesson: '',
+        }
+        setLanguages([...languages, newLanguage])
     };
 
-    /**Thử hiển thị thôi ạ */
-    const initialData = {
-        language: 'English',
-        level: 'A1',
-        salary: '5000',
-        minPerLesson: '50',
+    const handleChange = (index, field, value) => {
+        setLanguages((prevLanguages) => {
+            const updatedLanguages = [...prevLanguages];
+            updatedLanguages[index] = {
+                ...updatedLanguages[index],
+                [field]: value
+            };
+            return updatedLanguages;
+        });
     }
-    const languageDiv = <LanguageCard initialData={initialData} />
-    useEffect(() => {
-        setLanguages([...languages, languageDiv]);
-    }, []);
-    /** */
+
+    const removeLanguage = (index) => {
+        const updatedLanguages = [...languages];
+        updatedLanguages.splice(index, 1);
+        setLanguages(updatedLanguages)
+    };
 
     return (
         <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
@@ -81,11 +120,12 @@ export default function Form() {
                         id='gender'
                         className="input-field"
                         {...register('gender')}
+                        name='gender'
                     >
                         <option value='' disabled selected>性別</option>
-                        <option value="Male">男</option>
-                        <option value="Female">女</option>
-                        <option value="Other">他</option>
+                        <option value="male">男性</option>
+                        <option value="female">女性</option>
+                        <option value="other">他</option>
                     </select>
                     {errors.gender && <p className="error-message">{errors.gender.message}</p>}
                 </div>
@@ -106,6 +146,7 @@ export default function Form() {
                         id='speakingLanguage'
                         className="input-field"
                         {...register('speakingLanguage')}
+                        name='spealingLanguage'
                     >
                         <option value='' disabled selected>何語で教えますか。</option>
                         <option value="English">英語</option>
@@ -153,14 +194,29 @@ export default function Form() {
             </div>
             <div className='frame-2'>
                 <label>言語</label>
-                <div>{languages.map((div) => div)}</div>
+                {languages.map((language, index) => (
+                    <div >
+                        <LanguageCard
+                            key={index}
+                            index={index}
+                            data={language}
+                            onChange={handleChange}
+                            errors={errors}
+                        />
+                        <div className='card-button-row'>
+                            <button type="button" onClick={() => removeLanguage(index)}>削除</button>
+                        </div>
+                    </div>
+                ))}
+
+
                 <div className='button-row'>
-                    <button className='button' onClick={handleAddButtonClick}>
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        <label>言語</label>
+                    <button type="button" className='button' onClick={handleAddButtonClick}>
+                        <FontAwesomeIcon icon="fa-solid fa-plus" />
+                        言語
                     </button>
                     <button type="submit" className='button'>
-                        <label>保存</label>
+                        保存
                     </button>
                 </div>
             </div>
