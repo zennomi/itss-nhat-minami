@@ -32,18 +32,12 @@ const schema = yup.object().shape({
         yup.object().shape({
             language: yup.string().required('言語を選択してください。'),
             level: yup.string().required('レベルを入力してください。'),
-            salary: yup.string()
-                .test('is-number', '数字で入力してください。', (value) => {
-                    if (!value) return true;
-                    const numberValue = Number(value.replace(/\//g, ''));
-                    return !isNaN(numberValue);
-                }).required('給料を入力してください。'),
-            minPerLesson: yup.string()
-                .test('is-number', '数字で入力してください。', (value) => {
-                    if (!value) return true;
-                    const numberValue = Number(value.replace(/\//g, ''));
-                    return !isNaN(numberValue);
-                }).required('レッソンの時間を入力してください。'),
+            salary: yup.number()
+                .typeError('数字で入力してください。')
+                .required('給料を入力してください。'),
+            minPerLesson: yup.number()
+                .typeError('数字で入力してください。')
+                .required('レッソンの時間を入力してください。'),
         }),
     ),
 });
@@ -54,9 +48,9 @@ export default function Form({ initialData }) {
         resolver: yupResolver(schema),
     });
 
-    const { fields, append, remove, swap } = useFieldArray({
+    const { fields, append, remove } = useFieldArray({
         control,
-        name: 'languages', // Replace 'languages' with your array field name
+        name: 'languages',
     });
 
     const onSubmit = (data) => {
