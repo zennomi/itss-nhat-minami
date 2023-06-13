@@ -29,8 +29,11 @@ const Search = () => {
         queryString,
         setQueryString,
     } = useListTeacher();
+
     const [hoverData, setHoverData] = useState('');
+
     const [filters, setFilters] = useState(null);
+
     const [value, setValue] = React.useState([20, 70]);
     const [sort , setSort] = useState(true)
     const handleFilter = (key, value) => {
@@ -223,14 +226,14 @@ const Search = () => {
                             <div className="dropdown item_dropdown">
                                 <div  style={{color:'#212B36'}} className="d-flex justify-content-between"
                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span>{filters?.gender}</span>
+                                    <span>{filters?.sex}</span>
                                     <span className="dropdown-toggle"  ></span>
                                 </div>
                                 <div>
                                     <div className="dropdown-menu">
                                         <div >
                                                 {sex.map((item,index) => (
-                                                    <li onClick={() => handleFilter('gender', item)}><span className="dropdown-item" >{item}</span></li>
+                                                    <li onClick={() => handleFilter('sex', item)}><span className="dropdown-item" >{item}</span></li>
                                                 ))}
                                         </div>
                                         </div>
@@ -404,11 +407,8 @@ const Search = () => {
                                         <span className="publicsans-normal-white-16px">料金：最高から</span>
                                     </>
                                     )
-
                                 }
                             </div>
-
-
 
                         </Button>
                     </div>
@@ -421,11 +421,9 @@ const Search = () => {
                         </Button>
                     </div>
                 </div>
-
                 { isLoading && <>
                     <LinearProgress className='mt-4'/>
                 </> }
-
                 <div className="d-flex mt-5">
                     <div>
                     {isSuccess && listTeachers?.map((item) => <>
