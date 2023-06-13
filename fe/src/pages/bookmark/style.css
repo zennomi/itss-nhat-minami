@@ -1,0 +1,31 @@
+.bookmark-header-left{
+    display: flex;
+    flex-direction: column;
+}
+@import url("https://fonts.googleapis.com/css?family=Public+Sans:700,600,400");
+.bookmark{
+    margin: 88px 96px;
+}
+.bookmark-header{
+    display: flex;
+    justify-content: space-between;
+    min-height: 248px;
+    padding: 24px 48px 10px;
+
+}
+.text-front{
+    height: 80px;
+    min-width: 700px;
+
+    font-size: 60px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    white-space: nowrap;
+    font-family: var(--font-family-public_sans);
+}
+.text-behind{
+    font-size: 18px;
+    color: #637381;
+    font-family: var(--font-family-public_sans);
+}
+
