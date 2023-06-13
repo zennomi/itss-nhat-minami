@@ -4,60 +4,64 @@ import './style.css'
 const LanguageCard = ({
     index,
     data,
-    onChange,
+    register,
     errors,
 }) => {
+    const language = `languages.${index}.language`;
+    const level = `languages.${index}.level`;
+    const salary = `languages.${index}.salary`;
+    const minPerLesson = `languages.${index}.minPerLesson`;
     return (
         <div className='frame-2-item'>
             <div className='form-row'>
                 <div className='form-field'>
                     <select
-                        id={`language[${index}]`}
                         className="input-field"
-                        value={data.language}
-                        onChange={(e) => onChange(index, 'language', e.target.value)}
+                        defaultValue={data.language}
+                        {...register(language)}
                     >
                         <option value="" disabled selected>言語</option>
                         <option value="English">英語</option>
                         <option value="Vietnamese">ベトナム語</option>
                         <option value="Japanese">日本語</option>
                     </select>
-                    {errors.laguage && <p className='error-message'>{errors.laguage.message}</p>}
+                    {errors.languages?.[index]?.language &&
+                        <p className='error-message'>{errors.languages[index].language.message}</p>}
                 </div>
                 <div className='form-field'>
                     <input
-                        id={`language[${index}]`}
                         type='text'
                         className='input-field'
-                        value={data.level}
-                        onChange={(e) => onChange(index, 'level', e.target.value)}
+                        defaultValue={data.level}
+                        {...register(level)}
                         placeholder='レベル'
                     />
-                    {errors.level && <p className='error-message'>{errors.level.message}</p>}
+                    {errors.languages?.[index]?.level &&
+                        <p className='error-message'>{errors.languages[index].level.message}</p>}
                 </div>
             </div>
             <div className='form-row'>
                 <div className='form-field'>
                     <input
-                        id={`language[${index}]`}
                         type='text'
                         className='input-field'
-                        value={data.salary}
-                        onChange={(e) => onChange(index, 'salary', e.target.value)}
+                        defaultValue={data.salary}
+                        {...register(salary)}
                         placeholder='料金 ¥'
                     />
-                    {errors.salary && <p className='error-message'>{errors.salary.message}</p>}
+                    {errors.languages?.[index]?.salary &&
+                        <p className='error-message'>{errors.languages[index].salary.message}</p>}
                 </div>
                 <div className='form-field'>
                     <input
-                        id={`language[${index}]`}
                         type='text'
                         className='input-field'
-                        value={data.minPerLesson}
-                        onChange={(e) => onChange(index, 'minPerLesson', e.target.value)}
+                        defaultValue={data.minPerLesson}
+                        {...register(minPerLesson)}
                         placeholder='レッソンの時間 （分）'
                     />
-                    {errors.minPerLesson && <p className='error-message'>{errors.minPerLesson.message}</p>}
+                    {errors.languages?.[index]?.minPerLesson &&
+                        <p className='error-message'>{errors.languages[index].minPerLesson.message}</p>}
                 </div>
             </div>
 

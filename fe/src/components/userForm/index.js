@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import LanguageCard from '../languageInfo';
 import './style.css'
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as yup from 'yup';
@@ -32,22 +32,35 @@ const schema = yup.object().shape({
         yup.object().shape({
             language: yup.string().required('言語を選択してください。'),
             level: yup.string().required('レベルを入力してください。'),
-            salary: yup.number().required('給料を入力してください。'),
-            minPerLesson: yup.number().required('レッソンの時間を入力してください。'),
+            salary: yup.string()
+                .test('is-number', '数字で入力してください。', (value) => {
+                    if (!value) return true;
+                    const numberValue = Number(value.replace(/\//g, ''));
+                    return !isNaN(numberValue);
+                }).required('給料を入力してください。'),
+            minPerLesson: yup.string()
+                .test('is-number', '数字で入力してください。', (value) => {
+                    if (!value) return true;
+                    const numberValue = Number(value.replace(/\//g, ''));
+                    return !isNaN(numberValue);
+                }).required('レッソンの時間を入力してください。'),
         }),
     ),
 });
 
-export default function Form({initialData}) {
-    const [languages, setLanguages] = useState(initialData.languages);
-    const { handleSubmit, register, setValue, watch, formState: { errors } } = useForm({
+export default function Form({ initialData }) {
+    const { control, handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: initialData,
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = () => {
-        const updatedData = watch();
-        console.log(updatedData);
+    const { fields, append, remove, swap } = useFieldArray({
+        control,
+        name: 'languages', // Replace 'languages' with your array field name
+    });
+
+    const onSubmit = (data) => {
+        console.log(data);
     };
 
     const handleAddButtonClick = () => {
@@ -57,24 +70,11 @@ export default function Form({initialData}) {
             salary: '',
             minPerLesson: '',
         }
-        setLanguages([...languages, newLanguage])
+        append(newLanguage);
     };
 
-    const handleChange = (index, field, value) => {
-        const updatedLanguages = [...languages];
-        updatedLanguages[index] = {
-            ...updatedLanguages[index],
-            [field]: value
-        };
-        setLanguages(updatedLanguages)
-        setValue('languages', updatedLanguages);
-    }
-
     const removeLanguage = (index) => {
-        const updatedLanguages = [...languages];
-        updatedLanguages.splice(index, 1);
-        setLanguages(updatedLanguages);
-        setValue('languages', updatedLanguages);
+        remove(index);
     };
 
     return (
@@ -169,13 +169,13 @@ export default function Form({initialData}) {
             </div>
             <div className='frame-2'>
                 <label>言語</label>
-                {languages.map((language, index) => (
+                {fields.map((language, index) => (
                     <div >
                         <LanguageCard
                             key={index}
                             index={index}
                             data={language}
-                            onChange={handleChange}
+                            register={register}
                             errors={errors}
                         />
                         <div className='card-button-row'>
