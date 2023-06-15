@@ -38,7 +38,7 @@ const TEACHER = {
         let id = req.params.id || null;
         try {
             let kq = await DB.getTeacherInfos(id);
-            if(!kq.id)
+            if (!kq.id)
                 return res.status(404).json({message: 'NOT_FOUND'});
             return res.status(200).json(kq);
         } catch (e) {
@@ -70,6 +70,31 @@ const TEACHER = {
             let kq = await DB.getTeacherInfos(teacherId);
             await DB.updateUserInfos(kq.user_id, params);
             return res.status(200).json(await DB.getTeacherInfos(teacherId));
+        } catch (e) {
+            console.log(e);
+            return res.status(500).json({message: 'DATABASE_ERROR'});
+        }
+    },
+    addReview: async (req, res) => {
+        let teacherId = req.body.teacher_id;
+        let userId = req.user_id;
+        let star = req.body.star;
+        let content = req.body.content;
+        if (!teacherId || !userId || !star || !content) return res.status(400).json({message: 'MISSING_FIELDS'});
+        try {
+            await DB.addReview(teacherId, userId, star, content);
+            return res.status(200).json({message: 'OK'});
+        } catch (e) {
+            console.log(e);
+            return res.status(500).json({message: 'DATABASE_ERROR'});
+        }
+    },
+    getReviewsByTeacherId: async (req, res) => {
+        let teacherId = req.params.id;
+        if (!teacherId) return res.status(400).json({message: 'MISSING_FIELDS'});
+        try {
+            let kq = await DB.getReviewsByTeacherId(teacherId);
+            return res.status(200).json(kq);
         } catch (e) {
             console.log(e);
             return res.status(500).json({message: 'DATABASE_ERROR'});

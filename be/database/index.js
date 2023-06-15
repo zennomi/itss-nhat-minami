@@ -203,6 +203,26 @@ const DB = {
                 resolve();
             });
         });
+    },
+    addReview: async (teacher_id, user_id, rating, content) => {
+        return new Promise((resolve) => {
+            db.run(`INSERT INTO reviews (teacher_id, user_id, rating, content)
+                    VALUES ('${teacher_id}', '${user_id}', '${rating}', '${content}')`, (err) => {
+                if (err) console.log(err);
+                resolve();
+            });
+        });
+    },
+    getReviewsByTeacherId: async (teacher_id) => {
+        return new Promise((resolve) => {
+            db.all(`SELECT r.*, u.name, u.gender
+                    FROM reviews r
+                             JOIN users u on r.user_id = u.id
+                    WHERE r.teacher_id = '${teacher_id}'`, (err, rows) => {
+                if (err) console.log(err);
+                resolve(rows);
+            });
+        });
     }
 };
 

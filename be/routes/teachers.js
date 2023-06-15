@@ -6,4 +6,6 @@ const router = express.Router();
 router.get('/search', TEACHER.search);
 router.get('/teacher/:id', TEACHER.getTeacher);
 router.put('/teacher', auth, TEACHER.updateTeacher);
+router.post('/review', auth, TEACHER.addReview);
+router.get('/review/:id', TEACHER.getReviewsByTeacherId);
 module.exports = router;
