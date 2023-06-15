@@ -4,7 +4,8 @@ import * as Tutor_Component from '../../components/tutor'
 import './style.css';
 import Review from "../../components/review/Review";
 import useTutor from './useTutor';
-
+import {date, timesession} from "../../utils/constant";
+import Header from "../../components/header";
 function Tutor() {
   // new from review
   const review_banner_overview = {
@@ -60,6 +61,8 @@ function Tutor() {
   };
 
   return (
+      <div>
+        <Header/>
     <div className="tutor-container-center-horizontal">
       <div className="tutor-tutor-details-2screen">
         <div className="tutor-flex-col">
@@ -82,8 +85,8 @@ function Tutor() {
             {/* map */}
             <img className="tutor-image-4" src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/w_2560%2Cc_limit/GoogleMapTA.jpg" alt="image 4" />
           </div>
-          {activeComponent === 'component1' && 
-          <Tutor_Component.TeacherInfor 
+          {activeComponent === 'component1' &&
+          <Tutor_Component.TeacherInfor
                 lang_native = {teacherInformation?.lang_native}
                 flag = {teacherInformation?.flag}
                 star = {teacherInformation?.star}
@@ -100,12 +103,42 @@ function Tutor() {
                 twitter_url = {teacherInformation?.twitter_url}
             />
             }
-      {activeComponent === 'component2' && <spanText1>Đây là lịch</spanText1>}
+      {activeComponent === 'component2' && <>
+        <div className="frame-43-tutor " style={{'min-width':'720px!important'}} >
+          <div className="datepicker">
+            <div className="datepicker-header">
+              <div className="datepicker-col-hour"></div>
+              {date.map((day,index) => (
+                  <div className="d-flex">
+                    <div key={index} className="datepicker-date-tutor">{day}</div>
+                  </div>
+              ))}
+            </div>
+
+            {timesession.map((item,index) => (
+                <div className="datepicker-timerow">
+                  <div className="datepicker-col-hour">
+                    <span className="pickhour">{item.time}時</span>
+                    <div className="picksession">
+                      <span>{item.ss}</span>
+                    </div>
+                  </div>
+                  {date.map((day,index) => (
+                      <div className="d-flex">
+                        <div key={index}  className={`date-hour-tutor ${day}-${item.time}`}></div>
+                      </div>
+                  ))}
+                </div>
+            ))}
+          </div>
+        </div>
+      </>}
       {activeComponent === 'component3' && <Review review_banner_overview={review_banner_overview} reviewsData_tmp={reviewsData_tmp}/>}
-            
+
         </div>
       </div>
     </div>
+      </div>
   );
 }
 
