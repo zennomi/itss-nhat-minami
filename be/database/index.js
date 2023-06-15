@@ -190,6 +190,8 @@ const DB = {
         subQuery += params.instagram_url ? `instagram_url = '${params.instagram_url}', ` : '';
         subQuery += params.linkedin_url ? `linkedin_url = '${params.linkedin_url}', ` : '';
         subQuery += params.twitter_url ? `twitter_url = '${params.twitter_url}', ` : '';
+        subQuery += params.photo_url ? `photo_url = '${params.photo_url}', ` : '';
+        subQuery += params.background_image_url ? `background_image_url = '${params.background_image_url}', ` : '';
 
         if (subQuery.length > 0)
             subQuery = subQuery.slice(0, -2);
@@ -221,6 +223,16 @@ const DB = {
                     WHERE r.teacher_id = '${teacher_id}'`, (err, rows) => {
                 if (err) console.log(err);
                 resolve(rows);
+            });
+        });
+    },
+    getTeacherByUserId: async (user_id) => {
+        return new Promise((resolve) => {
+            db.get(`SELECT *
+                    FROM teachers
+                    WHERE user_id = ${user_id}`, (err, row) => {
+                if (err) console.log(err);
+                resolve(row);
             });
         });
     }

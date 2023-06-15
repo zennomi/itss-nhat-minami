@@ -8,4 +8,5 @@ router.get('/teacher/:id', TEACHER.getTeacher);
 router.put('/teacher', auth, TEACHER.updateTeacher);
 router.post('/review', auth, TEACHER.addReview);
 router.get('/review/:id', TEACHER.getReviewsByTeacherId);
+router.post('/bg', auth, TEACHER.upBackGround);
 module.exports = router;

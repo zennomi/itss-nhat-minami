@@ -7,12 +7,18 @@ const app = express();
 
 const usersRouter = require('./routes/users');
 const teachersRouter = require('./routes/teachers');
+var fileUpload = require('express-fileupload');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : './public/files/'
+}));
 
 // disable CORS
 app.use((req, res, next) => {
