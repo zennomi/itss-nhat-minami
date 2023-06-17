@@ -1,11 +1,11 @@
-import React from 'react'
-import { useState } from 'react';
+import { React, useState, useRef, useEffect } from 'react'
 import LanguageCard from '../languageInfo';
 import './style.css'
 import { useForm, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as yup from 'yup';
+import Gmap from '../map';
 
 const schema = yup.object().shape({
     name: yup.string().required('氏名を入力してください'),
@@ -43,7 +43,7 @@ const schema = yup.object().shape({
 });
 
 export default function Form({ initialData }) {
-    const { control, handleSubmit, register, formState: { errors } } = useForm({
+    const { control, handleSubmit, setValue, watch, register, formState: { errors } } = useForm({
         defaultValues: initialData,
         resolver: yupResolver(schema),
     });
@@ -53,6 +53,10 @@ export default function Form({ initialData }) {
         name: 'languages',
     });
 
+    const [center, setCenter] = useState({ lat: initialData.latitude, lng: initialData.longtitude })
+    const [showMap, setShowMap] = useState(false);
+    const [selectedLocation, setSelectedLocation] = useState(center);
+    const mapRef = useRef(null);
     const onSubmit = (data) => {
         console.log(data);
     };
@@ -69,6 +73,67 @@ export default function Form({ initialData }) {
 
     const removeLanguage = (index) => {
         remove(index);
+    };
+
+    const handleAddressChange = (event) => {
+        const address = event.target.value;
+        if (address) {
+            const geocoder = new window.google.maps.Geocoder();
+            geocoder.geocode({ address }, (results, status) => {
+                if (status === 'OK') {
+                    const { lat, lng } = results[0].geometry.location;
+                    setCenter({ lat: lat(), lng: lng() });
+                    setSelectedLocation(center);
+                    setValue('latitude', lat());
+                    setValue('longitude', lng());
+                } else {
+                    console.error('Geocode failed:', status);
+                }
+            });
+        }
+    };
+
+    const handleInputClick = () => {
+        setShowMap(true);
+    };
+
+    useEffect(() => {
+        const handleOutsideClick = event => {
+            const mapContainer = mapRef.current;
+
+            if (
+                mapContainer &&
+                !mapContainer.contains(event.target) &&
+                event.target?.id !== 'address'
+            ) {
+                setShowMap(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleOutsideClick);
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick);
+        };
+    }, []);
+
+    const handleMapClick = (mapProps, map, event) => {
+        const { latLng } = event;
+        const latitude = latLng.lat();
+        const longtitude = latLng.lng();
+        setValue('latitude', latitude);
+        setValue('longitude', longtitude);
+        setSelectedLocation({ lat: latitude, lng: longtitude });
+        const geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode({ location: latLng }, (results, status) => {
+            if (status === window.google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    setValue('address', results[0].formatted_address);
+                    console.log(watch('address'));
+                }
+            } else {
+                console.error('Geocode failed:', status);
+            }
+        });
     };
 
     return (
@@ -107,9 +172,12 @@ export default function Form({ initialData }) {
                         className='input-field'
                         {...register('address')}
                         placeholder='場所'
+                        onClick={handleInputClick}
+                        onChange={handleAddressChange}
                     />
                     {errors.address && <p className="error-message">{errors.address.message}</p>}
                 </div>
+
                 <div className='form-field'>
                     <select
                         id='speakingLanguage'
@@ -126,6 +194,13 @@ export default function Form({ initialData }) {
 
                 </div>
             </div>
+            {showMap &&
+                <div ref={mapRef} className='form-row'>
+                    <div style={{ height: '500px', width: '100%' }}>
+                        <Gmap center={center} setCenter={setCenter} handleMapClick={handleMapClick} selectedLocation={selectedLocation} setSelectedLocation={selectedLocation} />
+                    </div>
+                </div>
+            }
             <div className="form-row">
                 <div className='form-field'>
                     <input
@@ -151,15 +226,13 @@ export default function Form({ initialData }) {
                 </div>
             </div>
             <div className="form-row">
-                <div className="form-field">
-                    <textarea
-                        id='description'
-                        className='textarea'
-                        {...register('description')}
-                        placeholder='自己紹介'
-                    />
-                    {errors.description && <p className="error-message">{errors.description.message}</p>}
-                </div>
+                <textarea
+                    id='description'
+                    className='textarea'
+                    {...register('description')}
+                    placeholder='自己紹介'
+                />
+                {errors.description && <p className="error-message">{errors.description.message}</p>}
             </div>
             <div className='frame-2'>
                 <label>言語</label>
