@@ -1,7 +1,7 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
-const Gmap = ({ center, setCenter, handleMapClick, selectedLocation }) => {
+const Gmap = ({ center, setCenter, selectedLocation, setSelectedLocation, handleMapClick}) => {
 
     const getCenter = () => {
         // Get the current position using the browser's geolocation API
@@ -9,7 +9,7 @@ const Gmap = ({ center, setCenter, handleMapClick, selectedLocation }) => {
             position => {
                 const { latitude, longitude } = position.coords;
                 setCenter({ lat: latitude, lng: longitude });
-                selectedLocation = center;
+                setSelectedLocation(center);
             },
             error => {
                 console.error('Error getting the current position:', error);

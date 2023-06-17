@@ -6,13 +6,13 @@ import Contacts from '../../components/contacts';
 const initialData = {
     avatar: '',
     info: {
-        name: 'Do Minh Hieu',
+        name: 'Pham Duc Huy',
         gender: 'male',
-        address: '175/5 Dinh Cong',
+        address: '1 Dai Co Viet',
         latitude: 21.007174501197543, 
         longtitude: 105.84309276692177,
         speakingLanguage: 'Vietnamese',
-        dob: '03/08/2001',
+        dob: '01/01/2001',
         country: 'Viet Nam',
         description: '',
         languages: [
@@ -24,14 +24,14 @@ const initialData = {
             },
             {
                 language: 'Japanese',
-                level: 'N3',
+                level: 'N2',
                 salary: '5000',
                 minPerLesson: '45'
             },
         ]
     },
     contacts: {
-        phone: '0394896395',
+        phone: '0123456789',
         gmail: '',
         resume: '',
         linkedIn: '',

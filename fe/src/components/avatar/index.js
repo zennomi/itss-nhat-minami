@@ -67,7 +67,7 @@ export default function Avatar({ savedAvatar }) {
                 >
                     {isButtonVisible && <button className='transparent-layout' onClick={handleAvatarChangeButton} ref={buttonRef}>
                         <div className='transparent-layout-center-content'>
-                            <i class="fa fa-camera fa-lg" aria-hidden="true"></i>
+                            <i className="fa fa-camera fa-lg" aria-hidden="true"></i>
                             Update photo
                         </div>
                     </button>}

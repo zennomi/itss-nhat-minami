@@ -12,20 +12,21 @@ const schema = yup.object().shape({
     gender: yup.string().required('性別を選択してください'),
     address: yup.string().required('場所を入力してください'),
     speakingLanguage: yup.string().required('教えるために使用する言語を選択してください'),
-    dob: yup.string().matches(
-        /^(\d{2})\/(\d{2})\/(\d{4})$/,
-        '日付の形式が正しくありません。正しい形式は「dd/mm/yyyy」です。'
-    )
+    dob: yup.string()
+        .required('生年月日を入力してください')
         .test('is-number', '数字で入力してください。', (value) => {
             if (!value) return true;
             const numberValue = Number(value.replace(/\//g, ''));
             return !isNaN(numberValue);
-        })
+        }).matches(
+            /^(\d{2})\/(\d{2})\/(\d{4})$/,
+            '日付の形式が正しくありません。正しい形式は「dd/mm/yyyy」です。'
+        )
         .test('is-valid', '日付が無効です', (value) => {
             const [day, month, year] = value.split('/');
             const date = new Date(`${year}-${month}-${day}`);
             return date instanceof Date && !isNaN(date);
-        }).required('生年月日を入力してください'),
+        }),
     country: yup.string(),
     description: yup.string(),
     languages: yup.array().of(
@@ -43,7 +44,7 @@ const schema = yup.object().shape({
 });
 
 export default function Form({ initialData }) {
-    const { control, handleSubmit, setValue, watch, register, formState: { errors } } = useForm({
+    const { control, handleSubmit, setValue, register, formState: { errors } } = useForm({
         defaultValues: initialData,
         resolver: yupResolver(schema),
     });
@@ -57,6 +58,7 @@ export default function Form({ initialData }) {
     const [showMap, setShowMap] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState(center);
     const mapRef = useRef(null);
+
     const onSubmit = (data) => {
         console.log(data);
     };
@@ -97,6 +99,7 @@ export default function Form({ initialData }) {
         setShowMap(true);
     };
 
+    // Make the add file field disappear when clicking outside it
     useEffect(() => {
         const handleOutsideClick = event => {
             const mapContainer = mapRef.current;
@@ -128,7 +131,6 @@ export default function Form({ initialData }) {
             if (status === window.google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
                     setValue('address', results[0].formatted_address);
-                    console.log(watch('address'));
                 }
             } else {
                 console.error('Geocode failed:', status);
@@ -197,7 +199,12 @@ export default function Form({ initialData }) {
             {showMap &&
                 <div ref={mapRef} className='form-row'>
                     <div style={{ height: '500px', width: '100%' }}>
-                        <Gmap center={center} setCenter={setCenter} handleMapClick={handleMapClick} selectedLocation={selectedLocation} setSelectedLocation={selectedLocation} />
+                        <Gmap
+                            center={center}
+                            setCenter={setCenter}
+                            selectedLocation={selectedLocation}
+                            setSelectedLocation={selectedLocation}
+                            handleMapClick={handleMapClick} />
                     </div>
                 </div>
             }
@@ -212,6 +219,7 @@ export default function Form({ initialData }) {
                         {...register('dob')}
                         placeholder="生年月日"
                     />
+
                     {errors.dob && <p className="error-message">{errors.dob.message}</p>}
                 </div>
                 <div className="form-field">
