@@ -4,12 +4,12 @@ import ReviewEcommerceProduct from "./ReviewEcommerceProduct";
 import Pagination from "./Pagination";
 
 const Reviews = (props) => {
-  const { spanText, avatar_url, name, review_day, stars } = props;
+  const { content, avatar_url, name, review_day, stars } = props;
 
   return (
     <div className="review_list-reviews">
       <ReviewEcommerceProduct
-        spanText={spanText}
+        spanText={content}
         avatar_url={avatar_url}
         name={name}
         review_day={review_day}

@@ -2,7 +2,7 @@ import React from "react";
 import './style_review_banner.css'
 
 const ReviewBaner = (props) => {
-  const { spanText2, spanText3, star5Count, star4Count, star3Count, star2Count, star1Count } = props;
+  const { starAvg, reviewCount, star5Count, star4Count, star3Count, star2Count, star1Count } = props;
 
   return (
     <div className="review_banner-ecommerce-product-summary">
@@ -11,11 +11,11 @@ const ReviewBaner = (props) => {
           <span className="publicsans-semi-bold-pale-sky-16px">生徒からの評価</span>
         </div>
         <h1 className="review_banner-text-1 publicsans-extra-bold-charade-48px">
-          <span className="publicsans-extra-bold-charade-48px">{spanText2}</span>
+          <span className="publicsans-extra-bold-charade-48px">{starAvg}</span>
         </h1>
         <Rating />
         <div className="review_banner-x824kreviews publicsans-normal-pale-sky-12px">
-          <span className="publicsans-normal-pale-sky-12px">{spanText3}</span>
+          <span className="publicsans-normal-pale-sky-12px">{reviewCount}</span>
         </div>
       </div>
       <img className="review_banner-divider" src="https://www.seekpng.com/png/detail/330-3307905_thin-vertical-line-straight-vertical-line-png.png" alt="Divider" />

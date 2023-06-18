@@ -7,44 +7,6 @@ import useTutor from './useTutor';
 import {date, timesession} from "../../utils/constant";
 import Header from "../../components/header";
 function Tutor() {
-  // new from review
-  const review_banner_overview = {
-    spanText2: "4/5",
-    spanText3: "(8.24k レビュー)",
-    star5Count: "25k",
-    star4Count: "5k",
-    star3Count: "24.5k",
-    star2Count: "15k",
-    star1Count: "1k",
-  };
-
-  const reviewsData_tmp = [
-    {
-      spanText: "this is a review 1 this is a review 1 this is a review 1 this is a review 1 this is a review 1 this is a review 1 this is a review 1 this is a review 1 this is a review 1 this is a review 1 this is a review 1 this is a review 1 this is a review 1",
-      avatar_url:
-        "https://afamilycdn.com/150157425591193600/2020/6/3/dsc5530gallery003-1591191241931219782812.jpg",
-      name: "huy",
-      review_day:"4月3.2023",
-      stars: 4.5,
-    },
-    {
-      spanText: "this is a review 2",
-      avatar_url:
-        "https://afamilycdn.com/150157425591193600/2020/6/3/dsc5530gallery003-1591191241931219782812.jpg",
-      name: "huy 2",
-      review_day:"3月3.2022",
-      stars: 3.5,
-    },
-    {
-      spanText: "this is a review 3",
-      avatar_url:
-        "https://afamilycdn.com/150157425591193600/2020/6/3/dsc5530gallery003-1591191241931219782812.jpg",
-      name: "huy 3",
-      review_day:"6月2.2022",
-      stars: 2,
-    },
-  ];
-  // giữ nguyên
   const { data } = useTutor();
 
   const userProfileBannerData = data?.userProfileBannerData;
@@ -133,8 +95,7 @@ function Tutor() {
           </div>
         </div>
       </>}
-      {activeComponent === 'component3' && <Review review_banner_overview={review_banner_overview} reviewsData_tmp={reviewsData_tmp}/>}
-
+      {activeComponent === 'component3' && <Review />}
         </div>
       </div>
     </div>
