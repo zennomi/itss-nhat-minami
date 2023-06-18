@@ -20,70 +20,70 @@ export default function Contacts({ initialData }) {
             <div className='contact-field'>
                 <i className="fa-solid fa-phone" style={{ color: '#F0AB00', width: '24px', height: '24px' }}></i>
                 <input
-                    id='phone'
+                    id='phone_number'
                     type='text'
                     className='contact-input'
-                    {...register('phone')}
+                    {...register('phone_number')}
                     placeholder='電話番号'
                 ></input>
             </div>
             <div className='contact-field'>
                 <Icon icon="logos:google-gmail" className='icon' />
                 <input
-                    id='gmail'
+                    id='gmail_url'
                     type='text'
                     className='contact-input'
-                    {...register('gmail')}
+                    {...register('gmail_url')}
                     placeholder='Gmail'
                 ></input>
             </div>
             <div className='contact-field'>
                 <img src={CvImg} alt='' className='icon'></img>
                 <input
-                    id='resume'
+                    id='resume_url'
                     type='text'
                     className='contact-input'
-                    {...register('resume')}
+                    {...register('resume_url')}
                     placeholder='Resume'
                 ></input>
             </div>
             <div className='contact-field'>
                 <i className="fa-brands fa-linkedin-in" style={{ color: '#007EBB', width: '24px', height: '24px' }}></i>
                 <input
-                    id='linkedIn'
+                    id='linkedin_url'
                     type='text'
                     className='contact-input'
-                    {...register('linkedIn')}
+                    {...register('linkedin_url')}
                     placeholder='LinkedIn'
                 ></input>
             </div>
             <div className='contact-field'>
                 <i className="fa-brands fa-twitter" style={{ color: '#00AAEC', width: '24px', height: '24px' }}></i>
                 <input
-                    id='twitter'
+                    id='twitter_url'
                     type='text'
                     className='contact-input'
-                    {...register('twitter')}
+                    {...register('twitter_url')}
                     placeholder='Twitter'
                 ></input>
             </div>
             <div className='contact-field'>
                 <i className="fa-brands fa-facebook-f" style={{ color: '#1465f0', width: '24px', height: '24px' }}></i>
                 <input
-                    id='facebook'
+                    id='fabebook_url'
                     type='text'
                     className='contact-input'
-                    {...register('facebook')}
+                    {...register('fabebook_url')}
                     placeholder='Facebook'
                 ></input>
             </div>
             <div className='contact-field'>
                 <Icon icon="skill-icons:instagram" className='icon' />
                 <input
-                    id='instagram'
+                    id='instagram_url'
                     type='text'
                     className='contact-input'
-                    {...register('instagram')}
+                    {...register('instagram_url')}
                     placeholder='Instagram'
                 ></input>
             </div>

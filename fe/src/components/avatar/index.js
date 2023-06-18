@@ -1,15 +1,19 @@
 import React from 'react'
 import { useState, useRef, useEffect } from 'react';
 import './style.css'
-export default function Avatar({ savedAvatar }) {
+export default function Avatar({ initialData }) {
     const fileInputRef = useRef(null);
-    const buttonRef = useRef(null);
-    const [avatar, setAvatar] = useState(savedAvatar);
+    const [avatar, setAvatar] = useState(initialData.photo_url);
+    const [background, setBackground] = useState(initialData.background_image_url);
     const [isButtonVisible, setButtonVisible] = useState(false);
-    const [showDiv, setShowDiv] = useState(false);
-
-    const handleMouseMove = () => {
+    const [showFileAddField, setShowAddFileField] = useState(false);
+    const [photoType, setPhotoType] = useState();
+    const [isLocked, setLock] = useState(false);
+    const handleMouseMove = (type) => {
         setButtonVisible(true);
+        if (!isLocked) {
+            setPhotoType(type);
+        }
     };
 
     const handleMouseLeave = () => {
@@ -20,63 +24,91 @@ export default function Avatar({ savedAvatar }) {
         const handleOutsideClick = (event) => {
             const addFile = document.getElementById('add-file-field');
             if (event.target !== addFile && event.target.parentNode !== addFile) {
-                setShowDiv(false);
+                setShowAddFileField(false);
+                setLock(false);
             }
         };
         window.addEventListener('mouseup', handleOutsideClick);
     }, []);
 
-    const handleAvatarChangeButton = () => {
-        setShowDiv(true);
+    const handleChangeButtonClick = (type) => {
+        setShowAddFileField(true);
+        setPhotoType(type);
+        setLock(true);
     };
 
     const handleAddFileClick = () => {
         fileInputRef.current.click();
     }
 
-    const handleAvatarChange = (event) => {
-        const uploadedAvatar = event.target.files[0];
-        if (uploadedAvatar.size > 3.1 * 1024 * 1024) {
+    const handleChange = (event) => {
+        const uploadedPhoto = event.target.files[0];
+        console.log(uploadedPhoto);
+        if (uploadedPhoto.size > 3.1 * 1024 * 1024) {
             alert('File size exceeds the limit of 3.1MB');
             return;
         }
-        if (uploadedAvatar) {
+        if (uploadedPhoto) {
             const reader = new FileReader();
-            reader.onload = () => {
-                setAvatar(reader.result);
+            if (photoType === "avatar") {
+                reader.onload = () => {
+                    setAvatar(reader.result);
+                    initialData.photo_url = avatar;
+                }
+            } else if (photoType === "background") {
+                reader.onload = () => {
+                    setBackground(reader.result);
+                    initialData.background_image_url = background;
+                }
             };
-            reader.readAsDataURL(uploadedAvatar);
-            setShowDiv(false);
+            reader.readAsDataURL(uploadedPhoto);
             //Send data to BE here
-            console.log(avatar);
         }
+        setShowAddFileField(false);
+        setLock(false);
     };
-
     return (
         <>
-            <div className='avatar-container'>
+            <div className='photo-container'>
+                {background &&
+                    <img src={background} alt='User background' className='background-container' />
+                }
                 {avatar ? (
-                    <img src={avatar} alt='User Avatar' className='user-avatar' />
+                    <img src={avatar} alt='User Avatar' className='avatar-container' />
                 ) : (
                     <div className='placeholder-avatar'></div>
                 )}
                 <div
-                    className='round-button'
-                    onMouseMove={handleMouseMove}
+                    className='background-container'
+                    onMouseMove={() => handleMouseMove("background")}
                     onMouseLeave={handleMouseLeave}
                 >
-                    {isButtonVisible && <button className='transparent-layout' onClick={handleAvatarChangeButton} ref={buttonRef}>
-                        <div className='transparent-layout-center-content'>
-                            <i className="fa fa-camera fa-lg" aria-hidden="true"></i>
-                            Update photo
-                        </div>
-                    </button>}
+                    {isButtonVisible && photoType === "background" &&
+                        <button className='background-transparent-layout' onClick={() => handleChangeButtonClick("background")} >
+                            <div className='transparent-layout-center-content'>
+                                <i className="fa fa-camera fa-lg" aria-hidden="true"></i>
+                                Update background
+                            </div>
+                        </button>}
+                </ div>
+                <div
+                    className='avatar-container'
+                    onMouseMove={() => handleMouseMove("avatar")}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    {isButtonVisible && photoType === "avatar" &&
+                        <button className='avatar-transparent-layout' onClick={() => handleChangeButtonClick("avatar")} >
+                            <div className='transparent-layout-center-content'>
+                                <i className="fa fa-camera fa-lg" aria-hidden="true"></i>
+                                Update photo
+                            </div>
+                        </button>}
                 </ div>
             </div>
-            {showDiv && (
+            {showFileAddField && (
                 <div className='add-file-field' id='add-file-field'>
                     <button className='add-file-button' onClick={handleAddFileClick}>
-                        <input type='file' accept="image/*" style={{ display: 'none' }} ref={fileInputRef} onChange={handleAvatarChange} />
+                        <input type='file' accept="image/*" style={{ display: 'none' }} ref={fileInputRef} onChange={(e) => handleChange(e)} />
                         <i class="fa fa-cloud-upload" aria-hidden="true" style={{
                             width: '40px',
                             height: '40px',

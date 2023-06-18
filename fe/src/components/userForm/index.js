@@ -11,7 +11,7 @@ const schema = yup.object().shape({
     name: yup.string().required('氏名を入力してください'),
     gender: yup.string().required('性別を選択してください'),
     address: yup.string().required('場所を入力してください'),
-    speakingLanguage: yup.string().required('教えるために使用する言語を選択してください'),
+    lang_teach: yup.string().required('教えるために使用する言語を選択してください'),
     dob: yup.string()
         .required('生年月日を入力してください')
         .test('is-number', '数字で入力してください。', (value) => {
@@ -159,9 +159,9 @@ export default function Form({ initialData }) {
                         name='gender'
                     >
                         <option value='' disabled selected>性別</option>
-                        <option value="male">男性</option>
-                        <option value="female">女性</option>
-                        <option value="other">他</option>
+                        <option value="男性">男性</option>
+                        <option value="女性">女性</option>
+                        <option value="他">他</option>
                     </select>
                     {errors.gender && <p className="error-message">{errors.gender.message}</p>}
                 </div>
@@ -182,17 +182,18 @@ export default function Form({ initialData }) {
 
                 <div className='form-field'>
                     <select
-                        id='speakingLanguage'
+                        id='lang_teach'
                         className="input-field"
-                        {...register('speakingLanguage')}
+                        {...register('lang_teach')}
                         name='spealingLanguage'
                     >
                         <option value='' disabled selected>何語で教えますか。</option>
-                        <option value="English">英語</option>
-                        <option value="Vietnamese">ベトナム語</option>
-                        <option value="Japanese">日本語</option>
+                        <option value="英語">英語</option>
+                        <option value="ベトナム語">ベトナム語</option>
+                        <option value="日本語">日本語</option>
+                        <option value="韓国語">韓国語</option>
                     </select>
-                    {errors.speakingLanguage && <p className="error-message">{errors.speakingLanguage.message}</p>}
+                    {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
 
                 </div>
             </div>

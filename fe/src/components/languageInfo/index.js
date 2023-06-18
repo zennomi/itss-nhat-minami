@@ -21,9 +21,10 @@ const LanguageCard = ({
                         {...register(language)}
                     >
                         <option value="" disabled selected>言語</option>
-                        <option value="English">英語</option>
-                        <option value="Vietnamese">ベトナム語</option>
-                        <option value="Japanese">日本語</option>
+                        <option value="英語">英語</option>
+                        <option value="ベトナム語">ベトナム語</option>
+                        <option value="日本語">日本語</option>
+                        <option value="韓国語">韓国語</option>
                     </select>
                     {errors.languages?.[index]?.language &&
                         <p className='error-message'>{errors.languages[index].language.message}</p>}
