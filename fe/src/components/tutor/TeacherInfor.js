@@ -17,7 +17,6 @@ const TeacherInfor = (props) => {
         linkedin_url,
         twitter_url
     } = props;
-    // const flag = "https://img.uxwing.com/wp-content/themes/uxwing/download/flags-landmarks/south-korea-flag-icon.png"
     return (
         <div className="tutor-flex-col-2">
             <div className="tutor-frame-50">

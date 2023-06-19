@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-google-maps": "^9.4.5",
     "react-hook-form": "^7.44.3",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.11.2",
     "react-scripts": "^5.0.1",
     "remotion": "^3.3.96",
@@ -53,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@iconify/react": "^4.1.0"
   }
 }

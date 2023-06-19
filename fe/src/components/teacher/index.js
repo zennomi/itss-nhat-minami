@@ -1,25 +1,30 @@
 import React from "react";
-import './style.css';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
+import './teacher.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const calculatorDate = (time) => {
     const currentDate = new Date();
+    var dateofBirth = new Date(time)
 
-    const dateOfBirth = new Date("1990-01-01");
+    let age = currentDate.getFullYear() - dateofBirth.getFullYear();
 
-    let age = currentDate.getFullYear() - dateOfBirth.getFullYear();
-
-    if ( currentDate.getMonth() < dateOfBirth.getMonth() ||
-        (currentDate.getMonth() === dateOfBirth.getMonth() && currentDate.getDate() < dateOfBirth.getDate())) {
+    if ( currentDate.getMonth() < dateofBirth.getMonth() ||
+        (currentDate.getMonth() === dateofBirth.getMonth() && currentDate.getDate() < dateofBirth.getDate())) {
     age--;
     }
     return age;
 }
 
 function Teacher({ data }) {
-    console.log(data)
+    const navigate = useNavigate();
+
+    const { id } = data;
+
     return (
-        <div className="frame-1">
+        <div className="frame-1" onClick={() => navigate(`/tutor/${id}`)} style={{
+            'cursor': 'pointer'
+        }}>
             {/*avt */}
             <img
                 className="x335913644_9819789628"
@@ -40,7 +45,7 @@ function Teacher({ data }) {
                         </div>
                     </div>
                 </div>
-                <div className="overlap-group-1">
+                <div className="teacher-result-right">
                     <div className="frame-8">
                         <div className="button-x1">
                             <i className="fa-solid fa-user-group" style={{color:'rgb(255, 86, 48)'}}></i>
@@ -63,6 +68,7 @@ function Teacher({ data }) {
                     </div>
                     <div className="x2publicsans-normal-pale-sky-14px">
             <span className="publicsans-normal-pale-sky-14px">
+                {data.description}
               2年間の経験と資格を持つ認定講師 はじめまして、TuMyと申します。
               私はベトナム南部から来ました。師範大学の日本語学部を卒業して、5年間の教育経験があります。特に3年間、子供を教えました。教師の仕事が好きで、世界の友達を作りたいです。2016-2017：日本センターで大人に教えました。2018-2022：日本センターで子供に教えました…
             </span>
@@ -72,12 +78,15 @@ function Teacher({ data }) {
             {/*cục giá + đánh giá */}
             <div className="frame-5">
             <div className="frame-10">
-                <div className="overlap-group">
+                <div className="result-right">
                     <div className="frame-6">
                         <i className="fa-solid fa-star fa-lg" style={{color: '#f5d60f'}} ></i>
                         <div className="numberpublicsans-bold-black-14px">
-                            <span className="publicsans-bold-black-14px">{data.star.toFixed(1)}</span>
+                            <span className="publicsans-bold-black-14px">{data?.star?.toFixed(1)}</span>
                         </div>
+                    </div>
+                    <div className="numberpublicsans-bold-black-14px">
+                        <span className="publicsans-semi-bold-charade-16px">{data.reviewCount}レビュー</span>
                     </div>
                 </div>
                 <div className="frame-9">
@@ -86,7 +95,7 @@ function Teacher({ data }) {
                     </span>
 
                     <div className="address-1publicsans-semi-bold-white-14px">
-                        <span  className="publicsans-semi-bold-black-14px tx1">{data.longitude} min / lesson</span>
+                        <span  className="publicsans-semi-bold-black-14px tx1">{data.hours*60} min / lesson</span>
                     </div>
                 </div>
             </div>

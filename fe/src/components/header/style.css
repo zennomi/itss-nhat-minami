@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css?family=Public+Sans:400,700,600,800|Barlow:900");
+/* Variables */
+
+:root {
+    --black:
+            rgba(0, 0, 0, 1);
+    --evening-sea:
+            rgba(0, 82, 73, 1);
+    --jade:
+            rgba(0, 171, 85, 1);
+    --charade:
+            rgba(33, 43, 54, 1);
+    --white:
+            rgba(255, 255, 255, 1);
+
+    --font-size-s: 12px;
+    --font-size-m: 14px;
+    --font-size-l: 15px;
+    --font-size-xl: 48px;
+    --font-size-xxl: 96px;
+
+    --font-family-barlow: "Barlow";
+    --font-family-public_sans: "Public Sans";
+}
+
+/* Classes */
+
+.publicsans-semi-bold-jade-14px {
+    color: var(--jade);
+    font-family: var(--font-family-public_sans);
+    font-size: var(--font-size-m);
+    font-weight: 600;
+    font-style: normal;
+}
+.publicsans-bold-charade-12px {
+    color: var(--charade);
+    font-family: var(--font-family-public_sans);
+    font-size: var(--font-size-s);
+    font-weight: 700;
+    font-style: normal;
+}
+.publicsans-semi-bold-charade-14px {
+    color: var(--charade);
+    font-family: var(--font-family-public_sans);
+    font-size: var(--font-size-m);
+    font-weight: 600;
+    font-style: normal;
+}
+.publicsans-extra-bold-charade-48px {
+    color: var(--charade);
+    font-family: var(--font-family-public_sans);
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    font-style: normal;
+}
+.publicsans-bold-white-14px {
+    color: var(--white);
+    font-family: var(--font-family-public_sans);
+    font-size: var(--font-size-m);
+    font-weight: 700;
+    font-style: normal;
+}
+.publicsans-bold-white-15px {
+    color: var(--white);
+    font-family: var(--font-family-public_sans);
+    font-size: var(--font-size-l);
+    font-weight: 700;
+    font-style: normal;
+}
+.publicsans-bold-charade-15px {
+    color: var(--charade);
+    font-family: var(--font-family-public_sans);
+    font-size: var(--font-size-l);
+    font-weight: 700;
+    font-style: normal;
+}
+.publicsans-normal-charade-12px {
+    color: var(--charade);
+    font-family: var(--font-family-public_sans);
+    font-size: var(--font-size-s);
+    font-weight: 400;
+    font-style: normal;
+}
+.valign-text-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-header {
+    align-items: flex-start;
+    display: flex;
+    min-width: 1920px;
+    position: relative;
+    z-index: 1000;
+
+
+}
+
+.header-wrap {
+    align-items: center;
+    display: flex;
+    height: 40px;
+    left: 384px;
+    min-width: 1152px;
+    position: absolute;
+    top: 24px;
+}
+
+.shadow {
+    background-color: var(--white);
+    border-radius: 928px/12px;
+    box-shadow: 0px 8px 16px
+    #919eab29;
+    height: 24px;
+    left: 32px;
+    position: absolute;
+    top: 64px;
+    width: 1856px;
+}
+
+.header-right {
+    background-color: var(--white);
+    height: 88px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1920px;
+}
+
+.header-content {
+    align-items: center;
+    height: 88px;
+    background-color: white;
+    position: fixed;
+    width: 1920px;
+    border-bottom: 1px solid #cecece;
+    box-shadow: -10px 10px 20px -4px #919eab3d, 0px 0px 2px #919eab3d;
+}
+.content-right{
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    justify-content: flex-end;
+    min-width: 1112px;
+}
+.logo-header {
+    height: 40px;
+    width: 40px;
+}
+
+.links {
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    justify-content: flex-end;
+    min-width: 1112px;
+}
+
+.home {
+    letter-spacing: 0;
+    line-height: 22px;
+    margin-bottom: 2px;
+    min-width: 42px;
+    white-space: nowrap;
+}
+
+.find-tutors {
+    letter-spacing: 0;
+    line-height: 22px;
+    margin-bottom: 2px;
+    min-width: 70px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+
+
+.dot-logo {
+    background-color: var(--jade);
+    border-radius: 3px;
+    height: 6px;
+    opacity: 0.48;
+    width: 6px;
+    margin: 2px 2px 0 -6px;
+}
+
+.dashboard {
+    align-self: flex-start;
+    letter-spacing: 0;
+    line-height: 22px;
+    margin-left: 8px;
+    margin-top: -1px;
+    min-width: 28px;
+    white-space: nowrap;
+}
+
+.iconsic_chevron_left-header {
+    height: 16px;
+    width: 16px;
+    margin-top: 3px;
+}
+
+.button-header {
+    align-items: center;
+    background-color: var(--jade);
+    border-radius: 8px;
+    display: flex;
+    gap: 8px;
+    height: 36px;
+    min-width: 116px;
+    padding: 5px 16px;
+}
+
+.start-icon {
+    align-self: center;
+    height: 20px;
+    width: 20px;
+}
+
+.label {
+    height: 24px;
+    letter-spacing: 0;
+    line-height: 24px;
+    min-width: 56px;
+    text-align: center;
+    white-space: nowrap;
+}
