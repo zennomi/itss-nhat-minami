@@ -30,10 +30,10 @@ export default function Contacts({ initialData }) {
             <div className='contact-field'>
                 <Icon icon="logos:google-gmail" className='icon' />
                 <input
-                    id='gmail_url'
+                    id='gmail'
                     type='text'
                     className='contact-input'
-                    {...register('gmail_url')}
+                    {...register('gmail')}
                     placeholder='Gmail'
                 ></input>
             </div>
