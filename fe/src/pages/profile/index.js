@@ -31,7 +31,7 @@ const initialData = {
         },
     ],
     phone_number: '0123456789',
-    gmail_url: '',
+    gmail: '',
     resume_url: '',
     linkedin_url: '',
     twitter_url: '',
