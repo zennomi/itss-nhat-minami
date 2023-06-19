@@ -39,6 +39,7 @@ const Search = () => {
     const [value, setValue] = React.useState([20, 70]);
     const [sort, setSort] = useState(true)
     const [center, setCenter] = useState();
+    const [selectedLocation, setSelectedLocation] = useState();
     const [latLngRange, setLatLngRange] = useState();
     const handleFilter = (key, value) => {
         setFilters({ ...filters, [key]: value });
@@ -48,6 +49,22 @@ const Search = () => {
         setValue(newValue);
     };
 
+    const handleMapClick = (mapProps, map, event) => {
+        const { latLng } = event;
+        const latitude = latLng.lat();
+        const longitude = latLng.lng();
+        setSelectedLocation({ lat: latitude, lng: longitude });
+        // const geocoder = new window.google.maps.Geocoder();
+        // geocoder.geocode({ location: latLng }, (results, status) => {
+        //     if (status === window.google.maps.GeocoderStatus.OK) {
+        //         if (results[0]) {
+        //             setValue('address', results[0].formatted_address);
+        //         }
+        //     } else {
+        //         console.error('Geocode failed:', status);
+        //     }
+        // });
+    };
     const handleRadiusChange = (event) => {
         const latitudeDelta = event.target.value / 111.32;
         const longitudeDelta = event.target.value / (111.32 * Math.cos((center.lat * Math.PI) / 180));
@@ -416,7 +433,13 @@ const Search = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <Gmap center={center} setCenter={setCenter} style={{ width: '570px', height: '360px' }} />
+                                    <Gmap
+                                        center={center}
+                                        setCenter={setCenter}
+                                        selectedLocation={selectedLocation}
+                                        setSelectedLocation={setSelectedLocation}
+                                        handleMapClick = {handleMapClick}
+                                        style={{ width: '570px', height: '360px' }} />
                                 </div>
                             </div>
 
