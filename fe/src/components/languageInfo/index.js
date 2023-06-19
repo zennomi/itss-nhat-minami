@@ -7,27 +7,27 @@ const LanguageCard = ({
     register,
     errors,
 }) => {
-    const lang_study = `languages.${index}.lang_study`;
-    const level = `languages.${index}.level`;
-    const salary = `languages.${index}.salary`;
-    const minPerLesson = `languages.${index}.minPerLesson`;
+    const language_code = `certificates.${index}.language_code`;
+    const level = `certificates.${index}.level`;
+    // const salary = `certificates.${index}.salary`;
+    // const minPerLesson = `certificates.${index}.minPerLesson`;
     return (
         <div className='frame-2-item'>
             <div className='form-row'>
                 <div className='form-field'>
                     <select
                         className="input-field"
-                        defaultValue={data.lang_study}
-                        {...register(lang_study)}
+                        defaultValue={data.language_code}
+                        {...register(language_code)}
                     >
-                        <option value="" disabled selected>言語</option>
-                        <option value="英語">英語</option>
-                        <option value="ベトナム語">ベトナム語</option>
-                        <option value="日本語">日本語</option>
-                        <option value="韓国語">韓国語</option>
+                        <option value="" disabled selected>証明書の種類</option>
+                        <option value="IELTS">IELTS</option>
+                        <option value="JLPT">JLPT</option>
+                        <option value="TOPIK">TOPIK</option>
+                        <option value="HSK">HSK</option>
                     </select>
-                    {errors.languages?.[index]?.lang_study &&
-                        <p className='error-message'>{errors.languages[index].lang_study.message}</p>}
+                    {errors.certificates?.[index]?.language_code &&
+                        <p className='error-message'>{errors.certificates[index].language_code.message}</p>}
                 </div>
                 <div className='form-field'>
                     <input
@@ -37,11 +37,11 @@ const LanguageCard = ({
                         {...register(level)}
                         placeholder='レベル'
                     />
-                    {errors.languages?.[index]?.level &&
-                        <p className='error-message'>{errors.languages[index].level.message}</p>}
+                    {errors.certificates?.[index]?.level &&
+                        <p className='error-message'>{errors.certificates[index].level.message}</p>}
                 </div>
             </div>
-            <div className='form-row'>
+            {/* <div className='form-row'>
                 <div className='form-field'>
                     <input
                         type='text'
@@ -50,8 +50,8 @@ const LanguageCard = ({
                         {...register(salary)}
                         placeholder='料金 ¥'
                     />
-                    {errors.languages?.[index]?.salary &&
-                        <p className='error-message'>{errors.languages[index].salary.message}</p>}
+                    {errors.certificates?.[index]?.salary &&
+                        <p className='error-message'>{errors.certificates[index].salary.message}</p>}
                 </div>
                 <div className='form-field'>
                     <input
@@ -61,10 +61,10 @@ const LanguageCard = ({
                         {...register(minPerLesson)}
                         placeholder='レッソンの時間 （分）'
                     />
-                    {errors.languages?.[index]?.minPerLesson &&
-                        <p className='error-message'>{errors.languages[index].minPerLesson.message}</p>}
+                    {errors.certificates?.[index]?.minPerLesson &&
+                        <p className='error-message'>{errors.certificates[index].minPerLesson.message}</p>}
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )

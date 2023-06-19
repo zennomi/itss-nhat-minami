@@ -12,22 +12,26 @@ const initialData = {
     address: '1 Dai Co Viet',
     latitude: 21.007174501197543,
     longitude: 105.84309276692177,
-    lang_teach: 'ベトナム語',
+    lang_teach: 'Vietnamese',
     date_of_birth: '01/01/2001',
     country_of_birth: 'Viet Nam',
     description: '',
-    languages: [
+    certificates: [
         {
-            lang_study: '英語',
-            level: 'B1',
-            salary: '5000',
-            minPerLesson: '45'
+            id: 1,
+            language_code: 'IELTS',
+            level: '9',
+            teacher_id: 1,
+            // salary: '5000',
+            // minPerLesson: '45'
         },
         {
-            lang_study: '日本語',
+            id: 2,
+            language_code: 'JLPT',
             level: 'N2',
-            salary: '5000',
-            minPerLesson: '45'
+            teacher_id: 1,
+            // salary: '5000',
+            // minPerLesson: '45'
         },
     ],
     phone_number: '0123456789',
@@ -42,7 +46,7 @@ const initialData = {
 const Profile = () => {
     return (
         <div className='profile-container'>
-            <Header/>
+            <Header />
             <div className='page-label'>
                 教師になる！
             </div>
