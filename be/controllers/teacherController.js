@@ -64,9 +64,11 @@ const TEACHER = {
             name: req.body.name || null,
             gender: req.body.gender || null,
             date_of_birth: req.body.date_of_birth || null,
+            certificates: req.body.certificates || [],
         };
         try {
             await DB.updateTeacherInfos(teacherId, params);
+            await DB.updateCertificates(teacherId, params.certificates);
             let kq = await DB.getTeacherInfos(teacherId);
             await DB.updateUserInfos(kq.user_id, params);
             return res.status(200).json(await DB.getTeacherInfos(teacherId));

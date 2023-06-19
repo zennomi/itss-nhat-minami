@@ -173,7 +173,11 @@ const DB = {
                     where t.id = ${teacher_id}
                     GROUP BY t.id`, (err, row) => {
                 if (err) console.log(err);
-                resolve(row);
+                db.all(`select * from certificates where teacher_id = ${teacher_id}`, (err, row2) => {
+                    if (err) console.log(err);
+                    row.certificates = row2;
+                    resolve(row);
+                });
             });
         });
     },
@@ -208,8 +212,8 @@ const DB = {
     },
     addReview: async (teacher_id, user_id, rating, content) => {
         return new Promise((resolve) => {
-            db.run(`INSERT INTO reviews (teacher_id, user_id, rating, content)
-                    VALUES ('${teacher_id}', '${user_id}', '${rating}', '${content}')`, (err) => {
+            db.run(`INSERT INTO reviews (teacher_id, user_id, rating, content, created_at)
+                    VALUES ('${teacher_id}', '${user_id}', '${rating}', '${content}', '${new Date().toISOString()}')`, (err) => {
                 if (err) console.log(err);
                 resolve();
             });
@@ -233,6 +237,20 @@ const DB = {
                     WHERE user_id = ${user_id}`, (err, row) => {
                 if (err) console.log(err);
                 resolve(row);
+            });
+        });
+    },
+    updateCertificates: async (teacher_id, certificates) => {
+        return new Promise((resolve) => {
+            db.run(`DELETE FROM certificates WHERE teacher_id = ${teacher_id}`, (err) => {
+                if (err) console.log(err);
+            });
+            certificates.forEach((item) => {
+                db.run(`INSERT INTO certificates (teacher_id, language_code, level)
+                        VALUES ('${teacher_id}', '${item.language_code}', '${item.level}')`, (err) => {
+                    if (err) console.log(err);
+                    resolve();
+                });
             });
         });
     }
