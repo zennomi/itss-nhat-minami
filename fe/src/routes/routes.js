@@ -18,4 +18,5 @@ export const NormalRoutes = [
     {path: '/search', element: <Pages.Search/>},
     {path: '/bookmark',element: <Pages.Bookmark/>},
     {path: '/tutor/:id', element: <Pages.Tutor/>},
+    {path: '/profile/:id', element: <Pages.Profile/>}
 ];

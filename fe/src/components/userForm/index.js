@@ -54,7 +54,7 @@ export default function Form({ initialData }) {
         name: 'languages',
     });
 
-    const [center, setCenter] = useState({ lat: initialData.latitude, lng: initialData.longtitude })
+    const [center, setCenter] = useState({ lat: initialData.latitude, lng: initialData.longitude })
     const [showMap, setShowMap] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState(center);
     const mapRef = useRef(null);
@@ -122,10 +122,10 @@ export default function Form({ initialData }) {
     const handleMapClick = (mapProps, map, event) => {
         const { latLng } = event;
         const latitude = latLng.lat();
-        const longtitude = latLng.lng();
+        const longitude = latLng.lng();
         setValue('latitude', latitude);
-        setValue('longitude', longtitude);
-        setSelectedLocation({ lat: latitude, lng: longtitude });
+        setValue('longitude', longitude);
+        setSelectedLocation({ lat: latitude, lng: longitude });
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({ location: latLng }, (results, status) => {
             if (status === window.google.maps.GeocoderStatus.OK) {
@@ -185,7 +185,7 @@ export default function Form({ initialData }) {
                         id='lang_teach'
                         className="input-field"
                         {...register('lang_teach')}
-                        name='spealingLanguage'
+                        name='lang_teach'
                     >
                         <option value='' disabled selected>何語で教えますか。</option>
                         <option value="英語">英語</option>
