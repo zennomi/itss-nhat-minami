@@ -7,7 +7,7 @@ const LanguageCard = ({
     register,
     errors,
 }) => {
-    const language = `languages.${index}.language`;
+    const lang_study = `languages.${index}.lang_study`;
     const level = `languages.${index}.level`;
     const salary = `languages.${index}.salary`;
     const minPerLesson = `languages.${index}.minPerLesson`;
@@ -17,8 +17,8 @@ const LanguageCard = ({
                 <div className='form-field'>
                     <select
                         className="input-field"
-                        defaultValue={data.language}
-                        {...register(language)}
+                        defaultValue={data.lang_study}
+                        {...register(lang_study)}
                     >
                         <option value="" disabled selected>言語</option>
                         <option value="英語">英語</option>
@@ -26,8 +26,8 @@ const LanguageCard = ({
                         <option value="日本語">日本語</option>
                         <option value="韓国語">韓国語</option>
                     </select>
-                    {errors.languages?.[index]?.language &&
-                        <p className='error-message'>{errors.languages[index].language.message}</p>}
+                    {errors.languages?.[index]?.lang_study &&
+                        <p className='error-message'>{errors.languages[index].lang_study.message}</p>}
                 </div>
                 <div className='form-field'>
                     <input

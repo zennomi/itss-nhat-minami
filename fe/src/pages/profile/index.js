@@ -17,13 +17,13 @@ const initialData = {
     description: '',
     languages: [
         {
-            language: '英語',
+            lang_study: '英語',
             level: 'B1',
             salary: '5000',
             minPerLesson: '45'
         },
         {
-            language: '日本語',
+            lang_study: '日本語',
             level: 'N2',
             salary: '5000',
             minPerLesson: '45'

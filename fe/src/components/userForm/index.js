@@ -12,7 +12,7 @@ const schema = yup.object().shape({
     gender: yup.string().required('性別を選択してください'),
     address: yup.string().required('場所を入力してください'),
     lang_teach: yup.string().required('教えるために使用する言語を選択してください'),
-    dob: yup.string()
+    date_of_birth: yup.string()
         .required('生年月日を入力してください')
         .test('is-number', '数字で入力してください。', (value) => {
             if (!value) return true;
@@ -27,11 +27,11 @@ const schema = yup.object().shape({
             const date = new Date(`${year}-${month}-${day}`);
             return date instanceof Date && !isNaN(date);
         }),
-    country: yup.string(),
+    country_of_birth: yup.string(),
     description: yup.string(),
     languages: yup.array().of(
         yup.object().shape({
-            language: yup.string().required('言語を選択してください。'),
+            lang_study: yup.string().required('言語を選択してください。'),
             level: yup.string().required('レベルを入力してください。'),
             salary: yup.number()
                 .typeError('数字で入力してください。')
@@ -212,26 +212,26 @@ export default function Form({ initialData }) {
             <div className="form-row">
                 <div className='form-field'>
                     <input
-                        id="dob"
+                        id="date_of_birth"
                         type="text"
                         className='input-field'
                         pattern="\d{2}/\d{2}/\d{4}"
                         maxLength="10"
-                        {...register('dob')}
+                        {...register('date_of_birth')}
                         placeholder="生年月日"
                     />
 
-                    {errors.dob && <p className="error-message">{errors.dob.message}</p>}
+                    {errors.date_of_birth && <p className="error-message">{errors.date_of_birth.message}</p>}
                 </div>
                 <div className="form-field">
                     <input
-                        id='country'
+                        id='country_of_birth'
                         type="text"
                         className='input-field'
-                        {...register('country')}
+                        {...register('country_of_birth')}
                         placeholder='国籍'
                     />
-                    {errors.country && <p className="error-message">{errors.country.message}</p>}
+                    {errors.country_of_birth && <p className="error-message">{errors.country_of_birth.message}</p>}
                 </div>
             </div>
             <div className="form-row">
