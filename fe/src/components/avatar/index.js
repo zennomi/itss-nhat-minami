@@ -1,8 +1,11 @@
 import React from 'react'
 import { useState, useRef, useEffect } from 'react';
-import './style.css'
+import { useParams } from 'react-router-dom';
 import PlaceholderAvatar from './placeholder.jpg'
+import { updateTeacherBg, updateTeacherAvatar } from '../../services/teacherService';
+import './style.css'
 export default function Avatar({ initialData }) {
+    const { id } = useParams();
     const fileInputRef = useRef(null);
     const [avatar, setAvatar] = useState(initialData.photo_url);
     const [background, setBackground] = useState(initialData.background_image_url);
@@ -42,7 +45,7 @@ export default function Avatar({ initialData }) {
         fileInputRef.current.click();
     }
 
-    const handleChange = (event) => {
+    const handleChange = async (event) => {
         const uploadedPhoto = event.target.files[0];
         console.log(uploadedPhoto);
         if (uploadedPhoto.size > 3.1 * 1024 * 1024) {
@@ -51,13 +54,18 @@ export default function Avatar({ initialData }) {
         }
         if (uploadedPhoto) {
             const reader = new FileReader();
+            const formData = new FormData();
+            formData.append('file', uploadedPhoto, uploadedPhoto.name);
+            formData.append('teacher_id', id);
             if (photoType === "avatar") {
-                reader.onload = () => {
+                await updateTeacherAvatar(formData);
+                reader.onload = async () => {
                     setAvatar(reader.result);
                     initialData.photo_url = avatar;
                 }
             } else if (photoType === "background") {
-                reader.onload = () => {
+                await updateTeacherBg(formData);
+                reader.onload = async () => {
                     setBackground(reader.result);
                     initialData.background_image_url = background;
                 }

@@ -21,3 +21,19 @@ export const getTeacherReviews = async (id) => {
         url: `/api/review/${id}`,
     })
 }
+
+export const updateTeacherBg = async (data) => {
+    return publicHttp({
+        method: 'POST',
+        url: '/api/bg',
+        data
+    })
+}
+
+export const updateTeacherAvatar = async (data) => {
+    return publicHttp({
+        method: 'POST',
+        url: '/api/avatar',
+        data
+    })
+}
