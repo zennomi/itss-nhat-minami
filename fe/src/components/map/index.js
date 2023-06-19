@@ -9,7 +9,7 @@ const Gmap = ({ center, setCenter, selectedLocation, setSelectedLocation, handle
             position => {
                 const { latitude, longitude } = position.coords;
                 setCenter({ lat: latitude, lng: longitude });
-                setSelectedLocation(center);
+                if(setSelectedLocation) setSelectedLocation(center);
             },
             error => {
                 console.error('Error getting the current position:', error);
