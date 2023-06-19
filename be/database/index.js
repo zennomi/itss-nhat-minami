@@ -176,7 +176,11 @@ const DB = {
                 db.all(`select * from certificates where teacher_id = ${teacher_id}`, (err, row2) => {
                     if (err) console.log(err);
                     row.certificates = row2;
-                    resolve(row);
+                    db.all(`select * from schedules where teacher_id = ${teacher_id}`, (err, row3) => {
+                        if (err) console.log(err);
+                        row.schedules = row3;
+                        resolve(row);
+                    });
                 });
             });
         });
