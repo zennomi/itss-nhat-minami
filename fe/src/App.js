@@ -15,7 +15,7 @@ function App() {
                     ))}
                     {GuestRoutes.map((route, index) => (
                         <Route key={index} path={route.path}
-                            element={<Auth role={ROLE.GUEST} path={'/'}>{route.element}</Auth>}/>
+                            element={route.element}/>
                     ))}
                     {UserRoutes.map((route, index) => (
                         <Route key={index} path={route.path}
