@@ -28,7 +28,7 @@ export default function Contacts({ initialData }) {
                 ></input>
             </div>
             <div className='contact-field'>
-                <Icon icon="logos:google-gmail" className='icon' />
+                <Icon icon="logos:google-gmail" className='icon-box' />
                 <input
                     id='gmail'
                     type='text'
@@ -38,7 +38,7 @@ export default function Contacts({ initialData }) {
                 ></input>
             </div>
             <div className='contact-field'>
-                <img src={CvImg} alt='' className='icon'></img>
+                <img src={CvImg} alt='' className='icon-box'></img>
                 <input
                     id='resume_url'
                     type='text'
@@ -78,7 +78,7 @@ export default function Contacts({ initialData }) {
                 ></input>
             </div>
             <div className='contact-field'>
-                <Icon icon="skill-icons:instagram" className='icon' />
+                <Icon icon="skill-icons:instagram" className='icon-box' />
                 <input
                     id='instagram_url'
                     type='text'
