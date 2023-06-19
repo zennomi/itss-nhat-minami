@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useRef, useEffect } from 'react';
 import './style.css'
+import PlaceholderAvatar from './placeholder.jpg'
 export default function Avatar({ initialData }) {
     const fileInputRef = useRef(null);
     const [avatar, setAvatar] = useState(initialData.photo_url);
@@ -76,7 +77,7 @@ export default function Avatar({ initialData }) {
                 {avatar ? (
                     <img src={avatar} alt='User Avatar' className='avatar-container' />
                 ) : (
-                    <div className='placeholder-avatar'></div>
+                    <img src={PlaceholderAvatar} alt='User Avatar' className='avatar-container' />
                 )}
                 <div
                     className='background-container'
