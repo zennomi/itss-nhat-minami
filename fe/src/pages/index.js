@@ -4,4 +4,5 @@ import Register from "./register";
 import Search from "./search";
 import Tutor from "./tutor";
 import Profile from "./profile";
-export {Home, Login, Register,Search, Tutor, Profile};
+import Bookmark from "./bookmark";
+export {Home, Login, Register,Search, Tutor, Profile, Bookmark};
