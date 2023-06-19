@@ -33,7 +33,8 @@ const Search = () => {
     const [hoverData, setHoverData] = useState('');
 
     const [filters, setFilters] = useState(null);
-
+    const [sortedList, setSortedList] = useState([]);
+    const [isSorted, setIsSorted] = useState(false);
     const [value, setValue] = React.useState([20, 70]);
     const [sort , setSort] = useState(true)
     const handleFilter = (key, value) => {
@@ -44,10 +45,19 @@ const Search = () => {
         setValue(newValue);
     };
 
-    const handleSort = () => {
-        setSort(!sort)
 
+    const handleSort = (sort) => {
+        if(sort){
+            const sorted = [...listTeachers]?.sort((a,b) => b.price - a.price);
+            setSortedList(sorted)
+        }else{
+            const sorted = [...listTeachers]?.sort((a,b) => a.price - b.price);
+            setSortedList(sorted)
+        }
+        setIsSorted(true);
+        setSort(!sort)
     }
+
     const handleSchedule = (event, hour, day) => {
         const timesession = filters?.timesession || [];
         const value = `${day}-${hour}`;
@@ -76,6 +86,7 @@ const Search = () => {
         };
         console.log(filters)
         setQueryString(params);
+        setIsSorted(false)
     };
 
     useEffect(() => {
@@ -394,7 +405,7 @@ const Search = () => {
 
                 <div className="d-flex">
                     <div style={{'gap':'30px','margin':'0 50px 0 20px'}}>
-                        <Button　onClick={handleSort}  style={{'min-width':'814px','background-color':'#ffab00'}} size={"large"} fullWidth={830}  variant="contained" >
+                        <Button　onClick = {() => handleSort(sort)}  style={{'min-width':'814px','background-color':'#ffab00'}} size={"large"} fullWidth={830}  variant="contained" >
                             <div className="labelpublicsans-normal-white-16px d-flex align-items-center " style={{'gap':'8px'}}>
                                 {sort ? (
                                     <>
@@ -416,7 +427,7 @@ const Search = () => {
                         <Button onClick={handleSubmit} style={{'min-width':'814px','background-color':'rgba(0, 171, 85, 1)'}} size={"large"} fullWidth={830} variant="contained" >
                             <div className="labelpublicsans-normal-white-16px d-flex align-items-center " style={{'gap':'8px'}}>
                                 <i className="fa-solid fa-magnifying-glass"></i>
-                                <span className="publicsans-normal-white-16px">料金：最低から</span>
+                                <span className="publicsans-normal-white-16px">検索する</span>
                             </div>
                         </Button>
                     </div>
@@ -426,13 +437,21 @@ const Search = () => {
                 </> }
                 <div className="d-flex mt-5">
                     <div>
-                    {isSuccess && listTeachers?.map((item) => <>
+                        {isSuccess && !isSorted && listTeachers?.map((item) => <>
                             <div className="teacher d-flex flex-column mt-5 ">
                                 <div onMouseOver={() => handleMouseOver(item.id,item)} onMouseLeave={() => handleMouseLeave(item.id)}>
                                 <Teacher data={item} />
                                 </div>
                             </div>
-                    </>) }
+                        </>) }
+                        {isSuccess && isSorted && sortedList?.map((item) => <>
+                            <div className="teacher d-flex flex-column mt-5 ">
+                                <div onMouseOver={() => handleMouseOver(item.id,item)} onMouseLeave={() => handleMouseLeave(item.id)}>
+                                    <Teacher data={item} />
+                                </div>
+                            </div>
+                        </>) }
+
                     </div>
                     <div className="mx-3 teachercard" style={{'display':'none'}}>
                         <TeacherCard data={hoverData}/>
