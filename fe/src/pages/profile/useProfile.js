@@ -19,18 +19,18 @@ export default function useListTeacher() {
     date_of_birth: '01/01/2001',
     country_of_birth: 'Viet Nam',
     description: '',
-    languages: [
+    certificates: [
         {
-            lang_study: '英語',
-            level: 'B1',
-            salary: '5000',
-            minPerLesson: '45'
+            language_code: 'Ielts',
+            level: '9',
+            // salary: '5000',
+            // minPerLesson: '45'
         },
         {
-            lang_study: '日本語',
+            language_code: 'JLPT',
             level: 'N2',
-            salary: '5000',
-            minPerLesson: '45'
+            // salary: '5000',
+            // minPerLesson: '45'
         },
     ],
     phone_number: '0123456789',
@@ -55,15 +55,15 @@ export default function useListTeacher() {
       date_of_birth: data?.date_of_birth,
       country_of_birth: data?.country_of_birth,
       description: data?.description,
-      languages: [
+      certificates: [
           {
-              lang_study: '英語',
+              language_code: '英語',
               level: 'B1',
               salary: '5000',
               minPerLesson: '45'
           },
           {
-              lang_study: '日本語',
+              language_code: '日本語',
               level: 'N2',
               salary: '5000',
               minPerLesson: '45'

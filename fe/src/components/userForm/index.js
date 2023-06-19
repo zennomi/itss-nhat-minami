@@ -29,16 +29,16 @@ const schema = yup.object().shape({
         }),
     country_of_birth: yup.string(),
     description: yup.string(),
-    languages: yup.array().of(
+    certificates: yup.array().of(
         yup.object().shape({
-            lang_study: yup.string().required('言語を選択してください。'),
+            language_code: yup.string().required('証明書の種類を選択してください。'),
             level: yup.string().required('レベルを入力してください。'),
-            salary: yup.number()
-                .typeError('数字で入力してください。')
-                .required('給料を入力してください。'),
-            minPerLesson: yup.number()
-                .typeError('数字で入力してください。')
-                .required('レッソンの時間を入力してください。'),
+            // salary: yup.number()
+            //     .typeError('数字で入力してください。')
+            //     .required('給料を入力してください。'),
+            // minPerLesson: yup.number()
+            //     .typeError('数字で入力してください。')
+            //     .required('レッソンの時間を入力してください。'),
         }),
     ),
 });
@@ -51,7 +51,7 @@ export default function Form({ initialData }) {
 
     const { fields, append, remove } = useFieldArray({
         control,
-        name: 'languages',
+        name: 'certificates',
     });
 
     const [center, setCenter] = useState({ lat: initialData.latitude, lng: initialData.longitude })
@@ -188,10 +188,10 @@ export default function Form({ initialData }) {
                         name='lang_teach'
                     >
                         <option value='' disabled selected>何語で教えますか。</option>
-                        <option value="英語">英語</option>
-                        <option value="ベトナム語">ベトナム語</option>
-                        <option value="日本語">日本語</option>
-                        <option value="韓国語">韓国語</option>
+                        <option value="English">英語</option>
+                        <option value="Vietnamese">ベトナム語</option>
+                        <option value="Japanese">日本語</option>
+                        <option value="Korean">韓国語</option>
                     </select>
                     {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
 
@@ -245,12 +245,12 @@ export default function Form({ initialData }) {
             </div>
             <div className='frame-2'>
                 <label>言語</label>
-                {fields.map((language, index) => (
+                {fields.map((certi, index) => (
                     <div >
                         <LanguageCard
                             key={index}
                             index={index}
-                            data={language}
+                            data={certi}
                             register={register}
                             errors={errors}
                         />
