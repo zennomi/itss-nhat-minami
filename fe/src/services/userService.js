@@ -1,4 +1,5 @@
 import privateHttp from './http/privateHttp.config';
+import publicHttp from './http/publicHttp.config';
 
 const USER = {
     getUser: ({ user_id = "", username = "" }) => privateHttp({
@@ -14,7 +15,7 @@ const USER = {
         url: '/user/me'
     }),
     register: async ({ username, password }) => {
-        let result = await privateHttp({
+        let result = await publicHttp({
             method: 'POST',
             url: '/user/register',
             data: {
@@ -27,7 +28,7 @@ const USER = {
         return result;
     },
     login: async (username, password) => {
-        let result = await privateHttp({
+        let result = await publicHttp({
             method: 'POST',
             url: '/user/login',
             data: {

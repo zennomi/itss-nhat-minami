@@ -1,16 +1,7 @@
 import React from 'react';
 import './style.css';
-import Form from "../../components/form";
-import USER from "../../services/userService";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    let navigate = useNavigate();
-    const callback = (message) => {
-        if (message === "LOGIN_SUCCESS")
-            navigate('/');
-    }
-
     return (
         <div className="login-container">
             <div className="login-login">

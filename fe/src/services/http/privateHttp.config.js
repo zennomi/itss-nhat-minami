@@ -32,7 +32,7 @@ privateHttp.interceptors.response.use(
       error.response.statusText === 'Unauthorized'
     ) {
         token.removeAccessToken();
-        window.location.href = '/sign-in';
+        window.location.href = '/login';
         return Promise.reject(error);
       }
     return Promise.reject(error);
