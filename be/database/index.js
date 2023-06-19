@@ -104,11 +104,11 @@ const DB = {
         subQuery += params.price ? `AND t.price <= '${params.price}' ` : '';
         subQuery += params.gioitinh ? `AND u.gender = '${params.gioitinh}' ` : '';
         subQuery += params.star ? `AND (select avg(rating) from reviews where teacher_id = t.id) >= ${params.star} ` : '';
-        subQuery += params.date ? `AND s.day = '${params.date}' ` : '';
         if (params.timesession.length > 0) {
             subQuery += `AND (`;
             params.timesession.forEach((item, index) => {
-                subQuery += `(s.start_hour = ${item.split("-")[0]} and s.end_hour = ${item.split("-")[1]})`;
+                let [day, start_hour, end_hour] = item.split("-");
+                subQuery += `(s.day = '${day}' and s.start_hour >= '${start_hour}' and s.end_hour <= '${end_hour}')`;
                 if (index < params.timesession.length - 1) subQuery += ` or `;
             });
             subQuery += `)`;
@@ -143,7 +143,7 @@ const DB = {
                     }
                 }
 
-                let result = rows.slice((page - 1) * limit, page * limit);
+                let result = rows?.slice((page - 1) * limit, page * limit);
                 let data = {
                     teacher: result,
                     pagination: {
@@ -173,7 +173,11 @@ const DB = {
                     where t.id = ${teacher_id}
                     GROUP BY t.id`, (err, row) => {
                 if (err) console.log(err);
-                resolve(row);
+                db.all(`select * from certificates where teacher_id = ${teacher_id}`, (err, row2) => {
+                    if (err) console.log(err);
+                    row.certificates = row2;
+                    resolve(row);
+                });
             });
         });
     },
@@ -190,6 +194,8 @@ const DB = {
         subQuery += params.instagram_url ? `instagram_url = '${params.instagram_url}', ` : '';
         subQuery += params.linkedin_url ? `linkedin_url = '${params.linkedin_url}', ` : '';
         subQuery += params.twitter_url ? `twitter_url = '${params.twitter_url}', ` : '';
+        subQuery += params.photo_url ? `photo_url = '${params.photo_url}', ` : '';
+        subQuery += params.background_image_url ? `background_image_url = '${params.background_image_url}', ` : '';
 
         if (subQuery.length > 0)
             subQuery = subQuery.slice(0, -2);
@@ -201,6 +207,50 @@ const DB = {
                     WHERE id = '${teacher_id}'`, (err) => {
                 if (err) console.log(err);
                 resolve();
+            });
+        });
+    },
+    addReview: async (teacher_id, user_id, rating, content) => {
+        return new Promise((resolve) => {
+            db.run(`INSERT INTO reviews (teacher_id, user_id, rating, content, created_at)
+                    VALUES ('${teacher_id}', '${user_id}', '${rating}', '${content}', '${new Date().toISOString()}')`, (err) => {
+                if (err) console.log(err);
+                resolve();
+            });
+        });
+    },
+    getReviewsByTeacherId: async (teacher_id) => {
+        return new Promise((resolve) => {
+            db.all(`SELECT r.*, u.name, u.gender
+                    FROM reviews r
+                             JOIN users u on r.user_id = u.id
+                    WHERE r.teacher_id = '${teacher_id}'`, (err, rows) => {
+                if (err) console.log(err);
+                resolve(rows);
+            });
+        });
+    },
+    getTeacherByUserId: async (user_id) => {
+        return new Promise((resolve) => {
+            db.get(`SELECT *
+                    FROM teachers
+                    WHERE user_id = ${user_id}`, (err, row) => {
+                if (err) console.log(err);
+                resolve(row);
+            });
+        });
+    },
+    updateCertificates: async (teacher_id, certificates) => {
+        return new Promise((resolve) => {
+            db.run(`DELETE FROM certificates WHERE teacher_id = ${teacher_id}`, (err) => {
+                if (err) console.log(err);
+            });
+            certificates.forEach((item) => {
+                db.run(`INSERT INTO certificates (teacher_id, language_code, level)
+                        VALUES ('${teacher_id}', '${item.language_code}', '${item.level}')`, (err) => {
+                    if (err) console.log(err);
+                    resolve();
+                });
             });
         });
     }
