@@ -5,13 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const calculatorDate = (time) => {
     const currentDate = new Date();
+    var dateofBirth = new Date(time)
 
-    const dateOfBirth = new Date("1990-01-01");
+    let age = currentDate.getFullYear() - dateofBirth.getFullYear();
 
-    let age = currentDate.getFullYear() - dateOfBirth.getFullYear();
-
-    if ( currentDate.getMonth() < dateOfBirth.getMonth() ||
-        (currentDate.getMonth() === dateOfBirth.getMonth() && currentDate.getDate() < dateOfBirth.getDate())) {
+    if ( currentDate.getMonth() < dateofBirth.getMonth() ||
+        (currentDate.getMonth() === dateofBirth.getMonth() && currentDate.getDate() < dateofBirth.getDate())) {
     age--;
     }
     return age;
@@ -96,7 +95,7 @@ function Teacher({ data }) {
                     </span>
 
                     <div className="address-1publicsans-semi-bold-white-14px">
-                        <span  className="publicsans-semi-bold-black-14px tx1">{data.longitude} min / lesson</span>
+                        <span  className="publicsans-semi-bold-black-14px tx1">{data.hours*60} min / lesson</span>
                     </div>
                 </div>
             </div>
