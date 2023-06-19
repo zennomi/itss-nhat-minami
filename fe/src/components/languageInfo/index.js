@@ -1,54 +1,71 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
 import './style.css'
-const LanguageCard = ({initialData}) => {
-    /**Cannot change input value */
-    const [formData, setFormData] = useState(initialData);
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [name]: value
-        }));
-    };
+const LanguageCard = ({
+    index,
+    data,
+    register,
+    errors,
+}) => {
+    const lang_study = `languages.${index}.lang_study`;
+    const level = `languages.${index}.level`;
+    const salary = `languages.${index}.salary`;
+    const minPerLesson = `languages.${index}.minPerLesson`;
     return (
         <div className='frame-2-item'>
             <div className='form-row'>
-                <select id='language' className="form-field"
-                    value={formData.language} onChange={handleInputChange}>
-                    <option value='' disabled selected>言語</option>
-                    <option value="English">英語</option>
-                    <option value="Vietnamese">ベトナム語</option>
-                    <option value="Japanese">日本語</option>
-                </select>
-                <input
-                    id='level'
-                    type='text'
-                    className='form-field'
-                    value={formData.level}
-                    onChange={handleInputChange}
-                    placeholder='レベル'
-                />
+                <div className='form-field'>
+                    <select
+                        className="input-field"
+                        defaultValue={data.lang_study}
+                        {...register(lang_study)}
+                    >
+                        <option value="" disabled selected>言語</option>
+                        <option value="英語">英語</option>
+                        <option value="ベトナム語">ベトナム語</option>
+                        <option value="日本語">日本語</option>
+                        <option value="韓国語">韓国語</option>
+                    </select>
+                    {errors.languages?.[index]?.lang_study &&
+                        <p className='error-message'>{errors.languages[index].lang_study.message}</p>}
+                </div>
+                <div className='form-field'>
+                    <input
+                        type='text'
+                        className='input-field'
+                        defaultValue={data.level}
+                        {...register(level)}
+                        placeholder='レベル'
+                    />
+                    {errors.languages?.[index]?.level &&
+                        <p className='error-message'>{errors.languages[index].level.message}</p>}
+                </div>
             </div>
             <div className='form-row'>
-                <input
-                    id='salary'
-                    type='text'
-                    className='form-field'
-                    value={formData.salary}
-                    onChange={handleInputChange}
-                    placeholder='料金 (¥)'
-                />
-                <input
-                    id='min per lesson'
-                    type='text'
-                    className='form-field'
-                    value={formData.minPerLesson}
-                    onChange={handleInputChange}
-                    placeholder='レッソンの時間 (分)'
-                />
+                <div className='form-field'>
+                    <input
+                        type='text'
+                        className='input-field'
+                        defaultValue={data.salary}
+                        {...register(salary)}
+                        placeholder='料金 ¥'
+                    />
+                    {errors.languages?.[index]?.salary &&
+                        <p className='error-message'>{errors.languages[index].salary.message}</p>}
+                </div>
+                <div className='form-field'>
+                    <input
+                        type='text'
+                        className='input-field'
+                        defaultValue={data.minPerLesson}
+                        {...register(minPerLesson)}
+                        placeholder='レッソンの時間 （分）'
+                    />
+                    {errors.languages?.[index]?.minPerLesson &&
+                        <p className='error-message'>{errors.languages[index].minPerLesson.message}</p>}
+                </div>
             </div>
+
         </div>
     )
 }

@@ -1,8 +1,8 @@
 .profile-container {
     position: relative;
     width: 1920px;
-    height: 1024px;
-    background: #F9FAFB;
+    height: auto;
+    background: #E9EBEE;
 }
 
 .page-label {
@@ -18,5 +18,15 @@
     line-height: 48px;
 }
 
-
-
+.left-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    padding: 0;
+    width: 458px;
+    height: auto;
+    left: 66px;
+    top: 215px;
+}
