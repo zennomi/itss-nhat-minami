@@ -36,7 +36,9 @@ export default function useListTeacher() {
         facebook_url: data?.facebook_url,
         instagram_url: data?.instagram_url,
         linkedin_url: data?.linkedin_url,
-        twitter_url: data?.twitter_url
+        twitter_url: data?.twitter_url,
+        latitude: data?.latitude,
+        longitude: data?.longitude,
     }
     
     return {

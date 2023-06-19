@@ -14,3 +14,10 @@ export const getTeacher = async (id) => {
         url: `/api/teacher/${id}`,
     })
 }
+
+export const getTeacherReviews = async (id) => {
+    return publicHttp({
+        method: 'GET',
+        url: `/api/review/${id}`,
+    })
+}
