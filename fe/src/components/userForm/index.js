@@ -217,8 +217,8 @@ export default function Form({ initialData }) {
                         className='input-field'
                         {...register('address')}
                         placeholder='場所'
-                        onClick={() => handleInputClick}
-                        onChange={() => handleAddressChange}
+                        onClick={handleInputClick}
+                        onChange={handleAddressChange}
                     />
                     {errors.address && <p className="error-message">{errors.address.message}</p>}
                 </div>
