@@ -264,6 +264,7 @@ export default function Form({ initialData }) {
                         className='input-field'
                         {...register('hours')}
                         placeholder='時'
+                        disabled
                     />
                     {errors.hours &&
                         <p className='error-message'>{errors.hours.message}</p>}
