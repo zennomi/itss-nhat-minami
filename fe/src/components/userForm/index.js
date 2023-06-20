@@ -258,6 +258,23 @@ export default function Form({ initialData }) {
                         <p className='error-message'>{errors.price.message}</p>}
                 </div>
                 <div className='form-field'>
+                <span style={{ paddingLeft: '10px' }}>何語で教えますか。</span>
+                    <select
+                        id='lang_teach'
+                        className="input-field"
+                        {...register('lang_teach')}
+                        name='lang_teach'
+                    >
+                        <option value='' disabled selected>何語で教えますか。</option>
+                        <option value="English">英語</option>
+                        <option value="Vietnamese">ベトナム語</option>
+                        <option value="Japanese">日本語</option>
+                        <option value="Korean">韓国語</option>
+                    </select>
+                    {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
+
+                </div>
+                {/* <div className='form-field'>
                     <span style={{ paddingLeft: '10px' }}>レッソンの時間</span>
                     <input
                         type='text'
@@ -268,7 +285,7 @@ export default function Form({ initialData }) {
                     />
                     {errors.hours &&
                         <p className='error-message'>{errors.hours.message}</p>}
-                </div>
+                </div> */}
             </div>
             <div className="form-row">
                 {/* <div className='form-field'>
@@ -284,7 +301,7 @@ export default function Form({ initialData }) {
                     {errors.address && <p className="error-message">{errors.address.message}</p>}
                 </div> */}
 
-                <div className='form-field' style={{
+                {/* <div className='form-field' style={{
                     width: '100%',
                 }}>
                     <select
@@ -301,7 +318,7 @@ export default function Form({ initialData }) {
                     </select>
                     {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
 
-                </div>
+                </div> */}
             </div>
             <div className="form-row">
                 <textarea
