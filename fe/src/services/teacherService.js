@@ -23,18 +23,22 @@ export const getTeacherReviews = async (id) => {
 }
 
 export const updateTeacherBg = async (data) => {
-    console.log(data)
     return publicHttp({
         method: 'POST',
         url: '/api/bg',
+        headers: {
+            'Content-Type': 'multipart/form-data',
+          },      
         data
     })
 }
 
 export const updateTeacherAvatar = async (data) => {
-    console.log(data)
     return publicHttp({
         method: 'POST',
+        headers: {
+            'Content-Type': 'multipart/form-data',
+          },   
         url: '/api/avatar',
         data
     })

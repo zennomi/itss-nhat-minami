@@ -35,6 +35,18 @@ export default function Avatar({ initialData }) {
         window.addEventListener('mouseup', handleOutsideClick);
     }, []);
 
+    useEffect(() => {
+        if (initialData.photo_url !== '') {
+            setAvatar(initialData.photo_url);
+        }
+    }, [initialData.photo_url])
+
+    useEffect(() => {
+        if (initialData.background_image_url !== '') {
+            setBackground(initialData.background_image_url);
+        }
+    }, [initialData.background_image_url])
+
     const handleChangeButtonClick = (type) => {
         setShowAddFileField(true);
         setPhotoType(type);
@@ -53,9 +65,10 @@ export default function Avatar({ initialData }) {
         }
         if (uploadedPhoto) {
             const reader = new FileReader();
-            var formData = new FormData();
-            formData.append('file', uploadedPhoto, uploadedPhoto.name);
+            let formData = new FormData();
+            formData.append('file', uploadedPhoto);
             console.log(formData)
+            console.log(uploadedPhoto)
             formData.append('teacher_id', id);
             console.log(formData)
             if (photoType === "avatar") {
