@@ -5,6 +5,7 @@ import Form from '../../components/userForm';
 import Avatar from '../../components/avatar';
 import Contacts from '../../components/contacts';
 const initialData = {
+    user_id: 6,
     photo_url: '',
     background_image_url: '',
     name: 'Pham Duc Huy',
@@ -15,6 +16,8 @@ const initialData = {
     lang_teach: 'Vietnamese',
     date_of_birth: '01/01/2001',
     country_of_birth: 'Viet Nam',
+    price: 5000,
+    hours: 3,
     description: '',
     certificates: [
         {

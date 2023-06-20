@@ -41,31 +41,6 @@ const LanguageCard = ({
                         <p className='error-message'>{errors.certificates[index].level.message}</p>}
                 </div>
             </div>
-            {/* <div className='form-row'>
-                <div className='form-field'>
-                    <input
-                        type='text'
-                        className='input-field'
-                        defaultValue={data.salary}
-                        {...register(salary)}
-                        placeholder='料金 ¥'
-                    />
-                    {errors.certificates?.[index]?.salary &&
-                        <p className='error-message'>{errors.certificates[index].salary.message}</p>}
-                </div>
-                <div className='form-field'>
-                    <input
-                        type='text'
-                        className='input-field'
-                        defaultValue={data.minPerLesson}
-                        {...register(minPerLesson)}
-                        placeholder='レッソンの時間 （分）'
-                    />
-                    {errors.certificates?.[index]?.minPerLesson &&
-                        <p className='error-message'>{errors.certificates[index].minPerLesson.message}</p>}
-                </div>
-            </div> */}
-
         </div>
     )
 }
