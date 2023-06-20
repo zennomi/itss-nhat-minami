@@ -308,11 +308,11 @@
 }
 
 .tutor-flex-col {
+  padding-top: 20px;
   align-items: center;
   display: flex;
   flex-direction: column;
   gap: 33px;
-  min-height: 401px;
   position: relative;
   width: 1920px;
 }

@@ -17,23 +17,25 @@ function Tutor() {
   const teacherInformation = data?.teacherInformation;
 
   const [center, setCenter] = useState({ lat: teacherInformation?.latitude, lng: teacherInformation?.longitude })
+  const [selectedLocation, setSelectedLocation] = useState();
   const [activeComponent, setActiveComponent] = useState('component1');
 
+  console.log(center);
   const handleBannerClick = (componentName) => {
     setActiveComponent(componentName);
   };
 
   useEffect(() => {
     if (data?.teacherInformation?.schedules.length > 0) {
-        const timesession = data?.teacherInformation?.schedules.map((schedule) => {
-          return `${schedule?.day}-${schedule?.start_hour}-${schedule?.end_hour}`
-        });
-        timesession.forEach((time) => {
-            const element = document.querySelector(`.${time}`);
-            element?.classList.add('hour-choose');
-        });
+      const timesession = data?.teacherInformation?.schedules.map((schedule) => {
+        return `${schedule?.day}-${schedule?.start_hour}-${schedule?.end_hour}`
+      });
+      timesession.forEach((time) => {
+        const element = document.querySelector(`.${time}`);
+        element?.classList.add('hour-choose');
+      });
     }
-});
+  });
 
   return (
     <div>
@@ -41,10 +43,10 @@ function Tutor() {
       <div className="tutor-container-center-horizontal">
         <div className="tutor-tutor-details-2screen">
           <div className="tutor-flex-col">
-            <div className="tutor-overlap-group">
+            {/* <div className="tutor-overlap-group">
               <div className="tutor-shadow"></div>
               <div className="tutor-bg-1"></div>
-            </div>
+            </div> */}
             <Tutor_Component.UserProfileBanner {...userProfileBannerData} handleBannerClick={handleBannerClick} />
           </div>
           <div className="tutor-flex-row">
@@ -58,7 +60,12 @@ function Tutor() {
                 level={userProfileAboutCardData?.level}
               />
               {/* map */}
-                <Gmap center={center} setCenter={setCenter} style={{ height: '185px', width: '461px' }}/>
+              <Gmap
+                center={center}
+                setCenter={setCenter}
+                selectedLocation={selectedLocation}
+                setSelectedLocation={setSelectedLocation}
+                style={{ height: '185px', width: '461px' }} />
             </div>
             {activeComponent === 'component1' &&
               <Tutor_Component.TeacherInfor
