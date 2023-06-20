@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as Tutor_Component from '../../components/tutor'
 import './style.css';
 import Review from "../../components/review/Review";
@@ -23,6 +23,20 @@ function Tutor() {
   const handleBannerClick = (componentName) => {
     setActiveComponent(componentName);
   };
+
+  useEffect(() => {
+    if (data?.teacherInformation?.schedules.length > 0) {
+        const timesession = data?.teacherInformation?.schedules.map((schedule) => {
+          return `${schedule?.day}-${schedule?.start_hour}-${schedule?.end_hour}`
+        });
+        timesession.forEach((time) => {
+            console.log(`.${time}`)
+            const element = document.querySelector(`.${time}`);
+            console.log(element)
+            element?.classList.add('hour-choose');
+        });
+    }
+});
 
   return (
     <div>

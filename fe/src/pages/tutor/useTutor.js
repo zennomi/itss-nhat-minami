@@ -39,6 +39,7 @@ export default function useListTeacher() {
         twitter_url: data?.twitter_url,
         latitude: data?.latitude,
         longitude: data?.longitude,
+        schedules: [...data?.schedules],
     }
     
     return {

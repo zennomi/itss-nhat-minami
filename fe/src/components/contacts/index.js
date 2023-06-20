@@ -1,16 +1,60 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Icon } from '@iconify/react';
 import CvImg from './cv.png'
 import './style.css'
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { useParams } from 'react-router-dom';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { updateTeacherInfo } from '../../services/teacherService';
+import LoadingButton from '@mui/lab/LoadingButton';
+
+const Alert = React.forwardRef(function Alert(
+    props,
+    ref,
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
 export default function Contacts({ initialData }) {
-    const { handleSubmit, register } = useForm({
+    const { id } = useParams();
+
+    const queryClient = useQueryClient();
+
+    const [open, setOpen] = React.useState(false);
+
+    const updateTeacherInfoMutation = useMutation(data => updateTeacherInfo(data));
+
+    const onSubmit = (data) => {
+        updateTeacherInfoMutation.mutate(
+            { teacher_id: id, ...data }, 
+            {
+                onSuccess: () => {
+                    queryClient.invalidateQueries({
+                        queryKey: ['profile'],
+                      });
+                      setOpen(true);
+                }
+            }
+        );
+    }; 
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+
+    const { reset, handleSubmit, register } = useForm({
         defaultValues: initialData,
     })
 
-    const onSubmit = (data) => {
-        console.log(data);
-    };
+    useEffect(() => {
+        reset(initialData);
+    }, [initialData, reset]);
 
     return (
         <form className='contacts-container' onSubmit={handleSubmit(onSubmit)}>
@@ -73,7 +117,7 @@ export default function Contacts({ initialData }) {
                     id='fabebook_url'
                     type='text'
                     className='contact-input'
-                    {...register('fabebook_url')}
+                    {...register('facebook_url')}
                     placeholder='Facebook'
                 ></input>
             </div>
@@ -88,9 +132,33 @@ export default function Contacts({ initialData }) {
                 ></input>
             </div>
             <div className='button-row'>
-                <button type='submit' className='contacts-submit' >
-                    提出
-                </button>
+            <LoadingButton
+                        loading={updateTeacherInfoMutation.isLoading} 
+                        type="submit" 
+                        style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: "8px",
+                            background: "#00AB55",
+                            border: "transparent",
+                            borderRadius: "8px",
+                            fontFamily: 'Public Sans',
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            fontSize: "22px",
+                            lineHeight: "28px",
+                            color: "#FFFFFF",
+                    }}>
+                        保存
+                    </LoadingButton>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Update successfully!
+                    </Alert>
+                </Snackbar>
             </div>
         </form>
     )

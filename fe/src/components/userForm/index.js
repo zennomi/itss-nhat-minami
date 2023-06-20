@@ -1,4 +1,5 @@
-import { React, useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import LanguageCard from '../languageInfo';
 import './style.css'
 import { useForm, useFieldArray } from 'react-hook-form';
@@ -6,6 +7,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as yup from 'yup';
 import Gmap from '../map';
+import { updateTeacherInfo } from '../../services/teacherService';
+import { useParams } from 'react-router-dom';
+import LoadingButton from '@mui/lab/LoadingButton';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(
+    props,
+    ref,
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 const schema = yup.object().shape({
     name: yup.string().required('氏名を入力してください'),
@@ -45,8 +58,13 @@ const schema = yup.object().shape({
 });
 
 export default function Form({ initialData }) {
+    const [open, setOpen] = React.useState(false);
 
-    const { control, handleSubmit, setValue, watch, register, formState: { errors } } = useForm({
+    const { id } = useParams();
+
+    const queryClient = useQueryClient();
+
+    const { reset, control, handleSubmit, setValue, watch, register, formState: { errors } } = useForm({
         defaultValues: initialData,
         resolver: yupResolver(schema),
     });
@@ -61,10 +79,30 @@ export default function Form({ initialData }) {
     const [selectedLocation, setSelectedLocation] = useState(center);
     const mapRef = useRef(null);
 
+    const updateTeacherInfoMutation = useMutation(data => updateTeacherInfo(data));
+
     const onSubmit = (data) => {
         setValue('hours', watch('hours') / 60);
-        console.log(data);
+        updateTeacherInfoMutation.mutate(
+            { teacher_id: id, ...data }, 
+            {
+                onSuccess: () => {
+                    queryClient.invalidateQueries({
+                        queryKey: ['profile'],
+                      });
+                      setOpen(true);
+                }
+            }
+        );
     };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
 
     const handleAddButtonClick = () => {
         const newLanguage = {
@@ -119,6 +157,10 @@ export default function Form({ initialData }) {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
     }, []);
+
+    useEffect(() => {
+        reset(initialData);
+    }, [initialData, reset]);
 
     const handleMapClick = (mapProps, map, event) => {
         const { latLng } = event;
@@ -288,10 +330,34 @@ export default function Form({ initialData }) {
                         <FontAwesomeIcon icon="fa-solid fa-plus" />
                         証明書
                     </button>
-                    <button type="submit" className='button'>
+                    <LoadingButton
+                        loading={updateTeacherInfoMutation.isLoading} 
+                        type="submit" 
+                        style={{
+                            justifyContent: center,
+                            alignItems: center,
+                            gap: "8px",
+                            background: "#00AB55",
+                            border: "transparent",
+                            borderRadius: "8px",
+                            fontFamily: 'Public Sans',
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            fontSize: "22px",
+                            lineHeight: "28px",
+                            color: "#FFFFFF",
+                    }}>
                         保存
-                    </button>
+                    </LoadingButton>
                 </div>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Update successfully!
+                    </Alert>
+                </Snackbar>
             </div>
         </form>
     )

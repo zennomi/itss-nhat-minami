@@ -37,3 +37,11 @@ export const updateTeacherAvatar = async (data) => {
         data
     })
 }
+
+export const updateTeacherInfo = async (data) => {
+    return publicHttp({
+        method: 'PUT',
+        url: '/api/teacher',
+        data
+    })
+}
