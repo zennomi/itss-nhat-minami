@@ -27,24 +27,26 @@ const schema = yup.object().shape({
             const date = new Date(`${year}-${month}-${day}`);
             return date instanceof Date && !isNaN(date);
         }),
-    country_of_birth: yup.string(),
+    country_of_birth: yup.string()
+        .required('国籍を入力してください'),
+    price: yup.number()
+        .typeError('数字で入力してください。')
+        .required('給料を入力してください。'),
+    hours: yup.number()
+        .typeError('数字で入力してください。')
+        .required('レッソンの時間を入力してください。'),
     description: yup.string(),
     certificates: yup.array().of(
         yup.object().shape({
             language_code: yup.string().required('証明書の種類を選択してください。'),
             level: yup.string().required('レベルを入力してください。'),
-            // salary: yup.number()
-            //     .typeError('数字で入力してください。')
-            //     .required('給料を入力してください。'),
-            // minPerLesson: yup.number()
-            //     .typeError('数字で入力してください。')
-            //     .required('レッソンの時間を入力してください。'),
         }),
     ),
 });
 
 export default function Form({ initialData }) {
-    const { control, handleSubmit, setValue, register, formState: { errors } } = useForm({
+
+    const { control, handleSubmit, setValue, watch, register, formState: { errors } } = useForm({
         defaultValues: initialData,
         resolver: yupResolver(schema),
     });
@@ -60,15 +62,14 @@ export default function Form({ initialData }) {
     const mapRef = useRef(null);
 
     const onSubmit = (data) => {
+        setValue('hours', watch('hours') / 60);
         console.log(data);
     };
 
     const handleAddButtonClick = () => {
         const newLanguage = {
-            language: '',
+            language_code: '',
             level: '',
-            salary: '',
-            minPerLesson: '',
         }
         append(newLanguage);
     };
@@ -174,8 +175,8 @@ export default function Form({ initialData }) {
                         className='input-field'
                         {...register('address')}
                         placeholder='場所'
-                        onClick={handleInputClick}
-                        onChange={handleAddressChange}
+                        onClick={() => handleInputClick}
+                        onChange={() => handleAddressChange}
                     />
                     {errors.address && <p className="error-message">{errors.address.message}</p>}
                 </div>
@@ -205,7 +206,7 @@ export default function Form({ initialData }) {
                             setCenter={setCenter}
                             selectedLocation={selectedLocation}
                             setSelectedLocation={selectedLocation}
-                            handleMapClick={handleMapClick} />
+                            handleMapClick={() => handleMapClick} />
                     </div>
                 </div>
             }
@@ -220,7 +221,6 @@ export default function Form({ initialData }) {
                         {...register('date_of_birth')}
                         placeholder="生年月日"
                     />
-
                     {errors.date_of_birth && <p className="error-message">{errors.date_of_birth.message}</p>}
                 </div>
                 <div className="form-field">
@@ -234,6 +234,30 @@ export default function Form({ initialData }) {
                     {errors.country_of_birth && <p className="error-message">{errors.country_of_birth.message}</p>}
                 </div>
             </div>
+            <div className='form-row'>
+                <div className='form-field'>
+                    <span style={{ paddingLeft: '10px' }}>料金</span>
+                    <input
+                        type='text'
+                        className='input-field'
+                        {...register('price')}
+                        placeholder='¥'
+                    />
+                    {errors.price &&
+                        <p className='error-message'>{errors.price.message}</p>}
+                </div>
+                <div className='form-field'>
+                    <span style={{ paddingLeft: '10px' }}>レッソンの時間</span>
+                    <input
+                        type='text'
+                        className='input-field'
+                        {...register('hours')}
+                        placeholder='時'
+                    />
+                    {errors.hours &&
+                        <p className='error-message'>{errors.hours.message}</p>}
+                </div>
+            </div>
             <div className="form-row">
                 <textarea
                     id='description'
@@ -244,7 +268,7 @@ export default function Form({ initialData }) {
                 {errors.description && <p className="error-message">{errors.description.message}</p>}
             </div>
             <div className='frame-2'>
-                <label>言語</label>
+                <label>証明書</label>
                 {fields.map((certi, index) => (
                     <div >
                         <LanguageCard
@@ -262,7 +286,7 @@ export default function Form({ initialData }) {
                 <div className='button-row'>
                     <button type="button" className='button' onClick={handleAddButtonClick}>
                         <FontAwesomeIcon icon="fa-solid fa-plus" />
-                        言語
+                        証明書
                     </button>
                     <button type="submit" className='button'>
                         保存
