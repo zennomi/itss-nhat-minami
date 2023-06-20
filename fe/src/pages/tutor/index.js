@@ -19,7 +19,6 @@ function Tutor() {
   const [center, setCenter] = useState({ lat: teacherInformation?.latitude, lng: teacherInformation?.longitude })
   const [activeComponent, setActiveComponent] = useState('component1');
 
-  console.log(center);
   const handleBannerClick = (componentName) => {
     setActiveComponent(componentName);
   };
@@ -30,9 +29,7 @@ function Tutor() {
           return `${schedule?.day}-${schedule?.start_hour}-${schedule?.end_hour}`
         });
         timesession.forEach((time) => {
-            console.log(`.${time}`)
             const element = document.querySelector(`.${time}`);
-            console.log(element)
             element?.classList.add('hour-choose');
         });
     }

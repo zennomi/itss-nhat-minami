@@ -84,7 +84,6 @@ const Search = () => {
             ...queryString,
             ...filters
         };
-        console.log(filters)
         setQueryString(params);
         setIsSorted(false)
     };

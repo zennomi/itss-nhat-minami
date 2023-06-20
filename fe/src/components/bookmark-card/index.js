@@ -3,7 +3,6 @@ import { Button} from "@mui/material";
 import './style.css'
 
 const BookmarkCard = ({data}) => {
-    console.log(data)
     return(
         <div>
             <div className=" bookmark-cpn">

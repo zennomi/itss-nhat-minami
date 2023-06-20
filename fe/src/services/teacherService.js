@@ -23,6 +23,7 @@ export const getTeacherReviews = async (id) => {
 }
 
 export const updateTeacherBg = async (data) => {
+    console.log(data)
     return publicHttp({
         method: 'POST',
         url: '/api/bg',
@@ -31,6 +32,7 @@ export const updateTeacherBg = async (data) => {
 }
 
 export const updateTeacherAvatar = async (data) => {
+    console.log(data)
     return publicHttp({
         method: 'POST',
         url: '/api/avatar',

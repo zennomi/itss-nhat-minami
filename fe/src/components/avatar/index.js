@@ -45,27 +45,28 @@ export default function Avatar({ initialData }) {
         fileInputRef.current.click();
     }
 
-    const handleChange = async (event) => {
+    const handleChange = (event) => {
         const uploadedPhoto = event.target.files[0];
-        console.log(uploadedPhoto);
         if (uploadedPhoto.size > 3.1 * 1024 * 1024) {
             alert('File size exceeds the limit of 3.1MB');
             return;
         }
         if (uploadedPhoto) {
             const reader = new FileReader();
-            const formData = new FormData();
+            var formData = new FormData();
             formData.append('file', uploadedPhoto, uploadedPhoto.name);
+            console.log(formData)
             formData.append('teacher_id', id);
+            console.log(formData)
             if (photoType === "avatar") {
-                await updateTeacherAvatar(formData);
                 reader.onload = async () => {
+                    await updateTeacherAvatar(formData);
                     setAvatar(reader.result);
                     initialData.photo_url = avatar;
                 }
             } else if (photoType === "background") {
-                await updateTeacherBg(formData);
                 reader.onload = async () => {
+                    await updateTeacherBg(formData);
                     setBackground(reader.result);
                     initialData.background_image_url = background;
                 }
