@@ -37,11 +37,11 @@ const UserProfileAboutCard = (props) => {
             spanText={lang_native}
             className="tutor-x-item"
           />
-          <Info
+          {/* <Info
             iconsIc_Location="https://www.freeiconspng.com/uploads/building-icon-16.png"
             spanText={level}
             className="tutor-x-item"
-          />
+          /> */}
         </div>
       </div>
     );
