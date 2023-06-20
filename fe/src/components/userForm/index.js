@@ -209,37 +209,6 @@ export default function Form({ initialData }) {
                     {errors.gender && <p className="error-message">{errors.gender.message}</p>}
                 </div>
             </div>
-            <div className="form-row">
-                <div className='form-field'>
-                    <input
-                        id='address'
-                        type='text'
-                        className='input-field'
-                        {...register('address')}
-                        placeholder='場所'
-                        onClick={handleInputClick}
-                        onChange={handleAddressChange}
-                    />
-                    {errors.address && <p className="error-message">{errors.address.message}</p>}
-                </div>
-
-                <div className='form-field'>
-                    <select
-                        id='lang_teach'
-                        className="input-field"
-                        {...register('lang_teach')}
-                        name='lang_teach'
-                    >
-                        <option value='' disabled selected>何語で教えますか。</option>
-                        <option value="English">英語</option>
-                        <option value="Vietnamese">ベトナム語</option>
-                        <option value="Japanese">日本語</option>
-                        <option value="Korean">韓国語</option>
-                    </select>
-                    {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
-
-                </div>
-            </div>
             {showMap &&
                 <div ref={mapRef} className='form-row'>
                     <div style={{ height: '500px', width: '100%' }}>
@@ -298,6 +267,37 @@ export default function Form({ initialData }) {
                     />
                     {errors.hours &&
                         <p className='error-message'>{errors.hours.message}</p>}
+                </div>
+            </div>
+            <div className="form-row">
+                {/* <div className='form-field'>
+                    <input
+                        id='address'
+                        type='text'
+                        className='input-field'
+                        {...register('address')}
+                        placeholder='場所'
+                        onClick={handleInputClick}
+                        onChange={handleAddressChange}
+                    />
+                    {errors.address && <p className="error-message">{errors.address.message}</p>}
+                </div> */}
+
+                <div className='form-field'>
+                    <select
+                        id='lang_teach'
+                        className="input-field"
+                        {...register('lang_teach')}
+                        name='lang_teach'
+                    >
+                        <option value='' disabled selected>何語で教えますか。</option>
+                        <option value="English">英語</option>
+                        <option value="Vietnamese">ベトナム語</option>
+                        <option value="Japanese">日本語</option>
+                        <option value="Korean">韓国語</option>
+                    </select>
+                    {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
+
                 </div>
             </div>
             <div className="form-row">
