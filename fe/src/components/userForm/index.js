@@ -283,7 +283,9 @@ export default function Form({ initialData }) {
                     {errors.address && <p className="error-message">{errors.address.message}</p>}
                 </div> */}
 
-                <div className='form-field'>
+                <div className='form-field' style={{
+                    width: '100%',
+                }}>
                     <select
                         id='lang_teach'
                         className="input-field"

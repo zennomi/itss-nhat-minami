@@ -1,6 +1,8 @@
 import React from "react";
 import './style.css'
+import { useNavigate } from "react-router-dom";
 function Header() {
+    const navigate = useNavigate();
     return (
         <div className="main-header">
             <div className="header-content">
@@ -30,9 +32,13 @@ function Header() {
                 <span>
                   <span className="publicsans-bold-white-14px">ログイン</span>
                 </span>
-                            </div>
+                    </div>
                         </div>
-                        <div className="find-tutors">
+                        <div className="find-tutors" onClick={() => {
+                            navigate(
+                                "/profile/1"
+                            )
+                        }}>
                             <span className="publicsans-semi-bold-charade-14px">教師になる</span>
                         </div>
                     </div>
