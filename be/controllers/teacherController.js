@@ -65,6 +65,8 @@ const TEACHER = {
             gender: req.body.gender || null,
             date_of_birth: req.body.date_of_birth || null,
             certificates: req.body.certificates || [],
+            country_of_birth: req.body.country_of_birth || null,
+            description: req.body.description || null,
         };
         try {
             await DB.updateTeacherInfos(teacherId, params);
@@ -103,8 +105,7 @@ const TEACHER = {
         }
     },
     upBackGround: async (req, res) => {
-        let userId = req.user_id;
-        let teacherId = (await DB.getTeacherByUserId(userId)).id;
+        let teacherId = req.body.teacher_id;
         let bg = req.files?.file;
         if (!teacherId || !bg) return res.status(400).json({message: 'MISSING_FIELDS'});
         let newName = __dirname + "/../public/files/bg" + teacherId + ".jpg";
@@ -112,6 +113,22 @@ const TEACHER = {
             await bg.mv(newName);
             try {
                 await DB.updateTeacherInfos(teacherId, {background_image_url: "/files/bg" + teacherId + ".jpg"});
+                return res.status(200).json({message: 'OK'});
+            } catch (e) {
+                console.log(e);
+                return res.status(500).json({message: 'DATABASE_ERROR'});
+            }
+        }
+    },
+    upAvatar: async (req, res) => {
+        let teacherId = req.body.teacher_id;
+        let bg = req.files?.file;
+        if (!teacherId || !bg) return res.status(400).json({message: 'MISSING_FIELDS'});
+        let newName = __dirname + "/../public/files/avatar" + teacherId + ".jpg";
+        if (req.files && req.files.file) {
+            await bg.mv(newName);
+            try {
+                await DB.updateTeacherInfos(teacherId, {photo_url: "/files/avatar" + teacherId + ".jpg"});
                 return res.status(200).json({message: 'OK'});
             } catch (e) {
                 console.log(e);

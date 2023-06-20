@@ -200,6 +200,8 @@ const DB = {
         subQuery += params.twitter_url ? `twitter_url = '${params.twitter_url}', ` : '';
         subQuery += params.photo_url ? `photo_url = '${params.photo_url}', ` : '';
         subQuery += params.background_image_url ? `background_image_url = '${params.background_image_url}', ` : '';
+        subQuery += params.description ? `description = '${params.description}', ` : '';
+        subQuery += params.country_of_birth ? `country_of_birth = '${params.country_of_birth}', ` : '';
 
         if (subQuery.length > 0)
             subQuery = subQuery.slice(0, -2);

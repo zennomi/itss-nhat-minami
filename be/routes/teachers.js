@@ -9,4 +9,5 @@ router.put('/teacher', TEACHER.updateTeacher);
 router.post('/review', TEACHER.addReview);
 router.get('/review/:id', TEACHER.getReviewsByTeacherId);
 router.post('/bg', TEACHER.upBackGround);
+router.post('/avatar', TEACHER.upAvatar);
 module.exports = router;
