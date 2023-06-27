@@ -1,8 +1,11 @@
 import React from 'react';
 import './style.css';
+import Header from "../../components/header";
 
 const Login = () => {
     return (
+        <div>
+            <Header></Header>
         <div className="login-container">
             <div className="login-login">
                 <div className="login-logo">
@@ -122,6 +125,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
