@@ -3,6 +3,7 @@ import './style.css';
 import Form from "../../components/form";
 import USER from "../../services/userService";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/header";
 
 const Register = () => {
     let navigate = useNavigate();
@@ -11,6 +12,8 @@ const Register = () => {
             navigate('/');
     }
     return (
+        <div>
+            <Header></Header>
         <div className="register-container">
             <div className="register-register">
                 <div className="register-logo">
@@ -172,6 +175,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
