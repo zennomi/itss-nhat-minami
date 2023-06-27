@@ -41,7 +41,7 @@ function Teacher({ data }) {
                     <div className="button-x">
 
                         <div className="labelpublicsans-bold-white-13px">
-                            <span className="model" >{data.remote}</span>
+                            <span className="model" ></span>
                         </div>
                     </div>
                 </div>
@@ -69,8 +69,7 @@ function Teacher({ data }) {
                     <div className="x2publicsans-normal-pale-sky-14px">
             <span className="publicsans-normal-pale-sky-14px">
                 {data.description}
-              2年間の経験と資格を持つ認定講師 はじめまして、TuMyと申します。
-              私はベトナム南部から来ました。師範大学の日本語学部を卒業して、5年間の教育経験があります。特に3年間、子供を教えました。教師の仕事が好きで、世界の友達を作りたいです。2016-2017：日本センターで大人に教えました。2018-2022：日本センターで子供に教えました…
+
             </span>
                     </div>
                 </div>
