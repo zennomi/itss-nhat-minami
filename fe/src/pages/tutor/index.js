@@ -60,12 +60,12 @@ function Tutor() {
                 level={userProfileAboutCardData?.level}
               />
               {/* map */}
-              {/* <Gmap
-                center={center}
-                setCenter={setCenter}
-                selectedLocation={selectedLocation}
-                setSelectedLocation={setSelectedLocation}
-                style={{ height: '185px', width: '461px' }} /> */}
+              {/*<Gmap*/}
+              {/*  center={center}*/}
+              {/*  setCenter={setCenter}*/}
+              {/*  selectedLocation={selectedLocation}*/}
+              {/*  setSelectedLocation={setSelectedLocation}*/}
+              {/*  style={{ height: '185px', width: '461px' }} />*/}
             </div>
             {activeComponent === 'component1' &&
               <Tutor_Component.TeacherInfor
