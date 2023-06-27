@@ -171,8 +171,8 @@
     background-color: var(--manatee-4);
     border-radius: 6px;
     text-align: center;
-    height: 28px;
-    min-width: 95px;
+    height: 39px;
+    min-width: 91px;
     padding:0  12px  4px 12px;
 }
 
@@ -433,7 +433,6 @@
 }
 
 .group-2 {
-    display: none !important;
     display: flex;
     flex-direction: column;
     gap: 6px;

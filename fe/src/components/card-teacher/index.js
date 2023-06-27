@@ -53,6 +53,7 @@ function TeacherCard ({ data }) {
                         </div>
                         <div>
                             <span className="footerItem-result" style={{color:'#212B36'}}>{data?.star?.toFixed(1)}</span>
+                            <i className="fa-solid fa-star fa-lg" style={{color: '#f5d60f'}} ></i>
                         </div>
                     </div>
                     <div className="footerItem">
