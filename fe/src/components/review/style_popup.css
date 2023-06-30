@@ -16,6 +16,7 @@
   flex-direction: column;
   min-height: 360px;
   width: 700px;
+  z-index: 99;
 }
 
 .popup-title {
@@ -90,6 +91,7 @@
   min-width: 70px;
   text-align: center;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .popup-rating {
@@ -121,4 +123,5 @@
   min-width: 28px;
   text-align: center;
   white-space: nowrap;
+  cursor: pointer;
 }
