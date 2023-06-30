@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css?family=Public+Sans:400,700,600,800");
+
+.popup-valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.popup-review-product-dialog-form {
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 16px;
+  box-shadow: -40px 40px 80px -8px 
+#919eab3d;
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+  width: 700px;
+  z-index: 99;
+}
+
+.popup-title {
+  letter-spacing: 0;
+  line-height: 28px;
+  margin-left: 12px;
+  margin-top: 23px;
+  white-space: nowrap;
+  width: 664px;
+}
+
+.popup-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 25px;
+  min-height: 200px;
+  width: 700px;
+}
+
+.popup-stack {
+  align-items: flex-start;
+  display: flex;
+  gap: 12px;
+  height: 24px;
+  position: relative;
+  width: 652px;
+}
+
+.popup-your-review-about-th {
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-top: -1px;
+  min-width: 32px;
+  white-space: nowrap;
+}
+
+.popup-input {
+  align-items: flex-start;
+  border-radius: 8px;
+  display: flex;
+  height: 152px;
+  overflow: hidden;
+  padding: 15px 14px;
+  width: 652px;
+}
+
+.popup-labelplaceholder {
+  letter-spacing: 0;
+  line-height: 24px;
+  min-height: 120px;
+  width: 624px;
+}
+
+.popup-dialog {
+  align-items: center;
+  display: flex;
+  gap: 28px;
+  height: 84px;
+  justify-content: flex-end;
+  min-width: 700px;
+  padding: 0 24px;
+  position: relative;
+}
+
+.popup-label {
+  height: 24px;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-bottom: 2px;
+  min-width: 70px;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.popup-rating {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  min-width: 100px;
+}
+
+.popup-iconsic_star {
+  height: 20px;
+  width: 20px;
+}
+
+.popup-button {
+  align-items: flex-start;
+  background-color: var(--jade);
+  border-radius: 8px;
+  display: flex;
+  height: 36px;
+  min-width: 60px;
+  padding: 5px 16px;
+}
+
+.popup-label-1 {
+  height: 24px;
+  letter-spacing: 0;
+  line-height: 24px;
+  min-width: 28px;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}

@@ -1,9 +1,17 @@
 import React from "react";
+import { useState } from "react";
 import './style_review_banner.css'
+import './style_popup.css'
+import PopUp from './PopUp'
 
-const ReviewBaner = (props) => {
-  const { starAvg, reviewCount, star5Count, star4Count, star3Count, star2Count, star1Count } = props;
+const ReviewBaner = ({data, onButtonClick}) => {
+  const { starAvg, reviewCount, star5Count, star4Count, star3Count, star2Count, star1Count } = data;
 
+  // const [showPopup, setShowPopup] = useState(false);
+
+  const handleClick = () => {
+    onButtonClick()
+  };
   return (
     <div className="review_banner-ecommerce-product-summary">
       <div className="review_banner-stack">
@@ -42,7 +50,7 @@ const ReviewBaner = (props) => {
       <div className="review_banner-stack-2">
         <div className="review_banner-stack-2-content">
         <img className="review_banner-shape" src="https://simpleicon.com/wp-content/uploads/pencil.png" alt="shape" />
-        <div className="review_banner-label publicsans-bold-charade-15px">
+        <div className="review_banner-label publicsans-bold-charade-15px"  onClick={handleClick}>
           <span className="publicsans-bold-charade-15px">レビューする</span>
         </div>
         </div>
