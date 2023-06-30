@@ -205,6 +205,8 @@ const DB = {
         subQuery += params.description ? `description = '${params.description}', ` : '';
         subQuery += params.country_of_birth ? `country_of_birth = '${params.country_of_birth}', ` : '';
         subQuery += params.address ? `address = '${params.address}', ` : '';
+        subQuery += params.latitude ? `latitude = '${params.latitude}', ` : '';
+        subQuery += params.longitude ? `longitude = '${params.longitude}', ` : '';
 
         if (subQuery.length > 0)
             subQuery = subQuery.slice(0, -2);
@@ -222,8 +224,8 @@ const DB = {
     createTeacher: async (user_id, params) => {
         // returning id
         return new Promise((resolve) => {
-            db.get(`INSERT INTO teachers (user_id, lang_teach, lang_study, purpose, price, phone_number, resume_url, website_url, facebook_url, instagram_url, linkedin_url, twitter_url, photo_url, background_image_url, description, country_of_birth, address)
-                    VALUES ('${user_id}', '${params.lang_teach}', '${params.lang_study}', '${params.purpose}', '${params.price}', '${params.phone_number}', '${params.resume_url}', '${params.website_url}', '${params.facebook_url}', '${params.instagram_url}', '${params.linkedin_url}', '${params.twitter_url}', '${params.photo_url}', '${params.background_image_url}', '${params.description}', '${params.country_of_birth}', '${params.address}') returning id`, (err, row) => {
+            db.get(`INSERT INTO teachers (user_id, lang_teach, lang_study, purpose, price, phone_number, resume_url, website_url, facebook_url, instagram_url, linkedin_url, twitter_url, photo_url, background_image_url, description, country_of_birth, address, latitude, longitude)
+                    VALUES ('${user_id}', '${params.lang_teach}', '${params.lang_study}', '${params.purpose}', '${params.price}', '${params.phone_number}', '${params.resume_url}', '${params.website_url}', '${params.facebook_url}', '${params.instagram_url}', '${params.linkedin_url}', '${params.twitter_url}', '${params.photo_url}', '${params.background_image_url}', '${params.description}', '${params.country_of_birth}', '${params.address}', '${params.latitude}', '${params.longitude}') returning id`, (err, row) => {
                 if (err) console.log(err);
                 resolve(row);
             });
