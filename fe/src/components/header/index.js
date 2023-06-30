@@ -12,7 +12,11 @@ function Header() {
                         <div className="home">
                             <span className="publicsans-semi-bold-charade-14px">ホーム</span>
                         </div>
-                        <div className="find-tutors">
+                        <div className="find-tutors" onClick={() => {
+                            navigate(
+                                "/search"
+                            )
+                        }}>
                             <span  className="publicsans-semi-bold-charade-14px">教師を探す</span>
                         </div>
                         <div className="link">
@@ -36,7 +40,7 @@ function Header() {
                         </div>
                         <div className="find-tutors" onClick={() => {
                             navigate(
-                                "/profile/1"
+                                "/profile/4"
                             )
                         }}>
                             <span className="publicsans-semi-bold-charade-14px">教師になる</span>

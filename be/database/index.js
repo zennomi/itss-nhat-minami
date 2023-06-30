@@ -175,8 +175,14 @@ const DB = {
                 if (err) console.log(err);
                 db.all(`select * from certificates where teacher_id = ${teacher_id}`, (err, row2) => {
                     if (err) console.log(err);
-                    row.certificates = row2;
-                    resolve(row);
+                    if(row)
+                        row.certificates = row2;
+                    db.all(`select * from schedules where teacher_id = ${teacher_id}`, (err, row3) => {
+                        if (err) console.log(err);
+                        if(row)
+                            row.schedules = row3;
+                        resolve(row);
+                    });
                 });
             });
         });
@@ -196,6 +202,11 @@ const DB = {
         subQuery += params.twitter_url ? `twitter_url = '${params.twitter_url}', ` : '';
         subQuery += params.photo_url ? `photo_url = '${params.photo_url}', ` : '';
         subQuery += params.background_image_url ? `background_image_url = '${params.background_image_url}', ` : '';
+        subQuery += params.description ? `description = '${params.description}', ` : '';
+        subQuery += params.country_of_birth ? `country_of_birth = '${params.country_of_birth}', ` : '';
+        subQuery += params.address ? `address = '${params.address}', ` : '';
+        subQuery += params.latitude ? `latitude = '${params.latitude}', ` : '';
+        subQuery += params.longitude ? `longitude = '${params.longitude}', ` : '';
 
         if (subQuery.length > 0)
             subQuery = subQuery.slice(0, -2);
@@ -207,6 +218,16 @@ const DB = {
                     WHERE id = '${teacher_id}'`, (err) => {
                 if (err) console.log(err);
                 resolve();
+            });
+        });
+    },
+    createTeacher: async (user_id, params) => {
+        // returning id
+        return new Promise((resolve) => {
+            db.get(`INSERT INTO teachers (user_id, lang_teach, lang_study, purpose, price, phone_number, resume_url, website_url, facebook_url, instagram_url, linkedin_url, twitter_url, photo_url, background_image_url, description, country_of_birth, address, latitude, longitude)
+                    VALUES ('${user_id}', '${params.lang_teach}', '${params.lang_study}', '${params.purpose}', '${params.price}', '${params.phone_number}', '${params.resume_url}', '${params.website_url}', '${params.facebook_url}', '${params.instagram_url}', '${params.linkedin_url}', '${params.twitter_url}', '${params.photo_url}', '${params.background_image_url}', '${params.description}', '${params.country_of_birth}', '${params.address}', '${params.latitude}', '${params.longitude}') returning id`, (err, row) => {
+                if (err) console.log(err);
+                resolve(row);
             });
         });
     },
@@ -251,6 +272,36 @@ const DB = {
                     if (err) console.log(err);
                     resolve();
                 });
+            });
+        });
+    },
+    addBookmark: async (user_id, teacher_id) => {
+        return new Promise((resolve) => {
+            db.run(`INSERT INTO bookmarks (user_id, teacher_id, created_at)
+                    VALUES ('${user_id}', '${teacher_id}'), '${new Date().toISOString()}'`, (err) => {
+                if (err) console.log(err);
+                resolve();
+            });
+        });
+    },
+    removeBookmark: async (user_id, teacher_id) => {
+        return new Promise((resolve) => {
+            db.run(`DELETE FROM bookmarks
+                    WHERE user_id = ${user_id} AND teacher_id = ${teacher_id}`, (err) => {
+                if (err) console.log(err);
+                resolve();
+            });
+        });
+    },
+    getBookmarksByUserId: async (user_id) => {
+        return new Promise((resolve) => {
+            db.all(`SELECT *
+                    FROM bookmarks b
+                                JOIN teachers t on b.teacher_id = t.id
+                                JOIN users u on u.id = t.user_id
+                    WHERE b.user_id = ${user_id}`, (err, rows) => {
+                if (err) console.log(err);
+                resolve(rows);
             });
         });
     }

@@ -134,6 +134,13 @@
     font-weight: 600;
     font-style: normal;
 }
+.publicsans-semi-bold-jade-13px{
+    color: #09d356;
+    font-family: var(--font-family-public_sans-semibold);
+    font-size: 13px;
+    font-weight: 600;
+    font-style: normal;
+}
 .publicsans-semi-bold-charade-14px {
     color: var(--backgrounddarkpaper);
     font-family: var(--font-family-public_sans-semibold);
@@ -473,12 +480,6 @@
     height: 600px;
     min-width: 900px;
     object-fit: cover;
-    position: relative;
-}
-
-.main-header {
-    height: 88px;
-    min-width: 99vw;
     position: relative;
 }
 
