@@ -9,43 +9,44 @@ export default function useListTeacher() {
 
   const parseData = useCallback((data) => {
     const userProfileBannerData = {
-        bg: `http://tungsnk.tech:9999${data?.background_image_url}`,
-        img_Avatar25: `http://tungsnk.tech:9999${data?.photo_url}`,
-        spanText1: data?.name,
-        spanText2: data?.lang_teach
+      bg: `http://tungsnk.tech:9999${data?.background_image_url}`,
+      img_Avatar25: `http://tungsnk.tech:9999${data?.photo_url}`,
+      spanText1: data?.name,
+      spanText2: data?.lang_teach
     };
-    
+
     const userProfileAboutCardData = {
-        address: data?.country_of_birth,
-        gender: data?.gender,
-        lang_native: data?.lang_teach,
-        level: data?.language_code + ": " + data?.level,
-      };
-  
+      address: data?.address,
+      gender: data?.gender,
+      description: data?.description,
+      lang_native: data?.lang_teach,
+      certificates: [...data?.certificates],
+    };
+
     const teacherInformation = {
-        lang_native: data?.lang_teach,
-        flag: flagLanguageImg[data?.lang_teach],
-        star: data?.star.toFixed(1),
-        rated_count: data?.reviewCount,
-        price: data?.price,
-        time: data?.hours,
-        phone: data?.phone_number,
-        resume_url: data?.resume_url,
-        gmail: data?.website_url,
-        website_url: data?.website_url,
-        facebook_url: data?.facebook_url,
-        instagram_url: data?.instagram_url,
-        linkedin_url: data?.linkedin_url,
-        twitter_url: data?.twitter_url,
-        latitude: data?.latitude,
-        longitude: data?.longitude,
-        schedules: [...data?.schedules],
+      lang_native: data?.lang_teach,
+      flag: flagLanguageImg[data?.lang_teach],
+      star: data?.star.toFixed(1),
+      rated_count: data?.reviewCount,
+      price: data?.price,
+      time: data?.hours,
+      phone: data?.phone_number,
+      resume_url: data?.resume_url,
+      gmail: data?.website_url,
+      website_url: data?.website_url,
+      facebook_url: data?.facebook_url,
+      instagram_url: data?.instagram_url,
+      linkedin_url: data?.linkedin_url,
+      twitter_url: data?.twitter_url,
+      latitude: data?.latitude || 0,
+      longitude: data?.longitude || 0,
+      schedules: [...data?.schedules],
     }
-    
+
     return {
-        userProfileBannerData,
-        userProfileAboutCardData,
-        teacherInformation
+      userProfileBannerData,
+      userProfileAboutCardData,
+      teacherInformation
     };
   }, []);
 

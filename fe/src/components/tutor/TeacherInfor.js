@@ -52,7 +52,7 @@ const TeacherInfor = (props) => {
                     <span className="publicsans-bold-charade-24px">{price}¥</span>
                   </div>
                   <div className="tutor-label-4 publicsans-normal-pale-sky-14px">
-                    <span className="publicsans-normal-pale-sky-14px">{time} min / lesson</span>
+                    <span className="publicsans-normal-pale-sky-14px">{time*60} min / lesson</span>
                   </div>
                 </div>
               </div>
