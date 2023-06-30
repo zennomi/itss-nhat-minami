@@ -7,15 +7,14 @@ import useTutor from './useTutor';
 import { date, timesession } from "../../utils/constant";
 import Header from "../../components/header";
 import Map from "../../components/map";
-import { useMap } from "react-leaflet";
 function Tutor() {
   const { data } = useTutor();
-
   const userProfileBannerData = data?.userProfileBannerData;
-
   const userProfileAboutCardData = data?.userProfileAboutCardData;
   const teacherInformation = data?.teacherInformation;
+  
   const [activeComponent, setActiveComponent] = useState('component1');
+  const [showMap, setShowMap] = useState((teacherInformation?.latitude && teacherInformation?.longitude) ? true: false);
 
   const handleBannerClick = (componentName) => {
     setActiveComponent(componentName);
@@ -39,10 +38,9 @@ function Tutor() {
       <div className="tutor-container-center-horizontal">
         <div className="tutor-tutor-details-2screen">
           <div className="tutor-flex-col">
-            {/* <div className="tutor-overlap-group">
-              <div className="tutor-shadow"></div>
+            <div className="tutor-overlap-group">
               <div className="tutor-bg-1"></div>
-            </div> */}
+            </div>
             <Tutor_Component.UserProfileBanner {...userProfileBannerData} handleBannerClick={handleBannerClick} />
           </div>
           <div className="tutor-flex-row">
@@ -55,8 +53,7 @@ function Tutor() {
                 certificates={userProfileAboutCardData?.certificates}
               />
               {/* map */}
-              {teacherInformation?.latitude && teacherInformation?.longitude
-                &&
+              {showMap &&
                 <div style={{ height: '185px', width: '461px' }}>
                   <Map
                     latitude={teacherInformation?.latitude}

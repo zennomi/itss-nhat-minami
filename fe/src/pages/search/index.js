@@ -5,7 +5,7 @@ import TeacherCard from "../../components/card-teacher";
 import { LinearProgress } from "@mui/material";
 import Header from "../../components/header";
 import useListTeacher from './useListTeacher';
-import Gmap from '../../components/map';
+import Map from '../../components/map';
 import {
     languages,
     purposes,
@@ -38,9 +38,9 @@ const Search = () => {
     const [isSorted, setIsSorted] = useState(false);
     const [value, setValue] = React.useState([20, 70]);
     const [sort, setSort] = useState(true)
-    const [center, setCenter] = useState();
-    const [selectedLocation, setSelectedLocation] = useState();
-    const [latLngRange, setLatLngRange] = useState();
+    const [lat, setLat] = useState(0);
+    const [lon, setLon] = useState(0);
+    const [radius, setRadius] = useState();
     const handleFilter = (key, value) => {
         setFilters({ ...filters, [key]: value });
     };
@@ -48,39 +48,28 @@ const Search = () => {
         handleFilter('age', newValue)
         setValue(newValue);
     };
-
-    const handleMapClick = (mapProps, map, event) => {
-        const { latLng } = event;
-        const latitude = latLng.lat();
-        const longitude = latLng.lng();
-        setSelectedLocation({ lat: latitude, lng: longitude });
-        // const geocoder = new window.google.maps.Geocoder();
-        // geocoder.geocode({ location: latLng }, (results, status) => {
-        //     if (status === window.google.maps.GeocoderStatus.OK) {
-        //         if (results[0]) {
-        //             setValue('address', results[0].formatted_address);
-        //         }
-        //     } else {
-        //         console.error('Geocode failed:', status);
-        //     }
-        // });
-    };
-    const handleRadiusChange = (event) => {
-        const latitudeDelta = event.target.value / 111.32;
-        const longitudeDelta = event.target.value / (111.32 * Math.cos((center.lat * Math.PI) / 180));
-
-        setLatLngRange(
-            {
-                latRange: {
-                    min: center.lat - latitudeDelta,
-                    max: center.lat + latitudeDelta
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setLat(latitude);
+                    setLon(longitude);
                 },
-                lngRange: {
-                    min: center.lng - longitudeDelta,
-                    max: center.lng + longitudeDelta
+                (error) => {
+                    console.error('Geolocation error:', error);
                 }
-            }
-        );
+            );
+        }
+    });
+    const handleMapClick = (event) => {
+        const { lat, lng } = event.latlng;
+        setLat(lat);
+        setLon(lng);
+    };
+
+    const handleRadiusChange = (event) => {
+        setRadius(event.target.value);
     };
 
     const handleSort = (sort) => {
@@ -412,33 +401,32 @@ const Search = () => {
                                 <span className="dropdown-toggle"  ></span>
                             </div>
                             <div className="map-search dropdown-menu">
-                                <div className="">
-                                    <div className="switch">
-                                        <Switch {...label} defaultChecked />
-                                        <div>
-                                            <span className="map-choose">online</span>
+                                <div className="switch">
+                                    <Switch {...label} defaultChecked />
+                                    <div>
+                                        <span className="map-choose">online</span>
+                                    </div>
+                                </div>
+                                <div className="map-instance">
+                                    <div className="text-1 ">
+                                        <span>グーグルマップ</span>
+                                    </div>
+                                    <div className="text-field">
+                                        <div className="radius">
+                                            <span>radius (km)</span>
+                                        </div>
+                                        <div className="input_radius">
+                                            <input type="text" onChange={() => handleRadiusChange} />
                                         </div>
                                     </div>
-                                    <div className="map-instance">
-                                        <div className="text-1 ">
-                                            <span>グーグルマップ</span>
-                                        </div>
-                                        <div className="text-field">
-                                            <div className="radius">
-                                                <span>radius (km)</span>
-                                            </div>
-                                            <div className="input_radius">
-                                                <input type="text" onChange={() => handleRadiusChange} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <Gmap
-                                        center={center}
-                                        setCenter={setCenter}
-                                        selectedLocation={selectedLocation}
-                                        setSelectedLocation={setSelectedLocation}
-                                        handleMapClick = {handleMapClick}
-                                        style={{ width: '570px', height: '360px' }} />
+                                </div>
+                                <div style={{ height: '350px', width: '100%' }}>
+                                    <Map
+                                        latitude={lat}
+                                        longitude={lon}
+                                        handleMapClick={handleMapClick}
+                                        clickable={true}
+                                    />
                                 </div>
                             </div>
 
