@@ -6,7 +6,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as yup from 'yup';
-import Gmap from '../map';
+import Map from '../map';
 import { updateTeacherInfo } from '../../services/teacherService';
 import { useParams } from 'react-router-dom';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -16,9 +16,9 @@ import MuiAlert from '@mui/material/Alert';
 const Alert = React.forwardRef(function Alert(
     props,
     ref,
-  ) {
+) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+});
 
 const schema = yup.object().shape({
     name: yup.string().required('氏名を入力してください'),
@@ -63,7 +63,7 @@ export default function Form({ initialData }) {
     const { id } = useParams();
 
     const queryClient = useQueryClient();
-
+    initialData.hours *= 60;
     const { reset, control, handleSubmit, setValue, watch, register, formState: { errors } } = useForm({
         defaultValues: initialData,
         resolver: yupResolver(schema),
@@ -74,23 +74,75 @@ export default function Form({ initialData }) {
         name: 'certificates',
     });
 
-    const [center, setCenter] = useState({ lat: initialData.latitude, lng: initialData.longitude })
+    const getCurrentLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setValue('latitude', latitude);
+                    setValue('longitude', longitude);
+                },
+                (error) => {
+                    console.error('Geolocation error:', error);
+                }
+            );
+        }
+    }
+
+    useEffect(() => {
+        const address = watch('address');
+        if (address.trim() !== '') {
+            geocode(address)
+                .then((coordinates) => {
+                    const { lat, lon } = coordinates;
+                    setValue('latitude', lat);
+                    setValue('longitude', lon);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        } else {
+            getCurrentLocation();
+        }
+    }, [watch('address')]);
+
+    if (watch('latitude') === 0 && watch('longitude') === 0) {
+        getCurrentLocation();
+    }
+
+    const geocode = async (address) => {
+        try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`);
+            const data = await response.json();
+
+            if (response.ok && data.length > 0) {
+                const { lat, lon } = data[0];
+                return { lat: lat, lon: lon };
+            } else {
+                throw new Error('Geocoding failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            throw error;
+        }
+    };
+
     const [showMap, setShowMap] = useState(false);
-    const [selectedLocation, setSelectedLocation] = useState(center);
     const mapRef = useRef(null);
 
     const updateTeacherInfoMutation = useMutation(data => updateTeacherInfo(data));
 
     const onSubmit = (data) => {
         setValue('hours', watch('hours') / 60);
+        console.log(data);
         updateTeacherInfoMutation.mutate(
-            { teacher_id: id, ...data }, 
+            { teacher_id: id, ...data },
             {
                 onSuccess: () => {
                     queryClient.invalidateQueries({
                         queryKey: ['profile'],
-                      });
-                      setOpen(true);
+                    });
+                    setOpen(true);
                 }
             }
         );
@@ -98,11 +150,11 @@ export default function Form({ initialData }) {
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
-          return;
+            return;
         }
-    
+
         setOpen(false);
-      };
+    };
 
     const handleAddButtonClick = () => {
         const newLanguage = {
@@ -116,25 +168,7 @@ export default function Form({ initialData }) {
         remove(index);
     };
 
-    const handleAddressChange = (event) => {
-        const address = event.target.value;
-        if (address) {
-            const geocoder = new window.google.maps.Geocoder();
-            geocoder.geocode({ address }, (results, status) => {
-                if (status === 'OK') {
-                    const { lat, lng } = results[0].geometry.location;
-                    setCenter({ lat: lat(), lng: lng() });
-                    setSelectedLocation(center);
-                    setValue('latitude', lat());
-                    setValue('longitude', lng());
-                } else {
-                    console.error('Geocode failed:', status);
-                }
-            });
-        }
-    };
-
-    const handleInputClick = () => {
+    const handleAddressClick = () => {
         setShowMap(true);
     };
 
@@ -161,25 +195,6 @@ export default function Form({ initialData }) {
     useEffect(() => {
         reset(initialData);
     }, [initialData, reset]);
-
-    const handleMapClick = (mapProps, map, event) => {
-        const { latLng } = event;
-        const latitude = latLng.lat();
-        const longitude = latLng.lng();
-        setValue('latitude', latitude);
-        setValue('longitude', longitude);
-        setSelectedLocation({ lat: latitude, lng: longitude });
-        const geocoder = new window.google.maps.Geocoder();
-        geocoder.geocode({ location: latLng }, (results, status) => {
-            if (status === window.google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
-                    setValue('address', results[0].formatted_address);
-                }
-            } else {
-                console.error('Geocode failed:', status);
-            }
-        });
-    };
 
     return (
         <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
@@ -209,15 +224,45 @@ export default function Form({ initialData }) {
                     {errors.gender && <p className="error-message">{errors.gender.message}</p>}
                 </div>
             </div>
+            <div className="form-row">
+                <div className='form-field'>
+                    <input
+                        id='address'
+                        type='text'
+                        className='input-field'
+                        {...register('address')}
+                        placeholder='場所'
+                        onClick={handleAddressClick}
+                    />
+                    {errors.address && <p className="error-message">{errors.address.message}</p>}
+                </div>
+
+                <div className='form-field'>
+                    <select
+                        id='lang_teach'
+                        className="input-field"
+                        {...register('lang_teach')}
+                        name='lang_teach'
+                    >
+                        <option value='' disabled selected>何語で教えますか。</option>
+                        <option value="English">英語</option>
+                        <option value="Vietnamese">ベトナム語</option>
+                        <option value="Japanese">日本語</option>
+                        <option value="Korean">韓国語</option>
+                    </select>
+                    {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
+
+                </div>
+            </div>
             {showMap &&
                 <div ref={mapRef} className='form-row'>
                     <div style={{ height: '500px', width: '100%' }}>
-                        <Gmap
-                            center={center}
-                            setCenter={setCenter}
-                            selectedLocation={selectedLocation}
-                            setSelectedLocation={selectedLocation}
-                            handleMapClick={() => handleMapClick} />
+                        <Map
+                            latitude={watch('latitude')}
+                            longitude={watch('longitude')}
+                            setValue={setValue}
+                            clickable={true}
+                        />
                     </div>
                 </div>
             }
@@ -258,67 +303,16 @@ export default function Form({ initialData }) {
                         <p className='error-message'>{errors.price.message}</p>}
                 </div>
                 <div className='form-field'>
-                <span style={{ paddingLeft: '10px' }}>何語で教えますか。</span>
-                    <select
-                        id='lang_teach'
-                        className="input-field"
-                        {...register('lang_teach')}
-                        name='lang_teach'
-                    >
-                        <option value='' disabled selected>何語で教えますか。</option>
-                        <option value="English">英語</option>
-                        <option value="Vietnamese">ベトナム語</option>
-                        <option value="Japanese">日本語</option>
-                        <option value="Korean">韓国語</option>
-                    </select>
-                    {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
-
-                </div>
-                {/* <div className='form-field'>
                     <span style={{ paddingLeft: '10px' }}>レッソンの時間</span>
                     <input
                         type='text'
                         className='input-field'
                         {...register('hours')}
                         placeholder='時'
-                        disabled
                     />
                     {errors.hours &&
                         <p className='error-message'>{errors.hours.message}</p>}
-                </div> */}
-            </div>
-            <div className="form-row">
-                {/* <div className='form-field'>
-                    <input
-                        id='address'
-                        type='text'
-                        className='input-field'
-                        {...register('address')}
-                        placeholder='場所'
-                        onClick={handleInputClick}
-                        onChange={handleAddressChange}
-                    />
-                    {errors.address && <p className="error-message">{errors.address.message}</p>}
-                </div> */}
-
-                {/* <div className='form-field' style={{
-                    width: '100%',
-                }}>
-                    <select
-                        id='lang_teach'
-                        className="input-field"
-                        {...register('lang_teach')}
-                        name='lang_teach'
-                    >
-                        <option value='' disabled selected>何語で教えますか。</option>
-                        <option value="English">英語</option>
-                        <option value="Vietnamese">ベトナム語</option>
-                        <option value="Japanese">日本語</option>
-                        <option value="Korean">韓国語</option>
-                    </select>
-                    {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
-
-                </div> */}
+                </div>
             </div>
             <div className="form-row">
                 <textarea
@@ -351,11 +345,11 @@ export default function Form({ initialData }) {
                         証明書
                     </button>
                     <LoadingButton
-                        loading={updateTeacherInfoMutation.isLoading} 
-                        type="submit" 
+                        loading={updateTeacherInfoMutation.isLoading}
+                        type="submit"
                         style={{
-                            justifyContent: center,
-                            alignItems: center,
+                            justifyContent: 'center',
+                            alignItems: 'center',
                             gap: "8px",
                             background: "#00AB55",
                             border: "transparent",
@@ -366,7 +360,7 @@ export default function Form({ initialData }) {
                             fontSize: "22px",
                             lineHeight: "28px",
                             color: "#FFFFFF",
-                    }}>
+                        }}>
                         保存
                     </LoadingButton>
                 </div>

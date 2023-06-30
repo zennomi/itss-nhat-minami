@@ -1,38 +1,72 @@
 import React from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import L from 'leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import marker from './marker-icon.png'
+const Map = ({ latitude, longitude, setValue, clickable }) => {
+    const reverseGeocode = async (lat, lon) => {
+        try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+            const data = await response.json();
 
-const Gmap = ({ center, setCenter, selectedLocation, setSelectedLocation, handleMapClick, style}) => {
-
-    const getCenter = () => {
-        // Get the current position using the browser's geolocation API
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                const { latitude, longitude } = position.coords;
-                setCenter({ lat: latitude, lng: longitude });
-                setSelectedLocation(center);
-            },
-            error => {
-                console.error('Error getting the current position:', error);
+            if (response.ok && data.address) {
+                const { house_number, road, city, country } = data.address;
+                const addressComponents = [house_number, road, city, country].filter(Boolean);
+                const address = addressComponents.join(', ');
+                return address;
+            } else {
+                throw new Error('Reverse geocoding failed');
             }
-        );
-    }
+        } catch (error) {
+            console.error('Error:', error);
+            throw error;
+        }
+    };
 
-    if (!center) {
-        getCenter();
-    }
+    const handleMapClick = (event) => {
+        const { lat, lng } = event.latlng;
+        setValue('latitude', lat);
+        setValue('longitude', lng);
+        reverseGeocode(lat, lng)
+            .then((clickedAddress) => {
+                setValue('address', clickedAddress);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
+
+    const icon = L.icon({
+        iconUrl: marker,
+        iconSize: [45, 45],
+        iconAnchor: [12, 45],
+        popupAnchor: [1, -34],
+    });
+
+    const MapClickHandler = () => {
+        useMapEvents({
+            click: handleMapClick,
+        });
+
+        return null;
+    };
 
     return (
-        <Map
-            google={window.google}
-            zoom={16}
-            initialCenter={center}
-            onClick={handleMapClick}
-            style={style}
+        <MapContainer
+            center={[latitude, longitude]}
+            zoom={18}
+            style={{ height: '100%', width: '100%' }}
         >
-            {selectedLocation && <Marker position={selectedLocation} />}
-        </Map>
+            <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution="Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors" />
+            {latitude !== 0 && longitude !== 0 && (
+                <Marker position={[latitude, longitude]} icon={icon}>
+                </Marker>
+            )}
+            {clickable && <MapClickHandler />}
+        </MapContainer>
     );
 };
-export default GoogleApiWrapper({
-    apiKey: 'AIzaSyC8F4lK0x68Em-oDEAqckFImvW9k-Fz8Ow'
-})(Gmap);
+
+export default Map;

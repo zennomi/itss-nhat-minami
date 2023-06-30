@@ -7,8 +7,8 @@ import './style.css'
 export default function Avatar({ initialData }) {
     const { id } = useParams();
     const fileInputRef = useRef(null);
-    const [avatar, setAvatar] = useState(initialData.photo_url);
-    const [background, setBackground] = useState(initialData.background_image_url);
+    const [avatar, setAvatar] = useState(initialData?.photo_url);
+    const [background, setBackground] = useState(initialData?.background_image_url);
     const [isButtonVisible, setButtonVisible] = useState(false);
     const [showFileAddField, setShowAddFileField] = useState(false);
     const [photoType, setPhotoType] = useState();
