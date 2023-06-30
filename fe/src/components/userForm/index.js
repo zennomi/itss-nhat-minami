@@ -127,6 +127,37 @@ export default function Form({ initialData }) {
         }
     };
 
+    const reverseGeocode = async (lat, lon) => {
+        try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+            const data = await response.json();
+
+            if (response.ok && data.address) {
+                const { house_number, road, city, country } = data.address;
+                const addressComponents = [house_number, road, city, country].filter(Boolean);
+                const address = addressComponents.join(', ');
+                return address;
+            } else {
+                throw new Error('Reverse geocoding failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            throw error;
+        }
+    };
+
+    const handleMapClick = (event) => {
+        const { lat, lng } = event.latlng;
+        setValue('latitude', lat);
+        setValue('longitude', lng);
+        reverseGeocode(lat, lng)
+            .then((clickedAddress) => {
+                setValue('address', clickedAddress);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
     const [showMap, setShowMap] = useState(false);
     const mapRef = useRef(null);
 
@@ -134,7 +165,6 @@ export default function Form({ initialData }) {
 
     const onSubmit = (data) => {
         setValue('hours', watch('hours') / 60);
-        console.log(data);
         updateTeacherInfoMutation.mutate(
             { teacher_id: id, ...data },
             {
@@ -260,7 +290,7 @@ export default function Form({ initialData }) {
                         <Map
                             latitude={watch('latitude')}
                             longitude={watch('longitude')}
-                            setValue={setValue}
+                            handleMapClick={handleMapClick}
                             clickable={true}
                         />
                     </div>

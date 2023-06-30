@@ -3,38 +3,8 @@ import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import marker from './marker-icon.png'
-const Map = ({ latitude, longitude, setValue, clickable }) => {
-    const reverseGeocode = async (lat, lon) => {
-        try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
-            const data = await response.json();
-
-            if (response.ok && data.address) {
-                const { house_number, road, city, country } = data.address;
-                const addressComponents = [house_number, road, city, country].filter(Boolean);
-                const address = addressComponents.join(', ');
-                return address;
-            } else {
-                throw new Error('Reverse geocoding failed');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            throw error;
-        }
-    };
-
-    const handleMapClick = (event) => {
-        const { lat, lng } = event.latlng;
-        setValue('latitude', lat);
-        setValue('longitude', lng);
-        reverseGeocode(lat, lng)
-            .then((clickedAddress) => {
-                setValue('address', clickedAddress);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    };
+const Map = ({ latitude, longitude, handleMapClick, clickable }) => {
+    
 
     const icon = L.icon({
         iconUrl: marker,
