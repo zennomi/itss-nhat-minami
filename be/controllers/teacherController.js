@@ -69,6 +69,8 @@ const TEACHER = {
             country_of_birth: req.body.country_of_birth || null,
             description: req.body.description || null,
             address: req.body.address || null,
+            longitude: req.body.longitude || null,
+            latitude: req.body.latitude || null,
         };
         try {
             if((await DB.getTeacherInfos(teacherId)).id === undefined) {
