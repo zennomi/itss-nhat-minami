@@ -5,7 +5,6 @@ import 'leaflet/dist/leaflet.css';
 import marker from './marker-icon.png'
 const Map = ({ latitude, longitude, handleMapClick, clickable }) => {
     
-
     const icon = L.icon({
         iconUrl: marker,
         iconSize: [45, 45],

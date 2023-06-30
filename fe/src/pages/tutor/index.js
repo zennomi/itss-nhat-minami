@@ -12,9 +12,8 @@ function Tutor() {
   const userProfileBannerData = data?.userProfileBannerData;
   const userProfileAboutCardData = data?.userProfileAboutCardData;
   const teacherInformation = data?.teacherInformation;
-  
+
   const [activeComponent, setActiveComponent] = useState('component1');
-  const [showMap, setShowMap] = useState((teacherInformation?.latitude && teacherInformation?.longitude) ? true: false);
 
   const handleBannerClick = (componentName) => {
     setActiveComponent(componentName);
@@ -53,14 +52,14 @@ function Tutor() {
                 certificates={userProfileAboutCardData?.certificates}
               />
               {/* map */}
-              {showMap &&
-                <div style={{ height: '185px', width: '461px' }}>
+              {(teacherInformation?.latitude && teacherInformation?.longitude) ? (
+                <div style={{ height: '200px', width: '461px' }}>
                   <Map
                     latitude={teacherInformation?.latitude}
                     longitude={teacherInformation?.longitude}
                     clickable={false}
                   />
-                </div>
+                </div>) : (<div />)
               }
             </div>
             {activeComponent === 'component1' &&
