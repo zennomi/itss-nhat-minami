@@ -48,6 +48,7 @@ const TEACHER = {
     },
     updateTeacher: async (req, res) => {
         let teacherId = req.body.teacher_id;
+        let userId = req.body.user_id;
         if (!teacherId) return res.status(400).json({message: 'MISSING_FIELDS'});
         let params = {
             lang_teach: req.body.lang_teach || null,
@@ -67,8 +68,18 @@ const TEACHER = {
             certificates: req.body.certificates || [],
             country_of_birth: req.body.country_of_birth || null,
             description: req.body.description || null,
+            address: req.body.address || null,
         };
         try {
+            if((await DB.getTeacherInfos(teacherId)).id === undefined) {
+                if(!userId) return res.status(400).json({message: 'TEACHER_NOT_CREATED_BECAUSE_USER_ID_NOT_FOUND'});
+                let res = await DB.createTeacher(userId, params);
+                let teacher_id_new = res.id;
+                await DB.updateCertificates(teacher_id_new, params.certificates);
+                await DB.updateUserInfos(userId, params);
+                return res.status(200).json(await DB.getTeacherInfos(teacher_id_new));
+
+            }
             await DB.updateTeacherInfos(teacherId, params);
             await DB.updateCertificates(teacherId, params.certificates);
             let kq = await DB.getTeacherInfos(teacherId);
@@ -134,6 +145,41 @@ const TEACHER = {
                 console.log(e);
                 return res.status(500).json({message: 'DATABASE_ERROR'});
             }
+        }
+    },
+    addBookmark: async (req, res) => {
+        let teacherId = req.body.teacher_id;
+        let userId = req.body.user_id;
+        if (!teacherId || !userId) return res.status(400).json({message: 'MISSING_FIELDS'});
+        try {
+            await DB.addBookmark(teacherId, userId);
+            return res.status(200).json({message: 'OK'});
+        } catch (e) {
+            console.log(e);
+            return res.status(500).json({message: 'DATABASE_ERROR'});
+        }
+    },
+    removeBookmark: async (req, res) => {
+        let teacherId = req.body.teacher_id;
+        let userId = req.body.user_id;
+        if (!teacherId || !userId) return res.status(400).json({message: 'MISSING_FIELDS'});
+        try {
+            await DB.removeBookmark(teacherId, userId);
+            return res.status(200).json({message: 'OK'});
+        } catch (e) {
+            console.log(e);
+            return res.status(500).json({message: 'DATABASE_ERROR'});
+        }
+    },
+    getBookmarks: async (req, res) => {
+        let userId = req.params.id;
+        if (!userId) return res.status(400).json({message: 'MISSING_FIELDS'});
+        try {
+            let kq = await DB.getBookmarksByUserId(userId);
+            return res.status(200).json(kq);
+        } catch (e) {
+            console.log(e);
+            return res.status(500).json({message: 'DATABASE_ERROR'});
         }
     }
 }
