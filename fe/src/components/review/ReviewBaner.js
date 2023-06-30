@@ -1,9 +1,26 @@
 import React from "react";
+import { useState } from "react";
 import './style_review_banner.css'
+import './style_popup.css'
+import PopUp from './PopUp'
 
 const ReviewBaner = (props) => {
   const { starAvg, reviewCount, star5Count, star4Count, star3Count, star2Count, star1Count } = props;
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [value, setValue] = React.useState(1);
+  const [textareaValue, setTextareaValue] = useState('');
 
+  const handleTextareaChange = (event) => {
+    setTextareaValue(event.target.value);
+  };
+
+  const handleDivClick = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
   return (
     <div className="review_banner-ecommerce-product-summary">
       <div className="review_banner-stack">
@@ -42,9 +59,49 @@ const ReviewBaner = (props) => {
       <div className="review_banner-stack-2">
         <div className="review_banner-stack-2-content">
         <img className="review_banner-shape" src="https://simpleicon.com/wp-content/uploads/pencil.png" alt="shape" />
-        <div className="review_banner-label publicsans-bold-charade-15px">
+        <div className="review_banner-label publicsans-bold-charade-15px"  onClick={handleDivClick}>
           <span className="publicsans-bold-charade-15px">レビューする</span>
         </div>
+        {isPopupOpen && (
+        <div className="popup-review-product-dialog-form">
+          <div className="popup-title publicsans-bold-charade-18px">
+            <span className="publicsans-bold-charade-18px">レビューする</span>
+          </div>
+          <div className="popup-content">
+            <div className="popup-stack">
+              <div className="popup-your-review-about-th publicsans-normal-charade-16px">
+                <span className="publicsans-normal-charade-16px">評点</span>
+              </div>
+              <Rating
+                name="simple-controlled"
+                value={value}
+                onChange={(event, newValue) => {
+                    setValue(newValue);
+                }}
+          />
+            </div>
+            <div className="popup-input">
+              <div className="popup-labelplaceholder publicsans-normal-manatee-16px">
+                <textarea className="publicsans-normal-manatee-16px" placeholder="あなたのレビュー" value={textareaValue} onChange={handleTextareaChange} />
+              </div>
+            </div>
+          </div>
+          <div className="popup-dialog">
+            <div className="popup-label popup-valign-text-middle publicsans-bold-charade-14px" onClick={closePopup}>
+              <span>
+                <span className="publicsans-bold-charade-14px">キャンセル</span>
+              </span>
+            </div>
+            <div className="popup-button">
+            <div className="popup-label-1 popup-valign-text-middle publicsans-bold-white-14px">
+                <span>
+                <span className="publicsans-bold-white-14px">提出</span>
+                </span>
+            </div>
+            </div>
+          </div>
+        </div>
+  )}
         </div>
       </div>
     </div>
