@@ -73,7 +73,7 @@ export default function Form({ initialData }) {
         control,
         name: 'certificates',
     });
-
+    const [changeLatLon, setChangeLatLon] = useState(true);
     const getCurrentLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -89,14 +89,16 @@ export default function Form({ initialData }) {
         }
     }
 
-    useEffect(() => {
-        const address = watch('address');
+    const handleAddressChange = (event) => {
+        const address = event.target.value;
         if (address.trim() !== '') {
             geocode(address)
                 .then((coordinates) => {
                     const { lat, lon } = coordinates;
-                    setValue('latitude', lat);
-                    setValue('longitude', lon);
+                    // if (changeLatLon) {
+                        setValue('latitude', lat);
+                        setValue('longitude', lon);
+                    // }
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -104,7 +106,7 @@ export default function Form({ initialData }) {
         } else {
             getCurrentLocation();
         }
-    }, [watch('address')]);
+    };
 
     if (watch('latitude') === 0 && watch('longitude') === 0) {
         getCurrentLocation();
@@ -150,6 +152,7 @@ export default function Form({ initialData }) {
         const { lat, lng } = event.latlng;
         setValue('latitude', lat);
         setValue('longitude', lng);
+        // setChangeLatLon(false);
         reverseGeocode(lat, lng)
             .then((clickedAddress) => {
                 setValue('address', clickedAddress);
@@ -263,6 +266,7 @@ export default function Form({ initialData }) {
                         {...register('address')}
                         placeholder='場所'
                         onClick={handleAddressClick}
+                        onChange={handleAddressChange}
                     />
                     {errors.address && <p className="error-message">{errors.address.message}</p>}
                 </div>

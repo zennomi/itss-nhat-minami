@@ -1,10 +1,17 @@
 import React from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import marker from './marker-icon.png'
 const Map = ({ latitude, longitude, handleMapClick, clickable }) => {
-    
+
+    const CenteredMap = ({ latitude, longitude}) => {
+        const map = useMap();
+        map.setView([latitude, longitude], 18);
+
+        return null;
+    };
+
     const icon = L.icon({
         iconUrl: marker,
         iconSize: [45, 45],
@@ -28,7 +35,9 @@ const Map = ({ latitude, longitude, handleMapClick, clickable }) => {
         >
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors" />
+                attribution="Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors"
+            />
+            <CenteredMap latitude={latitude} longitude={longitude}/>
             {latitude !== 0 && longitude !== 0 && (
                 <Marker position={[latitude, longitude]} icon={icon}>
                 </Marker>
