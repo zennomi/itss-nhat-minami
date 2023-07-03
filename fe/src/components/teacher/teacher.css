@@ -193,6 +193,7 @@ color: rgb(25, 57, 183)!important;
     margin-top: 10px;
     object-fit: cover;
     width: 121px;
+    border-radius: 16px;
 }
 
 .frame-2 {
