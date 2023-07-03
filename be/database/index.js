@@ -104,6 +104,8 @@ const DB = {
         subQuery += params.price ? `AND t.price <= '${params.price}' ` : '';
         subQuery += params.gioitinh ? `AND u.gender = '${params.gioitinh}' ` : '';
         subQuery += params.star ? `AND (select avg(rating) from reviews where teacher_id = t.id) >= ${params.star} ` : '';
+        subQuery += (params.longitude && params.latitude && params.radius) ?
+            `AND (SQRT(SQUARE((t.latitude - ${params.latitude}) * 110.574) + SQUARE((t.longitude - ${params.longitude}) * 111.320 * COS(t.latitude / 180 * PI()))) <= ${params.radius}) ` : '';
         if (params.timesession.length > 0) {
             subQuery += `AND (`;
             params.timesession.forEach((item, index) => {
@@ -173,13 +175,17 @@ const DB = {
                     where t.id = ${teacher_id}
                     GROUP BY t.id`, (err, row) => {
                 if (err) console.log(err);
-                db.all(`select * from certificates where teacher_id = ${teacher_id}`, (err, row2) => {
+                db.all(`select *
+                        from certificates
+                        where teacher_id = ${teacher_id}`, (err, row2) => {
                     if (err) console.log(err);
-                    if(row)
+                    if (row)
                         row.certificates = row2;
-                    db.all(`select * from schedules where teacher_id = ${teacher_id}`, (err, row3) => {
+                    db.all(`select *
+                            from schedules
+                            where teacher_id = ${teacher_id}`, (err, row3) => {
                         if (err) console.log(err);
-                        if(row)
+                        if (row)
                             row.schedules = row3;
                         resolve(row);
                     });
@@ -224,8 +230,17 @@ const DB = {
     createTeacher: async (user_id, params) => {
         // returning id
         return new Promise((resolve) => {
-            db.get(`INSERT INTO teachers (user_id, lang_teach, lang_study, purpose, price, phone_number, resume_url, website_url, facebook_url, instagram_url, linkedin_url, twitter_url, photo_url, background_image_url, description, country_of_birth, address, latitude, longitude)
-                    VALUES ('${user_id}', '${params.lang_teach}', '${params.lang_study}', '${params.purpose}', '${params.price}', '${params.phone_number}', '${params.resume_url}', '${params.website_url}', '${params.facebook_url}', '${params.instagram_url}', '${params.linkedin_url}', '${params.twitter_url}', '${params.photo_url}', '${params.background_image_url}', '${params.description}', '${params.country_of_birth}', '${params.address}', '${params.latitude}', '${params.longitude}') returning id`, (err, row) => {
+            db.get(`INSERT INTO teachers (user_id, lang_teach, lang_study, purpose, price, phone_number, resume_url,
+                                          website_url, facebook_url, instagram_url, linkedin_url, twitter_url,
+                                          photo_url, background_image_url, description, country_of_birth, address,
+                                          latitude, longitude)
+                    VALUES ('${user_id}', '${params.lang_teach}', '${params.lang_study}', '${params.purpose}',
+                            '${params.price}', '${params.phone_number}', '${params.resume_url}', '${params.website_url}
+                            ', '${params.facebook_url}', '${params.instagram_url}', '${params.linkedin_url}',
+                            '${params.twitter_url}', '${params.photo_url}', '${params.background_image_url}',
+                            '${params.description}', '${params.country_of_birth}', '${params.address}',
+                            '${params.latitude}', '${params.longitude}')
+                    returning id`, (err, row) => {
                 if (err) console.log(err);
                 resolve(row);
             });
@@ -234,7 +249,8 @@ const DB = {
     addReview: async (teacher_id, user_id, rating, content) => {
         return new Promise((resolve) => {
             db.run(`INSERT INTO reviews (teacher_id, user_id, rating, content, created_at)
-                    VALUES ('${teacher_id}', '${user_id}', '${rating}', '${content}', '${new Date().toISOString()}')`, (err) => {
+                    VALUES ('${teacher_id}', '${user_id}', '${rating}', '${content}', '${new Date().toISOString()}
+                            ')`, (err) => {
                 if (err) console.log(err);
                 resolve();
             });
@@ -263,7 +279,9 @@ const DB = {
     },
     updateCertificates: async (teacher_id, certificates) => {
         return new Promise((resolve) => {
-            db.run(`DELETE FROM certificates WHERE teacher_id = ${teacher_id}`, (err) => {
+            db.run(`DELETE
+                    FROM certificates
+                    WHERE teacher_id = ${teacher_id}`, (err) => {
                 if (err) console.log(err);
             });
             certificates.forEach((item) => {
@@ -286,8 +304,10 @@ const DB = {
     },
     removeBookmark: async (user_id, teacher_id) => {
         return new Promise((resolve) => {
-            db.run(`DELETE FROM bookmarks
-                    WHERE user_id = ${user_id} AND teacher_id = ${teacher_id}`, (err) => {
+            db.run(`DELETE
+                    FROM bookmarks
+                    WHERE user_id = ${user_id}
+                      AND teacher_id = ${teacher_id}`, (err) => {
                 if (err) console.log(err);
                 resolve();
             });
@@ -297,8 +317,8 @@ const DB = {
         return new Promise((resolve) => {
             db.all(`SELECT *
                     FROM bookmarks b
-                                JOIN teachers t on b.teacher_id = t.id
-                                JOIN users u on u.id = t.user_id
+                             JOIN teachers t on b.teacher_id = t.id
+                             JOIN users u on u.id = t.user_id
                     WHERE b.user_id = ${user_id}`, (err, rows) => {
                 if (err) console.log(err);
                 resolve(rows);
