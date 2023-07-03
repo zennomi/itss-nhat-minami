@@ -9,11 +9,11 @@ function TeacherCard ({ data }) {
             <div className="teacherCard">
                 <div className="group2">
                     <div className="group1">
-                        <img src="https://media.istockphoto.com/id/1154370446/photo/funny-raccoon-in-green-sunglasses-showing-a-rock-gesture-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=kkZiaB9Q-GbY5gjf6WWURzEpLzNrpjZp_tn09GB21bI=" alt=""></img>
+                        <img src={data.photo_url} alt=""></img>
                         <div className="overlay-solid">
                         </div>
                         <div className="group0">
-                            <div className="avatar" style={{ backgroundImage: `url(https://media.istockphoto.com/id/1154370446/photo/funny-raccoon-in-green-sunglasses-showing-a-rock-gesture-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=kkZiaB9Q-GbY5gjf6WWURzEpLzNrpjZp_tn09GB21bI=)` }}>
+                            <div className="avatar" style={{ backgroundImage: `url(${data.photo_url})` }}>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import './teacher.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import VerifiedIcon from '@mui/icons-material/Verified';
 
 const calculatorDate = (time) => {
@@ -29,7 +28,7 @@ function Teacher({ data }) {
             {/*avt */}
             <img
                 className="x335913644_9819789628"
-                src="https://media.istockphoto.com/id/1154370446/photo/funny-raccoon-in-green-sunglasses-showing-a-rock-gesture-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=kkZiaB9Q-GbY5gjf6WWURzEpLzNrpjZp_tn09GB21bI%3D&fbclid=IwAR2LyOl7qFuCBH0ZV5XoL0vZKT4aVBlx8kSfQ9M_ItZoND_HMcCmxBF2tdo"
+                src={data.photo_url}
                 alt="335913644_981978962817391_6054761902614117248_n 1"
             />
             {/*cục bên phải */}
@@ -37,9 +36,7 @@ function Teacher({ data }) {
                 <div className="frame-3">
                     <div className="aizawa-minamipublicsans-semi-bold-black-16px">
                         <span className="publicsans-semi-bold-black-16px" >{data.name}</span>
-                        <VerifiedIcon style={{color: '#09d356',
-                            'font-size': '18px',
-                            'margin-left': '14px'}}></VerifiedIcon>
+                        <VerifiedIcon style={{color: '#09d356', 'font-size': '18px', 'margin-left': '14px'}}></VerifiedIcon>
                         { data.remote === 1 ?
                             <span className="publicsans-semi-bold-jade-13px" style={{'margin-left':'8px'}}>オンラインレッスン </span>
                             :
