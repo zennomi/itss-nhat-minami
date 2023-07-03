@@ -8,7 +8,7 @@ router.get('/teacher/:id', TEACHER.getTeacher);
 router.get('/review/:id', TEACHER.getReviewsByTeacherId);
 router.post('/bg', TEACHER.upBackGround);
 router.post('/avatar', TEACHER.upAvatar);
-router.post('/review', TEACHER.addReview);
+router.post('/review', auth, TEACHER.addReview);
 router.post('/add_bookmark', TEACHER.addBookmark);
 router.get('/bookmarks/:id', TEACHER.getBookmarks);
 router.delete('/bookmarks', TEACHER.removeBookmark);
