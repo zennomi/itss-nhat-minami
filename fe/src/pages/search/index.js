@@ -509,10 +509,10 @@ const Search = () => {
                 <div className="d-flex mt-5">
                     <div>
                         {isSuccess && !isSorted && listTeachers?.map((item) => <>
-                            <div className="teacher d-flex flex-column mt-5 ">
-                                <div onMouseOver={() => handleMouseOver(item.id, item)} onMouseLeave={() => handleMouseLeave(item.id)}>
-                                    <Teacher data={item} />
-                                </div>
+                            <div className=" mt-5  ">
+                               <div className="d-flex position-relative" onMouseOver={() => handleMouseOver(item.id, item)} onMouseLeave={() => handleMouseLeave(item.id)}>
+                                   <Teacher data={item}  />
+                               </div>
                             </div>
                         </>)}
                         {isSuccess && isSorted && sortedList?.map((item) => <>
@@ -527,6 +527,7 @@ const Search = () => {
                     <div className="mx-3 teachercard" style={{ 'display': 'none' }}>
                         <TeacherCard data={hoverData} />
                     </div>
+
 
                 </div>
 
