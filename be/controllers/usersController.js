@@ -55,13 +55,13 @@ const USER = {
             return {message: 'USERNAME_REQUIRED'};
         if (!password)
             return {message: 'PASSWORD_REQUIRED'};
-        if (!validator.isAlphanumeric(username) || !validator.isLength(username, {min: 3, max: 50})) {
-            return {message: 'USERNAME_INVALID'};
-        }
-
-        if (!validator.isLength(password, {min: 3, max: 20})) {
-            return {message: 'PASSWORD_INVALID'};
-        }
+        // if (!validator.isAlphanumeric(username) || !validator.isLength(username, {min: 3, max: 50})) {
+        //     return {message: 'USERNAME_INVALID'};
+        // }
+        //
+        // if (!validator.isLength(password, {min: 3, max: 20})) {
+        //     return {message: 'PASSWORD_INVALID'};
+        // }
         return null;
     },
 
