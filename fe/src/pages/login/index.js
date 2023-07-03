@@ -1,8 +1,26 @@
 import React from 'react';
 import './style.css';
+import Header from "../../components/header";
+import { useState } from 'react';
 
 const Login = () => {
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = useState('');
+    const handleMailChange = (event) => {
+        setMail(event.target.value);
+    };
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    };
+
+    const handleClick = () => {
+        // console.log(mail)
+        // console.log(password)
+        // gửi về cho BE
+    }
     return (
+        <div>
+            <Header></Header>
         <div className="login-container">
             <div className="login-login">
                 <div className="login-logo">
@@ -41,23 +59,30 @@ const Login = () => {
                             <div className="login-content1">
                                 <div className="login-text-field">
                                     <div className="login-input">
-                                        <span className="login-text07 Body1">
-                                        </span>
-                                        <div className="login-labelfocus">
-                                            <img
+                                        {/* <span className="login-text07 Body1">
+                                        </span> */}
+                                        {/* <div className="login-labelfocus"> */}
+                                            {/* <img
                                                 src="/images/masklabeli1740-6dx7-200h.png"
                                                 alt="masklabelI1740"
                                                 className="login-masklabel"
-                                            />
-                                            <span className="login-text09 ComponentsTextFieldLabel">
+                                            /> */}
+                                            {/* <span className="login-text09 ComponentsTextFieldLabel">
                                                 <span>メールアドレス</span>
-                                            </span>
-                                        </div>
+                                            </span> */}
+                                            <input
+                                                type="text"
+                                                placeholder="メールアドレス"
+                                                className="register-input"
+                                                value={mail}
+                                                onChange={handleMailChange}
+                                            />
+                                        {/* </div> */}
                                     </div>
                                 </div>
                                 <div className="login-text-field1">
                                     <div className="login-input1">
-                                        <span className="login-text11 Body1">
+                                        {/* <span className="login-text11 Body1">
                                             <span>パスワード</span>
                                         </span>
                                         <div className="login-endadornment">
@@ -68,13 +93,20 @@ const Login = () => {
                                                     className="login-iconsiceye"
                                                 />
                                             </button>
-                                        </div>
+                                        </div> */}
+                                        <input
+                                            type="text"
+                                            placeholder="パスワード"
+                                            className="register-input"
+                                            value={password}
+                                            onChange={handlePasswordChange}
+                                        />
                                     </div>
                                 </div>
                                 <span className="login-text13 UnderlineBody2">
                                     <span>パスワードを忘れた?</span>
                                 </span>
-                                <button className="login-button">
+                                <button className="login-button" onClick={handleClick}>
                                     <span className="login-text15 ComponentsButtonLarge">
                                         <span>ログイン</span>
                                     </span>
@@ -122,6 +154,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

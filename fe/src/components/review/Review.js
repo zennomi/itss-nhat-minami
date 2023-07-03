@@ -1,12 +1,23 @@
 import React, { useMemo } from "react";
 import './style.css';
+import { useState } from "react";
 import ReviewBaner from "./ReviewBaner";
 import ReviewList from "./ReviewList";
 import useReview from "./useReview";
+import PopUp from "./PopUp";
 
 
 const Review = () => {
     const { reviews } = useReview();
+    const [showPopup, setShowPopup] = useState(false);
+
+    const handleButtonClick = () => {
+      setShowPopup(true);
+    };
+
+    const handleClosePopup = () => {
+      setShowPopup(false);
+    };
 
     const review_banner_overview = useMemo(() => {
       const starAvg = (reviews.reduce((acc, cur) => acc + cur.stars, 0) / reviews.length).toFixed(1);
@@ -29,7 +40,8 @@ const Review = () => {
 
   return (
   <div className="review-container">
-    <ReviewBaner {...review_banner_overview}/>
+    <ReviewBaner data={review_banner_overview} onButtonClick={handleButtonClick}/>
+    {showPopup && <PopUp onClose={handleClosePopup} />}
     <ReviewList reviewsData_tmp = {reviews}/>
   </div >
   )

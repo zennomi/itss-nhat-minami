@@ -171,8 +171,8 @@
     background-color: var(--manatee-4);
     border-radius: 6px;
     text-align: center;
-    height: 28px;
-    min-width: 95px;
+    height: 39px;
+    min-width: 91px;
     padding:0  12px  4px 12px;
 }
 
@@ -251,6 +251,7 @@
     position: absolute;
     top: 0;
     width: 70px;
+    padding:0;
 }
 
 .track {
@@ -433,7 +434,6 @@
 }
 
 .group-2 {
-    display: none !important;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -615,7 +615,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    min-height: 360px;
+    min-height: 480px!important;
     padding: 15px 0;
     min-width: 570px!important;
 }

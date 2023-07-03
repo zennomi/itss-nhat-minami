@@ -86,6 +86,7 @@
   letter-spacing: 0;
   line-height: 26px;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .review_banner-rating {

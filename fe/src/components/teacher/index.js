@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import './teacher.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 const calculatorDate = (time) => {
     const currentDate = new Date();
@@ -36,7 +37,16 @@ function Teacher({ data }) {
                 <div className="frame-3">
                     <div className="aizawa-minamipublicsans-semi-bold-black-16px">
                         <span className="publicsans-semi-bold-black-16px" >{data.name}</span>
+                        <VerifiedIcon style={{color: '#09d356',
+                            'font-size': '18px',
+                            'margin-left': '14px'}}></VerifiedIcon>
+                        { data.remote === 1 ?
+                            <span className="publicsans-semi-bold-jade-13px" style={{'margin-left':'8px'}}>オンラインレッスン </span>
+                            :
+                            <span className="publicsans-semi-bold-jade-13px" style={{'margin-left':'8px'}}>オフラインレッスン </span>
+                        }
                     </div>
+
                     <div className="iconsflagsic_kr"></div>
                     <div className="button-x">
 
@@ -62,14 +72,13 @@ function Teacher({ data }) {
                         <div className="button-3">
                             <i className="fa-solid fa-location-dot" style={{color: '#000000'}}></i>
                             <div className="label-3publicsans-bold-charade-13px">
-                                <span className="publicsans-bold-charade-13px" >ハーノイ</span>
+                                <span className="publicsans-semi-bold-black-16px" >{data.country_of_birth}</span>
                             </div>
                         </div>
                     </div>
                     <div className="x2publicsans-normal-pale-sky-14px">
             <span className="publicsans-normal-pale-sky-14px">
                 {data.description}
-
             </span>
                     </div>
                 </div>
