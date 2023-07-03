@@ -4,12 +4,32 @@ import Form from "../../components/form";
 import USER from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header";
+import { useState } from 'react';
 
 const Register = () => {
     let navigate = useNavigate();
     const callback = (message) => {
         if (message === "USER_CREATED")
             navigate('/');
+    }
+    const [name, setName] = useState('');
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = useState('');
+    const handleNameChange = (event) => {
+        setName(event.target.value);
+    };
+    const handleMailChange = (event) => {
+        setMail(event.target.value);
+    };
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    };
+
+    const handleClick = () => {
+        // console.log(name)
+        // console.log(mail)
+        // console.log(password)
+        // gửi về cho BE
     }
     return (
         <div>
@@ -70,6 +90,8 @@ const Register = () => {
                                             type="text"
                                             placeholder="氏名"
                                             className="register-input"
+                                            value={name}
+                                            onChange={handleNameChange}
                                         />
                                     </div>
                                 </div>
@@ -78,9 +100,11 @@ const Register = () => {
                                         type="text"
                                         placeholder="メールアドレス"
                                         className="register-input1"
+                                        value={mail}
+                                        onChange={handleMailChange}
                                     />
                                 </div>
-                                <div className="register-text-field2">
+                                {/* <div className="register-text-field2">
                                     <div className="register-input2">
                                         <span className="register-text07 Body1">
                                             <span>パスワード</span>
@@ -95,9 +119,18 @@ const Register = () => {
                                             </button>
                                         </div>
                                     </div>
+                                </div> */}
+                                <div className="register-text-field1">
+                                    <input
+                                        type="text"
+                                        placeholder="パスワードス"
+                                        className="register-input1"
+                                        value={password}
+                                        onChange={handlePasswordChange}
+                                    />
                                 </div>
                                 <button className="register-button">
-                                    <span className="register-text09 ComponentsButtonLarge">
+                                    <span className="register-text09 ComponentsButtonLarge" onClick={handleClick}>
                                         <span>アカウン作る</span>
                                     </span>
                                 </button>

@@ -6,21 +6,15 @@ import Review from "../../components/review/Review";
 import useTutor from './useTutor';
 import { date, timesession } from "../../utils/constant";
 import Header from "../../components/header";
-import Gmap from "../../components/map";
+import Map from "../../components/map";
 function Tutor() {
   const { data } = useTutor();
-
   const userProfileBannerData = data?.userProfileBannerData;
-
   const userProfileAboutCardData = data?.userProfileAboutCardData;
-
   const teacherInformation = data?.teacherInformation;
 
-  const [center, setCenter] = useState({ lat: teacherInformation?.latitude, lng: teacherInformation?.longitude })
-  const [selectedLocation, setSelectedLocation] = useState();
   const [activeComponent, setActiveComponent] = useState('component1');
 
-  console.log(center);
   const handleBannerClick = (componentName) => {
     setActiveComponent(componentName);
   };
@@ -43,29 +37,30 @@ function Tutor() {
       <div className="tutor-container-center-horizontal">
         <div className="tutor-tutor-details-2screen">
           <div className="tutor-flex-col">
-            {/* <div className="tutor-overlap-group">
-              <div className="tutor-shadow"></div>
+            <div className="tutor-overlap-group">
               <div className="tutor-bg-1"></div>
-            </div> */}
+            </div>
             <Tutor_Component.UserProfileBanner {...userProfileBannerData} handleBannerClick={handleBannerClick} />
           </div>
           <div className="tutor-flex-row">
             <div className="tutor-flex-col-1">
               <Tutor_Component.UserProfileAboutCard
-                spanText1="About"
-                spanText2="2年間の経験と資格を持つ認定講師 はじめまして、TuMyと申します。 私はベトナム南部から来ました。師範大学の日本語学部を卒業して、5年間の教育経験があります。"
+                description={userProfileAboutCardData?.description}
                 address={userProfileAboutCardData?.address}
                 gender={userProfileAboutCardData?.gender}
                 lang_native={userProfileAboutCardData?.lang_native}
-                level={userProfileAboutCardData?.level}
+                certificates={userProfileAboutCardData?.certificates}
               />
               {/* map */}
-              {/*<Gmap*/}
-              {/*  center={center}*/}
-              {/*  setCenter={setCenter}*/}
-              {/*  selectedLocation={selectedLocation}*/}
-              {/*  setSelectedLocation={setSelectedLocation}*/}
-              {/*  style={{ height: '185px', width: '461px' }} />*/}
+              {(teacherInformation?.latitude && teacherInformation?.longitude) ? (
+                <div style={{ height: '200px', width: '461px' }}>
+                  <Map
+                    latitude={teacherInformation?.latitude}
+                    longitude={teacherInformation?.longitude}
+                    clickable={false}
+                  />
+                </div>) : (<div />)
+              }
             </div>
             {activeComponent === 'component1' &&
               <Tutor_Component.TeacherInfor

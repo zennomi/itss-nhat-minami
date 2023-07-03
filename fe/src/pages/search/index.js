@@ -5,7 +5,7 @@ import TeacherCard from "../../components/card-teacher";
 import { LinearProgress } from "@mui/material";
 import Header from "../../components/header";
 import useListTeacher from './useListTeacher';
-import Gmap from '../../components/map';
+import Map from '../../components/map';
 import {
     languages,
     purposes,
@@ -37,10 +37,12 @@ const Search = () => {
     const [sortedList, setSortedList] = useState([]);
     const [isSorted, setIsSorted] = useState(false);
     const [value, setValue] = React.useState([20, 70]);
-    const [sort, setSort] = useState(true)
-    const [center, setCenter] = useState();
-    const [selectedLocation, setSelectedLocation] = useState();
-    const [latLngRange, setLatLngRange] = useState();
+    const [sort, setSort] = useState(true);
+    const [lat, setLat] = useState(21);
+    const [lon, setLon] = useState(105);
+    const [address, setAddress] = useState('');
+    const [radius, setRadius] = useState();
+
     const handleFilter = (key, value) => {
         setFilters({ ...filters, [key]: value });
     };
@@ -49,38 +51,63 @@ const Search = () => {
         setValue(newValue);
     };
 
-    const handleMapClick = (mapProps, map, event) => {
-        const { latLng } = event;
-        const latitude = latLng.lat();
-        const longitude = latLng.lng();
-        setSelectedLocation({ lat: latitude, lng: longitude });
-        // const geocoder = new window.google.maps.Geocoder();
-        // geocoder.geocode({ location: latLng }, (results, status) => {
-        //     if (status === window.google.maps.GeocoderStatus.OK) {
-        //         if (results[0]) {
-        //             setValue('address', results[0].formatted_address);
-        //         }
-        //     } else {
-        //         console.error('Geocode failed:', status);
-        //     }
-        // });
-    };
-    const handleRadiusChange = (event) => {
-        const latitudeDelta = event.target.value / 111.32;
-        const longitudeDelta = event.target.value / (111.32 * Math.cos((center.lat * Math.PI) / 180));
+    const reverseGeocode = async (lat, lon) => {
+        try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+            const data = await response.json();
 
-        setLatLngRange(
-            {
-                latRange: {
-                    min: center.lat - latitudeDelta,
-                    max: center.lat + latitudeDelta
-                },
-                lngRange: {
-                    min: center.lng - longitudeDelta,
-                    max: center.lng + longitudeDelta
-                }
+            if (response.ok && data.address) {
+                const { house_number, road, city, country } = data.address;
+                const addressComponents = [house_number, road, city, country].filter(Boolean);
+                const address = addressComponents.join(', ');
+                return address;
+            } else {
+                throw new Error('Reverse geocoding failed');
             }
-        );
+        } catch (error) {
+            console.error('Error:', error);
+            throw error;
+        }
+    };
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setLat(latitude);
+                    setLon(longitude);
+                    reverseGeocode(latitude, longitude)
+                        .then((clickedAddress) => {
+                            setAddress(clickedAddress);
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+                },
+                (error) => {
+                    console.error('Geolocation error:', error);
+                }
+            );
+        }
+    }, []);
+
+    const handleMapClick = (event) => {
+        const { lat, lng } = event.latlng;
+        setLat(lat);
+        setLon(lng);
+        reverseGeocode(lat, lng)
+            .then((clickedAddress) => {
+                setAddress(clickedAddress);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
+
+    const handleRadiusChange = (event) => {
+        console.log(event.target.value);
+        setRadius(event.target.value);
     };
 
     const handleSort = (sort) => {
@@ -130,7 +157,7 @@ const Search = () => {
     }, []);
 
     useEffect(() => {
-        if (filters?.timesession.length > 0) {
+        if (filters?.timesession && filters?.timesession.length > 0) {
             const timesession = filters?.timesession;
             timesession.forEach((time) => {
                 const element = document.querySelector(`.${time}`);
@@ -405,41 +432,42 @@ const Search = () => {
                         </div>
                         <div className="dropdown item_dropdown">
                             <div style={{ color: '#212B36' }} className="d-flex justify-content-between"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                                data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                 <span>
-                                    <span className="publicsans-semi-bold-charade-14px">Ha Noi, Ha Noi +5km</span>
+                                    <span className="publicsans-semi-bold-charade-14px">{address} + {radius}km</span>
                                 </span>
-                                <span className="dropdown-toggle"  ></span>
+                                <span className="dropdown-toggle"></span>
                             </div>
                             <div className="map-search dropdown-menu">
-                                <div className="">
-                                    <div className="switch">
-                                        <Switch {...label} defaultChecked />
-                                        <div>
-                                            <span className="map-choose">online</span>
-                                        </div>
+                                <div className="switch">
+                                    <Switch {...label} defaultChecked />
+                                    <div>
+                                        <span className="map-choose">online</span>
                                     </div>
-                                    <div className="map-instance">
-                                        <div className="text-1 ">
-                                            <span>グーグルマップ</span>
-                                        </div>
-                                        <div className="text-field">
-                                            <div className="radius">
-                                                <span>radius (km)</span>
-                                            </div>
-                                            <div className="input_radius">
-                                                <input type="text" onChange={() => handleRadiusChange} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <Gmap
-                                        center={center}
-                                        setCenter={setCenter}
-                                        selectedLocation={selectedLocation}
-                                        setSelectedLocation={setSelectedLocation}
-                                        handleMapClick = {handleMapClick}
-                                        style={{ width: '570px', height: '360px' }} />
                                 </div>
+                                <div className="map-instance">
+                                    <div className="text-1 ">
+                                        <span>グーグルマップ</span>
+                                    </div>
+                                    <div className="text-field">
+                                        <div className="radius">
+                                            <span>radius (km)</span>
+                                        </div>
+                                        <div className="input_radius">
+                                            <input type="text" onChange={handleRadiusChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                                {(lat && lon) &&
+                                    <div style={{ height: '350px', width: '100%' }}>
+                                        <Map
+                                            latitude={lat}
+                                            longitude={lon}
+                                            handleMapClick={handleMapClick}
+                                            clickable={true}
+                                        />
+                                    </div>
+                                }
                             </div>
 
                         </div>

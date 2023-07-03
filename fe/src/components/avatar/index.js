@@ -7,8 +7,8 @@ import './style.css'
 export default function Avatar({ initialData }) {
     const { id } = useParams();
     const fileInputRef = useRef(null);
-    const [avatar, setAvatar] = useState(initialData.photo_url);
-    const [background, setBackground] = useState(initialData.background_image_url);
+    const [avatar, setAvatar] = useState(initialData?.photo_url);
+    const [background, setBackground] = useState(initialData?.background_image_url);
     const [isButtonVisible, setButtonVisible] = useState(false);
     const [showFileAddField, setShowAddFileField] = useState(false);
     const [photoType, setPhotoType] = useState();
@@ -93,10 +93,10 @@ export default function Avatar({ initialData }) {
     return (
         <>
             <div className='photo-container'>
-                {background &&
+                {(background && background !== '') &&
                     <img src={background} alt='User background' className='background-container' />
                 }
-                {avatar ? (
+                {(avatar && avatar !== '') ? (
                     <img src={avatar} alt='User Avatar' className='avatar-container' />
                 ) : (
                     <img src={PlaceholderAvatar} alt='User Avatar' className='avatar-container' />

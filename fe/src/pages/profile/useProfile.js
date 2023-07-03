@@ -19,10 +19,10 @@ export default function useListTeacher() {
     country_of_birth: '',
     description: '',
     certificates: [
-        {
-            language_code: '',
-            level: '',
-        },
+      {
+        language_code: '',
+        level: '',
+      },
     ],
     phone_number: '',
     gmail: '',
@@ -31,7 +31,7 @@ export default function useListTeacher() {
     twitter_url: '',
     facebook_url: '',
     instagram_url: '',
-}
+  }
 
   const parseData = useCallback((data) => {
     const profile = {
@@ -39,7 +39,7 @@ export default function useListTeacher() {
       background_image_url: `http://tungsnk.tech:9999${data?.background_image_url}` || '',
       name: data?.name || '',
       gender: data?.gender || '',
-      address: data?.country_of_birth || '',
+      address: data?.address || '',
       latitude: data?.latitude || 0,
       longitude: data?.longitude || 0,
       lang_teach: data?.lang_teach || '',
@@ -50,14 +50,14 @@ export default function useListTeacher() {
       phone_number: data?.phone_number || '',
       gmail: data?.gmail || '',
       resume_url: data?.resume_url || '',
-      linkedin_url:   data?.linkedin_url || '',
+      linkedin_url: data?.linkedin_url || '',
       twitter_url: data?.twitter_url || '',
       facebook_url: data?.facebook_url || '',
       instagram_url: data?.instagram_url || '',
       price: data?.price || '',
       hours: data?.hours || '',
     }
-    
+
     return profile;
   }, []);
 
