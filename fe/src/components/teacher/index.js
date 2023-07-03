@@ -28,7 +28,7 @@ function Teacher({ data }) {
             {/*avt */}
             <img
                 className="x335913644_9819789628"
-                src="https://media.istockphoto.com/id/1154370446/photo/funny-raccoon-in-green-sunglasses-showing-a-rock-gesture-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=kkZiaB9Q-GbY5gjf6WWURzEpLzNrpjZp_tn09GB21bI%3D&fbclid=IwAR2LyOl7qFuCBH0ZV5XoL0vZKT4aVBlx8kSfQ9M_ItZoND_HMcCmxBF2tdo"
+                src={data.photo_url}
                 alt="335913644_981978962817391_6054761902614117248_n 1"
             />
             {/*cục bên phải */}
