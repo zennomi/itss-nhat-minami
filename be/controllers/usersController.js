@@ -105,9 +105,10 @@ const USER = {
             if (user) {
                 const match = await bcrypt.compare(password, user.hash_password);
                 if (match) {
-                    const user_id = user.user_id;
+                    const user_id = user.id;
                     const token = jwt.sign({user_id}, process.env.JWT_SECRET || 'secret');
                     await DB.addSession(user_id, token);
+                    console.log(user)
                     return res.status(200).json({message: 'LOGIN_SUCCESS', user_id, token});
                 } else {
                     return res.status(400).json({message: 'LOGIN_FAIL'});
