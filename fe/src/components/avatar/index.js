@@ -93,10 +93,10 @@ export default function Avatar({ initialData }) {
     return (
         <>
             <div className='photo-container'>
-                {background &&
+                {(background && background !== '') &&
                     <img src={background} alt='User background' className='background-container' />
                 }
-                {avatar ? (
+                {(avatar && avatar !== '') ? (
                     <img src={avatar} alt='User Avatar' className='avatar-container' />
                 ) : (
                     <img src={PlaceholderAvatar} alt='User Avatar' className='avatar-container' />
