@@ -734,5 +734,6 @@
 }
 
 .teachercard{
-    margin-top: 48px;
+    right: -525px;
+    position: absolute;
 }
