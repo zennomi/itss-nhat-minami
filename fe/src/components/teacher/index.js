@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import './teacher.css';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import { addBookmark } from "../../services/teacherService";
+import { toast } from "react-toastify";
 
 const calculatorDate = (time) => {
     const currentDate = new Date();
@@ -21,10 +23,22 @@ function Teacher({ data }) {
 
     const { id } = data;
 
+    const user_id = localStorage.getItem('id');
+
+    const handleAddBookmark = async () => {
+        try {
+            const res = await addBookmark({
+                teacher_id: id,
+                user_id: Number(user_id)
+            });
+            toast.success('Add bookmark success')
+        } catch(error) {
+            toast.error(error?.response?.data?.message);
+        }
+    }
+
     return (
-        <div className="frame-1" onClick={() => navigate(`/tutor/${id}`)} style={{
-            'cursor': 'pointer'
-        }}>
+        <div className="frame-1">
             {/*avt */}
             <img
                 className="x335913644_9819789628"
@@ -32,7 +46,9 @@ function Teacher({ data }) {
                 alt="335913644_981978962817391_6054761902614117248_n 1"
             />
             {/*cục bên phải */}
-            <div className="frame-2">
+            <div className="frame-2" onClick={() => navigate(`/tutor/${id}`)} style={{
+            'cursor': 'pointer'
+                }}>
                 <div className="frame-3">
                     <div className="aizawa-minamipublicsans-semi-bold-black-16px">
                         <span className="publicsans-semi-bold-black-16px" >{data.name}</span>
@@ -104,7 +120,7 @@ function Teacher({ data }) {
                     </div>
                 </div>
             </div>
-            <div className="button-4">
+            <div className="button-4" onClick={handleAddBookmark}>
                 <i className="fa-solid fa-star" style={{color:'#f0f2f4'}}></i>
                 <div className="label-4valign-text-middlepublicsans-bold-white-14px">
           <span>

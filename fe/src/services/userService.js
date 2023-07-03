@@ -19,15 +19,13 @@ const USER = {
             method: 'POST',
             url: '/user/register',
             data: {
-                username,
-                password
+                username: username,
+                password: password
             }
-        })
-        if (result.message === 'USER_CREATED')
-            localStorage.setItem('token', result.token);
+        });
         return result;
     },
-    login: async (username, password) => {
+    login: async ({username, password}) => {
         let result = await publicHttp({
             method: 'POST',
             url: '/user/login',

@@ -1,4 +1,5 @@
 import publicHttp from "./http/publicHttp.config";
+import privateHttp from "./http/privateHttp.config";
 
 export const getTeachers = async (params) => {
     return publicHttp({
@@ -49,5 +50,58 @@ export const updateTeacherInfo = async (data) => {
         method: 'PUT',
         url: '/api/teacher',
         data
+    })
+}
+
+export const getBookmark = async (id) => {
+    return publicHttp({
+        method: 'GET',
+        url: `/api/bookmarks/${id}`,
+    })
+}
+
+export const addBookmark = async ({
+    teacher_id,
+    user_id
+}) => {
+    return publicHttp({
+        method: 'POST',
+        url: '/api/add_bookmark',
+        data: {
+            teacher_id,
+            user_id
+        }
+    })
+}
+
+export const addReview = async ({
+    teacher_id,
+    user_id,
+    star,
+    content
+}) => {
+    return privateHttp({
+        method: 'POST',
+        url: '/api/review',
+        data: {
+            teacher_id,
+            user_id,
+            star,
+            content
+        }
+    })
+}
+
+export const removeBookmark = async ({
+    teacher_id,
+    user_id
+}) => {
+    return publicHttp({
+        method: 'DELETE',
+        url: '/api/bookmarks',
+        data: {
+            teacher_id,
+            user_id
+        }
     })
 }

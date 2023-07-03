@@ -3,11 +3,14 @@ import {Routes, Route, BrowserRouter} from "react-router-dom";
 import {AdminRoutes, GuestRoutes, UserRoutes, NormalRoutes } from "./routes/routes";
 import Auth, {ROLE} from "./hooks/auth";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     const queryClient = new QueryClient()
     return (
         <QueryClientProvider client={queryClient}>
+            <ToastContainer />
             <BrowserRouter>
                 <Routes>
                     {NormalRoutes.map((route, index) => (

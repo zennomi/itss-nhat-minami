@@ -1,17 +1,13 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import './style.css';
-import Form from "../../components/form";
 import USER from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header";
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     let navigate = useNavigate();
-    const callback = (message) => {
-        if (message === "USER_CREATED")
-            navigate('/');
-    }
     const [name, setName] = useState('');
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,12 +21,31 @@ const Register = () => {
         setPassword(event.target.value);
     };
 
-    const handleClick = () => {
-        // console.log(name)
-        // console.log(mail)
-        // console.log(password)
-        // gửi về cho BE
+    const handleClick = async () => {
+        try {
+            const result = await USER.register({ 
+                username: mail,
+                password: password,
+             });
+            const token = result?.data?.token;
+            localStorage.setItem('token', token);
+            const id = result?.data?.user_id;
+            localStorage.setItem('id', id);
+            toast.success('Register success');
+            navigate('/');
+        } catch(err) {
+            toast.error(err?.response?.data?.message);
+        }
     }
+
+    const token = useMemo(() => localStorage.getItem('token'), []);
+    
+    useEffect(() => {
+        if (token) {
+            navigate('/');
+        }
+    }, [navigate, token])
+
     return (
         <div>
             <Header></Header>
@@ -129,8 +144,8 @@ const Register = () => {
                                         onChange={handlePasswordChange}
                                     />
                                 </div>
-                                <button className="register-button">
-                                    <span className="register-text09 ComponentsButtonLarge" onClick={handleClick}>
+                                <button className="register-button" onClick={handleClick}>
+                                    <span className="register-text09 ComponentsButtonLarge">
                                         <span>アカウン作る</span>
                                     </span>
                                 </button>

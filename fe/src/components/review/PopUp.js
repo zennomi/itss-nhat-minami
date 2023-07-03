@@ -2,21 +2,35 @@ import React from "react";
 import Rating from '@mui/material/Rating';
 import { useState } from "react";
 import './style_popup.css'
+import { useParams } from "react-router-dom";
+import { addReview } from '../../services/teacherService'
+import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 
 const PopUp = ({onClose}) => {
+  const queryClient = useQueryClient();
     const [value, setValue] = React.useState(1);
   const [textareaValue, setTextareaValue] = useState('');
   const handleTextareaChange = (event) => {
     setTextareaValue(event.target.value);
   };
-  const handleSend = () => {
-    // value là star
-    // textareaValue là comment
-    console.log(value)
-    console.log(textareaValue)
-    // gọi send ...
-    // close pop up
-    alert("Gửi nhận xét thành công")
+
+  const { id } = useParams();
+  const user_id = localStorage.getItem("id");
+
+  const handleSend = async () => {
+    try {
+      await addReview({
+        teacher_id: Number(id),
+        user_id: Number(user_id),
+        content: textareaValue,
+        star: value
+      })
+      toast.success('Add review success')
+      queryClient.invalidateQueries(['tutor-review', id])
+    } catch {
+      toast.error('Add review failed')
+    }
     onClose()
   }
 return (

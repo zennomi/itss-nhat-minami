@@ -1,18 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import {LinearProgress , Button} from "@mui/material";
+import React, { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Header from "../../components/header";
 import BookmarkCard from "../../components/bookmark-card";
 import './style.css'
+import { getBookmark } from '../../services/teacherService';
 
 
 const Bookmark = () => {
-    const teachers = [
-        {name: 'Phạm Đức Huy ',lang_teach:'Japanese , Korean'},
-        {name: 'Phạm Duy Mạnh ',lang_teach:'HongKong , French'},
-        {name: 'Nguyễn Thu Hà ',lang_teach:'Spain, Chinese'},
-        {name: 'Nguyễn Thu Linh ',lang_teach:'Japanese, Chinese'},
-    ]
+    const id = useMemo(() => localStorage.getItem('id'), []);
 
+    const parseData = (data) => {
+        return data.map((item) => ({
+            id: item.teacher_id,
+            name: item.name,
+            lang_teach: item.lang_teach,
+        }));
+    }
+
+    const { data } = useQuery({
+        queryKey: ['bookmark', id],
+        queryFn: () => getBookmark(id),
+        staleTime: 10 * 1000,
+        select: (data) => parseData(data.data),
+        enabled: !!id,
+      });
 
     return (
         <div>
@@ -34,17 +45,11 @@ const Bookmark = () => {
 
 
                 <div className="row">
-                    {teachers.map((item,index) => (
+                    {data?.map((item,index) => (
                         <div key={index} className="col-sm-4">
                             <BookmarkCard data={item}/>
                         </div>
                     ))}
-
-
-
-
-
-
                 </div>
             </div>
         </div>

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useMemo, useEffect } from 'react';
 import './style.css';
 import Header from "../../components/header";
 import { useState } from 'react';
+import USER from '../../services/userService'; 
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate();
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
     const handleMailChange = (event) => {
@@ -13,11 +17,35 @@ const Login = () => {
         setPassword(event.target.value);
     };
 
-    const handleClick = () => {
-        // console.log(mail)
-        // console.log(password)
-        // gửi về cho BE
+    const handleClick = async () => {
+        try {
+            const res = await USER.login({
+                username: mail,
+                password: password
+            });
+            const token = res?.data?.token;
+            if (token) {
+                localStorage.setItem('token', token);
+            }
+            const id = res?.data?.user_id;
+            if (id) {
+                localStorage.setItem('id', id);
+            }
+            toast.success('Login success');
+            navigate('/');
+        } catch(error) {
+            toast.error(error?.response?.data?.message);
+        }
     }
+
+    const token = useMemo(() => localStorage.getItem('token'), []);
+    
+    useEffect(() => {
+        if (token) {
+            navigate('/');
+        }
+    }, [navigate, token])
+
     return (
         <div>
             <Header></Header>
