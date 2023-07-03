@@ -11,6 +11,9 @@ const TEACHER = {
         let star = req.query.star || null;
         let date = req.query.date || null;
         let timesession = req.query.timesession || [];
+        let longitude = req.query.longitude || null;
+        let latitude = req.query.latitude || null;
+        let radius = req.query.radius || null;
         let page = req.query.page || null;
         let limit = req.query.limit || null;
 
@@ -25,6 +28,9 @@ const TEACHER = {
                 star,
                 date,
                 timesession,
+                longitude,
+                latitude,
+                radius,
                 page,
                 limit
             });
