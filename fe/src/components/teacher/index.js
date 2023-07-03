@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import './teacher.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import VerifiedIcon from '@mui/icons-material/Verified';
 
 const calculatorDate = (time) => {
@@ -37,9 +36,7 @@ function Teacher({ data }) {
                 <div className="frame-3">
                     <div className="aizawa-minamipublicsans-semi-bold-black-16px">
                         <span className="publicsans-semi-bold-black-16px" >{data.name}</span>
-                        <VerifiedIcon style={{color: '#09d356',
-                            'font-size': '18px',
-                            'margin-left': '14px'}}></VerifiedIcon>
+                        <VerifiedIcon style={{color: '#09d356', 'font-size': '18px', 'margin-left': '14px'}}></VerifiedIcon>
                         { data.remote === 1 ?
                             <span className="publicsans-semi-bold-jade-13px" style={{'margin-left':'8px'}}>オンラインレッスン </span>
                             :
