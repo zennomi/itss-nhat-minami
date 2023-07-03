@@ -296,7 +296,7 @@ const DB = {
     addBookmark: async (user_id, teacher_id) => {
         return new Promise((resolve) => {
             db.run(`INSERT INTO bookmarks (user_id, teacher_id, created_at)
-                    VALUES ('${user_id}', '${teacher_id}'), '${new Date().toISOString()}'`, (err) => {
+                    VALUES ('${user_id}', '${teacher_id}', '${new Date().toISOString()}')`, (err) => {
                 if (err) console.log(err);
                 resolve();
             });
