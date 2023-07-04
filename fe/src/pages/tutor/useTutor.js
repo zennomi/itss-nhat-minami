@@ -9,8 +9,8 @@ export default function useListTeacher() {
 
   const parseData = useCallback((data) => {
     const userProfileBannerData = {
-      bg: `http://tungsnk.tech:9999${data?.background_image_url}`,
-      img_Avatar25: `http://tungsnk.tech:9999${data?.photo_url}`,
+      bg: (data.background_image_url.startsWith("http") ? data.background_image_url : `http://tungsnk.tech:9999${data?.background_image_url}`),
+      img_Avatar25: (data.photo_url.startsWith("http") ? data.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`),
       spanText1: data?.name,
       spanText2: data?.lang_teach
     };
