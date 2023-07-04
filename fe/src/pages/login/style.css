@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Public+Sans:700,600,400");
 .login-container {
     width: 100%;
     display: flex;
@@ -7,14 +8,14 @@
     flex-direction: column;
 }
 .login-login {
-    width: 100%;
-    height: 1024px;
+    height: 825px;
     display: flex;
-    overflow: hidden;
     position: relative;
     align-items: flex-start;
     flex-shrink: 0;
     background-color: rgba(255, 255, 255, 1);
+    margin-top: 88px;
+    width: 100%;
 }
 .login-login1 {
     gap: 82px;
@@ -82,9 +83,9 @@
     left: 250px;
     width: 720px;
     display: flex;
-    position: absolute;
-    align-items: center;
-    flex-direction: column;
+    width: 50%;
+    padding-left: 234px;
+
 }
 .login-text {
     color: var(--dl-color-text_light-primary);
@@ -102,7 +103,7 @@
     flex-shrink: 0;
 }
 .login-img1 {
-    top: 0px;
+    top: 84px;
     left: 0px;
     width: 720px;
     height: 712px;
@@ -123,12 +124,14 @@
 }
 .login-stack {
     display: flex;
-    padding: 240px 64px 0;
+    padding: 80px 64px 0;
     z-index: 2;
     align-self: stretch;
     align-items: flex-start;
     flex-shrink: 0;
     justify-content: center;
+    margin-left: 80px;
+    width: 38%;
 }
 .login-auth-form-login {
     gap: 40px;
@@ -149,21 +152,21 @@
     flex-direction: column;
 }
 .login-text02 {
-    color: var(--dl-color-text_light-primary);
+    color:  rgba(0, 0, 0, 1);
     height: auto;
     text-align: left;
     line-height: 36px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: "Public Sans", sans-serif;
 }
 .login-text04 {
-    color: rgba(33, 43, 54, 1);
-    height: auto;
-    font-size: 14px;
-    font-style: Regular;
-    text-align: right;
-    font-family: Public Sans;
-    font-weight: 400;
-    line-height: 22px;
-    font-stretch: normal;
+    margin: 0px;
+    font-weight: 600;
+    line-height: 1.57143;
+    font-size: 0.875rem;
+    font-family: "Public Sans", sans-serif;
+    color: rgb(0, 167, 111);
     text-decoration: none;
 }
 .login-text05 {
@@ -174,7 +177,6 @@
     gap: 20px;
     display: flex;
     align-self: stretch;
-    align-items: center;
     flex-direction: column;
 }
 .login-text-field {
@@ -183,19 +185,19 @@
     align-items: flex-start;
     flex-direction: column;
 }
-.login-input {
-    gap: 8px;
-    display: flex;
-    padding: 16px 14px;
-    position: relative;
-    align-self: stretch;
-    align-items: center;
-    flex-shrink: 0;
-    border-color: rgba(145, 158, 171, 0.3199999928474426);
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 8px;
-}
+/*.login-input {*/
+/*    gap: 8px;*/
+/*    display: flex;*/
+/*    padding: 16px 14px;*/
+/*    position: relative;*/
+/*    align-self: stretch;*/
+/*    align-items: center;*/
+/*    flex-shrink: 0;*/
+/*    border-color: rgba(145, 158, 171, 0.3199999928474426);*/
+/*    border-style: solid;*/
+/*    border-width: 1px;*/
+/*    border-radius: 8px;*/
+/*}*/
 .login-text07 {
     color: var(--dl-color-text_light-primary);
     height: auto;
@@ -224,26 +226,26 @@
     text-align: left;
     line-height: 12px;
 }
-.login-text-field1 {
-    display: flex;
-    align-self: stretch;
-    align-items: flex-start;
-    flex-direction: column;
-}
-.login-input1 {
-    gap: 8px;
-    display: flex;
-    padding: 16px 14px;
-    overflow: hidden;
-    position: relative;
-    align-self: stretch;
-    align-items: center;
-    flex-shrink: 0;
-    border-color: rgba(145, 158, 171, 0.3199999928474426);
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 8px;
-}
+/*.login-text-field1 {*/
+/*    display: flex;*/
+/*    align-self: stretch;*/
+/*    align-items: flex-start;*/
+/*    flex-direction: column;*/
+/*}*/
+/*.login-input1 {*/
+/*    gap: 8px;*/
+/*    display: flex;*/
+/*    padding: 16px 14px;*/
+/*    overflow: hidden;*/
+/*    position: relative;*/
+/*    align-self: stretch;*/
+/*    align-items: center;*/
+/*    flex-shrink: 0;*/
+/*    border-color: rgba(145, 158, 171, 0.3199999928474426);*/
+/*    border-style: solid;*/
+/*    border-width: 1px;*/
+/*    border-radius: 8px;*/
+/*}*/
 .login-text11 {
     color: var(--dl-color-text_light-disabled);
     height: auto;
@@ -269,11 +271,13 @@
     height: 24px;
 }
 .login-text13 {
-    color: var(--dl-color-text_light-primary);
+    color:  rgba(0, 0, 0, 1);
     height: auto;
-    align-self: stretch;
-    text-align: right;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: "Public Sans", sans-serif;
     line-height: 22px;
+    text-align: right;
 }
 .login-button {
     gap: 8px;
