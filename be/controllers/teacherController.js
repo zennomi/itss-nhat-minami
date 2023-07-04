@@ -53,9 +53,7 @@ const TEACHER = {
         }
     },
     updateTeacher: async (req, res) => {
-        let teacherId = req.body.teacher_id;
-        let userId = req.body.user_id;
-        if (!teacherId) return res.status(400).json({message: 'MISSING_FIELDS'});
+        let userId = req.user_id;
         let params = {
             lang_teach: req.body.lang_teach || null,
             lang_study: req.body.lang_study || null,
@@ -78,9 +76,9 @@ const TEACHER = {
             longitude: req.body.longitude || null,
             latitude: req.body.latitude || null,
         };
+        let teacherId = await DB.getTeacherByUserId(userId);
         try {
-            if((await DB.getTeacherInfos(teacherId)).id === undefined) {
-                if(!userId) return res.status(400).json({message: 'TEACHER_NOT_CREATED_BECAUSE_USER_ID_NOT_FOUND'});
+            if(teacherId === null) {
                 let res = await DB.createTeacher(userId, params);
                 let teacher_id_new = res.id;
                 await DB.updateCertificates(teacher_id_new, params.certificates);
