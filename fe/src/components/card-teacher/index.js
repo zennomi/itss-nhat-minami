@@ -13,7 +13,7 @@ function TeacherCard ({ data }) {
                         <div className="overlay-solid">
                         </div>
                         <div className="group0">
-                            <div className="avatar" style={{ backgroundImage: `url(${data.photo_url})` }}>
+                            <div className="avatar" style={{ backgroundImage: `url(${data.background_image_url})` }}>
                             </div>
                         </div>
                     </div>

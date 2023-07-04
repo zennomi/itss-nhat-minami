@@ -43,7 +43,7 @@ function Teacher({ data }) {
             <img
                 className="x335913644_9819789628"
                 src={data.photo_url}
-                alt="335913644_981978962817391_6054761902614117248_n 1"
+                alt=""
             />
             {/*cục bên phải */}
             <div className="frame-2" onClick={() => navigate(`/tutor/${id}`)} style={{
