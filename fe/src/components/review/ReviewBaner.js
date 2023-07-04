@@ -3,6 +3,7 @@ import { useState } from "react";
 import './style_review_banner.css'
 import './style_popup.css'
 import PopUp from './PopUp'
+import Rating from '@mui/material/Rating';
 
 const ReviewBaner = ({data, onButtonClick}) => {
   const { starAvg, reviewCount, star5Count, star4Count, star3Count, star2Count, star1Count } = data;
@@ -21,7 +22,7 @@ const ReviewBaner = ({data, onButtonClick}) => {
         <h1 className="review_banner-text-1 publicsans-extra-bold-charade-48px">
           <span className="publicsans-extra-bold-charade-48px">{starAvg}</span>
         </h1>
-        <Rating />
+        <Rating name="read-only" value={starAvg} readOnly />
         <div className="review_banner-x824kreviews publicsans-normal-pale-sky-12px">
           <span className="publicsans-normal-pale-sky-12px">{reviewCount}</span>
         </div>
@@ -60,18 +61,6 @@ const ReviewBaner = ({data, onButtonClick}) => {
 }
 
 export default ReviewBaner;
-
-function Rating() {
-  return (
-    <div className="review_banner-rating">
-      <img className="review_banner-icon" src="https://img.uxwing.com/wp-content/themes/uxwing/download/arts-graphic-shapes/star-icon.png" alt="icon-star" />
-      <img className="review_banner-icon" src="https://img.uxwing.com/wp-content/themes/uxwing/download/arts-graphic-shapes/star-icon.png" alt="icon-star" />
-      <img className="review_banner-icon" src="https://img.uxwing.com/wp-content/themes/uxwing/download/arts-graphic-shapes/star-icon.png" alt="icon-star" />
-      <img className="review_banner-icon" src="https://img.uxwing.com/wp-content/themes/uxwing/download/arts-graphic-shapes/star-icon.png" alt="icon-star" />
-      <img className="review_banner-icon" src="https://img.uxwing.com/wp-content/themes/uxwing/download/arts-graphic-shapes/star-icon.png" alt="icons/ic_star" />
-    </div>
-  );
-}
 
 function Row(props) {
   const { spanText1, spanText2 } = props;
