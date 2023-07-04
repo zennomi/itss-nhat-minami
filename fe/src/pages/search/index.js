@@ -47,7 +47,7 @@ const Search = () => {
         setFilters({ ...filters, [key]: value });
     };
     const handleChange = (event, newValue) => {
-        handleFilter('age', newValue)
+        handleFilter('age', newValue);
         setValue(newValue);
     };
 
@@ -96,6 +96,8 @@ const Search = () => {
         const { lat, lng } = event.latlng;
         setLat(lat);
         setLon(lng);
+        handleFilter('latitude', lat);
+        handleFilter('longitude', lng);
         reverseGeocode(lat, lng)
             .then((clickedAddress) => {
                 setAddress(clickedAddress);
@@ -106,8 +108,8 @@ const Search = () => {
     };
 
     const handleRadiusChange = (event) => {
-        console.log(event.target.value);
         setRadius(event.target.value);
+        handleFilter('radius', event.target.value);
     };
 
     const handleSort = (sort) => {
