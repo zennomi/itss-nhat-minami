@@ -137,7 +137,7 @@ const Register = () => {
                                 </div> */}
                                 <div className="register-text-field1">
                                     <input
-                                        type="text"
+                                        type="password"
                                         placeholder="パスワードス"
                                         className="register-input1"
                                         value={password}
