@@ -123,7 +123,7 @@ const Login = () => {
                                             </button>
                                         </div> */}
                                         <input
-                                            type="text"
+                                            type="password"
                                             placeholder="パスワード"
                                             className="register-input"
                                             value={password}
