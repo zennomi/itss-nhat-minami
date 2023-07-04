@@ -49,28 +49,29 @@ const Login = () => {
     return (
         <div>
             <Header></Header>
-            <div className="login-container">
-                <div className="login-login">
-                    <div className="login-logo">
-                        <img
-                            src="/images/logo.svg"
-                            alt="Logo17403"
-                            className="login-logo1"
-                        />
-                    </div>
-                    <div className="login-login1">
-                        <div className="login-auth-banner">
-                            <div className="login-content">
-                                {/* <span className="login-text H3">
+
+        <div className="login-container">
+            <div className="login-login">
+                <div className="login-logo">
+                    <img
+                        src="/images/logo.svg"
+                        alt="Logo17403"
+                        className="login-logo1"
+                    />
+                </div>
+                <div className="login-login1">
+                    <div className="login-auth-banner">
+                        <div className="login-content">
+                            {/* <span className="login-text H3">
                                 こんにちは
                             </span> */}
-                                <div className="login-illustrationsillustrationdashboard">
-                                    <img
-                                        src="/images/login.png"
-                                        alt="imgI1740"
-                                        className="login-img1"
-                                    />
-                                </div>
+                            <div className="login-illustrationsillustrationdashboard">
+                                <img
+                                    src="/images/login.png"
+                                    alt="imgI1740"
+                                    className="login-img1"
+                                />
+
                             </div>
                         </div>
                         <div className="login-stack">
