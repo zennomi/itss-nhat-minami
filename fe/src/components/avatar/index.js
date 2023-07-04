@@ -7,8 +7,8 @@ import './style.css'
 export default function Avatar({ initialData }) {
     const { id } = useParams();
     const fileInputRef = useRef(null);
-    const [avatar, setAvatar] = useState(initialData?.photo_url);
-    const [background, setBackground] = useState(initialData?.background_image_url);
+    const [avatar, setAvatar] = useState();
+    const [background, setBackground] = useState();
     const [isButtonVisible, setButtonVisible] = useState(false);
     const [showFileAddField, setShowAddFileField] = useState(false);
     const [photoType, setPhotoType] = useState();
@@ -38,6 +38,8 @@ export default function Avatar({ initialData }) {
     useEffect(() => {
         if (initialData.photo_url !== '') {
             setAvatar(initialData.photo_url);
+        } else {
+            setAvatar(PlaceholderAvatar);
         }
     }, [initialData.photo_url])
 
@@ -96,10 +98,8 @@ export default function Avatar({ initialData }) {
                 {(background && background !== '') &&
                     <img src={background} alt='User background' className='background-container' />
                 }
-                {(avatar && avatar !== '') ? (
+                {(avatar && avatar !== '') && (
                     <img src={avatar} alt='User Avatar' className='avatar-container' />
-                ) : (
-                    <img src={PlaceholderAvatar} alt='User Avatar' className='avatar-container' />
                 )}
                 <div
                     className='background-container'

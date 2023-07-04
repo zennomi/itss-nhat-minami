@@ -3,15 +3,15 @@
 
 :root {
     --black:
-            rgba(0, 0, 0, 1);
+        rgba(0, 0, 0, 1);
     --evening-sea:
-            rgba(0, 82, 73, 1);
+        rgba(0, 82, 73, 1);
     --jade:
-            rgba(0, 171, 85, 1);
+        rgba(0, 171, 85, 1);
     --charade:
-            rgba(33, 43, 54, 1);
+        rgba(33, 43, 54, 1);
     --white:
-            rgba(255, 255, 255, 1);
+        rgba(255, 255, 255, 1);
 
     --font-size-s: 12px;
     --font-size-m: 14px;
@@ -32,6 +32,7 @@
     font-weight: 600;
     font-style: normal;
 }
+
 .publicsans-bold-charade-12px {
     color: var(--charade);
     font-family: var(--font-family-public_sans);
@@ -39,6 +40,7 @@
     font-weight: 700;
     font-style: normal;
 }
+
 .publicsans-semi-bold-charade-14px {
     color: var(--charade);
     font-family: var(--font-family-public_sans);
@@ -46,6 +48,7 @@
     font-weight: 600;
     font-style: normal;
 }
+
 .publicsans-extra-bold-charade-48px {
     color: var(--charade);
     font-family: var(--font-family-public_sans);
@@ -53,6 +56,7 @@
     font-weight: 800;
     font-style: normal;
 }
+
 .publicsans-bold-white-14px {
     color: var(--white);
     font-family: var(--font-family-public_sans);
@@ -60,6 +64,7 @@
     font-weight: 700;
     font-style: normal;
 }
+
 .publicsans-bold-white-15px {
     color: var(--white);
     font-family: var(--font-family-public_sans);
@@ -67,6 +72,7 @@
     font-weight: 700;
     font-style: normal;
 }
+
 .publicsans-bold-charade-15px {
     color: var(--charade);
     font-family: var(--font-family-public_sans);
@@ -74,6 +80,7 @@
     font-weight: 700;
     font-style: normal;
 }
+
 .publicsans-normal-charade-12px {
     color: var(--charade);
     font-family: var(--font-family-public_sans);
@@ -81,6 +88,7 @@
     font-weight: 400;
     font-style: normal;
 }
+
 .valign-text-middle {
     display: flex;
     flex-direction: column;
@@ -110,8 +118,7 @@
 .shadow {
     background-color: var(--white);
     border-radius: 928px/12px;
-    box-shadow: 0px 8px 16px
-    #919eab29;
+    box-shadow: 0px 8px 16px #919eab29;
     height: 24px;
     left: 32px;
     position: absolute;
@@ -137,13 +144,15 @@
     border-bottom: 1px solid #cecece;
     box-shadow: -10px 10px 20px -4px #919eab3d, 0px 0px 2px #919eab3d;
 }
-.content-right{
+
+.content-right {
     align-items: center;
     display: flex;
     gap: 40px;
     justify-content: flex-end;
     min-width: 1112px;
 }
+
 .logo-header {
     height: 40px;
     width: 40px;
@@ -204,6 +213,7 @@
 .button-header {
     align-items: center;
     background-color: var(--jade);
+    border: transparent;
     border-radius: 8px;
     display: flex;
     gap: 8px;

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useMemo } from "react";
 import './style.css'
 import { useNavigate } from "react-router-dom";
 function Header() {
     const navigate = useNavigate();
+    const token = useMemo(() => localStorage.getItem('token'), []);
+    const id = useMemo(() => localStorage.getItem('id'), []);
     return (
         <div className="main-header">
             <div className="header-content">
-            <div className="header-wrap">
+                <div className="header-wrap">
                     <img className="logo-header" src="../images/logo.svg" alt="Logo" />
                     <div className="link publicsans-semi-bold-charade-14px content-right">
                         <div className="home">
@@ -17,7 +19,7 @@ function Header() {
                                 "/search"
                             )
                         }}>
-                            <span  className="publicsans-semi-bold-charade-14px">教師を探す</span>
+                            <span className="publicsans-semi-bold-charade-14px">教師を探す</span>
                         </div>
                         <div className="link">
                             <div className="dot-logo"></div>
@@ -30,23 +32,31 @@ function Header() {
                                 alt="icons/ic_chevron_left"
                             />
                         </div>
-                        <div className="button-header">
-                            <img className="start-icon" src="../images/start-icon-1.svg" alt="start icon" />
-                            <div className="labelvalign-text-middlepublicsans-bold-white-14px">
-                <span>
-                  <span className="publicsans-bold-white-14px">ログイン</span>
-                </span>
-                    </div>
-                        </div>
-                        <div className="find-tutors" onClick={() => {
+                        <button className="button-header" onClick={() => {
                             navigate(
-                                "/profile/4"
+                                "/login"
                             )
+                        }}>
+                            <img className="start-icon" src="../images/start-icon-1.svg" alt="start icon" />
+                            <div className="labelvalign-text-middlepublicsans-bold-white-14px" >
+                                <span className="publicsans-bold-white-14px">ログイン</span>
+                            </div>
+                        </button>
+                        <div className="find-tutors" onClick={() => {
+                            {
+                                (token && id) ?
+                                    navigate(
+                                        `/profile/${id}`
+                                    ) : navigate(
+                                        "/login"
+                                    )
+                            }
+
                         }}>
                             <span className="publicsans-semi-bold-charade-14px">教師になる</span>
                         </div>
                     </div>
-            </div>
+                </div>
             </div>
         </div>
     );
