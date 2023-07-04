@@ -9,11 +9,11 @@ function TeacherCard ({ data }) {
             <div className="teacherCard">
                 <div className="group2">
                     <div className="group1">
-                        <img src={data.photo_url} alt=""></img>
+                        <img src={data.background_image_url} alt=""></img>
                         <div className="overlay-solid">
                         </div>
                         <div className="group0">
-                            <div className="avatar" style={{ backgroundImage: `url(${data.background_image_url})` }}>
+                            <div className="avatar" style={{ backgroundImage: `url(${data.photo_url})` }}>
                             </div>
                         </div>
                     </div>

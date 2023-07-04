@@ -35,8 +35,8 @@ export default function useListTeacher() {
 
   const parseData = useCallback((data) => {
     const profile = {
-      photo_url: `http://tungsnk.tech:9999${data?.photo_url}` || '',
-      background_image_url: `http://tungsnk.tech:9999${data?.background_image_url}` || '',
+      photo_url: (data.photo_url.startsWith("http") ? data.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`),
+      background_image_url: (data.background_image_url.startsWith("http") ? data.background_image_url : `http://tungsnk.tech:9999${data?.background_image_url}`),
       name: data?.name || '',
       gender: data?.gender || '',
       address: data?.address || '',
