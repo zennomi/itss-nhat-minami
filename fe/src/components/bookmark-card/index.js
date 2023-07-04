@@ -29,8 +29,8 @@ const BookmarkCard = ({data}) => {
                 <div>
                     <img src="https://c1thule-bd.edu.vn/wp-content/uploads/2022/04/Avatar-Tiktok-Dep-Cute-Doc-Dao-Tao-An-Tuong-Manh.jpg" className="bookmark-item-avater" alt=""/>
                 </div>
-                <div className="bookmark-detail" onClick={() => navigate(`/tutor/${data?.id}`)}>
-                    <div className="bookmark-infor">
+                <div className="bookmark-detail">
+                    <div className="bookmark-infor" onClick={() => navigate(`/tutor/${data?.id}`)}>
                         <div className="detail-name ">
                             <span>{data.name}</span>
                         </div>

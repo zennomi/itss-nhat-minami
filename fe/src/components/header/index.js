@@ -1,10 +1,25 @@
 import React, { useMemo } from "react";
 import './style.css'
 import { useNavigate } from "react-router-dom";
+import USER from "../../services/userService";
+import { toast } from "react-toastify";
+
 function Header() {
     const navigate = useNavigate();
     const token = useMemo(() => localStorage.getItem('token'), []);
     const id = useMemo(() => localStorage.getItem('id'), []);
+
+    const handleLogout = async () => {
+        try {
+            await USER.logout();
+            localStorage.removeItem('token');
+            localStorage.removeItem('id');
+            toast.success('Logout success');
+            navigate('/login')
+        } catch (e) {
+            toast.error('Logout failed');
+        }
+    }
     return (
         <div className="main-header">
             <div className="header-content">
@@ -21,10 +36,10 @@ function Header() {
                         }}>
                             <span className="publicsans-semi-bold-charade-14px">教師を探す</span>
                         </div>
-                        <div className="link">
+                        <div className="link logout" onClick={handleLogout}>
                             <div className="dot-logo"></div>
                             <div className="dashboardpublicsans-semi-bold-jade-14px">
-                                <span className="publicsans-semi-bold-jade-14px">言語</span>
+                                <span className="publicsans-semi-bold-jade-14px">ログアウト</span>
                             </div>
                             <img
                                 className="iconsic_chevron_left-header"

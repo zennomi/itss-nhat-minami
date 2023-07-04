@@ -24,7 +24,7 @@ export const getTeacherReviews = async (id) => {
 }
 
 export const updateTeacherBg = async (data) => {
-    return publicHttp({
+    return privateHttp({
         method: 'POST',
         url: '/api/bg',
         headers: {
@@ -35,7 +35,7 @@ export const updateTeacherBg = async (data) => {
 }
 
 export const updateTeacherAvatar = async (data) => {
-    return publicHttp({
+    return privateHttp({
         method: 'POST',
         headers: {
             'Content-Type': 'multipart/form-data',
@@ -46,7 +46,7 @@ export const updateTeacherAvatar = async (data) => {
 }
 
 export const updateTeacherInfo = async (data) => {
-    return publicHttp({
+    return privateHttp({
         method: 'PUT',
         url: '/api/teacher',
         data
@@ -64,7 +64,7 @@ export const addBookmark = async ({
     teacher_id,
     user_id
 }) => {
-    return publicHttp({
+    return privateHttp({
         method: 'POST',
         url: '/api/add_bookmark',
         data: {
@@ -96,7 +96,7 @@ export const removeBookmark = async ({
     teacher_id,
     user_id
 }) => {
-    return publicHttp({
+    return privateHttp({
         method: 'DELETE',
         url: '/api/bookmarks',
         data: {

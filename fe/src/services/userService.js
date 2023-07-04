@@ -40,7 +40,6 @@ const USER = {
         return result;
     },
     logout: () => {
-        localStorage.removeItem('token');
         return privateHttp(
             {
                 method: 'POST',

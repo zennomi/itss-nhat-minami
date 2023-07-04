@@ -236,3 +236,7 @@
     text-align: center;
     white-space: nowrap;
 }
+
+.logout {
+    cursor: pointer;
+}

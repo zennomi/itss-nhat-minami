@@ -32,6 +32,7 @@ privateHttp.interceptors.response.use(
       error.response.statusText === 'Unauthorized'
     ) {
         token.removeAccessToken();
+        alert('この機能を使用するにはログインが必要です');
         window.location.href = '/login';
         return Promise.reject(error);
       }

@@ -1,10 +1,10 @@
 import React from "react";
 import "./style.css";
-
+import Header from "../../components/header";
 function Home() {
     return (
         <div className="main-pagescreen">
-            <MainHeader/>
+            <Header />
             <div className="home-hero">
                 <div className="bg">
                     <div className="overlay-container">
