@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom';
 const BookmarkCard = ({data}) => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const user_id = localStorage.getItem('id')
+    const user_id = localStorage.getItem('id');
+    // const photo_url = data?.photo_url.startsWith("http") ? data?.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`;
     const handleRemove = async () => {
         try {
             await removeBookmark({
@@ -27,7 +28,7 @@ const BookmarkCard = ({data}) => {
         <div>
             <div className=" bookmark-cpn">
                 <div>
-                    <img src="https://c1thule-bd.edu.vn/wp-content/uploads/2022/04/Avatar-Tiktok-Dep-Cute-Doc-Dao-Tao-An-Tuong-Manh.jpg" className="bookmark-item-avater" alt=""/>
+                    <img src="https://c1thule-bd.edu.vn/wp-content/uploads/2022/04/Avatar-Tiktok-Dep-Cute-Doc-Dao-Tao-An-Tuong-Manh.jpg" className="bookmark-item-avater" alt="" />
                 </div>
                 <div className="bookmark-detail">
                     <div className="bookmark-infor" onClick={() => navigate(`/tutor/${data?.id}`)}>

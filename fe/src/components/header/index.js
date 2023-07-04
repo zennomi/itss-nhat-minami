@@ -9,6 +9,8 @@ function Header() {
     const token = useMemo(() => localStorage.getItem('token'), []);
     const id = useMemo(() => localStorage.getItem('id'), []);
 
+
+
     const handleLogout = async () => {
         try {
             await USER.logout();
@@ -36,40 +38,60 @@ function Header() {
                         }}>
                             <span className="publicsans-semi-bold-charade-14px">教師を探す</span>
                         </div>
-                        <div className="link logout" onClick={handleLogout}>
-                            <div className="dot-logo"></div>
-                            <div className="dashboardpublicsans-semi-bold-jade-14px">
-                                <span className="publicsans-semi-bold-jade-14px">ログアウト</span>
-                            </div>
-                            <img
-                                className="iconsic_chevron_left-header"
-                                src="../images/icons-ic-chevron-left.svg"
-                                alt="icons/ic_chevron_left"
-                            />
-                        </div>
-                        <button className="button-header" onClick={() => {
-                            navigate(
-                                "/login"
-                            )
-                        }}>
-                            <img className="start-icon" src="../images/start-icon-1.svg" alt="start icon" />
-                            <div className="labelvalign-text-middlepublicsans-bold-white-14px" >
-                                <span className="publicsans-bold-white-14px">ログイン</span>
-                            </div>
-                        </button>
-                        <div className="find-tutors" onClick={() => {
-                            {
-                                (token && id) ?
+
+                        {
+                            (token && id) ?
+                                (
+                                    <>
+                                    <div className="link logout" onClick={handleLogout}>
+                                    <div className="dashboardpublicsans-semi-bold-jade-14px">
+                                        <span className="publicsans-semi-bold-jade-14px">ログアウト</span>
+                                    </div>
+                                    <img
+                                        className="iconsic_chevron_left-header"
+                                        src="../images/icons-ic-chevron-left.svg"
+                                        alt="icons/ic_chevron_left"
+                                    />
+                                    </div>
+                                    <button className="button-header" onClick={() => {
+                                        navigate(
+                                            "/bookmark"
+                                        )
+                                    }}>
+                                        <img className="start-icon" src="../images/start-icon-1.svg" alt="start icon"/>
+                                        <div className="labelvalign-text-middlepublicsans-bold-white-14px">
+                                            <span className="publicsans-bold-white-14px">ブックマークリスト</span>
+                                        </div>
+                                    </button>
+                                    </>
+                                )
+
+                                :
+                                ( <button className="button-header" onClick={() => {
                                     navigate(
-                                        `/profile/${id}`
-                                    ) : navigate(
                                         "/login"
                                     )
-                            }
+                                }}>
+                                    <img className="start-icon" src="../images/start-icon-1.svg" alt="start icon"/>
+                                    <div className="labelvalign-text-middlepublicsans-bold-white-14px">
+                                        <span className="publicsans-bold-white-14px">ログイン</span>
+                                    </div>
+                                </button>)
+                        }
+                                <div className="find-tutors" onClick={() => {
+                                    {
+                                        (token && id) ?
+                                            navigate(
+                                                `/profile/${id}`
+                                            ) : navigate(
+                                                "/login"
+                                            )
+                                    }
 
-                        }}>
-                            <span className="publicsans-semi-bold-charade-14px">教師になる</span>
-                        </div>
+                                }}>
+                                    <span className="publicsans-semi-bold-charade-14px">教師になる</span>
+                                </div>
+                        }
                     </div>
                 </div>
             </div>
