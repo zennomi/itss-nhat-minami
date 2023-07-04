@@ -49,22 +49,10 @@ const Login = () => {
     return (
         <div>
             <Header></Header>
-
             <div className="login-container">
                 <div className="login-login">
-                    <div className="login-logo">
-                        <img
-                            src="/images/logo.svg"
-                            alt="Logo17403"
-                            className="login-logo1"
-                        />
-                    </div>
-                    <div className="login-login1">
-                        <div className="login-auth-banner">
-                            <div className="login-content">
-                                {/* <span className="login-text H3">
-                                こんにちは
-                            </span> */}
+                    <div className="login-content">
+
                                 <div className="login-illustrationsillustrationdashboard">
                                     <img
                                         src="/images/login.png"
@@ -74,37 +62,26 @@ const Login = () => {
 
                                 </div>
                             </div>
-                            <div className="login-stack">
+                    <div className="login-stack">
                                 <div className="login-auth-form-login">
                                     <div className="login-head">
                                         <span className="login-text02 H4">
                                             ログイン
                                         </span>
-                                        <span className="login-text04">
-                                            新しいメンバー?
-                                            <span onClick={() => {
+                                        <span >
+                                            <span>新しいメンバー?</span>
+                                            <span className="login-text04" onClick={() => {
                                                 navigate(
                                                     "/register"
                                                 )
                                             }}>
-                                                アカウント作る
+                                               アカウント作る
                                             </span>
                                         </span>
                                     </div>
                                     <div className="login-content1">
-                                        <div className="login-text-field">
+
                                             <div className="login-input">
-                                                {/* <span className="login-text07 Body1">
-                                        </span> */}
-                                                {/* <div className="login-labelfocus"> */}
-                                                {/* <img
-                                                src="/images/masklabeli1740-6dx7-200h.png"
-                                                alt="masklabelI1740"
-                                                className="login-masklabel"
-                                            /> */}
-                                                {/* <span className="login-text09 ComponentsTextFieldLabel">
-                                                <span>メールアドレス</span>
-                                            </span> */}
                                                 <input
                                                     type="text"
                                                     placeholder="メールアドレス"
@@ -114,7 +91,8 @@ const Login = () => {
                                                 />
                                                 {/* </div> */}
                                             </div>
-                                        </div>
+
+
                                         <div className="login-text-field1">
                                             <div className="login-input1">
                                                 {/* <span className="login-text11 Body1">
@@ -187,8 +165,6 @@ const Login = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
