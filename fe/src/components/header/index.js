@@ -28,8 +28,12 @@ function Header() {
                 <div className="header-wrap">
                     <img className="logo-header" src="../images/logo.svg" alt="Logo" />
                     <div className="link publicsans-semi-bold-charade-14px content-right">
-                        <div className="home">
-                            <span className="publicsans-semi-bold-charade-14px">ホーム</span>
+                        <div className="home" onClick={() =>{
+                            navigate(
+                                "/"
+                            )
+                        }}>
+                            <span className="publicsans-semi-bold-charade-14px " style={{cursor:'pointer'}}>ホーム</span>
                         </div>
                         <div className="find-tutors" onClick={() => {
                             navigate(
@@ -47,11 +51,11 @@ function Header() {
                                     <div className="dashboardpublicsans-semi-bold-jade-14px">
                                         <span className="publicsans-semi-bold-jade-14px">ログアウト</span>
                                     </div>
-                                    <img
-                                        className="iconsic_chevron_left-header"
-                                        src="../images/icons-ic-chevron-left.svg"
-                                        alt="icons/ic_chevron_left"
-                                    />
+                                    {/*<img*/}
+                                    {/*    className="iconsic_chevron_left-header"*/}
+                                    {/*    src="../images/icons-ic-chevron-left.svg"*/}
+                                    {/*    alt="icons/ic_chevron_left"*/}
+                                    {/*/>*/}
                                     </div>
                                     <button className="button-header" onClick={() => {
                                         navigate(
@@ -91,7 +95,7 @@ function Header() {
                                 }}>
                                     <span className="publicsans-semi-bold-charade-14px">教師になる</span>
                                 </div>
-                        }
+
                     </div>
                 </div>
             </div>
