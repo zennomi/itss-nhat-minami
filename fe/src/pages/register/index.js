@@ -68,9 +68,9 @@ const Register = () => {
                             />
                         </div>
                         <div className="register-content">
-                            <span className="register-text H3">
+                            {/* <span className="register-text H3">
                                 <span>こんにちは</span>
-                            </span>
+                            </span> */}
                             <div className="register-illustrationsillustrationdashboard">
                                 <img
                                     src="/images/imgi1740-boyd-600h.png"
