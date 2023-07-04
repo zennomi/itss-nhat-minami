@@ -61,9 +61,9 @@ const Login = () => {
                 <div className="login-login1">
                     <div className="login-auth-banner">
                         <div className="login-content">
-                            <span className="login-text H3">
+                            {/* <span className="login-text H3">
                                 こんにちは
-                            </span>
+                            </span> */}
                             <div className="login-illustrationsillustrationdashboard">
                                 <img
                                     src="/images/login.png"
