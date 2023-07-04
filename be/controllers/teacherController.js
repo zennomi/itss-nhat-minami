@@ -172,7 +172,7 @@ const TEACHER = {
         let userId = req.body.user_id;
         if (!teacherId || !userId) return res.status(400).json({message: 'MISSING_FIELDS'});
         try {
-            await DB.removeBookmark(teacherId, userId);
+            await DB.removeBookmark(userId, teacherId);
             return res.status(200).json({message: 'OK'});
         } catch (e) {
             console.log(e);
