@@ -8,6 +8,7 @@ export default function useListTeacher() {
   const { id } = useParams();
 
   const parseData = useCallback((data) => {
+    console.log(data);
     const userProfileBannerData = {
       bg: (data.background_image_url.startsWith("http") ? data.background_image_url : `http://tungsnk.tech:9999${data?.background_image_url}`),
       img_Avatar25: (data.photo_url.startsWith("http") ? data.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`),
@@ -26,7 +27,7 @@ export default function useListTeacher() {
     const teacherInformation = {
       lang_native: data?.lang_teach,
       flag: flagLanguageImg[data?.lang_teach],
-      star: data?.star.toFixed(1),
+      star: data?.star ? data?.star.toFixed(1) : 0,
       rated_count: data?.reviewCount,
       price: data?.price,
       time: data?.hours,

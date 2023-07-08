@@ -395,7 +395,7 @@ const Search = () => {
                         <div style={{ 'cursor': 'pointer' }} className="dropdown item_dropdown">
                             <div style={{ color: '#212B36' }} className="d-flex justify-content-between"
                                 data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                <span >日: 夜; 月: 午後; 火: 午後遅く;水: 夕方..."</span>
+                                <span >{filters?.timesession}</span>
                                 <span className="dropdown-toggle"  ></span>
                             </div>
                             <div className="frame-43 dropdown-menu" style={{ 'min-width': '720px!important' }} >

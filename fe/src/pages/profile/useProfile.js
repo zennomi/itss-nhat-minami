@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getTeacherByUserId } from '../../services/teacherService';
+import { getTeacherByUserId, getTeacher } from '../../services/teacherService';
 
 export default function useListTeacher() {
-  const { id } = useParams();
+  const { user_id } = useParams();
 
   const initialData = {
     photo_url: '',
@@ -35,13 +35,14 @@ export default function useListTeacher() {
 
   const parseData = useCallback((data) => {
     const profile = {
-      photo_url: (data.photo_url.startsWith("http") ? data.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`),
-      background_image_url: (data.background_image_url.startsWith("http") ? data.background_image_url : `http://tungsnk.tech:9999${data?.background_image_url}`),
+      photo_url: data?.photo_url ? (data.photo_url.startsWith("http") ? data.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`) : '',
+      background_image_url: data?.background_image_url ? (data.background_image_url.startsWith("http") ? data.background_image_url : `http://tungsnk.tech:9999${data?.background_image_url}`) : '',
       name: data?.name || '',
       gender: data?.gender || '',
       address: data?.address || '',
       latitude: data?.latitude || 0,
       longitude: data?.longitude || 0,
+      lang_study: data?.lang_study || '',
       lang_teach: data?.lang_teach || '',
       date_of_birth: data?.date_of_birth || '',
       country_of_birth: data?.country_of_birth || '',
@@ -57,16 +58,24 @@ export default function useListTeacher() {
       price: data?.price || '',
       hours: data?.hours || '',
     }
-
     return profile;
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['profile', id],
-    queryFn: () => getTeacherByUserId(id),
+    queryKey: ['profile', user_id],
+    queryFn: async () => {
+      const teacherIdResponse = await getTeacherByUserId(user_id);
+      const teacherId = teacherIdResponse.data?.id || null;
+      if (!teacherId) {
+        return initialData;
+      }
+      const teacherResponse = await getTeacher(teacherId);
+      const parsedData = parseData(teacherResponse.data);
+      return parsedData || initialData; // Ensure a defined value is returned
+    },
+
     staleTime: 120 * 1000,
-    select: (data) => parseData(data.data),
-    enabled: !!id,
+    enabled: !!user_id,
   });
 
   return {

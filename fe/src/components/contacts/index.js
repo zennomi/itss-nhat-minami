@@ -59,7 +59,7 @@ export default function Contacts({ initialData }) {
     return (
         <form className='contacts-container' onSubmit={handleSubmit(onSubmit)}>
             <div className='title'>
-                連絡先
+                <span>連絡先</span>
             </div>
             <div className='contact-field'>
                 <i className="fa-solid fa-phone" style={{ color: '#F0AB00', width: '24px', height: '24px' }}></i>

@@ -10,7 +10,6 @@ const Profile = () => {
     const {
         teacher
     } = useProfile();
-
     return (
         <div className='profile-container'>
             <Header />

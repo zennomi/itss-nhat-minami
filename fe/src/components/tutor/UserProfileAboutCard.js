@@ -18,7 +18,8 @@ const UserProfileAboutCard = (props) => {
         </div>
       </div>
       <div className="tutor-x">
-        <span className="publicsans-normal-charade-14px">{description}</span>
+        {description !== "null" &&
+        <span className="publicsans-normal-charade-14px">{description}</span>}
         <Info
           iconsIc_Location="https://cdn-icons-png.flaticon.com/512/64/64113.png"
           spanText={address}
