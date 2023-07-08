@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getTeacher } from '../../services/teacherService';
+import { getTeacherByUserId } from '../../services/teacherService';
 
 export default function useListTeacher() {
   const { id } = useParams();
@@ -63,7 +63,7 @@ export default function useListTeacher() {
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['profile', id],
-    queryFn: () => getTeacher(id),
+    queryFn: () => getTeacherByUserId(id),
     staleTime: 120 * 1000,
     select: (data) => parseData(data.data),
     enabled: !!id,

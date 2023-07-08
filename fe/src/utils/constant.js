@@ -1,4 +1,4 @@
-export const languages = ['VietNamese','French','Japanese','Chinese','Korean'];
+export const languages = ['ベトナム語','英語','日本語','中国語','韓国語'];
 
 export const purposes = ['試験','会話','ビジネス'];
 

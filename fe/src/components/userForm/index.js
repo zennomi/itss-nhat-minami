@@ -25,6 +25,7 @@ const schema = yup.object().shape({
     gender: yup.string().required('性別を選択してください'),
     address: yup.string().required('場所を入力してください'),
     lang_teach: yup.string().required('教えるために使用する言語を選択してください'),
+    lang_study: yup.string().required('教える言語を選択してください'),
     date_of_birth: yup.string()
         .required('生年月日を入力してください')
         .test('is-number', '数字で入力してください。', (value) => {
@@ -63,7 +64,9 @@ export default function Form({ initialData }) {
     const { id } = useParams();
 
     const queryClient = useQueryClient();
-    initialData.hours *= 60;
+    if (initialData.hours) {
+        initialData.hours *= 60;
+    }
     const { reset, control, handleSubmit, setValue, watch, register, formState: { errors } } = useForm({
         defaultValues: initialData,
         resolver: yupResolver(schema),
@@ -73,7 +76,7 @@ export default function Form({ initialData }) {
         control,
         name: 'certificates',
     });
-    const [changeLatLon, setChangeLatLon] = useState(true);
+
     const getCurrentLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -96,8 +99,8 @@ export default function Form({ initialData }) {
                 .then((coordinates) => {
                     const { lat, lon } = coordinates;
                     // if (changeLatLon) {
-                        setValue('latitude', lat);
-                        setValue('longitude', lon);
+                    setValue('latitude', lat);
+                    setValue('longitude', lon);
                     // }
                 })
                 .catch((error) => {
@@ -258,19 +261,34 @@ export default function Form({ initialData }) {
                 </div>
             </div>
             <div className="form-row">
+                <input
+                    id='address'
+                    type='text'
+                    className='input-field'
+                    {...register('address')}
+                    placeholder='場所'
+                    onClick={handleAddressClick}
+                    onChange={handleAddressChange}
+                />
+                {errors.address && <p className="error-message">{errors.address.message}</p>}
+            </div>
+            <div className="form-row">
                 <div className='form-field'>
-                    <input
-                        id='address'
-                        type='text'
-                        className='input-field'
-                        {...register('address')}
-                        placeholder='場所'
-                        onClick={handleAddressClick}
-                        onChange={handleAddressChange}
-                    />
-                    {errors.address && <p className="error-message">{errors.address.message}</p>}
+                    <select
+                        id='lang_teach'
+                        className="input-field"
+                        {...register('lang_study')}
+                        name='lang_study'
+                    >
+                        <option value='' disabled selected>何語を教えますか。</option>
+                        <option value="英語">英語</option>
+                        <option value="ベトナム語">ベトナム語</option>
+                        <option value="日本語">日本語</option>
+                        <option value="韓国語">韓国語</option>
+                        <option value="中国語">中国語</option>
+                    </select>
+                    {errors.lang_study && <p className="error-message">{errors.lang_study.message}</p>}
                 </div>
-
                 <div className='form-field'>
                     <select
                         id='lang_teach'
@@ -279,13 +297,13 @@ export default function Form({ initialData }) {
                         name='lang_teach'
                     >
                         <option value='' disabled selected>何語で教えますか。</option>
-                        <option value="English">英語</option>
-                        <option value="Vietnamese">ベトナム語</option>
-                        <option value="Japanese">日本語</option>
-                        <option value="Korean">韓国語</option>
+                        <option value="英語">英語</option>
+                        <option value="ベトナム語">ベトナム語</option>
+                        <option value="日本語">日本語</option>
+                        <option value="韓国語">韓国語</option>
+                        <option value="中国語">中国語</option>
                     </select>
                     {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
-
                 </div>
             </div>
             {showMap &&

@@ -16,6 +16,13 @@ export const getTeacher = async (id) => {
     })
 }
 
+export const getTeacherByUserId = async (id) => {
+    return publicHttp({
+        method: 'GET',
+        url: `/api/teacherbyuser?user_id=${id}`,
+    })
+}
+
 export const getTeacherReviews = async (id) => {
     return publicHttp({
         method: 'GET',
