@@ -46,9 +46,9 @@ const schema = yup.object().shape({
     price: yup.number()
         .typeError('数字で入力してください。')
         .required('給料を入力してください。'),
-    hours: yup.number()
-        .typeError('数字で入力してください。')
-        .required('レッソンの時間を入力してください。'),
+    // hours: yup.number()
+    //     .typeError('数字で入力してください。')
+    //     .required('レッソンの時間を入力してください。'),
     description: yup.string().required("自己紹介してください。"),
     certificates: yup.array().of(
         yup.object().shape({
@@ -166,10 +166,9 @@ export default function Form({ initialData }) {
     const updateTeacherInfoMutation = useMutation(data => updateTeacherInfo(data));
 
     const onSubmit = (data) => {
-        setValue('hours', watch('hours') / 60);
         console.log(data);
         updateTeacherInfoMutation.mutate(
-            { user_id: id, ...data },
+            { teacher_id: id, ...data },
             {
                 onSuccess: () => {
                     queryClient.invalidateQueries({

@@ -27,6 +27,7 @@ export default function Contacts({ initialData }) {
     const updateTeacherInfoMutation = useMutation(data => updateTeacherInfo(data));
 
     const onSubmit = (data) => {
+        console.log(data);
         updateTeacherInfoMutation.mutate(
             { teacher_id: id, ...data }, 
             {
