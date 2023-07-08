@@ -17,6 +17,14 @@ const Bookmark = () => {
             photo_url: item?.photo_url.startsWith("http") ? item?.photo_url : `http://tungsnk.tech:9999${item?.photo_url}`,
         }));
     }
+    // const parseData = (data) => {
+    //     return data.map((item) => ({
+    //         id: item.teacher_id,
+    //         name: item.name,
+    //         lang_teach: item.lang_teach,
+    //         photo_url: item?.photo_url.startsWith("http") ? item?.photo_url : http://tungsnk.tech:9999${item?.photo_url},
+    // }));
+    // }
 
     const { data } = useQuery({
         queryKey: ['bookmark', id],
