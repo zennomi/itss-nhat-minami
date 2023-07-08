@@ -361,7 +361,7 @@ const Search = () => {
                         <div className="dropdown item_dropdown">
                             <div style={{ color: '#212B36', 'cursor': 'pointer' }} className="d-flex justify-content-between"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <span>{filters?.star} Star & Up</span>
+                                <span>{filters?.star}星から </span>
                                 <span className="dropdown-toggle"  ></span>
                             </div>
                             <div className="star-filter dropdown-menu ">
@@ -375,11 +375,13 @@ const Search = () => {
                                                 precision={0.5}
                                             />
                                         </div>
-                                        <div>
-                                            <span style={{
-                                                'color': 'rgb(33, 43, 54)'
-                                            }}>& Up</span>
-                                        </div>
+                                        {star < 5 &&
+                                            <div>
+                                                <span style={{
+                                                    'color': 'rgb(33, 43, 54)'
+                                                }}>から</span>
+                                            </div>
+                                        }
                                     </div>
                                 ))}
                             </div>
@@ -512,9 +514,9 @@ const Search = () => {
                     <div>
                         {isSuccess && !isSorted && listTeachers?.map((item) => <>
                             <div className=" mt-5  ">
-                               <div className="d-flex position-relative" onMouseOver={() => handleMouseOver(item.id, item)} onMouseLeave={() => handleMouseLeave(item.id)}>
-                                   <Teacher data={item}  />
-                               </div>
+                                <div className="d-flex position-relative" onMouseOver={() => handleMouseOver(item.id, item)} onMouseLeave={() => handleMouseLeave(item.id)}>
+                                    <Teacher data={item} />
+                                </div>
                             </div>
                         </>)}
                         {isSuccess && isSorted && sortedList?.map((item) => <>

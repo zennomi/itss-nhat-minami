@@ -91,7 +91,6 @@ function Header() {
                                 }}>
                                     <span className="publicsans-semi-bold-charade-14px">教師になる</span>
                                 </div>
-                        }
                     </div>
                 </div>
             </div>
