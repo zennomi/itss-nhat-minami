@@ -4,8 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getTeacherByUserId, getTeacher } from '../../services/teacherService';
 
 export default function useListTeacher() {
-  const { user_id } = useParams();
-
+  const { id } = useParams();
   const initialData = {
     photo_url: '',
     background_image_url: '',
@@ -62,9 +61,9 @@ export default function useListTeacher() {
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['profile', user_id],
+    queryKey: ['profile', id],
     queryFn: async () => {
-      const teacherIdResponse = await getTeacherByUserId(user_id);
+      const teacherIdResponse = await getTeacherByUserId(id);
       const teacherId = teacherIdResponse.data?.id || null;
       if (!teacherId) {
         return initialData;
@@ -75,7 +74,7 @@ export default function useListTeacher() {
     },
 
     staleTime: 120 * 1000,
-    enabled: !!user_id,
+    enabled: !!id,
   });
 
   return {
