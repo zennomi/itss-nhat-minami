@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import Header from "../../components/header";
+import { useNavigate } from "react-router-dom";
 function Home() {
     return (
         <div className="main-pagescreen">
@@ -38,13 +39,13 @@ function Home() {
                     <div className="stack">
                         <div className="stack-1">
                             <Button5 label={"教師を探す"}/>
-                            <div className="link">
-                                <img className="icons external-link" src="/images/icons-external-link.svg"
-                                     alt="icons/external-link"/>
-                                <div className="the-starting-point-f">
-                                    {"ログイン"}
-                                </div>
-                            </div>
+                            {/*<div className="link">*/}
+                            {/*    <img className="icons external-link" src="/images/icons-external-link.svg"*/}
+                            {/*         alt="icons/external-link"/>*/}
+                            {/*    <div className="the-starting-point-f">*/}
+                            {/*        {"ログイン"}*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
                         <Button6 label={"教師になる"}/>
                     </div>
@@ -144,7 +145,7 @@ function Button5(props) {
     return (
         <div className="button-1">
             <img className="iconsic_flash" src="/images/icons-ic-flash.svg" alt="icons/ic_flash"/>
-            <div className="label-1 publicsans-bold-white-15px">
+            <div className="label-1 publicsans-bold-white-15px" >
                 {label}
             </div>
         </div>
