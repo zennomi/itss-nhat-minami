@@ -26,6 +26,7 @@ export default function useListTeacher() {
     phone_number: '',
     gmail: '',
     resume_url: '',
+    website_url: '',
     linkedin_url: '',
     twitter_url: '',
     facebook_url: '',
@@ -50,12 +51,14 @@ export default function useListTeacher() {
       phone_number: data?.phone_number || '',
       gmail: data?.gmail || '',
       resume_url: data?.resume_url || '',
+      website_url: data?.website_url || '',
       linkedin_url: data?.linkedin_url || '',
       twitter_url: data?.twitter_url || '',
       facebook_url: data?.facebook_url || '',
       instagram_url: data?.instagram_url || '',
       price: data?.price || '',
       hours: data?.hours || '',
+      purpose: data?.purpose || '',
     }
     return profile;
   }, []);

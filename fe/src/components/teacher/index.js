@@ -46,7 +46,7 @@ function Teacher({ data }) {
                 alt=""
             />
             {/*cục bên phải */}
-            <div className="frame-2" onClick={() => navigate(`/tutor/${id}`)} style={{
+            <div className="frame-2"  style={{
                 'cursor': 'pointer'
             }}>
                 <div className="frame-3">
@@ -130,7 +130,7 @@ function Teacher({ data }) {
                         </span>
                     </div>
                 </div>
-                <div className="button-5">
+                <div className="button-5"　onClick={() => navigate(`/tutor/${id}`)}>
                     <i className="fa-solid fa-circle-exclamation" style={{ color: '#fafafa' }}></i>
                     <div className="label-5valign-text-middlepublicsans-bold-white-14px">
                         <span>

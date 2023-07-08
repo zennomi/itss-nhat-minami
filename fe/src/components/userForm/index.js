@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { purposes } from '../../utils/constant';
 
 const Alert = React.forwardRef(function Alert(
     props,
@@ -46,9 +47,8 @@ const schema = yup.object().shape({
     price: yup.number()
         .typeError('数字で入力してください。')
         .required('給料を入力してください。'),
-    // hours: yup.number()
-    //     .typeError('数字で入力してください。')
-    //     .required('レッソンの時間を入力してください。'),
+    purpose: yup.string()
+        .required('目的を入力してください'),
     description: yup.string().required("自己紹介してください。"),
     certificates: yup.array().of(
         yup.object().shape({
@@ -283,41 +283,6 @@ export default function Form({ initialData }) {
             }
             <div className="form-row">
                 <div className='form-field'>
-                    <select
-                        id='lang_study'
-                        className="input-field"
-                        {...register('lang_study')}
-                        name='lang_study'
-                    >
-                        <option value='' disabled selected>何語を教えますか。</option>
-                        <option value="フランス語">フランス語</option>
-                        <option value="ベトナム語">ベトナム語</option>
-                        <option value="日本語">日本語</option>
-                        <option value="韓国語">韓国語</option>
-                        <option value="中国語">中国語</option>
-                    </select>
-                    {errors.lang_study && <p className="error-message">{errors.lang_study.message}</p>}
-                </div>
-                <div className='form-field'>
-                    <select
-                        id='lang_teach'
-                        className="input-field"
-                        {...register('lang_teach')}
-                        name='lang_teach'
-                    >
-                        <option value='' disabled selected>何語で教えますか。</option>
-                        <option value="フランス語">フランス語</option>
-                        <option value="ベトナム語">ベトナム語</option>
-                        <option value="日本語">日本語</option>
-                        <option value="韓国語">韓国語</option>
-                        <option value="中国語">中国語</option>
-                    </select>
-                    {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
-                </div>
-            </div>
-
-            <div className="form-row">
-                <div className='form-field'>
                     <input
                         id="date_of_birth"
                         type="text"
@@ -340,29 +305,69 @@ export default function Form({ initialData }) {
                     {errors.country_of_birth && <p className="error-message">{errors.country_of_birth.message}</p>}
                 </div>
             </div>
+            <div className="form-row">
+                <div className='form-field'>
+                    <span style={{ paddingLeft: '10px' }}>何語を教えますか。</span>
+                    <select
+                        id='lang_study'
+                        className="input-field"
+                        {...register('lang_study')}
+                        name='lang_study'
+                    >
+                        <option value='' disabled selected>何語を教えますか。</option>
+                        <option value="フランス語">フランス語</option>
+                        <option value="ベトナム語">ベトナム語</option>
+                        <option value="日本語">日本語</option>
+                        <option value="韓国語">韓国語</option>
+                        <option value="中国語">中国語</option>
+                    </select>
+                    {errors.lang_study && <p className="error-message">{errors.lang_study.message}</p>}
+                </div>
+                <div className='form-field'>
+                    <span style={{ paddingLeft: '10px' }}>何語で教えますか。</span>
+                    <select
+                        id='lang_teach'
+                        className="input-field"
+                        {...register('lang_teach')}
+                        name='lang_teach'
+                    >
+                        <option value='' disabled selected>何語で教えますか。</option>
+                        <option value="フランス語">フランス語</option>
+                        <option value="ベトナム語">ベトナム語</option>
+                        <option value="日本語">日本語</option>
+                        <option value="韓国語">韓国語</option>
+                        <option value="中国語">中国語</option>
+                    </select>
+                    {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
+                </div>
+            </div>
             <div className='form-row'>
-                {/* <div className='form-field'> */}
-                {/* <span style={{ paddingLeft: '10px' }}>料金</span> */}
-                <input
-                    type='text'
-                    className='input-field'
-                    {...register('price')}
-                    placeholder='料金 ¥'
-                />
-                {errors.price &&
-                    <p className='error-message'>{errors.price.message}</p>}
-                {/* </div> */}
-                {/* <div className='form-field'>
-                    <span style={{ paddingLeft: '10px' }}>レッソンの時間</span>
+                <div className='form-field'>
+                    <span style={{ paddingLeft: '10px' }}>料金</span>
                     <input
                         type='text'
                         className='input-field'
-                        {...register('hours')}
-                        placeholder='分'
+                        {...register('price')}
+                        placeholder='料金 ¥'
                     />
-                    {errors.hours &&
-                        <p className='error-message'>{errors.hours.message}</p>}
-                </div> */}
+                    {errors.price &&
+                        <p className='error-message'>{errors.price.message}</p>}
+                </div>
+                <div className='form-field'>
+                    <span style={{ paddingLeft: '10px' }}>目的</span>
+                    <select
+                        id='purpose'
+                        className="input-field"
+                        {...register('purpose')}
+                        name='purpose'
+                    >
+                        <option value='' disabled selected>目的</option>
+                        {purposes.map((value)=>(
+                            <option value={value}>{value}</option>
+                        ))}
+                    </select>
+                    {errors.purpose && <p className="error-message">{errors.purpose.message}</p>}
+                </div>
             </div>
             <div className="form-row">
                 <textarea

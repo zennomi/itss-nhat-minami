@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Icon } from '@iconify/react';
-import CvImg from './cv.png'
+import CvImg from './cv.png';
+import WebsiteImg from './website.png';
 import './style.css'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -90,6 +91,16 @@ export default function Contacts({ initialData }) {
                     className='contact-input'
                     {...register('resume_url')}
                     placeholder='Resume'
+                ></input>
+            </div>
+            <div className='contact-field'>
+                <img src={WebsiteImg} alt='' className='icon-box'></img>
+                <input
+                    id='website_url'
+                    type='text'
+                    className='contact-input'
+                    {...register('website_url')}
+                    placeholder='Website'
                 ></input>
             </div>
             <div className='contact-field'>
