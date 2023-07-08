@@ -13,6 +13,7 @@ function Tutor() {
   const userProfileAboutCardData = data?.userProfileAboutCardData;
   const teacherInformation = data?.teacherInformation;
 
+  console.log([userProfileBannerData, userProfileAboutCardData, teacherInformation]);
   const [activeComponent, setActiveComponent] = useState('component1');
 
   const handleBannerClick = (componentName) => {

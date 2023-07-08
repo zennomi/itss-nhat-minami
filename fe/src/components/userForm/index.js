@@ -49,7 +49,7 @@ const schema = yup.object().shape({
     hours: yup.number()
         .typeError('数字で入力してください。')
         .required('レッソンの時間を入力してください。'),
-    description: yup.string(),
+    description: yup.string().required("自己紹介してください。"),
     certificates: yup.array().of(
         yup.object().shape({
             language_code: yup.string().required('証明書の種類を選択してください。'),
@@ -111,10 +111,6 @@ export default function Form({ initialData }) {
         }
     };
 
-    if (watch('latitude') === 0 && watch('longitude') === 0) {
-        getCurrentLocation();
-    }
-
     const geocode = async (address) => {
         try {
             const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`);
@@ -171,8 +167,9 @@ export default function Form({ initialData }) {
 
     const onSubmit = (data) => {
         setValue('hours', watch('hours') / 60);
+        console.log(data);
         updateTeacherInfoMutation.mutate(
-            { user_id: id, ...data },
+            { teacher_id: id, ...data },
             {
                 onSuccess: () => {
                     queryClient.invalidateQueries({
@@ -206,6 +203,7 @@ export default function Form({ initialData }) {
 
     const handleAddressClick = () => {
         setShowMap(true);
+        getCurrentLocation();
     };
 
     // Make the add file field disappear when clicking outside it
@@ -272,6 +270,18 @@ export default function Form({ initialData }) {
                 />
                 {errors.address && <p className="error-message">{errors.address.message}</p>}
             </div>
+            {showMap &&
+                <div ref={mapRef} className='form-row'>
+                    <div style={{ height: '500px', width: '100%' }}>
+                        <Map
+                            latitude={watch('latitude')}
+                            longitude={watch('longitude')}
+                            handleMapClick={handleMapClick}
+                            clickable={true}
+                        />
+                    </div>
+                </div>
+            }
             <div className="form-row">
                 <div className='form-field'>
                     <select
@@ -281,7 +291,7 @@ export default function Form({ initialData }) {
                         name='lang_study'
                     >
                         <option value='' disabled selected>何語を教えますか。</option>
-                        <option value="英語">英語</option>
+                        <option value="フランス語">フランス語</option>
                         <option value="ベトナム語">ベトナム語</option>
                         <option value="日本語">日本語</option>
                         <option value="韓国語">韓国語</option>
@@ -297,7 +307,7 @@ export default function Form({ initialData }) {
                         name='lang_teach'
                     >
                         <option value='' disabled selected>何語で教えますか。</option>
-                        <option value="英語">英語</option>
+                        <option value="フランス語">フランス語</option>
                         <option value="ベトナム語">ベトナム語</option>
                         <option value="日本語">日本語</option>
                         <option value="韓国語">韓国語</option>
@@ -306,18 +316,7 @@ export default function Form({ initialData }) {
                     {errors.lang_teach && <p className="error-message">{errors.lang_teach.message}</p>}
                 </div>
             </div>
-            {showMap &&
-                <div ref={mapRef} className='form-row'>
-                    <div style={{ height: '500px', width: '100%' }}>
-                        <Map
-                            latitude={watch('latitude')}
-                            longitude={watch('longitude')}
-                            handleMapClick={handleMapClick}
-                            clickable={true}
-                        />
-                    </div>
-                </div>
-            }
+
             <div className="form-row">
                 <div className='form-field'>
                     <input
@@ -344,15 +343,15 @@ export default function Form({ initialData }) {
             </div>
             <div className='form-row'>
                 {/* <div className='form-field'> */}
-                    {/* <span style={{ paddingLeft: '10px' }}>料金</span> */}
-                    <input
-                        type='text'
-                        className='input-field'
-                        {...register('price')}
-                        placeholder='料金 ¥'
-                    />
-                    {errors.price &&
-                        <p className='error-message'>{errors.price.message}</p>}
+                {/* <span style={{ paddingLeft: '10px' }}>料金</span> */}
+                <input
+                    type='text'
+                    className='input-field'
+                    {...register('price')}
+                    placeholder='料金 ¥'
+                />
+                {errors.price &&
+                    <p className='error-message'>{errors.price.message}</p>}
                 {/* </div> */}
                 {/* <div className='form-field'>
                     <span style={{ paddingLeft: '10px' }}>レッソンの時間</span>
@@ -369,6 +368,7 @@ export default function Form({ initialData }) {
             <div className="form-row">
                 <textarea
                     id='description'
+                    type="text"
                     className='textarea'
                     {...register('description')}
                     placeholder='自己紹介'
@@ -399,6 +399,7 @@ export default function Form({ initialData }) {
                     <LoadingButton
                         loading={updateTeacherInfoMutation.isLoading}
                         type="submit"
+                        onClick={handleSubmit(onSubmit)}
                         style={{
                             justifyContent: 'center',
                             alignItems: 'center',

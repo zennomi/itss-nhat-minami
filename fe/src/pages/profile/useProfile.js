@@ -4,10 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import { getTeacherByUserId, getTeacher } from '../../services/teacherService';
 
 export default function useListTeacher() {
-  const { id } = useParams();
+  const { user_id } = useParams();
 
   const initialData = {
-    id: 0,
     photo_url: '',
     background_image_url: '',
     name: '',
@@ -36,7 +35,6 @@ export default function useListTeacher() {
 
   const parseData = useCallback((data) => {
     const profile = {
-      id: data?.id || null,
       photo_url: data?.photo_url ? (data.photo_url.startsWith("http") ? data.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`) : '',
       background_image_url: data?.background_image_url ? (data.background_image_url.startsWith("http") ? data.background_image_url : `http://tungsnk.tech:9999${data?.background_image_url}`) : '',
       name: data?.name || '',
@@ -60,23 +58,24 @@ export default function useListTeacher() {
       price: data?.price || '',
       hours: data?.hours || '',
     }
-    console.log(profile);
     return profile;
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
-    queryKey: ['profile', id],
+    queryKey: ['profile', user_id],
     queryFn: async () => {
-      const teacherIdResponse = await getTeacherByUserId(id);
+      const teacherIdResponse = await getTeacherByUserId(user_id);
       const teacherId = teacherIdResponse.data?.id || null;
-      if (teacherId) {
-        const teacherResponse = await getTeacher(teacherId);
-        console.log(teacherResponse.data);
-        return parseData(teacherResponse.data);
+      if (!teacherId) {
+        return initialData;
       }
+      const teacherResponse = await getTeacher(teacherId);
+      const parsedData = parseData(teacherResponse.data);
+      return parsedData || initialData; // Ensure a defined value is returned
     },
+
     staleTime: 120 * 1000,
-    enabled: !!id,
+    enabled: !!user_id,
   });
 
   return {
