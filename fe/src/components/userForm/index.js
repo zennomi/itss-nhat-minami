@@ -169,7 +169,7 @@ export default function Form({ initialData }) {
         setValue('hours', watch('hours') / 60);
         console.log(data);
         updateTeacherInfoMutation.mutate(
-            { teacher_id: id, ...data },
+            { user_id: id, ...data },
             {
                 onSuccess: () => {
                     queryClient.invalidateQueries({
@@ -399,7 +399,6 @@ export default function Form({ initialData }) {
                     <LoadingButton
                         loading={updateTeacherInfoMutation.isLoading}
                         type="submit"
-                        onClick={handleSubmit(onSubmit)}
                         style={{
                             justifyContent: 'center',
                             alignItems: 'center',
