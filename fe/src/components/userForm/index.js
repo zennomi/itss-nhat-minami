@@ -172,7 +172,7 @@ export default function Form({ initialData }) {
     const onSubmit = (data) => {
         setValue('hours', watch('hours') / 60);
         updateTeacherInfoMutation.mutate(
-            { teacher_id: id, ...data },
+            { user_id: id, ...data },
             {
                 onSuccess: () => {
                     queryClient.invalidateQueries({
@@ -275,7 +275,7 @@ export default function Form({ initialData }) {
             <div className="form-row">
                 <div className='form-field'>
                     <select
-                        id='lang_teach'
+                        id='lang_study'
                         className="input-field"
                         {...register('lang_study')}
                         name='lang_study'
@@ -343,28 +343,28 @@ export default function Form({ initialData }) {
                 </div>
             </div>
             <div className='form-row'>
-                <div className='form-field'>
-                    <span style={{ paddingLeft: '10px' }}>料金</span>
+                {/* <div className='form-field'> */}
+                    {/* <span style={{ paddingLeft: '10px' }}>料金</span> */}
                     <input
                         type='text'
                         className='input-field'
                         {...register('price')}
-                        placeholder='¥'
+                        placeholder='料金 ¥'
                     />
                     {errors.price &&
                         <p className='error-message'>{errors.price.message}</p>}
-                </div>
-                <div className='form-field'>
+                {/* </div> */}
+                {/* <div className='form-field'>
                     <span style={{ paddingLeft: '10px' }}>レッソンの時間</span>
                     <input
                         type='text'
                         className='input-field'
                         {...register('hours')}
-                        placeholder='時'
+                        placeholder='分'
                     />
                     {errors.hours &&
                         <p className='error-message'>{errors.hours.message}</p>}
-                </div>
+                </div> */}
             </div>
             <div className="form-row">
                 <textarea

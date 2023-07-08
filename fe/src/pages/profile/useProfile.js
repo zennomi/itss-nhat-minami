@@ -1,12 +1,13 @@
 import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getTeacherByUserId } from '../../services/teacherService';
+import { getTeacherByUserId, getTeacher } from '../../services/teacherService';
 
 export default function useListTeacher() {
   const { id } = useParams();
 
   const initialData = {
+    id: 0,
     photo_url: '',
     background_image_url: '',
     name: '',
@@ -35,13 +36,15 @@ export default function useListTeacher() {
 
   const parseData = useCallback((data) => {
     const profile = {
-      photo_url: (data.photo_url.startsWith("http") ? data.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`),
-      background_image_url: (data.background_image_url.startsWith("http") ? data.background_image_url : `http://tungsnk.tech:9999${data?.background_image_url}`),
+      id: data?.id || null,
+      photo_url: data?.photo_url ? (data.photo_url.startsWith("http") ? data.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`) : '',
+      background_image_url: data?.background_image_url ? (data.background_image_url.startsWith("http") ? data.background_image_url : `http://tungsnk.tech:9999${data?.background_image_url}`) : '',
       name: data?.name || '',
       gender: data?.gender || '',
       address: data?.address || '',
       latitude: data?.latitude || 0,
       longitude: data?.longitude || 0,
+      lang_study: data?.lang_study || '',
       lang_teach: data?.lang_teach || '',
       date_of_birth: data?.date_of_birth || '',
       country_of_birth: data?.country_of_birth || '',
@@ -57,15 +60,22 @@ export default function useListTeacher() {
       price: data?.price || '',
       hours: data?.hours || '',
     }
-
+    console.log(profile);
     return profile;
   }, []);
 
   const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['profile', id],
-    queryFn: () => getTeacherByUserId(id),
+    queryFn: async () => {
+      const teacherIdResponse = await getTeacherByUserId(id);
+      const teacherId = teacherIdResponse.data?.id || null;
+      if (teacherId) {
+        const teacherResponse = await getTeacher(teacherId);
+        console.log(teacherResponse.data);
+        return parseData(teacherResponse.data);
+      }
+    },
     staleTime: 120 * 1000,
-    select: (data) => parseData(data.data),
     enabled: !!id,
   });
 
