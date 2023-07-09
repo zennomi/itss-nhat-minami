@@ -55,37 +55,38 @@ const TEACHER = {
     updateTeacher: async (req, res) => {
         let userId = req.user_id;
         let params = {
-            lang_teach: req.body.lang_teach || null,
-            lang_study: req.body.lang_study || null,
-            purpose: req.body.purpose || null,
-            price: req.body.price || null,
-            phone_number: req.body.phone_number || null,
-            resume_url: req.body.resume_url || null,
-            website_url: req.body.website_url || null,
-            facebook_url: req.body.facebook_url || null,
-            instagram_url: req.body.instagram_url || null,
-            linkedin_url: req.body.linkedin_url || null,
-            twitter_url: req.body.twitter_url || null,
-            name: req.body.name || null,
-            gender: req.body.gender || null,
-            date_of_birth: req.body.date_of_birth || null,
+            lang_teach: req.body.lang_teach || req.body.lang_teach === "" ? req.body.lang_teach : null,
+            lang_study: req.body.lang_study || req.body.lang_study === "" ? req.body.lang_study : null,
+            purpose: req.body.purpose || req.body.purpose === "" ? req.body.purpose : null,
+            price: req.body.price || req.body.price === "" ? req.body.price : null,
+            phone_number: req.body.phone_number || req.body.phone_number === "" ? req.body.phone_number : null,
+            resume_url: req.body.resume_url || req.body.resume_url === "" ? req.body.resume_url : null,
+            website_url: req.body.website_url || req.body.website_url === "" ? req.body.website_url : null,
+            facebook_url: req.body.facebook_url || req.body.facebook_url === "" ? req.body.facebook_url : null,
+            instagram_url: req.body.instagram_url || req.body.instagram_url === "" ? req.body.instagram_url : null,
+            linkedin_url: req.body.linkedin_url || req.body.linkedin_url === "" ? req.body.linkedin_url : null,
+            twitter_url: req.body.twitter_url || req.body.twitter_url === "" ? req.body.twitter_url : null,
+            name: req.body.name || req.body.name === "" ? req.body.name : null,
+            gender: req.body.gender || req.body.gender === "" ? req.body.gender : null,
+            date_of_birth: req.body.date_of_birth || req.body.date_of_birth === "" ? req.body.date_of_birth : null,
             certificates: req.body.certificates || [],
-            country_of_birth: req.body.country_of_birth || null,
-            description: req.body.description || null,
-            address: req.body.address || null,
-            longitude: req.body.longitude || null,
-            latitude: req.body.latitude || null,
+            country_of_birth: req.body.country_of_birth || req.body.country_of_birth === "" ? req.body.country_of_birth : null,
+            description: req.body.description || req.body.description === "" ? req.body.description : null,
+            address: req.body.address || req.body.address === "" ? req.body.address : null,
+            longitude: req.body.longitude || req.body.longitude === "" ? req.body.longitude : null,
+            latitude: req.body.latitude || req.body.latitude === "" ? req.body.latitude : null,
+            gmail: req.body.gmail || req.body.gmail === "" ? req.body.gmail : null
         };
         let teacherId = await DB.getTeacherByUserId(userId);
         try {
-            if(teacherId === null) {
-                let res = await DB.createTeacher(userId, params);
-                let teacher_id_new = res.id;
+            if(teacherId === null || teacherId === undefined){
+                let resp = await DB.createTeacher(userId, params);
+                let teacher_id_new = resp.id;
                 await DB.updateCertificates(teacher_id_new, params.certificates);
                 await DB.updateUserInfos(userId, params);
                 return res.status(200).json(await DB.getTeacherInfos(teacher_id_new));
-
             }
+            teacherId = teacherId.id;
             await DB.updateTeacherInfos(teacherId, params);
             await DB.updateCertificates(teacherId, params.certificates);
             let kq = await DB.getTeacherInfos(teacherId);
@@ -122,7 +123,8 @@ const TEACHER = {
         }
     },
     upBackGround: async (req, res) => {
-        let teacherId = req.body.teacher_id;
+        let userId = req.user_id;
+        let teacherId = (await DB.getTeacherByUserId(userId)).id;
         let bg = req.files?.file;
         if (!teacherId || !bg) return res.status(400).json({message: 'MISSING_FIELDS'});
         let newName = __dirname + "/../public/files/bg" + teacherId + ".jpg";
@@ -138,7 +140,8 @@ const TEACHER = {
         }
     },
     upAvatar: async (req, res) => {
-        let teacherId = req.body.teacher_id;
+        let userId = req.user_id;
+        let teacherId = (await DB.getTeacherByUserId(userId)).id;
         let bg = req.files?.file;
         if (!teacherId || !bg) return res.status(400).json({message: 'MISSING_FIELDS'});
         let newName = __dirname + "/../public/files/avatar" + teacherId + ".jpg";
@@ -182,6 +185,18 @@ const TEACHER = {
         if (!userId) return res.status(400).json({message: 'MISSING_FIELDS'});
         try {
             let kq = await DB.getBookmarksByUserId(userId);
+            return res.status(200).json(kq);
+        } catch (e) {
+            console.log(e);
+            return res.status(500).json({message: 'DATABASE_ERROR'});
+        }
+    },
+    getTeacherByUserId: async (req, res) => {
+        let userId = req.query.user_id;
+        if (!userId) return res.status(400).json({message: 'MISSING_FIELDS'});
+        try {
+            let kq = await DB.getTeacherByUserId(userId);
+            if(kq === undefined) return res.status(200).json({message: 'NOT_FOUND'});
             return res.status(200).json(kq);
         } catch (e) {
             console.log(e);
