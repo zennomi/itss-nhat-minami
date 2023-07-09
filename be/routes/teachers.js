@@ -13,4 +13,5 @@ router.post('/add_bookmark', auth, TEACHER.addBookmark);
 router.get('/bookmarks/:id', TEACHER.getBookmarks);
 router.delete('/bookmarks', auth, TEACHER.removeBookmark);
 router.put('/teacher', auth, TEACHER.updateTeacher);
+router.get('/teacherbyuser', TEACHER.getTeacherByUserId);
 module.exports = router;

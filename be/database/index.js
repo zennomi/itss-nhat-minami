@@ -130,9 +130,9 @@ const DB = {
                            count(r.id)               as reviewCount,
                            s.end_hour - s.start_hour as hours
                     from teachers t
-                             join users u on u.id = t.user_id
-                             join schedules s on t.id = s.teacher_id
-                             join reviews r on t.id = r.teacher_id
+                             left join users u on u.id = t.user_id
+                             left join schedules s on t.id = s.teacher_id
+                             left join reviews r on t.id = r.teacher_id
                     WHERE ${subQuery}
                     GROUP BY t.id`, (err, rows) => {
                 if (err) console.log(err);
@@ -169,12 +169,17 @@ const DB = {
                            u.date_of_birth,
                            s.end_hour - s.start_hour as hours
                     from teachers t
-                             join reviews r on t.id = r.teacher_id
-                             join users u on u.id = t.user_id
-                             join schedules s on t.id = s.teacher_id
+                             left join reviews r on t.id = r.teacher_id
+                             left join users u on u.id = t.user_id
+                             left join schedules s on t.id = s.teacher_id
                     where t.id = ${teacher_id}
                     GROUP BY t.id`, (err, row) => {
                 if (err) console.log(err);
+		Object.keys(row).forEach((key) => {
+                    if (row[key] !== null && typeof row[key] === 'string' && row[key].includes('null')) {
+                        row[key] = null;
+                    }
+                });
                 db.all(`select *
                         from certificates
                         where teacher_id = ${teacher_id}`, (err, row2) => {
@@ -213,6 +218,7 @@ const DB = {
         subQuery += params.address ? `address = '${params.address}', ` : '';
         subQuery += params.latitude ? `latitude = '${params.latitude}', ` : '';
         subQuery += params.longitude ? `longitude = '${params.longitude}', ` : '';
+        subQuery += params.gmail ? `gmail = '${params.gmail}', ` : '';
 
         if (subQuery.length > 0)
             subQuery = subQuery.slice(0, -2);
@@ -234,12 +240,12 @@ const DB = {
                                           website_url, facebook_url, instagram_url, linkedin_url, twitter_url,
                                           photo_url, background_image_url, description, country_of_birth, address,
                                           latitude, longitude)
-                    VALUES ('${user_id}', '${params.lang_teach}', '${params.lang_study}', '${params.purpose}',
-                            '${params.price}', '${params.phone_number}', '${params.resume_url}', '${params.website_url}
-                            ', '${params.facebook_url}', '${params.instagram_url}', '${params.linkedin_url}',
-                            '${params.twitter_url}', '${params.photo_url}', '${params.background_image_url}',
-                            '${params.description}', '${params.country_of_birth}', '${params.address}',
-                            '${params.latitude}', '${params.longitude}')
+                    VALUES (${user_id}, ${params.lang_teach}, ${params.lang_study}, ${params.purpose},
+                            ${params.price}, ${params.phone_number}, ${params.resume_url}, ${params.website_url},
+                            ${params.facebook_url}, ${params.instagram_url}, ${params.linkedin_url},
+                            ${params.twitter_url}, ${params.photo_url}, ${params.background_image_url},
+                            ${params.description}, ${params.country_of_birth}, ${params.address},
+                            ${params.latitude}, ${params.longitude})
                     returning id`, (err, row) => {
                 if (err) console.log(err);
                 resolve(row);

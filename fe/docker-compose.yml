@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+    fe-minami:
+        container_name: fe-minami
+        volumes:
+            -   ./:/app
+        ports:
+            - "3000:3000"
+        image: node:slim
+        command: bash -c "cd /app && npm install --legacy-peer-deps && npm run start"
+
+networks:
+    fe-network:
+        driver: host
+
+volumes:
+    fe-database:
+        driver: local
