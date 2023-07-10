@@ -75,7 +75,9 @@ const TEACHER = {
             address: req.body.address || req.body.address === "" ? req.body.address : null,
             longitude: req.body.longitude || req.body.longitude === "" ? req.body.longitude : null,
             latitude: req.body.latitude || req.body.latitude === "" ? req.body.latitude : null,
-            gmail: req.body.gmail || req.body.gmail === "" ? req.body.gmail : null
+            gmail: req.body.gmail || req.body.gmail === "" ? req.body.gmail : null,
+            photo_url: req.body.photo_url || req.body.photo_url === "" ? req.body.photo_url : null,
+            background_image_url: req.body.background_image_url || req.body.background_image_url === "" ? req.body.background_image_url : null,
         };
         let teacherId = await DB.getTeacherByUserId(userId);
         try {

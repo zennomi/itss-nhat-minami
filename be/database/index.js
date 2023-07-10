@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(__dirname + '/db.sqlite');
 
 const DB = {
-    getUserInfo: async ({user_id = null, username = null}) => {
+    getUserInfo: async ({ user_id = null, username = null }) => {
         let subQuery = '';
         if (user_id === null && username === null) return null;
         user_id ? subQuery = `WHERE id = ${user_id}` : subQuery = `WHERE username = '${username}'`;
@@ -175,7 +175,7 @@ const DB = {
                     where t.id = ${teacher_id}
                     GROUP BY t.id`, (err, row) => {
                 if (err) console.log(err);
-		Object.keys(row).forEach((key) => {
+                Object.keys(row).forEach((key) => {
                     if (row[key] !== null && typeof row[key] === 'string' && row[key].includes('null')) {
                         row[key] = null;
                     }
@@ -234,18 +234,19 @@ const DB = {
         });
     },
     createTeacher: async (user_id, params) => {
+        console.log({ params })
         // returning id
         return new Promise((resolve) => {
             db.get(`INSERT INTO teachers (user_id, lang_teach, lang_study, purpose, price, phone_number, resume_url,
                                           website_url, facebook_url, instagram_url, linkedin_url, twitter_url,
                                           photo_url, background_image_url, description, country_of_birth, address,
                                           latitude, longitude)
-                    VALUES (${user_id}, ${params.lang_teach}, ${params.lang_study}, ${params.purpose},
-                            ${params.price}, ${params.phone_number}, ${params.resume_url}, ${params.website_url},
-                            ${params.facebook_url}, ${params.instagram_url}, ${params.linkedin_url},
-                            ${params.twitter_url}, ${params.photo_url}, ${params.background_image_url},
-                            ${params.description}, ${params.country_of_birth}, ${params.address},
-                            ${params.latitude}, ${params.longitude})
+                    VALUES ('${user_id}', '${params.lang_teach}', '${params.lang_study}', '${params.purpose}',
+                            '${params.price}', '${params.phone_number}', '${params.resume_url}', '${params.website_url}',
+                            '${params.facebook_url}', '${params.instagram_url}', '${params.linkedin_url}',
+                            '${params.twitter_url}', '${params.photo_url}', '${params.background_image_url}',
+                            '${params.description}', '${params.country_of_birth}', '${params.address}',
+                            '${params.latitude}', '${params.longitude}')
                     returning id`, (err, row) => {
                 if (err) console.log(err);
                 resolve(row);
