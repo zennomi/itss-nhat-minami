@@ -4,6 +4,8 @@ import './teacher.css';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { addBookmark } from "../../services/teacherService";
 import { toast } from "react-toastify";
+import { Icon } from "@iconify/react";
+import { langToFlag } from "../../utils/constant";
 
 const calculatorDate = (time) => {
     const currentDate = new Date();
@@ -46,7 +48,7 @@ function Teacher({ data }) {
                 alt=""
             />
             {/*cục bên phải */}
-            <div className="frame-2 w-full"  style={{
+            <div className="frame-2 w-full" style={{
                 'cursor': 'pointer'
             }}>
                 <div className="frame-3">
@@ -59,8 +61,11 @@ function Teacher({ data }) {
                             <span className="publicsans-semi-bold-jade-13px" style={{ 'margin-left': '8px' }}>オフラインレッスン </span>
                         }
                     </div>
+                    {
+                        data.lang_teach &&
+                        <Icon icon={`emojione:flag-for-${langToFlag[data.lang_teach]}`} />
+                    }
 
-                    <div className="iconsflagsic_kr"></div>
                     <div className="button-x">
 
                         <div className="labelpublicsans-bold-white-13px">
@@ -130,7 +135,7 @@ function Teacher({ data }) {
                         </span>
                     </div>
                 </div>
-                <div className="button-5"　onClick={() => navigate(`/tutor/${id}`)}>
+                <div className="button-5" onClick={() => navigate(`/tutor/${id}`)}>
                     <i className="fa-solid fa-circle-exclamation" style={{ color: '#fafafa' }}></i>
                     <div className="label-5valign-text-middlepublicsans-bold-white-14px">
                         <span>

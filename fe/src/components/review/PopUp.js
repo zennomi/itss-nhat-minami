@@ -7,9 +7,9 @@ import { addReview } from '../../services/teacherService'
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 
-const PopUp = ({onClose}) => {
+const PopUp = ({ onClose }) => {
   const queryClient = useQueryClient();
-    const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(1);
   const [textareaValue, setTextareaValue] = useState('');
   const handleTextareaChange = (event) => {
     setTextareaValue(event.target.value);
@@ -33,45 +33,49 @@ const PopUp = ({onClose}) => {
     }
     onClose()
   }
-return (
-    <div className="popup-review-product-dialog-form">
-          <div className="popup-title publicsans-bold-charade-18px">
-            <span className="publicsans-bold-charade-18px">レビューする</span>
+  return (
+    <div className="fixed z-50">
+      <div className="popup-review-product-dialog-form border-2 border-green-500 rounded">
+        <div className="popup-title publicsans-bold-charade-18px">
+          <span className="publicsans-bold-charade-18px">レビューする</span>
+        </div>
+        <div className="popup-content">
+          <div className="popup-stack">
+            <div className="popup-your-review-about-th publicsans-normal-charade-16px">
+              <span className="publicsans-normal-charade-16px">評点</span>
+            </div>
+            <Rating
+              name="simple-controlled"
+              value={value}
+              onChange={(event, newValue) => {
+                setValue(newValue);
+              }}
+            />
           </div>
-          <div className="popup-content">
-            <div className="popup-stack">
-              <div className="popup-your-review-about-th publicsans-normal-charade-16px">
-                <span className="publicsans-normal-charade-16px">評点</span>
-              </div>
-              <Rating
-                name="simple-controlled"
-                value={value}
-                onChange={(event, newValue) => {
-                    setValue(newValue);
-                }}
-          />
-            </div>
-            <div className="popup-input">
-              <div className="popup-labelplaceholder publicsans-normal-manatee-16px">
-                <textarea className="publicsans-normal-manatee-16px" placeholder="あなたのレビュー" value={textareaValue} onChange={handleTextareaChange} />
-              </div>
-            </div>
-          </div>
-          <div className="popup-dialog">
-            <div className="popup-label popup-valign-text-middle publicsans-bold-charade-14px"onClick={onClose}>
-              <span>
-                <span className="publicsans-bold-charade-14px">キャンセル</span>
-              </span>
-            </div>
-            <div className="popup-button">
-            <div className="popup-label-1 popup-valign-text-middle publicsans-bold-white-14px" onClick={handleSend}>
-                <span>
-                <span className="publicsans-bold-white-14px">提出</span>
-                </span>
-            </div>
+          <div className="popup-input">
+            <div className="popup-labelplaceholder publicsans-normal-manatee-16px">
+              <textarea
+                className="publicsans-normal-manatee-16px block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500"
+                placeholder="あなたのレビュー" value={textareaValue} onChange={handleTextareaChange} />
             </div>
           </div>
         </div>
+        <div className="popup-dialog">
+          <div className="popup-label popup-valign-text-middle publicsans-bold-charade-14px" onClick={onClose}>
+            <span>
+              <span className="publicsans-bold-charade-14px">キャンセル</span>
+            </span>
+          </div>
+          <div className="popup-button">
+            <div className="popup-label-1 popup-valign-text-middle publicsans-bold-white-14px" onClick={handleSend}>
+              <span>
+                <span className="publicsans-bold-white-14px">提出</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

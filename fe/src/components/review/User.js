@@ -16,9 +16,9 @@ const User = (props) => {
           </span>
         </div>
         <div className="review_list-dd_mmm_yyyy4 publicsans-normal-pale-sky-12px">
-          <span className="review_list-span-1 publicsans-normal-pale-sky-12px">
+          {/* <span className="review_list-span-1 publicsans-normal-pale-sky-12px">
             {review_day}
-          </span>
+          </span> */}
         </div>
       </div>
     </div>

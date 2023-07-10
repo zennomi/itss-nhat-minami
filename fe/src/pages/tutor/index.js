@@ -65,6 +65,7 @@ function Tutor() {
             {activeComponent === 'component1' &&
               <Tutor_Component.TeacherInfor
                 lang_native={teacherInformation?.lang_native}
+                lang_study={teacherInformation?.lang_study}
                 flag={teacherInformation?.flag}
                 star={teacherInformation?.star}
                 rated_count={teacherInformation?.rated_count}

@@ -26,6 +26,7 @@ export default function useListTeacher() {
 
     const teacherInformation = {
       lang_native: data?.lang_teach,
+      lang_study: data?.lang_study,
       flag: flagLanguageImg[data?.lang_teach],
       star: data?.star ? data?.star.toFixed(1) : 0,
       rated_count: data?.reviewCount,
