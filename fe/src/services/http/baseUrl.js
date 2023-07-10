@@ -1,1 +1,1 @@
-export const baseUrl = process.env.LINK || 'http://tungsnk.tech:9999/';
+export const baseUrl = process.env.REACT_APP_API_ENDPOINT || 'http://tungsnk.tech:9999/';

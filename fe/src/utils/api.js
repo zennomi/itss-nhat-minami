@@ -1,4 +1,4 @@
-let LINK = process.env.LINK || 'http://localhost:9999';
+let LINK = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:9999';
 const api = async (url, method, body) => {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
