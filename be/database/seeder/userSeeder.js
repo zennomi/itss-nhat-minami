@@ -12,12 +12,12 @@ const userSeeder = async () => {
   await runQuery(`delete from users`);
   await runQuery(`UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='users'`);
   const admin = {
-    username: 'admin1',
+    username: 'admin',
     hash_password: adminPassword,
     role: 2,
     name: 'Admin',
-    date_of_birth: `${faker.number.int({ min: 1, max: 30 })}/${faker.number.int(
-      { min: 1, max: 12 }
+    date_of_birth: `${faker.number.int({ min: 10, max: 30 })}/${faker.number.int(
+      { min: 10, max: 12 }
     )}/${faker.number.int({ min: 1970, max: 2000 })}`,
   };
 
@@ -32,9 +32,9 @@ const userSeeder = async () => {
       name: faker.person.fullName(),
       gender: getRandomElement(sex),
       date_of_birth: `${faker.number.int({
-        min: 1,
+        min: 10,
         max: 30,
-      })}/${faker.number.int({ min: 1, max: 12 })}/${faker.number.int({
+      })}/${faker.number.int({ min: 10, max: 12 })}/${faker.number.int({
         min: 1970,
         max: 2000,
       })}`,
