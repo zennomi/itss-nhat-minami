@@ -510,17 +510,18 @@ const Search = () => {
                 {isLoading && <>
                     <LinearProgress className='mt-4' />
                 </>}
-                <div className="d-flex mt-5">
-                    <div>
+
+                <div className="grid grid-cols-4">
+                    <div className='col-span-3'>
                         {isSuccess && !isSorted && listTeachers?.map((item) => <>
-                            <div className=" mt-5  ">
-                                <div className="d-flex position-relative" onMouseOver={() => handleMouseOver(item.id, item)} onMouseLeave={() => handleMouseLeave(item.id)}>
+                            <div className="mt-3">
+                                <div className="d-flex position-relative w-full" onMouseOver={() => handleMouseOver(item.id, item)} onMouseLeave={() => handleMouseLeave(item.id)}>
                                     <Teacher data={item} />
                                 </div>
                             </div>
                         </>)}
                         {isSuccess && isSorted && sortedList?.map((item) => <>
-                            <div className="teacher d-flex flex-column mt-5 ">
+                            <div className="teacher d-flex flex-column mt-3">
                                 <div onMouseOver={() => handleMouseOver(item.id, item)} onMouseLeave={() => handleMouseLeave(item.id)}>
                                     <Teacher data={item} />
                                 </div>
@@ -528,14 +529,11 @@ const Search = () => {
                         </>)}
 
                     </div>
-                    <div className="mx-3 teachercard" style={{ 'display': 'none' }}>
+                    <div className="mx-3 teachercard mt-3" style={{ 'display': 'none' }}>
                         <TeacherCard data={hoverData} />
                     </div>
-
-
                 </div>
-
-                <div className="mt-5">
+                <div className="mt-3">
                     <Pagination count={totalPage} page={page} color="primary" onChange={handlePageChange} style={{
                         justifyContent: 'center',
                         display: 'flex',

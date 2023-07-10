@@ -38,7 +38,7 @@ function Teacher({ data }) {
     }
 
     return (
-        <div className="frame-1">
+        <div className="frame-1 w-full">
             {/*avt */}
             <img
                 className="x335913644_9819789628"
@@ -46,7 +46,7 @@ function Teacher({ data }) {
                 alt=""
             />
             {/*cục bên phải */}
-            <div className="frame-2"  style={{
+            <div className="frame-2 w-full"  style={{
                 'cursor': 'pointer'
             }}>
                 <div className="frame-3">
@@ -109,7 +109,7 @@ function Teacher({ data }) {
                             </div>
                         </div>
                         <div className="numberpublicsans-bold-black-14px">
-                            <span className="publicsans-semi-bold-charade-16px">{data.reviewCount}レビュー</span>
+                            <span className="publicsans-semi-bold-charade-16px whitespace-nowrap">{data.reviewCount}レビュー</span>
                         </div>
                     </div>
                     <div className="frame-9">
@@ -118,7 +118,7 @@ function Teacher({ data }) {
                         </span>
 
                         <div className="address-1publicsans-semi-bold-white-14px">
-                            <span className="publicsans-semi-bold-black-14px tx1">{data.hours * 60} min / lesson</span>
+                            <span className="publicsans-semi-bold-black-14px tx1 whitespace-nowrap">{data.hours * 60} min / lesson</span>
                         </div>
                     </div>
                 </div>

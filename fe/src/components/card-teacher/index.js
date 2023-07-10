@@ -5,8 +5,7 @@ import { Icon } from '@iconify/react';
 function TeacherCard ({ data }) {
     return (
         <div>
-
-            <div className="teacherCard">
+            <div className="teacherCard w-full sticky">
                 <div className="group2">
                     <div className="group1">
                         <img src={data.background_image_url} alt=""></img>
@@ -18,13 +17,12 @@ function TeacherCard ({ data }) {
                         </div>
                     </div>
                     <div className="info">
-                        <div>{data.name}</div>
+                        <div className="font-bold text-xl">{data.name}</div>
                         <div>{data.country_of_birth}</div>
                     </div>
                     <div className="contactWrapper">
                         <div className="icon">
                             <i className="fa-solid fa-phone" style={{color: '#F0AB00'}}></i>
-
                         </div>
                         <div className="icon">
                             <Icon icon="logos:google-gmail" />
@@ -48,7 +46,7 @@ function TeacherCard ({ data }) {
                 </div>
                 <div className="footer">
                     <div className="footerItem">
-                        <div>
+                        <div className="font-bold">
                             <span>評点</span>
                         </div>
                         <div>
@@ -57,7 +55,7 @@ function TeacherCard ({ data }) {
                         </div>
                     </div>
                     <div className="footerItem">
-                        <div>
+                        <div className="font-bold">
                             <span> レビュー</span>
                         </div>
                         <div>
@@ -65,7 +63,7 @@ function TeacherCard ({ data }) {
                         </div>
                     </div>
                     <div className="footerItem">
-                        <div>
+                        <div className="font-bold">
                             <span>料金</span>
                         </div>
                         <div>
