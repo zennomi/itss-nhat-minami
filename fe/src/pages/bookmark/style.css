@@ -21,11 +21,11 @@
     margin-bottom: 24px;
     font-weight: 600;
     white-space: nowrap;
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
 }
 .text-behind{
     font-size: 18px;
     color: #637381;
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
 }
 

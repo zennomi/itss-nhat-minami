@@ -1,29 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
+  font-family: "M PLUS Rounded 1c", "Public Sans", sans-serif;
 }
+
 :root {
-  --black: 
-rgba(0, 0, 0, 1);
-  --jade: 
-rgba(0, 171, 85, 1);
-  --charade: 
-rgba(33, 43, 54, 1);
-  --pale-sky: 
-rgba(99, 115, 129, 1);
-  --manatee-2: 
-rgba(145, 158, 171, 0.078);
-  --manatee-4: 
-rgba(145, 158, 171, 0.239);
-  --manatee-3: 
-rgba(145, 158, 171, 0.8);
-  --manatee: 
-rgba(145, 158, 171, 1);
-  --mercury: 
-rgba(223, 227, 232, 1);
-  --alabaster: 
-rgba(249, 250, 251, 1);
-  --white: 
-rgba(255, 255, 255, 1);
+  --black: rgba(0, 0, 0, 1);
+  --jade: rgba(0, 171, 85, 1);
+  --charade: rgba(33, 43, 54, 1);
+  --pale-sky: rgba(99, 115, 129, 1);
+  --manatee-2: rgba(145, 158, 171, 0.078);
+  --manatee-4: rgba(145, 158, 171, 0.239);
+  --manatee-3: rgba(145, 158, 171, 0.8);
+  --manatee: rgba(145, 158, 171, 1);
+  --mercury: rgba(223, 227, 232, 1);
+  --alabaster: rgba(249, 250, 251, 1);
+  --white: rgba(255, 255, 255, 1);
 
   --font-size-xs: 12px;
   --font-size-s: 13px;
@@ -35,146 +30,147 @@ rgba(255, 255, 255, 1);
 
   --font-family-be_vietnam: "Be Vietnam";
   --font-family-public_sans: "Public Sans";
+  --font-family-m_plus_rounded_1c: "M PLUS Rounded 1c";
 }
 
 /* Classes */
 
 .publicsans-normal-pale-sky-14px {
   color: var(--pale-sky);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-m);
   font-weight: 400;
   font-style: normal;
 }
 .publicsans-semi-bold-jade-14px {
   color: var(--jade);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-m);
   font-weight: 600;
   font-style: normal;
 }
 .publicsans-normal-pale-sky-12px {
   color: var(--pale-sky);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-xs);
   font-weight: 400;
   font-style: normal;
 }
 .publicsans-bold-charade-12px {
   color: var(--charade);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-xs);
   font-weight: 700;
   font-style: normal;
 }
 .publicsans-normal-black-16px {
   color: var(--black);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-l);
   font-weight: 400;
   font-style: normal;
 }
 .publicsans-bold-black-32px {
   color: var(--black);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-xxxl);
   font-weight: 700;
   font-style: normal;
 }
 .publicsans-semi-bold-charade-14px {
   color: var(--charade);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-m);
   font-weight: 600;
   font-style: normal;
 }
 .publicsans-bold-charade-18px {
   color: var(--charade);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-xl);
   font-weight: 700;
   font-style: normal;
 }
 .publicsans-bold-charade-24px {
   color: var(--charade);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-xxl);
   font-weight: 700;
   font-style: normal;
 }
 .publicsans-normal-black-14px {
   color: var(--black);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-m);
   font-weight: 400;
   font-style: normal;
 }
 .publicsans-bold-white-14px {
   color: var(--white);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-m);
   font-weight: 700;
   font-style: normal;
 }
 .publicsans-semi-bold-black-16px {
   color: var(--black);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-l);
   font-weight: 600;
   font-style: normal;
 }
 .publicsans-bold-white-24px {
   color: var(--white);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-xxl);
   font-weight: 700;
   font-style: normal;
 }
 .publicsans-normal-charade-14px {
   color: var(--charade);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-m);
   font-weight: 400;
   font-style: normal;
 }
 .publicsans-normal-manatee-12px {
   color: var(--manatee);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-xs);
   font-weight: 400;
   font-style: normal;
 }
 .publicsans-normal-manatee-16px {
   color: var(--manatee);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-l);
   font-weight: 400;
   font-style: normal;
 }
 .publicsans-bold-charade-13px {
   color: var(--charade);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-s);
   font-weight: 700;
   font-style: normal;
 }
 .publicsans-normal-manatee-14px {
   color: var(--manatee);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-m);
   font-weight: 400;
   font-style: normal;
 }
 .publicsans-normal-charade-16px {
   color: var(--charade);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-l);
   font-weight: 400;
   font-style: normal;
 }
 .publicsans-semi-bold-pale-sky-14px {
   color: var(--pale-sky);
-  font-family: var(--font-family-public_sans);
+  font-family: var(--font-family-m_plus_rounded_1c);
   font-size: var(--font-size-m);
   font-weight: 600;
   font-style: normal;

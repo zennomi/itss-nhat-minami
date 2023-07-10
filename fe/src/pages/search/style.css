@@ -120,7 +120,7 @@
     --font-size-xl: 16px;
     --font-size-xxl: 18px;
 
-    --font-family-public_sans: "Public Sans";
+    --font-family-m_plus_rounded_1c: "M PLUS Rounded 1c";
 }
 
 .star-filter{
@@ -320,7 +320,7 @@
 
 .span1 {
     color: var(--manatee);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s);
     font-weight: 700;
 }
@@ -634,7 +634,7 @@
     line-height: 22px;
     white-space: nowrap;
     color: var(--charade);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-m);
     font-weight: 600;
     font-style: normal;
@@ -656,7 +656,7 @@
     min-width: 126px;
     white-space: nowrap;
     color: var(--black);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-xxl);
     font-weight: 700;
     font-style: normal;
@@ -673,7 +673,7 @@
 }
 .radius{
     color: var(--charade);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s);
     font-weight: 700;
     font-style: normal;

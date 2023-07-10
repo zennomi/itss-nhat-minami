@@ -50,198 +50,198 @@
 
     --font-family-barlow: "Barlow";
     --font-family-barlow-black: "Barlow-Black";
-    --font-family-public_sans: "Public Sans";
-    --font-family-public_sans-bold: "Public Sans-Bold";
-    --font-family-public_sans-extrabold: "Public Sans-ExtraBold";
-    --font-family-public_sans-regular: "Public Sans-Regular";
-    --font-family-public_sans-semibold: "Public Sans-SemiBold";
+    --font-family-m_plus_rounded_1c: "M PLUS Rounded 1c";
+    --font-family-m_plus_rounded_1c-bold: "M PLUS Rounded 1c-Bold";
+    --font-family-m_plus_rounded_1c-extrabold: "M PLUS Rounded 1c-ExtraBold";
+    --font-family-m_plus_rounded_1c-regular: "M PLUS Rounded 1c-Regular";
+    --font-family-m_plus_rounded_1c-semibold: "M PLUS Rounded 1c-SemiBold";
 }
 
 /* Classes */
 
 .publicsans-bold-charade-12px {
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans-bold);
+    font-family: var(--font-family-m_plus_rounded_1c-bold);
     font-size: var(--font-size-xxs2);
     font-weight: 700;
     font-style: normal;
 }
 .publicsans-semi-bold-jade-14px {
     color: var(--primarymain);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s2);
     font-weight: 600;
     font-style: normal;
 }
 .publicsans-bold-white-14px {
     color: var(--backgroundlightpaper);
-    font-family: var(--font-family-public_sans-bold);
+    font-family: var(--font-family-m_plus_rounded_1c-bold);
     font-size: var(--font-size-s2);
     font-weight: 700;
     font-style: normal;
 }
 .publicsans-regular-normal-manatee-12px {
     color: var(--actiondarkactive);
-    font-family: var(--font-family-public_sans-regular);
+    font-family: var(--font-family-m_plus_rounded_1c-regular);
     font-size: var(--font-size-xxs2);
     font-weight: 400;
     font-style: normal;
 }
 .publicsans-bold-charade-12px {
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-xxs2);
     font-weight: 700;
     font-style: normal;
 }
 .publicsans-normal-black-16px {
     color: var(--commonblack);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-m2);
     font-weight: 400;
     font-style: normal;
 }
 .publicsans-bold-white-13px {
-    font-family: var(--font-family-public_sans-bold);
+    font-family: var(--font-family-m_plus_rounded_1c-bold);
     font-size: var(--font-size-xs2);
     font-weight: 700;
     font-style: normal;
 }
 .publicsans-bold-white-13px {
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-xs2);
     font-weight: 700;
     font-style: normal;
 }
 .publicsans-semi-bold-charade-14px {
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s2);
     font-weight: 600;
     font-style: normal;
 }
 .publicsans-normal-white-12px {
     color: var(--backgroundlightpaper);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-xxs2);
     font-weight: 400;
     font-style: normal;
 }
 .publicsans-semi-bold-jade-14px {
     color: var(--primarymain);
-    font-family: var(--font-family-public_sans-semibold);
+    font-family: var(--font-family-m_plus_rounded_1c-semibold);
     font-size: var(--font-size-s2);
     font-weight: 600;
     font-style: normal;
 }
 .publicsans-semi-bold-jade-13px{
     color: #09d356;
-    font-family: var(--font-family-public_sans-semibold);
+    font-family: var(--font-family-m_plus_rounded_1c-semibold);
     font-size: 13px;
     font-weight: 600;
     font-style: normal;
 }
 .publicsans-semi-bold-charade-14px {
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans-semibold);
+    font-family: var(--font-family-m_plus_rounded_1c-semibold);
     font-size: var(--font-size-s2);
     font-weight: 600;
     font-style: normal;
 }
 .publicsans-bold-white-14px {
     color: var(--backgroundlightpaper);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s2);
     font-weight: 700;
     font-style: normal;
 }
 .publicsans-regular-normal-white-12px {
     color: var(--backgroundlightpaper);
-    font-family: var(--font-family-public_sans-regular);
+    font-family: var(--font-family-m_plus_rounded_1c-regular);
     font-size: var(--font-size-xxs2);
     font-weight: 400;
     font-style: normal;
 }
 .publicsans-semi-bold-black-16px {
     color: var(--commonblack);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-m2);
     font-weight: 600;
     font-style: normal;
 }
 .publicsans-normal-charade-14px {
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s2);
     font-weight: 400;
     font-style: normal;
 }
 .publicsans-normal-manatee-12px {
     color: var(--actiondarkactive);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-xxs2);
     font-weight: 400;
     font-style: normal;
 }
 .publicsans-bold-white-15px {
     color: var(--backgroundlightpaper);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s3);
     font-weight: 700;
     font-style: normal;
 }
 .publicsans-semi-bold-manatee-14px {
     color: var(--actiondarkactive);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s2);
     font-weight: 600;
     font-style: normal;
 }
 .publicsans-bold-charade-13px {
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans-bold);
+    font-family: var(--font-family-m_plus_rounded_1c-bold);
     font-size: var(--font-size-xs2);
     font-weight: 700;
     font-style: normal;
 }
 .publicsans-regular-normal-charade-14px {
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans-regular);
+    font-family: var(--font-family-m_plus_rounded_1c-regular);
     font-size: var(--font-size-s2);
     font-weight: 400;
     font-style: normal;
 }
 .publicsans-semi-bold-manatee-14px {
     color: var(--actiondarkactive);
-    font-family: var(--font-family-public_sans-semibold);
+    font-family: var(--font-family-m_plus_rounded_1c-semibold);
     font-size: var(--font-size-s2);
     font-weight: 600;
     font-style: normal;
 }
 .publicsans-bold-white-15px {
     color: var(--backgroundlightpaper);
-    font-family: var(--font-family-public_sans-bold);
+    font-family: var(--font-family-m_plus_rounded_1c-bold);
     font-size: var(--font-size-s3);
     font-weight: 700;
     font-style: normal;
 }
 .publicsans-bold-charade-13px {
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-xs2);
     font-weight: 700;
     font-style: normal;
 }
 .publicsans-regular-normal-black-16px {
     color: var(--commonblack);
-    font-family: var(--font-family-public_sans-regular);
+    font-family: var(--font-family-m_plus_rounded_1c-regular);
     font-size: var(--font-size-m2);
     font-weight: 400;
     font-style: normal;
 }
 .publicsans-semi-bold-black-16px {
     color: var(--commonblack);
-    font-family: var(--font-family-public_sans-semibold);
+    font-family: var(--font-family-m_plus_rounded_1c-semibold);
     font-size: var(--font-size-m2);
     font-weight: 600;
     font-style: normal;
@@ -387,7 +387,7 @@
 .start-a-new-project-1 {
     align-self: stretch;
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-l2);
     font-weight: 800;
     letter-spacing: 0;
@@ -429,7 +429,7 @@
 
 .the-starting-point-f {
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-xxs2);
     font-weight: 400;
     letter-spacing: 0;
@@ -659,7 +659,7 @@
 
 .label-2 {
     color: var(--backgrounddarkpaper);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s3);
     font-weight: 700;
     letter-spacing: 0;

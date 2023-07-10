@@ -20,14 +20,14 @@
     --font-size-xxl: 96px;
 
     --font-family-barlow: "Barlow";
-    --font-family-public_sans: "Public Sans";
+    --font-family-m_plus_rounded_1c: "M PLUS Rounded 1c";
 }
 
 /* Classes */
 
 .publicsans-semi-bold-jade-14px {
     color: var(--jade);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-m);
     font-weight: 600;
     font-style: normal;
@@ -35,7 +35,7 @@
 
 .publicsans-bold-charade-12px {
     color: var(--charade);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s);
     font-weight: 700;
     font-style: normal;
@@ -43,7 +43,7 @@
 
 .publicsans-semi-bold-charade-14px {
     color: var(--charade);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-m);
     font-weight: 600;
     font-style: normal;
@@ -51,7 +51,7 @@
 
 .publicsans-extra-bold-charade-48px {
     color: var(--charade);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-xl);
     font-weight: 800;
     font-style: normal;
@@ -59,7 +59,7 @@
 
 .publicsans-bold-white-14px {
     color: var(--white);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-m);
     font-weight: 700;
     font-style: normal;
@@ -67,7 +67,7 @@
 
 .publicsans-bold-white-15px {
     color: var(--white);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-l);
     font-weight: 700;
     font-style: normal;
@@ -75,7 +75,7 @@
 
 .publicsans-bold-charade-15px {
     color: var(--charade);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-l);
     font-weight: 700;
     font-style: normal;
@@ -83,7 +83,7 @@
 
 .publicsans-normal-charade-12px {
     color: var(--charade);
-    font-family: var(--font-family-public_sans);
+    font-family: var(--font-family-m_plus_rounded_1c);
     font-size: var(--font-size-s);
     font-weight: 400;
     font-style: normal;
