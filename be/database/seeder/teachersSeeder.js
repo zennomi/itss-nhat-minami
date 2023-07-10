@@ -5,8 +5,8 @@ const { runQuery, getRandomElement, getRandomAndRemove } = require('./utils.js')
 
 const teachersSeeder = async () => {
   const numberTeachers = 10;
-  const countryDummy = ['日本', 'ベトナム', '中国', '韓国', 'アメリカ'];
-  const langDummy = ['日本語', 'ベトナム語', '中国語', '韓国語', 'アメリカ語'];
+  const countryDummy = ['日本', 'ベトナム', '中国', '韓国', 'フランス'];
+  const langDummy = ['日本語', 'ベトナム語', '中国語', '韓国語', 'フランス語'];
   const purposesDummy = ['試験', '会話', 'ビジネス']
   const photo_url = [
     'https://img.freepik.com/premium-photo/beautiful-young-woman-white-blouse-black-skirt-standing-near-whiteboard_338491-2143.jpg?w=900',
