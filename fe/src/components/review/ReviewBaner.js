@@ -28,7 +28,7 @@ const ReviewBaner = ({ data, onButtonClick }) => {
         </div>
       </div>
       <img className="review_banner-divider" src="https://www.seekpng.com/png/detail/330-3307905_thin-vertical-line-straight-vertical-line-png.png" alt="Divider" />
-      <div className="review_banner-stack-1">
+      <div className="review_banner-stack-1 px-2">
         <Row spanText1="5 つ星" spanText2={star5Count} total={total} />
         <Row
           spanText1="4 つ星"

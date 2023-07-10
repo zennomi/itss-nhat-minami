@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getTeacherByUserId, getTeacher } from '../../services/teacherService';
+import { baseUrl } from '../../services/http/baseUrl';
 
 export default function useListTeacher() {
   const { id } = useParams();
@@ -35,8 +36,8 @@ export default function useListTeacher() {
 
   const parseData = useCallback((data) => {
     const profile = {
-      photo_url: data?.photo_url ? (data.photo_url.startsWith("http") ? data.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`) : '',
-      background_image_url: data?.background_image_url ? (data.background_image_url.startsWith("http") ? data.background_image_url : `http://tungsnk.tech:9999${data?.background_image_url}`) : '',
+      photo_url: data?.photo_url ? (data.photo_url.startsWith("http") ? data.photo_url : `${baseUrl}/${data?.photo_url}`) : '',
+      background_image_url: data?.background_image_url ? (data.background_image_url.startsWith("http") ? data.background_image_url : `${baseUrl}/${data?.background_image_url}`) : '',
       name: data?.name || '',
       gender: data?.gender || '',
       address: data?.address || '',

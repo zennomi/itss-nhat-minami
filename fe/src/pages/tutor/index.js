@@ -32,28 +32,23 @@ function Tutor() {
   });
 
   return (
-    <div>
+    <div className="pb-5">
       <Header />
-      <div className="tutor-container-center-horizontal">
-        <div className="tutor-tutor-details-2screen">
-          <div className="tutor-flex-col">
-            <div className="tutor-overlap-group">
-              <div className="tutor-bg-1"></div>
-            </div>
-            <Tutor_Component.UserProfileBanner {...userProfileBannerData} handleBannerClick={handleBannerClick} />
-          </div>
-          <div className="tutor-flex-row">
-            <div className="tutor-flex-col-1">
-              <Tutor_Component.UserProfileAboutCard
-                description={userProfileAboutCardData?.description}
-                address={userProfileAboutCardData?.address}
-                gender={userProfileAboutCardData?.gender}
-                lang_native={userProfileAboutCardData?.lang_native}
-                certificates={userProfileAboutCardData?.certificates}
-              />
-              {/* map */}
+      <div className="mt-[120px] px-5">
+        <Tutor_Component.UserProfileBanner {...userProfileBannerData} handleBannerClick={handleBannerClick} />
+        <div className="grid grid-cols-3">
+          <div className="py-3 flex flex-col gap-y-4 pr-3">
+            <Tutor_Component.UserProfileAboutCard
+              description={userProfileAboutCardData?.description}
+              address={userProfileAboutCardData?.address}
+              gender={userProfileAboutCardData?.gender}
+              lang_native={userProfileAboutCardData?.lang_native}
+              certificates={userProfileAboutCardData?.certificates}
+            />
+            {/* map */}
+            <div className="rounded-2xl overflow-hidden">
               {(teacherInformation?.latitude && teacherInformation?.longitude) ? (
-                <div style={{ height: '200px', width: '461px' }}>
+                <div className="h-[200px] w-full">
                   <Map
                     latitude={teacherInformation?.latitude}
                     longitude={teacherInformation?.longitude}
@@ -62,6 +57,8 @@ function Tutor() {
                 </div>) : (<div />)
               }
             </div>
+          </div>
+          <div className="col-span-2 py-3">
             {activeComponent === 'component1' &&
               <Tutor_Component.TeacherInfor
                 lang_native={teacherInformation?.lang_native}
@@ -82,12 +79,12 @@ function Tutor() {
               />
             }
             {activeComponent === 'component2' && <>
-              <div className="frame-43-tutor " style={{ 'min-width': '720px!important' }} >
+              <div className="frame-43-tutor w-full py-3" >
                 <div className="datepicker">
                   <div className="datepicker-header">
                     <div className="datepicker-col-hour"></div>
                     {date.map((day, index) => (
-                      <div className="d-flex">
+                      <div className="flex w-full">
                         <div key={index} className="datepicker-date-tutor">{day}</div>
                       </div>
                     ))}
@@ -102,7 +99,7 @@ function Tutor() {
                         </div>
                       </div>
                       {date.map((day, index) => (
-                        <div className="d-flex">
+                        <div className="flex w-full">
                           <div key={index} className={`date-hour-tutor ${day}-${item.time}`}></div>
                         </div>
                       ))}

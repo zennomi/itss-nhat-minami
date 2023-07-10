@@ -8,10 +8,10 @@ function TeacherCard ({ data }) {
             <div className="teacherCard w-full sticky">
                 <div className="group2">
                     <div className="group1">
-                        <img src={data.background_image_url} alt=""></img>
+                        <img src={data.background_image_url} alt="" className="w-full"></img>
                         <div className="overlay-solid">
                         </div>
-                        <div className="group0">
+                        <div className="absolute top-[154px] w-full flex justify-center">
                             <div className="avatar" style={{ backgroundImage: `url(${data.photo_url})` }}>
                             </div>
                         </div>

@@ -110,7 +110,7 @@ function Teacher({ data }) {
                         <div className="frame-6">
                             <i className="fa-solid fa-star fa-lg" style={{ color: '#f5d60f' }} ></i>
                             <div className="numberpublicsans-bold-black-14px">
-                                <span className="publicsans-bold-black-14px">{data?.star?.toFixed(1)}</span>
+                                <span className="publicsans-bold-black-14px">{data?.star?.toFixed(1) || "..."}</span>
                             </div>
                         </div>
                         <div className="numberpublicsans-bold-black-14px">

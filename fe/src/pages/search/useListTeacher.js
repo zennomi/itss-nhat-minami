@@ -3,6 +3,7 @@ import useQueryString from '../../hooks/useQueryString';
 import { useQuery } from '@tanstack/react-query';
 import { getTeachers } from '../../services/teacherService';
 import { sleep } from '../../utils/helpers';
+import { baseUrl } from '../../services/http/baseUrl';
 
 export default function useListTeacher() {
   const [totalPage, setTotalPage] = useState(1);
@@ -31,7 +32,7 @@ export default function useListTeacher() {
         facebook_url: item.facebook_url,
         twitter_url: item.twitter_url,
         website_url: item.website_url,
-        photo_url: (item.photo_url.startsWith("http")? item.photo_url: `http://tungsnk.tech:9999${item?.photo_url}`),
+        photo_url: (item.photo_url.startsWith("http") ? item.photo_url : `${baseUrl}/${item?.photo_url}`),
         is_verified: item.is_verified,
         remote: item.remote,
         latitude: item.latitude,
@@ -40,21 +41,21 @@ export default function useListTeacher() {
         lang_teach: item.lang_teach,
         linkedin_url: item.linkedin_url,
         instagram_url: item.instagram_url,
-        background_image_url: (item.background_image_url.startsWith("http") ? item.background_image_url: `http://tungsnk.tech:9999${item?.background_image_url}`),
+        background_image_url: (item.background_image_url.startsWith("http") ? item.background_image_url : `https://telegraph-image-bak.pages.dev/file/c9dd079fac20971a2152f.jpg`),
         purpose: item.purpose,
         star: item.star,
         name: item.name,
         gender: item.gender,
         date_of_birth: item.date_of_birth,
         age: item.age,
-        reviewCount:item.reviewCount,
-        hours : item.hours,
+        reviewCount: item.reviewCount,
+        hours: item.hours,
         description: item.description,
       };
     });
     const pagination = {
       total: data.pagination.total,
-      currentPage: data.pagination.currentPage,
+      currentPage: parseInt(data.pagination.currentPage),
       totalPage: data.pagination.totalPage,
       limit: data.pagination.limit,
     };
@@ -93,9 +94,9 @@ export default function useListTeacher() {
     pagination: data?.pagination,
     isSuccess,
     isLoading,
-    page,
+    page: parseInt(page),
     limit,
-    totalPage: totalPage,
+    totalPage: parseInt(totalPage),
     handlePageChange,
     queryString, setQueryString
   };

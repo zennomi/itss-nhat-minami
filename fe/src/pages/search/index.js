@@ -31,6 +31,8 @@ const Search = () => {
         setQueryString,
     } = useListTeacher();
 
+    console.log({ page })
+
     const [hoverData, setHoverData] = useState('');
 
     const [filters, setFilters] = useState(null);
@@ -403,7 +405,7 @@ const Search = () => {
                                     <div className="datepicker-header">
                                         <div className="datepicker-col-hour"></div>
                                         {date.map((day, index) => (
-                                            <div className="d-flex">
+                                            <div className="flex w-full">
                                                 <div key={index} className="datepicker-date">{day}</div>
                                             </div>
                                         ))}
@@ -418,7 +420,7 @@ const Search = () => {
                                                 </div>
                                             </div>
                                             {date.map((day, index) => (
-                                                <div className="d-flex">
+                                                <div className="flex w-full">
                                                     <div key={index} onClick={(e) => handleSchedule(e, item.time, day)} className={`date-hour ${day}-${item.time}`}></div>
                                                 </div>
                                             ))}

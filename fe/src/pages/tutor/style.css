@@ -59,19 +59,17 @@
 .tutor-user-profile-banner {
   align-items: flex-start;
   border-radius: 16px;
-  box-shadow: 0px 12px 24px -4px
-#919eab1f, 0px 0px 2px
-#919eab33;
+  box-shadow: 0px 12px 24px -4px #919eab1f, 0px 0px 2px #919eab33;
   display: flex;
-  margin-right: 15px;
+  /* margin-right: 15px; */
   overflow: hidden;
-  width: 1797px;
+  width: 100%;
 }
 
 .tutor-overlap-group2 {
   height: 280px;
   position: relative;
-  width: 1797px;
+  width: 100%;
 }
 
 .tutor-overlap-group1 {
@@ -79,7 +77,7 @@
   left: 0;
   position: absolute;
   top: 0;
-  width: 1797px;
+  width: 100%;
 }
 
 .tutor-bg {
@@ -89,7 +87,7 @@
   display: flex;
   height: 232px;
   left: 0;
-  min-width: 1797px;
+  min-width: 100%;
   position: absolute;
   top: 0;
 }
@@ -97,9 +95,9 @@
 .tutor-overlay-solid {
   -webkit-backdrop-filter: blur(6px) brightness(100%);
   backdrop-filter: blur(6px) brightness(100%);
-  background-color: var(--manatee-3);
+  background-color: rgb(0, 0, 0, 0.5);
   height: 232px;
-  width: 1797px;
+  width: 100%;
 }
 
 .tutor-info {
@@ -143,7 +141,6 @@
 .tutor-name40 {
   letter-spacing: 0;
   line-height: 36px;
-  margin-top: -1px;
   white-space: nowrap;
 }
 
@@ -226,14 +223,12 @@
   align-items: center;
   background-color: var(--white);
   border-radius: 16px;
-  box-shadow: 0px 12px 24px -4px
-#919eab1f, 0px 0px 2px
-#919eab33;
+  box-shadow: 0px 12px 24px -4px #919eab1f, 0px 0px 2px #919eab33;
   display: flex;
   flex-direction: column;
   height: fit-content;
   overflow: hidden;
-  width: 465px;
+  /* width: 465px; */
   padding: 10px;
 }
 
@@ -242,7 +237,7 @@
   display: flex;
   height: 28px;
   margin-left: 8px;
-  width: 425px;
+  /* width: 425px; */
 }
 
 .tutor-title {
@@ -258,7 +253,7 @@
   flex-direction: column;
   height: auto;
   position: relative;
-  width: 465px;
+  width: 100%;
 }
 
 .tutor-x-1 {
@@ -275,7 +270,7 @@
   gap: 16px;
   height: 22px;
   margin-top: 17px;
-  width: 417px;
+  width: 100%;
 }
 
 .tutor-icon-1 {
@@ -324,8 +319,7 @@
 .tutor-shadow {
   background-color: var(--white);
   border-radius: 928px/12px;
-  box-shadow: 0px 8px 16px
-#919eab29;
+  box-shadow: 0px 8px 16px #919eab29;
   height: 24px;
   left: 32px;
   position: absolute;
@@ -427,7 +421,6 @@
   width: 465px;
   margin-top: 10px;
   margin-left: 50px;
-
 }
 
 .tutor-image-4 {
@@ -444,7 +437,7 @@
   gap: 22px;
   margin-top: 13px;
   min-height: 371px;
-  width: 1315px;
+  width: 100%;
 }
 
 .tutor-frame-50 {
@@ -454,7 +447,7 @@
   gap: 7px;
   min-height: 165px;
   padding: 10px 0;
-  width: 1315px;
+  width: 100%;
 }
 
 .tutor-frame-51 {
@@ -466,6 +459,7 @@
   height: 32px;
   margin-left: 0;
   padding: 4px 10px;
+  font-weight: bolder;
 }
 
 .tutor-iconsflagsic_kr {
@@ -494,9 +488,7 @@
   align-items: center;
   background-color: var(--white);
   border-radius: 16px;
-  box-shadow: 0px 12px 24px -4px
-#919eab1f, 0px 0px 2px
-#919eab33;
+  box-shadow: 0px 12px 24px -4px #919eab1f, 0px 0px 2px #919eab33;
   display: flex;
   height: 106px;
   min-width: 954px;
@@ -589,14 +581,12 @@
   align-items: flex-start;
   background-color: var(--white);
   border-radius: 16px;
-  box-shadow: 0px 12px 24px -4px
-#919eab1f, 0px 0px 2px
-#919eab33;
+  box-shadow: 0px 12px 24px -4px #919eab1f, 0px 0px 2px #919eab33;
   display: flex;
   height: 184px;
   margin-right: 1px;
   overflow: hidden;
-  width: 1288px;
+  width: 100%;
 }
 
 .tutor-user-profile-social-card-item {
@@ -606,7 +596,7 @@
   gap: 16px;
   min-height: 184px;
   padding: 24px;
-  width: 644px;
+  width: 100%;
 }
 
 .tutor-x-3 {
@@ -614,7 +604,7 @@
   display: flex;
   gap: 16px;
   height: 22px;
-  width: 129px;
+  /* width: 129px; */
 }
 
 .tutor-phone {
@@ -707,22 +697,16 @@
   width: 234px;
 }
 
-.frame-43-tutor{
-
+.frame-43-tutor {
   background-color: var(--white);
   border-radius: 16px;
-  box-shadow: 0px 12px 24px -4px
-  #919eab1f, 0px 0px 2px
-  #919eab33;
-  min-height: 456px!important;
+  box-shadow: 0px 12px 24px -4px #919eab1f, 0px 0px 2px #919eab33;
   width: 100%;
-  padding: 10px 48px;
   cursor: pointer;
   margin: auto;
 }
 
-.datepicker{
-
+.datepicker {
   border-radius: 16px;
   color: #52667d;
   display: flex;
@@ -732,12 +716,12 @@
   width: 100%;
   padding: 6px 20px 0 20px;
 }
-.datepicker-header{
+.datepicker-header {
   display: flex;
   height: 48px;
   max-width: 100%;
 }
-.title-header{
+.title-header {
   border: 1px solid #fff;
   display: flex;
   flex: 1 1;
@@ -750,11 +734,11 @@
   padding: 8px 10px;
 }
 
-.datepicker-daterow{
+.datepicker-daterow {
   display: flex;
 }
 
-.datepicker-col-hour{
+.datepicker-col-hour {
   display: flex;
   flex: 1 1;
   flex-direction: column;
@@ -764,19 +748,19 @@
   margin-top: -1px;
   overflow: hidden;
   padding: 8px 10px;
-  border: 1px solid #EFF1F3;
+  border: 1px solid #eff1f3;
 }
-.datepicker-daterow{
+.datepicker-daterow {
   display: flex;
 }
 
-.datepicker-timerow{
+.datepicker-timerow {
   display: flex;
   height: 48px;
   max-width: 100%;
 }
 
-.pickhour{
+.pickhour {
   align-items: center;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -784,32 +768,32 @@
   text-align: center;
 }
 
-.picksession{
+.picksession {
   color: #6f757b;
   font-size: 11px;
   text-align: center;
 }
 
-.date-hour-tutor{
+.date-hour-tutor {
   align-items: center;
-  background-color: #DFE3E8;
+  background-color: #dfe3e8;
   border: 1px solid #fff;
   display: flex;
   flex: 1 1;
   justify-content: center;
   padding: 0;
-  width: 150px;
+  width: 100%;
 }
-.hour-choose{
+.hour-choose {
   background-color: #22ae25;
 }
 .datepicker-date-tutor {
   align-items: center;
   background-color: #fff;
-  border: 1px solid #EFF1F3;
+  border: 1px solid #eff1f3;
   display: flex;
   flex: 1 1;
   justify-content: center;
   padding: 8px;
-  width: 150px;
+  width: 100%;
 }

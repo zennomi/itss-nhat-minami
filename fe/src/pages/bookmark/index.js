@@ -4,6 +4,7 @@ import Header from "../../components/header";
 import BookmarkCard from "../../components/bookmark-card";
 import './style.css'
 import { getBookmark } from '../../services/teacherService';
+import { baseUrl } from '../../services/http/baseUrl';
 
 
 const Bookmark = () => {
@@ -14,7 +15,7 @@ const Bookmark = () => {
             id: item.teacher_id,
             name: item.name,
             lang_teach: item.lang_teach,
-            photo_url: item?.photo_url.startsWith("http") ? item?.photo_url : `http://tungsnk.tech:9999${item?.photo_url}`,
+            photo_url: item?.photo_url.startsWith("http") ? item?.photo_url : `${baseUrl}/${item?.photo_url}`,
         }));
     }
     // const parseData = (data) => {

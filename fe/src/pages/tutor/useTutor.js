@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getTeacher } from '../../services/teacherService';
 import { flagLanguageImg } from '../../utils/constant';
+import { baseUrl } from '../../services/http/baseUrl';
 
 export default function useListTeacher() {
   const { id } = useParams();
@@ -10,8 +11,8 @@ export default function useListTeacher() {
   const parseData = useCallback((data) => {
     console.log(data);
     const userProfileBannerData = {
-      bg: (data.background_image_url.startsWith("http") ? data.background_image_url : `http://tungsnk.tech:9999${data?.background_image_url}`),
-      img_Avatar25: (data.photo_url.startsWith("http") ? data.photo_url : `http://tungsnk.tech:9999${data?.photo_url}`),
+      bg: (data.background_image_url.startsWith("http") ? data.background_image_url : "https://telegraph-image-bak.pages.dev/file/c9dd079fac20971a2152f.jpg"),
+      img_Avatar25: (data.photo_url.startsWith("http") ? data.photo_url : `${baseUrl}/${data?.photo_url}`),
       spanText1: data?.name,
       spanText2: data?.lang_teach
     };

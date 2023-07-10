@@ -25,5 +25,5 @@ export const langToFlag = {
         'フランス語': 'france',
         '日本語': 'japan',
         '中国語': 'china',
-        '韓国語': 'korea'
+        '韓国語': 'south-korea'
 }

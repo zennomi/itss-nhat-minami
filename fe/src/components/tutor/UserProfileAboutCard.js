@@ -11,8 +11,8 @@ const UserProfileAboutCard = (props) => {
   } = props;
 
   return (
-    <div className="tutor-user-profile-about-card">
-      <div className="tutor-text">
+    <div className="tutor-user-profile-about-card px-4">
+      <div className="tutor-text w-full">
         <div className="tutor-title publicsans-bold-charade-18px">
           <span className="publicsans-bold-charade-18px">About</span>
         </div>

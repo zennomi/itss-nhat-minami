@@ -14,7 +14,7 @@
   min-height: 12px;
   padding: 40px 0;
   position: relative;
-  width: 1322px;
+  width: 100%;
 }
 
 .review_list-review-ecommerce-product {
@@ -23,7 +23,7 @@
   display: flex;
   gap: 16px;
   height: 124px;
-  min-width: 1282px;
+  width: 100%;
   position: relative;
 }
 
@@ -34,14 +34,14 @@
   gap: 7px;
   min-height: 72px;
   position: relative;
-  width: 1026px;
+  width: 100%;
 }
 
 .review_list-gr {
   letter-spacing: 0;
   line-height: 22px;
   min-height: 44px;
-  width: 1026px;
+  width: 100%;
 }
 
 .review_list-review-ecommerce-product-1.review-ecommerce-product-3 .x {

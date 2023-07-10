@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getTeacherReviews } from '../../services/teacherService';
+import { getAvatarFromString } from '../../utils/random';
 
 export default function useListTeacher() {
     const { id } = useParams();
@@ -14,7 +15,7 @@ export default function useListTeacher() {
         teacher_id: item.teacher_id,
         user_id: item.user_id,
         content: item.content,
-        avatar_url: item.avatar_url || 'https://i.pravatar.cc/300',
+        avatar_url: item.avatar_url || getAvatarFromString(item.name),
         review_day: 'test',
     }));
   }, []);

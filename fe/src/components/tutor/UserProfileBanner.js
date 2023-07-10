@@ -26,16 +26,16 @@ const UserProfileBanner = (props) => {
               />
             </div>
             <div className="tutor-content">
-              <h1 className="tutor-name40 publicsans-bold-white-24px">
+              <div className="tutor-name40 publicsans-bold-white-24px">
                 <span className="publicsans-bold-white-24px">{spanText1}</span>
-              </h1>
-              <div className="tutor-role40 bevietnam-medium-white-16px">
-                <span className="bevietnam-medium-white-16px">{spanText2}</span>
+              </div>
+              <div className="tutor-role40">
+                <span className="publicsans-bold-white-14px text-base text-white">{spanText2}</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="tutor-tabs">
+        <div className="flex items-center justify-end gap-x-10 absolute bottom-0 right-0 mr-[30px]">
           <div
             className="tutor-tab"
             onClick={() => handleBannerClick("component1")}

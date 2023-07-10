@@ -48,12 +48,12 @@ const TeacherInfor = (props) => {
           <div className="tutor-item">
             <div className="tutor-overlap-group-1">
               <div className="tutor-frame-18">
-                <img className="tutor-icon-star" src="https://img.uxwing.com/wp-content/themes/uxwing/download/arts-graphic-shapes/star-icon.png" alt="icon-star" />
+                <Icon icon="twemoji:star" className="w-7 h-7" />
                 <div className="tutor-number-short2 publicsans-bold-charade-24px">
                   <span className="publicsans-bold-charade-24px">{star}</span>
                 </div>
               </div>
-              <div className="tutor-label-3 publicsans-normal-pale-sky-14px">
+              <div className="tutor-label-3 publicsans-normal-pale-sky-14px text-center w-full">
                 <span className="publicsans-normal-pale-sky-14px">{rated_count} レビュー</span>
               </div>
             </div>
@@ -72,53 +72,53 @@ const TeacherInfor = (props) => {
       <div className="tutor-user-profile-social-card">
         <div className="tutor-user-profile-social-card-item">
           <div className="tutor-x-3">
-            <div className="tutor-phone"></div>
+            <Icon icon="eva:phone-fill" className="h-5 w-5" />
             <div className="tutor-text-2 publicsans-normal-charade-14px">
               <span className="publicsans-normal-charade-14px">{phone}</span>
             </div>
           </div>
-          <div className="tutor-x-4">
-            <div className="tutor-resume"></div>
+          <div className="tutor-x-3">
+            <Icon icon="eva:file-text-fill" className="h-5 w-5" />
             <div className="tutor-text-2 publicsans-normal-charade-14px">
-              <span className="publicsans-normal-charade-14px">{resume_url}</span>
+              <a className="publicsans-normal-charade-14px" href={resume_url} target="_blank">{resume_url}</a>
             </div>
           </div>
-          <div className="tutor-x-5">
-            <div className="tutor-mail"></div>
+          <div className="tutor-x-3">
+            <Icon icon="eva:email-fill" className="h-5 w-5" />
             <div className="tutor-text-2 publicsans-normal-charade-14px">
               <span className="publicsans-normal-charade-14px">{gmail}</span>
             </div>
           </div>
-          <div className="tutor-x-6">
-            <img className="tutor-icon-2" src="https://www.freeiconspng.com/uploads/paper-airplane-icon-23.png" alt="icons/ic_email_sent" />
+          <div className="tutor-x-3">
+            <Icon icon="eva:globe-2-fill" className="h-5 w-5" />
             <div className="tutor-text-2 publicsans-normal-charade-14px">
-              <span className="publicsans-normal-charade-14px">{website_url}</span>
+              <a className="publicsans-normal-charade-14px" href={website_url} target="_blank">{website_url}</a>
             </div>
           </div>
         </div>
         <div className="tutor-user-profile-social-card-item">
-          <div className="tutor-x-7">
-            <img className="tutor-icon-2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="icons/ic_facebbook" />
+          <div className="tutor-x-3">
+            <Icon icon="eva:facebook-fill" className="h-5 w-5" />
             <div className="tutor-text-2 publicsans-normal-charade-14px">
-              <span className="publicsans-normal-charade-14px">{facebook_url}</span>
+              <a className="publicsans-normal-charade-14px" href={facebook_url} target="_blank">{facebook_url}</a>
             </div>
           </div>
-          <div className="tutor-x-8">
-            <img className="tutor-icon-2" src="https://png.pngtree.com/png-clipart/20180626/ourmid/pngtree-instagram-icon-instagram-logo-png-image_3584852.png" alt="icon-instagram" />
+          <div className="tutor-x-3">
+            <Icon icon="eva:image-2-fill" className="h-5 w-5" />
             <div className="tutor-text-2 publicsans-normal-charade-14px">
-              <span className="publicsans-normal-charade-14px">{instagram_url}</span>
+              <a className="publicsans-normal-charade-14px" href={instagram_url} target="_blank">{instagram_url}</a>
             </div>
           </div>
-          <div className="tutor-x-9">
-            <img className="tutor-icon-2" src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="icon-linkedin" />
+          <div className="tutor-x-3">
+            <Icon icon="eva:linkedin-fill" className="h-5 w-5" />
             <div className="tutor-text-2 publicsans-normal-charade-14px">
-              <span className="publicsans-normal-charade-14px">{linkedin_url}</span>
+              <a className="publicsans-normal-charade-14px" href={linkedin_url} target="_blank">{linkedin_url}</a>
             </div>
           </div>
-          <div className="tutor-x-10">
-            <img className="tutor-icon-2" src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-twitter-social-media-round-icon-png-image_6315985.png" alt="icon-twitter" />
+          <div className="tutor-x-3">
+            <Icon icon="eva:twitter-fill" className="h-5 w-5" />
             <div className="tutor-text-2 publicsans-normal-charade-14px">
-              <span className="publicsans-normal-charade-14px">{twitter_url}</span>
+              <a className="publicsans-normal-charade-14px" href={twitter_url} target="_blank">{twitter_url}</a>
             </div>
           </div>
         </div>

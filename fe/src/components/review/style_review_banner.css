@@ -3,7 +3,7 @@
 .review_banner-ecommerce-product-summary {
   align-items: center;
   display: flex;
-  min-width: 1322px;
+  width: 100%;
 }
 
 .review_banner-stack {
@@ -55,17 +55,17 @@
   min-height: 238px;
   padding: 40px 0;
   position: relative;
-  width: 440px;
+  width: 100%;
 }
 
 .review_banner-stack-2 {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   gap: 12px;
   height: 238px;
-  justify-content: flex-end;
-  min-width: 440px;
-  padding: 105px 159px;
+  justify-content: center;
+  min-width: 240px;
+  /* padding: 105px 159px; */
   /* border: 1px solid black; */
 }
 
