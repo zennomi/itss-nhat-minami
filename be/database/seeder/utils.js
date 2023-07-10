@@ -27,8 +27,15 @@ const getRandomAndRemove = (array) => {
   return randomElement;
 };
 
+const getRandomNumber = (min, max) => {
+  const numberMin = Math.ceil(min);
+  const numberMax = Math.floor(max);
+  return Math.floor(Math.random() * (numberMax - numberMin + 1)) + numberMin;
+};
+
 module.exports = {
   runQuery,
   getRandomElement,
   getRandomAndRemove,
+  getRandomNumber,
 };
