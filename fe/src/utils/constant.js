@@ -1,4 +1,4 @@
-export const languages = ['ベトナム語', 'フランス語', '日本語', '中国語', '韓国語'];
+export const languages = ['ベトナム語', '英語', '日本語', '中国語', '韓国語'];
 
 export const purposes = ['試験', '会話', 'ビジネス'];
 
@@ -12,7 +12,7 @@ export const date = ['日', '月', '火', '水', '木', '金', '土'];
 
 export const flagLanguageImg = {
         'ベトナム語': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png',
-        'フランス語': 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/1200px-Flag_of_France.svg.png',
+        '英語': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png',
         '日本語': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png',
         '中国語': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1200px-Flag_of_the_People%27s_Republic_of_China.svg.png',
         '韓国語': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/1200px-Flag_of_South_Korea.svg.png'
@@ -22,7 +22,7 @@ export const timesession = [{ time: '6-9', ss: '午前' }, { time: '9-12', ss: '
 
 export const langToFlag = {
         'ベトナム語': 'vietnam',
-        'フランス語': 'france',
+        '英語': 'english',
         '日本語': 'japan',
         '中国語': 'china',
         '韓国語': 'korea'

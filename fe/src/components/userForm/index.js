@@ -315,7 +315,7 @@ export default function Form({ initialData }) {
                         name='lang_study'
                     >
                         <option value='' disabled selected>何語を教えますか。</option>
-                        <option value="フランス語">フランス語</option>
+                        <option value="英語">英語</option>
                         <option value="ベトナム語">ベトナム語</option>
                         <option value="日本語">日本語</option>
                         <option value="韓国語">韓国語</option>
@@ -332,7 +332,7 @@ export default function Form({ initialData }) {
                         name='lang_teach'
                     >
                         <option value='' disabled selected>何語で教えますか。</option>
-                        <option value="フランス語">フランス語</option>
+                        <option value="英語">英語</option>
                         <option value="ベトナム語">ベトナム語</option>
                         <option value="日本語">日本語</option>
                         <option value="韓国語">韓国語</option>
