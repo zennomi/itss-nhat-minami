@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import './style.css'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import USER from "../../services/userService";
 import { toast } from "react-toastify";
 
@@ -23,17 +23,21 @@ function Header() {
         }
     }
     return (
-        <div className="main-header">
-            <div className="header-content">
-                <div className="header-wrap">
-                    <img className="logo-header" src="../images/logo.svg" alt="Logo" />
-                    <div className="link publicsans-semi-bold-charade-14px content-right">
-                        <div className="home" onClick={() =>{
+        <div className="main-header w-full">
+            <div className="header-content w-full">
+                <div className="header-wrap flex items-center justify-between w-full mt-4">
+                    <div className="ml-5">
+                        <Link to="/">
+                            <img className="logo-header" src="../images/logo.svg" alt="Logo" />
+                        </Link>
+                    </div>
+                    <div className="link publicsans-semi-bold-charade-14px content-right mr-5">
+                        <div className="home" onClick={() => {
                             navigate(
                                 "/"
                             )
                         }}>
-                            <span className="publicsans-semi-bold-charade-14px " style={{cursor:'pointer'}}>ホーム</span>
+                            <span className="publicsans-semi-bold-charade-14px " style={{ cursor: 'pointer' }}>ホーム</span>
                         </div>
                         <div className="find-tutors" onClick={() => {
                             navigate(
@@ -47,54 +51,54 @@ function Header() {
                             (token && id) ?
                                 (
                                     <>
-                                    <div className="link logout" onClick={handleLogout}>
-                                    <div className="dashboardpublicsans-semi-bold-jade-14px">
-                                        <span className="publicsans-semi-bold-jade-14px">ログアウト</span>
-                                    </div>
-                                    {/*<img*/}
-                                    {/*    className="iconsic_chevron_left-header"*/}
-                                    {/*    src="../images/icons-ic-chevron-left.svg"*/}
-                                    {/*    alt="icons/ic_chevron_left"*/}
-                                    {/*/>*/}
-                                    </div>
-                                    <button className="button-header" onClick={() => {
-                                        navigate(
-                                            "/bookmark"
-                                        )
-                                    }}>
-                                        <img className="start-icon" src="../images/start-icon-1.svg" alt="start icon"/>
-                                        <div className="labelvalign-text-middlepublicsans-bold-white-14px">
-                                            <span className="publicsans-bold-white-14px">ブックマークリスト</span>
+                                        <div className="link logout" onClick={handleLogout}>
+                                            <div className="dashboardpublicsans-semi-bold-jade-14px">
+                                                <span className="publicsans-semi-bold-jade-14px">ログアウト</span>
+                                            </div>
+                                            {/*<img*/}
+                                            {/*    className="iconsic_chevron_left-header"*/}
+                                            {/*    src="../images/icons-ic-chevron-left.svg"*/}
+                                            {/*    alt="icons/ic_chevron_left"*/}
+                                            {/*/>*/}
                                         </div>
-                                    </button>
+                                        <button className="button-header" onClick={() => {
+                                            navigate(
+                                                "/bookmark"
+                                            )
+                                        }}>
+                                            <img className="start-icon" src="../images/start-icon-1.svg" alt="start icon" />
+                                            <div className="labelvalign-text-middlepublicsans-bold-white-14px">
+                                                <span className="publicsans-bold-white-14px">ブックマークリスト</span>
+                                            </div>
+                                        </button>
                                     </>
                                 )
 
                                 :
-                                ( <button className="button-header" onClick={() => {
+                                (<button className="button-header" onClick={() => {
                                     navigate(
                                         "/login"
                                     )
                                 }}>
-                                    <img className="start-icon" src="../images/start-icon-1.svg" alt="start icon"/>
+                                    <img className="start-icon" src="../images/start-icon-1.svg" alt="start icon" />
                                     <div className="labelvalign-text-middlepublicsans-bold-white-14px">
                                         <span className="publicsans-bold-white-14px">ログイン</span>
                                     </div>
                                 </button>)
                         }
-                                <div className="find-tutors" onClick={() => {
-                                    {
-                                        (token && id) ?
-                                            navigate(
-                                                `/profile/${id}`
-                                            ) : navigate(
-                                                "/login"
-                                            )
-                                    }
+                        <div className="find-tutors" onClick={() => {
+                            {
+                                (token && id) ?
+                                    navigate(
+                                        `/profile/${id}`
+                                    ) : navigate(
+                                        "/login"
+                                    )
+                            }
 
-                                }}>
-                                    <span className="publicsans-semi-bold-charade-14px">教師になる</span>
-                                </div>
+                        }}>
+                            <span className="publicsans-semi-bold-charade-14px">教師になる</span>
+                        </div>
 
                     </div>
                 </div>

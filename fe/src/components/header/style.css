@@ -98,7 +98,7 @@
 .main-header {
     align-items: flex-start;
     display: flex;
-    min-width: 1920px;
+    /* min-width: 1920px; */
     position: relative;
     z-index: 1000;
 
@@ -109,9 +109,9 @@
     align-items: center;
     display: flex;
     height: 40px;
-    left: 384px;
-    min-width: 1152px;
-    position: absolute;
+    /* left: 384px; */
+    /* min-width: 1152px; */
+    /* position: absolute; */
     top: 24px;
 }
 
@@ -123,7 +123,7 @@
     left: 32px;
     position: absolute;
     top: 64px;
-    width: 1856px;
+    /* width: 1856px; */
 }
 
 .header-right {
@@ -132,7 +132,7 @@
     left: 0;
     position: absolute;
     top: 0;
-    width: 1920px;
+    /* width: 1920px; */
 }
 
 .header-content {
@@ -140,7 +140,7 @@
     height: 88px;
     background-color: white;
     position: fixed;
-    width: 1920px;
+    /* width: 1920px; */
     border-bottom: 1px solid #cecece;
     box-shadow: -10px 10px 20px -4px #919eab3d, 0px 0px 2px #919eab3d;
 }
@@ -150,7 +150,7 @@
     display: flex;
     gap: 40px;
     justify-content: flex-end;
-    min-width: 1112px;
+    /* min-width: 1112px; */
 }
 
 .logo-header {
@@ -163,14 +163,14 @@
     display: flex;
     gap: 40px;
     justify-content: flex-end;
-    min-width: 1112px;
+    /* min-width: 1112px; */
 }
 
 .home {
     letter-spacing: 0;
     line-height: 22px;
     margin-bottom: 2px;
-    min-width: 42px;
+    /* min-width: 42px; */
     white-space: nowrap;
 }
 
@@ -178,7 +178,7 @@
     letter-spacing: 0;
     line-height: 22px;
     margin-bottom: 2px;
-    min-width: 70px;
+    /* min-width: 70px; */
     white-space: nowrap;
     cursor: pointer;
 }
@@ -200,13 +200,13 @@
     line-height: 22px;
     margin-left: 8px;
     margin-top: -1px;
-    min-width: 28px;
+    /* min-width: 28px; */
     white-space: nowrap;
 }
 
 .iconsic_chevron_left-header {
     height: 16px;
-    width: 16px;
+    /* width: 16px; */
     margin-top: 3px;
 }
 
@@ -218,7 +218,7 @@
     display: flex;
     gap: 8px;
     height: 36px;
-    min-width: 116px;
+    /* min-width: 116px; */
     padding: 5px 16px;
 }
 
@@ -232,7 +232,7 @@
     height: 24px;
     letter-spacing: 0;
     line-height: 24px;
-    min-width: 56px;
+    /* min-width: 56px; */
     text-align: center;
     white-space: nowrap;
 }
