@@ -17,8 +17,8 @@ export const flagLanguageImg = {
         '中国語': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1200px-Flag_of_the_People%27s_Republic_of_China.svg.png',
         '韓国語': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/1200px-Flag_of_South_Korea.svg.png'
 }
-export const timesession = [{ time: '6-9', ss: '午前' }, { time: '9-12', ss: '午前' }, { time: '12-15', ss: '午前' },
-{ time: '15-18', ss: '午前' }, { time: '18-21', ss: '午前' }, { time: '21-0', ss: '午前' }, { time: '0-3', ss: '午前' }, { time: '3-6', ss: '午前' }];
+export const timesession = [{ time: '6-9', ss: '午前' }, { time: '9-12', ss: '午前遅く' }, { time: '12-15', ss: '午後' },
+{ time: '15-18', ss: '午後遅く' }, { time: '18-21', ss: '夕方' }, { time: '21-0', ss: '夕方遅く' }, { time: '0-3', ss: '夜' }, { time: '3-6', ss: '夜遅く' }];
 
 export const langToFlag = {
         'ベトナム語': 'vietnam',

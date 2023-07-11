@@ -528,7 +528,7 @@
 }
 .datepicker-timerow {
   display: flex;
-  height: 48px;
+  height: 49px;
   max-width: 100%;
 }
 .datepicker-col-hour {

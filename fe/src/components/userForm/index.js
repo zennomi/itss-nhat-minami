@@ -391,7 +391,7 @@ export default function Form({ initialData }) {
                             errors={errors}
                         />
                         <div className='card-button-row'>
-                            <button type="button" onClick={() => removeLanguage(index)}>削除</button>
+                            <button className='p-1 font-bold' type="button" onClick={() => removeLanguage(index)}>削除</button>
                         </div>
                     </div>
                 ))}
