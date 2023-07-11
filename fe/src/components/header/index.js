@@ -16,7 +16,7 @@ function Header() {
             await USER.logout();
             localStorage.removeItem('token');
             localStorage.removeItem('id');
-            toast.success('Logout success');
+            toast.success('ログアウト');
             navigate('/login')
         } catch (e) {
             toast.error('Logout failed');

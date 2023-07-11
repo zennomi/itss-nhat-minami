@@ -33,7 +33,7 @@ function Teacher({ data }) {
                 teacher_id: id,
                 user_id: Number(user_id)
             });
-            toast.success('Add bookmark success')
+            toast.success('ボークマックした')
         } catch (error) {
             toast.error(error?.response?.data?.message);
         }

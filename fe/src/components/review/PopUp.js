@@ -26,10 +26,10 @@ const PopUp = ({ onClose }) => {
         content: textareaValue,
         star: value
       })
-      toast.success('Add review success')
+      toast.success('レビューした')
       queryClient.invalidateQueries(['tutor-review', id])
     } catch {
-      toast.error('Add review failed')
+      toast.error('レビューした failed')
     }
     onClose()
   }
