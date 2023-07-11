@@ -35,7 +35,7 @@ export default function useListTeacher() {
       time: data?.hours,
       phone: data?.phone_number,
       resume_url: data?.resume_url,
-      gmail: data?.website_url,
+      gmail: data?.gmail,
       website_url: data?.website_url,
       facebook_url: data?.facebook_url,
       instagram_url: data?.instagram_url,
